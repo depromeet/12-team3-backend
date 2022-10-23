@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface DocumentConstraintsGenerator {
 
+    String CONSTRAINTS_KEY = "constraints";
+
     static Attributes.Attribute getConstraintsAttribute(Class<?> clazz, String propertyName) {
         List<String> nameDescription = new ConstraintDescriptions(clazz).descriptionsForProperty(propertyName);
-        return Attributes.key("constraints").value(nameDescription);
+        return Attributes.key(CONSTRAINTS_KEY).value(nameDescription);
     }
 }
