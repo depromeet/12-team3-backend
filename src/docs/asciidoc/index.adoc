@@ -1,0 +1,17 @@
+= REST Docs
+ahmatda
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Test-API]]
+== Test API
+
+[[Test]]
+=== Test
+operation::test-docs[snippets='http-request,request-body,request-fields,http-response,response-body,response-fields']
+// build/generated-snippets/test-docs (document 이름별 오퍼레이션을 한다)
+// .adoc 파일이 너무 길어지면, include:: 명령어를 사용해서 파일을 분리할 수 있다. (
