@@ -25,15 +25,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
       
-    - name: Run action
-      uses: lpmi-13/learning-space-single-setup@v1.0.0
+    - name: Set yaml file
+      uses: microsoft/variable-substitution@v1
+      with:
+        path: ${{ env.RESOURCE_PATH }}
       env:
         spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
         spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
         spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
         jpa.hibernate.ddl-auto: none
-      with:
-        path: ${{ env.RESOURCE_PATH }}
         
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
