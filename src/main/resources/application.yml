@@ -7,7 +7,7 @@ spring:
     hikari:
       maxLifetime: 500000
   jpa:
-    database-platform: org.hibernate.dialect.MariaDBDialect$
+    database-platform: org.hibernate.dialect.MariaDBDialect
     hibernate:
       ddl-auto: none
       properties:
