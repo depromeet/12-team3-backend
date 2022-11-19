@@ -26,7 +26,7 @@ jobs:
         distribution: 'temurin'
       
     - name: Set yaml file
-      uses: microsoft/variable-substitution@v1
+      uses: lpmi-13/learning-space-single-setup@v1.0.0
       with:
         path: ${{ env.RESOURCE_PATH }}
       env:
