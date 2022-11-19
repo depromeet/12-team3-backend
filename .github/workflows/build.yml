@@ -34,16 +34,6 @@ jobs:
         spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
         spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
         jpa.hibernate.ddl-auto: none
-    
-    - name: Set Test layer yaml file
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: ${{ env.TEST_RESOURCE_PATH }}
-      env:
-        spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
-        spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
-        spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
-        jpa.hibernate.ddl-auto: none    
 
     - name: Grant for Gradle
       run : chmod +x gradlew
