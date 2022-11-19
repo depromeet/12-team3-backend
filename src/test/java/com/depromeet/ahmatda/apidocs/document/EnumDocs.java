@@ -1,7 +1,5 @@
 package com.depromeet.ahmatda.apidocs.document;
 
-import com.depromeet.ahmatda.Color;
-import com.depromeet.ahmatda.apidocs.DocsCommonController;
 import com.depromeet.ahmatda.utils.EnumType;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
