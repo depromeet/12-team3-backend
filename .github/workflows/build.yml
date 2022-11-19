@@ -7,7 +7,6 @@ on:
 env:
   RESOURCE_PATH: ./src/main/resources/application.yml
   TEST_RESOURCE_PATH: ./src/test/resources/application.yml
-  FIREBASE_PATH: ./src/main/resources/firebase/firebase_service_key.json
   AWS_REGION: ap-northeast-2
   EB_ENVIRONMENT_NAME: ahmatda-app-env
   EB_APPLICATION_NAME: ahmatda-app
@@ -42,23 +41,6 @@ jobs:
         jpa.hibernate.ddl-auto: none
       with:
         path: ${{ env.RESOURCE_PATH }}
-
-    - name: Create Firebase secret Json
-      uses: microsoft/variable-substitution@v1 
-      with:
-        files: ${{ env.FIREBASE_PATH }}
-      env:
-        private_key_id: ${{ secrets.FIREBASE_KEY_ID }}
-        private_key: ${{ secrets.FIREBASE_KEY }}
-        client_email: ${{ secrets.FIREBASE_EMAIL }}
-        client_id: ${{ secrets.FIREBASE_ID }}
-        
-    - name: Check Firebase secret key
-      run: |
-        cd ./src/main/resources/firebase
-        ls -a .
-        cat firebase_service_key.json
-      shell: bash
  
     - name: Build Gradle
       run: ./gradlew clean build
