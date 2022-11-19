@@ -26,9 +26,9 @@ jobs:
         distribution: 'temurin'
       
     - name: Set yaml file
-      uses: lpmi-13/learning-space-single-setup@v1.0.0
+      uses: joshlrogers/variable-substitution@v1.1
       with:
-        path: ${{ env.RESOURCE_PATH }}
+        files: ${{ env.RESOURCE_PATH }}
       env:
         spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
         spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
