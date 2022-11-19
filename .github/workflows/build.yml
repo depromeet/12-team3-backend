@@ -34,11 +34,6 @@ jobs:
         spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
         spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
         jpa.hibernate.ddl-auto: none
-        
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: build
 
     - name: Grant for Gradle
       run : chmod +x gradlew
