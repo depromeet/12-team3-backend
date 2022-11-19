@@ -24,13 +24,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: build
-
-    - name: Grant for Gradle
-      run : chmod +x gradlew
       
     - name: Run action
       uses: lpmi-13/learning-space-single-setup@v1.0.0
@@ -41,7 +34,15 @@ jobs:
         jpa.hibernate.ddl-auto: none
       with:
         path: ${{ env.RESOURCE_PATH }}
- 
+        
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      with:
+        arguments: build
+
+    - name: Grant for Gradle
+      run : chmod +x gradlew
+      
     - name: Build Gradle
       run: ./gradlew clean build
     
