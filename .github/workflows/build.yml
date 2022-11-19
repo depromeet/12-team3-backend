@@ -26,7 +26,7 @@ jobs:
         distribution: 'temurin'
       
     - name: Set yaml file
-      uses: joshlrogers/variable-substitution@v1.1
+      uses: microsoft/variable-substitution@v1
       with:
         files: ${{ env.RESOURCE_PATH }}
         splitChar: '.'
