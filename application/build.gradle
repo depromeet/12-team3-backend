@@ -2,6 +2,9 @@ plugins {
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
+// application 레이어는 executable jar 만 생성
+jar.enabled = false
+
 configurations {
     asciidoctorExt
 }
