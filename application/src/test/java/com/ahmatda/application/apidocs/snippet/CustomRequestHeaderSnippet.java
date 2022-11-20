@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.apidocs.snippet;
+package com.ahmatda.application.apidocs.snippet;
 
 import org.springframework.restdocs.headers.AbstractHeadersSnippet;
 import org.springframework.restdocs.headers.HeaderDescriptor;

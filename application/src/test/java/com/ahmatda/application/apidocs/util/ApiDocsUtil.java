@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.apidocs.util;
+package com.ahmatda.application.apidocs.util;
 
 import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;
 import org.springframework.restdocs.operation.preprocess.OperationResponsePreprocessor;

@@ -19,6 +19,11 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+sourceSets {
+	main(resources { srcDirs = rootProject.projectDir.absolutePath + "/resources" })
+}
+
+
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'org.springframework.boot'

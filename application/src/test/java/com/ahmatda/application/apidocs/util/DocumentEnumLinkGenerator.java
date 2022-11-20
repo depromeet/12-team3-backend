@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.apidocs.util;
+package com.ahmatda.application.apidocs.util;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

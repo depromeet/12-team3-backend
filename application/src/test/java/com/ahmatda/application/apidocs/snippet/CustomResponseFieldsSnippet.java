@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.apidocs.snippet;
+package com.ahmatda.application.apidocs.snippet;
 
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.operation.Operation;
