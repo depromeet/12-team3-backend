@@ -8,7 +8,7 @@ env:
   RESOURCE_PATH: ./src/main/resources/application.yml
   TEST_RESOURCE_PATH: ./src/test/resources/application.yml
   AWS_REGION: ap-northeast-2
-  EB_ENVIRONMENT_NAME: ahmatda-app-env
+  EB_ENVIRONMENT_NAME: ahmatda-app
   EB_APPLICATION_NAME: ahmatda-app
   EB_DEPLOYMENT_PACKAGE: ./docker-compose.yml
 
