@@ -19,11 +19,6 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-sourceSets {
-	main(resources { srcDirs = rootProject.projectDir.absolutePath + "/resources" })
-}
-
-
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'org.springframework.boot'
@@ -40,6 +35,7 @@ subprojects {
 		developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 		testImplementation 'org.projectlombok:lombok'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 		testAnnotationProcessor 'org.projectlombok:lombok'
 	}
 }
