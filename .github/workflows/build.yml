@@ -9,7 +9,7 @@ env:
   TEST_RESOURCE_PATH: ./src/test/resources/application.yml
   AWS_REGION: ap-northeast-2
   EB_ENVIRONMENT_NAME: 3Team-ahmatda-ENV
-  EB_APPLICATION_NAME: ahmatda-app
+  EB_APPLICATION_NAME: "[3Team]-ahmatda-API"
   EB_DEPLOYMENT_PACKAGE: ./docker-compose.yml
 
 jobs:
