@@ -1,4 +1,4 @@
-package com.ahmatda.application;
+package com.depromeet.ahmatda;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

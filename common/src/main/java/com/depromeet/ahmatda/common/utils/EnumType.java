@@ -1,4 +1,4 @@
-package com.ahmatda.common.utils;
+package com.depromeet.ahmatda.common.utils;
 
 public interface EnumType {
     String getName();

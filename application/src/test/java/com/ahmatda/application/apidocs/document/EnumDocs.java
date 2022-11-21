@@ -1,13 +1,10 @@
 package com.ahmatda.application.apidocs.document;
 
-import com.ahmatda.common.utils.EnumType;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.depromeet.ahmatda.common.utils.EnumType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.restdocs.payload.FieldDescriptor;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.Arrays;
 import java.util.Map;
