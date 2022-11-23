@@ -77,7 +77,7 @@ jobs:
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/ahmatda-nginx:latest
         
     - name: Beanstalk Deploy
-      uses: einaregilsson/beanstalk-deploy@v20
+      uses: einaregilsson/beanstalk-deploy@v21
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
