@@ -3,6 +3,8 @@ package com.depromeet.ahmatda.common.response;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @Getter
 @NoArgsConstructor
 public class RestResponse<T> {
@@ -27,6 +29,10 @@ public class RestResponse<T> {
     }
 
     public static <T> RestResponse<T> error(ErrorCode errorCode) {
-        return new RestResponse<>(new ErrorResponse(errorCode));
+        return new RestResponse<>(new ErrorResponse(errorCode, null));
+    }
+
+    public static <T> RestResponse<T> error(ErrorCode errorCode, Map<String, Object> detail) {
+        return new RestResponse<>(new ErrorResponse(errorCode, detail));
     }
 }

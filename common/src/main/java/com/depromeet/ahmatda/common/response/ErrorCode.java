@@ -1,15 +1,24 @@
 package com.depromeet.ahmatda.common.response;
 
-public enum ErrorCode {
-    ;
+import com.depromeet.ahmatda.common.utils.EnumType;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-    final String code;
-    final String desc;
-    final int status;
+@Getter
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
+public enum ErrorCode implements EnumType {
+    UNAUTHORIZED("인증에 실패하였습니다.");
 
-    ErrorCode(String code, String desc, int status) {
-        this.code = code;
-        this.desc = desc;
-        this.status = status;
+    private final String desc;
+
+    @Override
+    public String getName() {
+        return name();
+    }
+
+    @Override
+    public String getLabel() {
+        return desc;
     }
 }
