@@ -48,7 +48,7 @@ jobs:
         utcOffset: "+09:00"
         
     - name: Show Current Time
-      run: echo "CurrentTime=${steps.current-time.outputs.formattedTime}"
+      run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
       shell: bash
    
     ## docker build [Spring, Nginx]
@@ -85,7 +85,7 @@ jobs:
         region: ${{ env.AWS_REGION }}
         environment_name: ${{ env.EB_ENVIRONMENT_NAME }}
         application_name: ${{ env.EB_APPLICATION_NAME }}
-        version_label: github-action-${steps.current-time.outputs.formattedTime}
+        version_label: github-action-${{steps.current-time.outputs.formattedTime}}
         wait_for_environment_recovery: 90
 
       
