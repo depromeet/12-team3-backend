@@ -86,8 +86,7 @@ jobs:
         region: ${{ env.AWS_REGION }}
         environment_name: ${{ env.EB_ENVIRONMENT_NAME }}
         application_name: ${{ env.EB_APPLICATION_NAME }}
-        deployment_package: deploy/deploy.zip
-        use_existing_version_if_available: true
+        deployment_package: ${{ env.EB_DEPLOYMENT_PACKAGE }}
         version_label: github-action-${{steps.current-time.outputs.formattedTime}}
         wait_for_environment_recovery: 90
 
