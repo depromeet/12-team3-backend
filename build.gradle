@@ -11,7 +11,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 bootJar {
-	mainClassName = 'com.depromeet.ahmatda.Application'
+	mainClass = 'com.depromeet.ahmatda.Application'
 }
 
 repositories {
