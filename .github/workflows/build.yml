@@ -49,6 +49,7 @@ jobs:
         
     - name: Show Current Time
       run: echo "CurrentTime=${{ steps.current-time.outputs.formattedTime }}"
+      shell: bash
    
     ## docker build [Spring, Nginx]
     - name: Set up Docker Buildx
