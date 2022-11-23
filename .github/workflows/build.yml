@@ -85,6 +85,7 @@ jobs:
         environment_name: ${{ env.EB_ENVIRONMENT_NAME }}
         application_name: ${{ env.EB_APPLICATION_NAME }}
         version_label: github-action-${{steps.current-time.outputs.formattedTime}}
+        wait_for_environment_recovery: 90
 
       
       
