@@ -1,4 +1,4 @@
-package com.ahmatda.application.apidocs.util;
+package com.depromeet.ahmatda.application.apidocs.util;
 
 import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;
 import org.springframework.restdocs.operation.preprocess.OperationResponsePreprocessor;
@@ -10,7 +10,7 @@ public interface ApiDocsUtil {
         return Preprocessors.preprocessRequest(
                 Preprocessors.modifyUris()
                         .scheme("https")
-                        .host("docs.api.com")
+                        .host("ahmatda.com")
                         .removePort(),
                 Preprocessors.prettyPrint()
         );
