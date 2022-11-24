@@ -1,10 +1,10 @@
-package com.ahmatda.common;
+package com.depromeet.ahmatda;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CommonApplicationTests {
+class DomainApplicationTests {
 
     @Test
     void contextLoads() {

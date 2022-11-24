@@ -1,4 +1,4 @@
-package com.ahmatda.application.apidocs.util;
+package com.depromeet.ahmatda.application.apidocs.util;
 
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.snippet.Attributes;
