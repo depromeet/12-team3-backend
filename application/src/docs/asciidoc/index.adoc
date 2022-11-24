@@ -1,4 +1,4 @@
-= REST Docs
+= 아맞다 API 명세서
 ahmatda
 :doctype: book
 :icons: font
@@ -6,12 +6,26 @@ ahmatda
 :toc: left
 :toclevels: 2
 :sectlinks:
+:docinfo: shared-head
 
-[[Test-API]]
-== Test API
+[[OVERVIEW]]
+== OVERVIEW
 
-[[Test]]
-=== Test
-operation::test-docs[snippets='http-request,request-body,request-fields,http-response,response-body,response-fields']
-// build/generated-snippets/test-docs (document 이름별 오퍼레이션을 한다)
-// .adoc 파일이 너무 길어지면, include:: 명령어를 사용해서 파일을 분리할 수 있다. (
+[[common-response-field]]
+=== 공통 응답 필드
+include::{snippets}/common-response/custom-response-fields.adoc[]
+
+[[error-code]]
+=== 예외 코드
+include::{snippets}/common-enums/custom-response-fields-errorCodes.adoc[]
+
+[[ok-response]]
+=== 정상응답 예시
+include::{snippets}/common-response/http-response.adoc[]
+
+[[error-response]]
+=== 에러 응답 예시
+include::{snippets}/common-error-response/http-response.adoc[]
+
+[[APIs]]
+== APIs
