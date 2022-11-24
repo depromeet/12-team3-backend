@@ -5,8 +5,8 @@ on:
     branches: [ "main" ]
     
 env:
-  RESOURCE_PATH: ./src/main/resources/application.yml
-  TEST_RESOURCE_PATH: ./src/test/resources/application.yml
+  RESOURCE_PATH: ./application/src/main/resources/application.yml
+  TEST_RESOURCE_PATH: ./application/src/test/resources/application.yml
   AWS_REGION: ap-northeast-2
   EB_ENVIRONMENT_NAME: 3Team-ahmatda-ENV
   EB_APPLICATION_NAME: "[3Team]-ahmatda-API"
@@ -43,12 +43,14 @@ jobs:
     
     - name: Get current time
       uses: josStorer/get-current-time@v2.0.2
+      id: current-time
       with:
         format: YYYYMMDD_HH-mm-ss
         utcOffset: "+09:00"
         
     - name: Show Current Time
-      run: echo "CurrentTime=${{ steps.current-time.outputs.formattedTime }}"
+      run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
+      shell: bash
    
     ## docker build [Spring, Nginx]
     - name: Set up Docker Buildx
@@ -77,7 +79,7 @@ jobs:
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/ahmatda-nginx:latest
         
     - name: Beanstalk Deploy
-      uses: einaregilsson/beanstalk-deploy@v20
+      uses: einaregilsson/beanstalk-deploy@v21
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -85,8 +87,8 @@ jobs:
         environment_name: ${{ env.EB_ENVIRONMENT_NAME }}
         application_name: ${{ env.EB_APPLICATION_NAME }}
         deployment_package: ${{ env.EB_DEPLOYMENT_PACKAGE }}
-        use_existing_version_if_available: true
         version_label: github-action-${{steps.current-time.outputs.formattedTime}}
+        wait_for_environment_recovery: 90
 
       
       

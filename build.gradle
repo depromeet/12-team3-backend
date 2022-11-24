@@ -10,6 +10,10 @@ group = 'com.depromeet'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+bootJar {
+	mainClass = 'com.depromeet.ahmatda.Application'
+}
+
 repositories {
 	mavenCentral()
 }
