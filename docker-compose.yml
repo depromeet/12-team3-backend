@@ -6,15 +6,14 @@ services:
     container_name: web
     image: ahmatda/ahmatda-app
     expose:
-      - "8080"
+      - 8080
     ports:
-      - "8080:8080"
+      - 8080:8080
 
   nginx:
     container_name: nginx
     image: ahmatda/ahmatda-nginx
-    restart: always
     ports:
-      - "80:80"
+      - 80:80
     depends_on:
       - web
