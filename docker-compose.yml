@@ -16,6 +16,5 @@ services:
     restart: always
     ports:
       - "80:80"
-      - "433:433"
     depends_on:
       - web
