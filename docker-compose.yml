@@ -9,11 +9,14 @@ services:
       - 8080
     ports:
       - 8080:8080
+    restart: always
 
   nginx:
     container_name: nginx
     image: ahmatda/ahmatda-nginx
     ports:
       - 80:80
+      - 433:433
     depends_on:
       - web
+    restart: always
