@@ -11,6 +11,10 @@ configurations {
 
 bootJar {
     dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}") {
+        print "${asciidoctor.outputDir}"
+        into 'static/docs'
+    }
 }
 
 ext {
@@ -21,20 +25,6 @@ asciidoctor {
     inputs.dir snippetsDir
     configurations 'asciidoctorExt'
     dependsOn test
-}
-
-asciidoctor.doFirst {
-    delete file('src/main/resources/static/docs')
-}
-
-task copyDocument(type: Copy) {
-    dependsOn asciidoctor
-    from file("build/docs/asciidoc")
-    into file("src/main/resources/static/docs")
-}
-
-build {
-    dependsOn copyDocument
 }
 
 tasks.named('test') {

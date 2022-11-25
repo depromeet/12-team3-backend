@@ -1,4 +1,4 @@
-package com.ahmatda.domain;
+package com.depromeet.ahmatda;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
