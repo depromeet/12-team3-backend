@@ -37,6 +37,7 @@ dependencies {
     implementation project(":inner-system")
     implementation project(":common")
 
+    runtimeOnly 'com.h2database:h2'
     //	implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
