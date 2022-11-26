@@ -16,6 +16,7 @@ bootJar {
 
 repositories {
 	mavenCentral()
+    gradlePluginPortal()
 }
 
 configurations {
