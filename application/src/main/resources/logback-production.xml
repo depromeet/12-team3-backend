@@ -2,12 +2,6 @@
 <configuration>
   <include resource="logback/properties.xml"/>
 
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>${DEFAULT_PATTERN}</pattern>
-    </encoder>
-  </appender>
-
   <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <fileNamePattern>ahmatda.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
@@ -24,7 +18,6 @@
   </appender>
 
   <root level="INFO">
-    <appender-ref ref="STDOUT"/>
     <appender-ref ref="dailyRollingFileAppender"/>
   </root>
 </configuration>
