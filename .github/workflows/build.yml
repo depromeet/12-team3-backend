@@ -38,7 +38,7 @@ jobs:
       run : chmod +x gradlew
       
     - name: Build Gradle
-      run: ./gradlew clean build
+      run: ./gradlew clean bootjar
     
     - name: Get current time
       uses: josStorer/get-current-time@v2.0.2
