@@ -29,16 +29,19 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+allprojects {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'java-library'
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'jacoco'
-
-	repositories {
-		mavenCentral()
-	}
 
 	dependencies {
 		compileOnly 'org.projectlombok:lombok'
