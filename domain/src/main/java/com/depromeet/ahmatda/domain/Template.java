@@ -21,6 +21,6 @@ public class Template extends BaseTimeEntity {
     private Long userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "category_id")
     private Category category;
 }

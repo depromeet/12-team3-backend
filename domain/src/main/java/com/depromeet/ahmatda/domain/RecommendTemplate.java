@@ -22,6 +22,6 @@ public class RecommendTemplate {
     private String templateName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "category_id")
     private Category category;
 }
