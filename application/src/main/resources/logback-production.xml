@@ -3,9 +3,9 @@
   <include resource="logback/properties.xml"/>
 
   <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>/home/ahmatda/logs/production.log</file>
+    <file>${LOG_PATH}/production.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>/home/ahmatda/logs/production.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <fileNamePattern>${LOG_PATH}/production.%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>30</maxHistory>
     </rollingPolicy>
 
