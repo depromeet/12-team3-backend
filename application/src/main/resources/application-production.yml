@@ -17,6 +17,7 @@ spring:
     open-in-view: false
 
 logging:
+  config: classpath:logback-production.xml
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
