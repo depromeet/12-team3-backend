@@ -5,6 +5,8 @@ services:
   web:
     container_name: web
     image: ahmatda/ahmatda-app
+    volumes:
+      - /home/ec2-user/logs:/home/ahmatda/logs/rolling:rw
     expose:
       - 8080
     ports:
