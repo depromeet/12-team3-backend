@@ -6,6 +6,7 @@ on:
     
 env:
   RESOURCE_PATH: ./application/src/main/resources/application.yml
+  TEST_RESOURCE_PATH: ./application/src/test/resources/application.yml
   AWS_REGION: ap-northeast-2
   EB_ENVIRONMENT_NAME: 3Team-ahmatda-ENV
   EB_APPLICATION_NAME: "[3Team]-ahmatda-API"
@@ -38,7 +39,7 @@ jobs:
       run : chmod +x gradlew
       
     - name: Build Gradle
-      run: ./gradlew clean bootjar
+      run: ./gradlew clean build
     
     - name: Get current time
       uses: josStorer/get-current-time@v2.0.2
