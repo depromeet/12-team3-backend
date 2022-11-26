@@ -3,11 +3,10 @@
   <include resource="logback/properties.xml"/>
 
   <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-      <fileNamePattern>ahmatda.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+    <file>/home/ahmatda/logs/production.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>/home/ahmatda/logs/production.%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>30</maxHistory>
-      <maxFileSize>100MB</maxFileSize>
-      <totalSizeCap>1GB</totalSizeCap>
     </rollingPolicy>
 
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
