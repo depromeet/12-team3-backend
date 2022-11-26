@@ -3,4 +3,6 @@
 <included>
   <property name="DEFAULT_PATTERN"
             value="[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] %green([%thread]), %X{[sessionId:--]} %green(%logger{35}) %highlight(%-5level) %boldWhite([%C.%M:%yellow(%L)]) - %msg %n"/>
+  <property name="LOG_PATH"
+            value="/home/ahmatda/logs"/>
 </included>
