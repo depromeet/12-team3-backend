@@ -29,13 +29,6 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-allprojects {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'java-library'
