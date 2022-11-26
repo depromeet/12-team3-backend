@@ -1,2 +1,8 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    include 'application', 'inner-system', 'domain', 'common'
+}
 rootProject.name = 'ahmatda'
-include 'application', 'inner-system', 'domain', 'common'
