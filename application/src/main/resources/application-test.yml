@@ -13,3 +13,9 @@ spring:
     url: jdbc:h2:mem:testdb;MODE=MySQL;
     username: SA
     password:
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
