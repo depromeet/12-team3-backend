@@ -3,8 +3,9 @@ package com.depromeet.ahmatda.user.service.impl;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
-import com.depromeet.ahmatda.user.UserExistException;
+import com.depromeet.ahmatda.user.exception.UserExistException;
 import com.depromeet.ahmatda.user.dto.SignUpRequestDto;
+import com.depromeet.ahmatda.user.exception.UserNotExistException;
 import com.depromeet.ahmatda.user.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,8 @@ public class DeviceUserService implements UserService {
 
     @Override
     public User getByDeviceId(String deviceId) {
-        return null;
+        return userAdaptor.getByDeviceId(deviceId).orElseThrow(() ->
+                new UserNotExistException("유저가 존재하지 않습니다")
+        );
     }
 }

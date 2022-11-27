@@ -1,6 +1,7 @@
 package com.depromeet.ahmatda.user;
 
 import com.depromeet.ahmatda.common.response.RestResponse;
+import com.depromeet.ahmatda.user.exception.UserExistException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
