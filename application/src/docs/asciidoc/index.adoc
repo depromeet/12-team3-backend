@@ -29,3 +29,17 @@ include::{snippets}/common-error-response/http-response.adoc[]
 
 [[APIs]]
 == APIs
+
+[[User]]
+=== User - 등록
+
+==== Method : Post
+==== curl-request
+include::{snippets}/user-sign-up/curl-request.adoc[]
+==== Request Body
+include::{snippets}/user-sign-up/request-body.adoc[]
+include::{snippets}/user-sign-up/request-fields.adoc[]
+==== 정상 응답
+include::{snippets}/user-sign-up/response-body.adoc[]
+==== 에러 응답 - 이미 존재하는 유저
+include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
