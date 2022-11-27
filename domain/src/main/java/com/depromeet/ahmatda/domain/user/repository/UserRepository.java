@@ -1,6 +1,6 @@
-package com.depromeet.ahmatda.repository;
+package com.depromeet.ahmatda.domain.user.repository;
 
-import com.depromeet.ahmatda.domain.User;
+import com.depromeet.ahmatda.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

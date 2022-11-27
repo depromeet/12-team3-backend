@@ -1,7 +1,7 @@
-package com.depromeet.ahmatda.adaptor;
+package com.depromeet.ahmatda.domain.user.adaptor;
 
-import com.depromeet.ahmatda.domain.User;
-import com.depromeet.ahmatda.repository.UserRepository;
+import com.depromeet.ahmatda.domain.user.User;
+import com.depromeet.ahmatda.domain.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
