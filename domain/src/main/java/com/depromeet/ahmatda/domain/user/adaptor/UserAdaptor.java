@@ -4,6 +4,8 @@ import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserAdaptor {
 
@@ -17,7 +19,7 @@ public class UserAdaptor {
         return userRepository.save(user);
     }
 
-    public User getByDeviceId(String deviceId) {
+    public Optional<User> getByDeviceId(String deviceId) {
         return userRepository.findByDeviceId(deviceId);
     }
 }
