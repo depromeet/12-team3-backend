@@ -49,7 +49,7 @@ class CommonDocsTest extends ApiDocumentationTest {
         );
 
         // then
-        result.andExpect(status().isUnauthorized())
+        result.andExpect(status().isInternalServerError())
             .andDo(MockMvcRestDocumentation.document("common-error-response",
                 getDocumentRequest(),
                 getDocumentResponse(),
