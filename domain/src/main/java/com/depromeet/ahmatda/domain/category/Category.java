@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.domain;
+package com.depromeet.ahmatda.domain.category;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.depromeet.ahmatda.domain.BaseTimeEntity;
+import com.depromeet.ahmatda.domain.RecommendTemplate;
+import com.depromeet.ahmatda.domain.Template;
 import lombok.Getter;
 
 @Getter
