@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public enum ErrorCode implements EnumType {
-    UNAUTHORIZED("인증에 실패하였습니다.");
+    EXIST_USER("이미 등록된 기기입니다"),
+    BINDING_ERROR("유효하지 않은 요청값입니다."),
+    INTERNAL_SERVER_ERROR("서버 오류가 발생했습니다.");
 
     private final String desc;
 

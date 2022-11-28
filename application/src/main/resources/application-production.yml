@@ -21,3 +21,9 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
