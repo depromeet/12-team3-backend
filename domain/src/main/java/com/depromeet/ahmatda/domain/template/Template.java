@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.domain;
+package com.depromeet.ahmatda.domain.template;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.depromeet.ahmatda.domain.BaseTimeEntity;
+import com.depromeet.ahmatda.domain.Category;
 import lombok.Getter;
 
 @Getter
