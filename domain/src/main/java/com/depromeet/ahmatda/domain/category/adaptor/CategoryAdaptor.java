@@ -4,7 +4,9 @@ import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -13,7 +15,17 @@ public class CategoryAdaptor {
 
     private final CategoryRepository categoryRepository;
 
-    public Optional<Category> getByCategoryId(Long categoryId) {
+    public Optional<Category> getCategoryById(Long categoryId) {
         return categoryRepository.findById(categoryId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Category> getCategoriesByDeviceId(String deviceId) {
+        return categoryRepository.findAll();
     }
 }
