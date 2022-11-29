@@ -23,8 +23,8 @@ public class CommonController {
 
     @GetMapping("/error-response")
     public ResponseEntity<RestResponse<Object>> getErrorDocs() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(RestResponse.error(ErrorCode.UNAUTHORIZED));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(RestResponse.error(ErrorCode.INTERNAL_SERVER_ERROR));
     }
 
 
