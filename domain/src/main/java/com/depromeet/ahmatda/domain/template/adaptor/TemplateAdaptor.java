@@ -13,7 +13,7 @@ public class TemplateAdaptor {
 
     private final TemplateRepository templateRepository;
 
-    public Optional<Template> getByTemplateId(Long templateId) {
+    public Optional<Template> getTemplateById(Long templateId) {
         return templateRepository.findById(templateId);
     }
 }

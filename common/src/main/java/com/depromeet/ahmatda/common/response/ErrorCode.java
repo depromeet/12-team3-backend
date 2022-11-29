@@ -10,7 +10,8 @@ import lombok.RequiredArgsConstructor;
 public enum ErrorCode implements EnumType {
     EXIST_USER("이미 등록된 기기입니다"),
     BINDING_ERROR("유효하지 않은 요청값입니다."),
-    INTERNAL_SERVER_ERROR("서버 오류가 발생했습니다.");
+    INTERNAL_SERVER_ERROR("서버 오류가 발생했습니다."),
+    TEMPLATE_NOT_FOUND("템플릿이 존재하지 않습니다.");
 
     private final String desc;
 
