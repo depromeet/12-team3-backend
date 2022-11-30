@@ -33,12 +33,6 @@ class CategoryControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @Autowired
-    CategoryAdaptor categoryAdaptor;
-
-    @Autowired
-    UserAdaptor userAdaptor;
-
     @DisplayName("GET: /api/category 요청 시 모든 카테고리를 반환한다")
     @Test
     void getCategories() throws Exception {
