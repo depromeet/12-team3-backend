@@ -5,6 +5,7 @@ import com.depromeet.ahmatda.domain.template.repository.TemplateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -15,5 +16,9 @@ public class TemplateAdaptor {
 
     public Optional<Template> getTemplateById(Long templateId) {
         return templateRepository.findById(templateId);
+    }
+
+    public List<Template> findByCategoryAndUserId(Long categoryId, Long userId) {
+        return templateRepository.findByCategoryAndUserId(categoryId, userId);
     }
 }

@@ -21,4 +21,9 @@ public class DeviceTemplateService implements TemplateService {
         return templateAdaptor.getTemplateById(id)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
     }
+
+    @Override
+    public List<Template> findByCategoryAndUserId(Long categoryId, Long userId) {
+        return templateAdaptor.findByCategoryAndUserId(categoryId, userId);
+    }
 }

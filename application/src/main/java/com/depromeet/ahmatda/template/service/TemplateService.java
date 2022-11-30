@@ -7,4 +7,6 @@ import java.util.List;
 public interface TemplateService {
 
     Template getTemplateById(Long id);
+
+    List<Template> findByCategoryAndUserId(Long categoryId, Long userId);
 }
