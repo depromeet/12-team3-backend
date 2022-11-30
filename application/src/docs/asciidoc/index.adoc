@@ -43,3 +43,17 @@ include::{snippets}/user-sign-up/request-fields.adoc[]
 include::{snippets}/user-sign-up/response-body.adoc[]
 ==== 에러 응답 - 이미 존재하는 유저
 include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
+
+[[Category]]
+=== Category - 조회
+
+==== Method : Get
+==== curl-request
+include::{snippets}/category/curl-request.adoc[]
+==== Request Body
+include::{snippets}/category/request-body.adoc[]
+include::{snippets}/category/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/category/response-body.adoc[]
+==== 에러 응답 - 존재하지 않는 카테고리
+include::{snippets}/category/http-response.adoc[]
