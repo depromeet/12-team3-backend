@@ -23,6 +23,8 @@ public class Template extends BaseTimeEntity {
     //TODO : User Entity 연관관계 매핑
     private Long userId;
 
+    private String templateName;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
