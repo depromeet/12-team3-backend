@@ -43,3 +43,5 @@ include::{snippets}/user-sign-up/request-fields.adoc[]
 include::{snippets}/user-sign-up/response-body.adoc[]
 ==== 에러 응답 - 이미 존재하는 유저
 include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
+==== 에러 응답 - 바인딩 실패 (IOS, ANDROID 정규식)
+include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
