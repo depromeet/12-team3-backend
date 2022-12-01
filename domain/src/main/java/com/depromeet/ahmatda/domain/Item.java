@@ -15,9 +15,6 @@ public class Item extends BaseTimeEntity {
     private Long id;
 
     @Column
-    private Long templateId;
-
-    @Column
     private Long categoryId;
 
     @ManyToOne(fetch = LAZY)
