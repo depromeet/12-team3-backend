@@ -18,10 +18,6 @@ public class Item extends BaseTimeEntity {
     private Long categoryId;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "itemlist_id")
-    private ItemList itemList;
-
-    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "template_id")
     private Template template;
 

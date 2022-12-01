@@ -5,7 +5,6 @@ import javax.persistence.*;
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.Category;
 import com.depromeet.ahmatda.domain.Item;
-import com.depromeet.ahmatda.domain.ItemList;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -29,8 +28,5 @@ public class Template extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
-
-    @OneToMany(mappedBy = "template")
-    private List<ItemList> itemList = new ArrayList<>();
 
 }
