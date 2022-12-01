@@ -7,6 +7,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 
 import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.adaptor.CategoryAdaptor;
@@ -22,11 +23,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @AutoConfigureRestDocs
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 @SpringBootTest
 class CategoryControllerTest {
 
@@ -43,6 +44,11 @@ class CategoryControllerTest {
                 getDocumentResponse(),
                 responseFields(
                     fieldWithPath("result").type(JsonFieldType.ARRAY).description("카테고리"),
-                    fieldWithPath("error").type(JsonFieldType.NULL).description("에러"))));
+                    fieldWithPath("result[].id").type(JsonFieldType.NUMBER).description("카테고리 ID"),
+                    fieldWithPath("result[].name").type(JsonFieldType.STRING).description("카테고리명"),
+                    fieldWithPath("result[].type").type(JsonFieldType.STRING).description("카테고리 타입"),
+                    fieldWithPath("result[].emoji").type(JsonFieldType.STRING).description("이모지"),
+                    fieldWithPath("error").type(JsonFieldType.NULL).description("에러"))))
+            .andDo(print());
     }
 }

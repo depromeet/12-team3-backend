@@ -1,8 +1,10 @@
 package com.depromeet.ahmatda.category;
 
+import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.category.Category;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +34,13 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<RestResponse<List<Category>>> getCategories() {
+    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategories() {
         List<Category> categories = categoryService.getCategories();
-        return ResponseEntity.ok().body(RestResponse.ok(categories));
+
+        List<CategoryResponse> categoryResponses = categories.stream()
+            .map(category -> CategoryResponse.createByEntity(category))
+            .collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 }
