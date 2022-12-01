@@ -1,5 +1,6 @@
 package com.depromeet.ahmatda.domain;
 
+import com.depromeet.ahmatda.domain.template.Template;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -22,6 +23,10 @@ public class Item extends BaseTimeEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "itemlist_id")
     private ItemList itemList;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "template_id")
+    private Template template;
 
     @Column
     private String name;
