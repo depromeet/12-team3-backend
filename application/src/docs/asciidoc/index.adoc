@@ -52,7 +52,6 @@ include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
 include::{snippets}/category/curl-request.adoc[]
 ==== Request Body
 include::{snippets}/category/request-body.adoc[]
-include::{snippets}/category/request-fields.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/category/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 카테고리

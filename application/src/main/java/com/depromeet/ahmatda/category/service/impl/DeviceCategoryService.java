@@ -1,5 +1,6 @@
 package com.depromeet.ahmatda.category.service.impl;
 
+import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.ErrorCode;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -23,8 +25,11 @@ public class DeviceCategoryService implements CategoryService {
     }
 
     @Override
-    public List<Category> getCategories() {
-        return categoryAdaptor.getCategories();
+    public List<CategoryResponse> getCategories() {
+        List<Category> categories = categoryAdaptor.getCategories();
+        return categories.stream()
+                .map(category -> CategoryResponse.createByEntity(category))
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -35,12 +35,7 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategories() {
-        List<Category> categories = categoryService.getCategories();
-
-        List<CategoryResponse> categoryResponses = categories.stream()
-            .map(category -> CategoryResponse.createByEntity(category))
-            .collect(Collectors.toList());
-
+        List<CategoryResponse> categoryResponses = categoryService.getCategories();
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 }
