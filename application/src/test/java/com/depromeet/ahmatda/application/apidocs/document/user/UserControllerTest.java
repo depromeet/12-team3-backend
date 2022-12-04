@@ -6,6 +6,7 @@ import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
 import com.depromeet.ahmatda.user.dto.SignUpRequestDto;
 import com.depromeet.ahmatda.user.exception.UserExistException;
+import com.fasterxml.jackson.core.JsonGenerator;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -66,7 +67,7 @@ public class UserControllerTest extends ApiDocumentationTest {
         // given
         SignUpRequestDto requestDto = new SignUpRequestDto(DeviceCode.IOS, iosDeviceId);
         String request = objectMapper.writeValueAsString(requestDto);
-        String response = objectMapper.writeValueAsString(RestResponse.error(ErrorCode.EXIST_USER));
+        String response = objectMapper.configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true).writeValueAsString(RestResponse.error(ErrorCode.EXIST_USER));
         doThrow(new UserExistException(ErrorCode.EXIST_USER)).when(userService).createUser(requestDto);
 
         // when
@@ -97,7 +98,7 @@ public class UserControllerTest extends ApiDocumentationTest {
         // given
         SignUpRequestDto requestDto = new SignUpRequestDto(DeviceCode.IOS, "abc");
         String request = objectMapper.writeValueAsString(requestDto);
-        String response = objectMapper.writeValueAsString(RestResponse.error(ErrorCode.BINDING_ERROR, Map.of("deviceCode", "deviceCode-deviceId 값이 유효하지 않습니다")));
+        String response = objectMapper.configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true).writeValueAsString(RestResponse.error(ErrorCode.BINDING_ERROR, Map.of("deviceCode", "deviceCode-deviceId 값이 유효하지 않습니다")));
 
         // when
         ResultActions result = this.mockMvc.perform(
