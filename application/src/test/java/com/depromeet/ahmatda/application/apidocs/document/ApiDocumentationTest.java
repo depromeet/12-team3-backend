@@ -35,4 +35,7 @@ public abstract class ApiDocumentationTest {
 
     @MockBean
     protected UserService userService;
+
+    @MockBean
+    protected CategoryService categoryService;
 }
