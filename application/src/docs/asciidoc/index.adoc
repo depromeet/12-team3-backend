@@ -45,3 +45,16 @@ include::{snippets}/user-sign-up/response-body.adoc[]
 include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
 ==== 에러 응답 - 바인딩 실패 (IOS, ANDROID 정규식)
 include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
+
+[[Category]]
+=== Category - 조회
+
+==== Method : Get
+==== curl-request
+include::{snippets}/category/curl-request.adoc[]
+==== Request Body
+include::{snippets}/category/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/category/response-body.adoc[]
+==== 에러 응답 - 존재하지 않는 카테고리
+include::{snippets}/category/http-response.adoc[]

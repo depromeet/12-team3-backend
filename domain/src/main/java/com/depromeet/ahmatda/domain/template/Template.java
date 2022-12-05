@@ -3,8 +3,8 @@ package com.depromeet.ahmatda.domain.template;
 import javax.persistence.*;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
-import com.depromeet.ahmatda.domain.Category;
 import com.depromeet.ahmatda.domain.Item;
+import com.depromeet.ahmatda.domain.category.Category;
 import lombok.Getter;
 
 import java.util.ArrayList;
