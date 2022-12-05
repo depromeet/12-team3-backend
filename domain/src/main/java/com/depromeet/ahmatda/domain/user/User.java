@@ -32,8 +32,6 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user")
     private List<Category> categories = new ArrayList<>();
 
-    public static User createUserWithDeviceId(String deviceId) {
-
     public static User createUserWithDeviceId(DeviceCode deviceCode, String deviceId) {
         return User.builder()
                 .deviceCode(deviceCode)
