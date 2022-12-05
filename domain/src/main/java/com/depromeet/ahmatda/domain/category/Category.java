@@ -38,5 +38,5 @@ public class Category extends BaseTimeEntity {
     private String name;
 
     @Column
-    private String emoji;
+    private Emoji emoji;
 }
