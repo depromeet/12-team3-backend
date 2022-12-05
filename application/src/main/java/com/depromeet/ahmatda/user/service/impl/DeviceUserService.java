@@ -23,7 +23,7 @@ public class DeviceUserService implements UserService {
         String deviceId = request.getDeviceId();
         checkExistUser(deviceId);
 
-        User user = User.createUserWithDeviceId(request.getDeviceId());
+        User user = User.createUserWithDeviceId(request.getDeviceCode(), request.getDeviceId());
         return userAdaptor.createUser(user);
     }
 
