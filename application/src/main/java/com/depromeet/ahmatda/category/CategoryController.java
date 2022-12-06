@@ -22,9 +22,9 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<RestResponse<Category>> getCategoryById(@PathVariable Long id) {
-        Category category = categoryService.getCategoryById(id);
-        return ResponseEntity.ok().body(RestResponse.ok(category));
+    public ResponseEntity<RestResponse<CategoryResponse>> getCategoryById(@PathVariable Long id) {
+        CategoryResponse categoryResponse = categoryService.getCategoryById(id);
+        return ResponseEntity.ok().body(RestResponse.ok(categoryResponse));
     }
 
     @GetMapping(value = "/user/{userId}")

@@ -19,9 +19,10 @@ public class DeviceCategoryService implements CategoryService {
     private final CategoryAdaptor categoryAdaptor;
 
     @Override
-    public Category getCategoryById(Long id) {
-        return categoryAdaptor.getCategoryById(id)
-                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+    public CategoryResponse getCategoryById(Long id) {
+        Category category = categoryAdaptor.getCategoryById(id)
+            .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+        return CategoryResponse.createByEntity(category);
     }
 
     @Override
