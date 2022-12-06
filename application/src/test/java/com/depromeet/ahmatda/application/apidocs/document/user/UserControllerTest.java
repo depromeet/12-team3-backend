@@ -66,7 +66,7 @@ public class UserControllerTest extends ApiDocumentationTest {
         // given
         SignUpRequestDto requestDto = new SignUpRequestDto(DeviceCode.IOS, iosDeviceId);
         String request = objectMapper.writeValueAsString(requestDto);
-        String response = getObjectMapper().writeValueAsString(RestResponse.error(ErrorCode.EXIST_USER));
+        String response = objectMapper.writeValueAsString(RestResponse.error(ErrorCode.EXIST_USER));
         doThrow(new UserExistException(ErrorCode.EXIST_USER)).when(userService).createUser(requestDto);
 
         // when
@@ -97,7 +97,7 @@ public class UserControllerTest extends ApiDocumentationTest {
         // given
         SignUpRequestDto requestDto = new SignUpRequestDto(DeviceCode.IOS, "abc");
         String request = objectMapper.writeValueAsString(requestDto);
-        String response = getObjectMapper().writeValueAsString(RestResponse.error(ErrorCode.BINDING_ERROR, Map.of("deviceCode", "deviceCode-deviceId 값이 유효하지 않습니다")));
+        String response = objectMapper.writeValueAsString(RestResponse.error(ErrorCode.BINDING_ERROR, Map.of("deviceCode", "deviceCode-deviceId 값이 유효하지 않습니다")));
 
         // when
         ResultActions result = this.mockMvc.perform(

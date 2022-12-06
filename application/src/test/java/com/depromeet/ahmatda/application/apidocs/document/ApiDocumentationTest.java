@@ -6,7 +6,9 @@ import com.depromeet.ahmatda.user.UserController;
 import com.depromeet.ahmatda.user.service.UserService;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,17 +23,19 @@ import org.springframework.test.web.servlet.MockMvc;
 })
 @AutoConfigureRestDocs
 @ActiveProfiles("test")
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class ApiDocumentationTest {
+
+    @BeforeAll
+    void init() {
+        objectMapper.configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
+    }
 
     @Autowired
     protected MockMvc mockMvc;
 
     @Autowired
     protected ObjectMapper objectMapper;
-
-    protected  ObjectMapper getObjectMapper() {
-        return objectMapper.configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
-    }
 
     @MockBean
     protected UserService userService;
