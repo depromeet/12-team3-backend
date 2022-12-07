@@ -8,7 +8,6 @@ import com.depromeet.ahmatda.domain.user.type.DeviceCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
@@ -22,8 +21,36 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class CategoryControllerTest extends ApiDocumentationTest {
+
+    @DisplayName("GET: /api/category/{id} 요청 시 단일 카테고리를 반환한다")
+    @Test
+    void getCategoryById() throws Exception {
+        CategoryResponse categoryResponse = CategoryResponse.builder()
+                .id(1L).emoji(Emoji.BICEPS)
+                .type("HEALTH").name("HEALTH").build();
+
+        given(categoryService.getCategoryById(1L)).willReturn(categoryResponse);
+
+        mockMvc.perform(get("/api/category/{id}", 1L))
+                .andExpect(status().isOk())
+                .andDo(document("category-by-id",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("id").description("카테고리 ID")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").type(JsonFieldType.OBJECT).description("결과"),
+                                fieldWithPath("result.id").type(JsonFieldType.NUMBER).description("카테고리 ID"),
+                                fieldWithPath("result.name").type(JsonFieldType.STRING).description("카테고리명"),
+                                fieldWithPath("result.type").type(JsonFieldType.STRING).description("카테고리 타입"),
+                                fieldWithPath("result.emoji").type(JsonFieldType.STRING).description("이모지"),
+                                fieldWithPath("error").type(JsonFieldType.NULL).description("에러"))))
+                .andDo(print());
+    }
 
     @DisplayName("GET: /api/category 요청 시 모든 카테고리를 반환한다")
     @Test
@@ -39,7 +66,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
         given(categoryService.getCategories()).willReturn(categoryResponses);
 
         mockMvc.perform(get("/api/category"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andDo(document("category",
                         getDocumentRequest(),
                         getDocumentResponse(),
@@ -70,7 +97,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
         given(categoryService.getCategoriesByUser(deviceId)).willReturn(categoryResponses);
 
         mockMvc.perform(get("/api/category/user/{deviceId}", deviceId))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andDo(document("category-by-user",
                         getDocumentRequest(),
                         getDocumentResponse(),
