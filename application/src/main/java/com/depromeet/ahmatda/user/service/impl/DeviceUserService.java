@@ -1,5 +1,6 @@
 package com.depromeet.ahmatda.user.service.impl;
 
+import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
 import com.depromeet.ahmatda.user.UserRegisterCode;
 import com.depromeet.ahmatda.user.service.UserService;
@@ -22,5 +23,12 @@ public class DeviceUserService implements UserService {
         return UserRegisterCode.getByUserFound(
                 userAdaptor.findByUserToken(userTokenValue).isPresent()
         );
+    }
+
+    @Override
+    public User createUser() {
+        UserToken userToken = UserToken.generate();
+        User user = User.createUserWithUserToken(userToken.getValue());
+        return userAdaptor.createUser(user);
     }
 }
