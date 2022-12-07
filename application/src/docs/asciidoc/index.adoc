@@ -56,5 +56,3 @@ include::{snippets}/category/curl-request.adoc[]
 include::{snippets}/category/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/category/response-body.adoc[]
-==== 에러 응답 - 존재하지 않는 카테고리
-include::{snippets}/category/http-response.adoc[]
