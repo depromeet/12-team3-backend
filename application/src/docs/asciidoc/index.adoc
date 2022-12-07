@@ -60,7 +60,7 @@ include::{snippets}/category/response-body.adoc[]
 ==== Method : Get
 ==== curl-request
 include::{snippets}/category-by-user/curl-request.adoc[]
-==== Request Body
-include::{snippets}/category-by-user/request-body.adoc[]
+==== Path Parameter
+include::{snippets}/category-by-user/path-parameters.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/category-by-user/response-body.adoc[]

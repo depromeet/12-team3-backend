@@ -19,8 +19,8 @@ public class DeviceCategoryService implements CategoryService {
     private final CategoryAdaptor categoryAdaptor;
 
     @Override
-    public CategoryResponse getCategoryById(Long id) {
-        Category category = categoryAdaptor.getCategoryById(id)
+    public CategoryResponse getCategoryById(final Long id) {
+        final Category category = categoryAdaptor.getCategoryById(id)
             .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
         return CategoryResponse.createByEntity(category);
     }
@@ -34,8 +34,8 @@ public class DeviceCategoryService implements CategoryService {
     }
 
     @Override
-    public List<CategoryResponse> getCategoriesByUser(String deviceId) {
-        List<Category> userCategories = categoryAdaptor.getCategoriesByDeviceId(deviceId);
+    public List<CategoryResponse> getCategoriesByUser(final String deviceId) {
+        final List<Category> userCategories = categoryAdaptor.getCategoriesByDeviceId(deviceId);
         return userCategories.stream()
                 .map(category -> CategoryResponse.createByEntity(category))
                 .collect(Collectors.toList());

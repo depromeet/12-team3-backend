@@ -22,20 +22,20 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<RestResponse<CategoryResponse>> getCategoryById(@PathVariable Long id) {
-        CategoryResponse categoryResponse = categoryService.getCategoryById(id);
+    public ResponseEntity<RestResponse<CategoryResponse>> getCategoryById(@PathVariable final Long id) {
+        final CategoryResponse categoryResponse = categoryService.getCategoryById(id);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponse));
     }
 
     @GetMapping(value = "/user/{deviceId}")
-    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByDeviceId(@PathVariable String deviceId) {
-        List<CategoryResponse> categoryResponses =  categoryService.getCategoriesByUser(deviceId);
+    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByDeviceId(@PathVariable final String deviceId) {
+        final List<CategoryResponse> categoryResponses =  categoryService.getCategoriesByUser(deviceId);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 
     @GetMapping
     public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategories() {
-        List<CategoryResponse> categoryResponses = categoryService.getCategories();
+        final List<CategoryResponse> categoryResponses = categoryService.getCategories();
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 }

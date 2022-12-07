@@ -15,7 +15,7 @@ public class CategoryAdaptor {
 
     private final CategoryRepository categoryRepository;
 
-    public Optional<Category> getCategoryById(Long categoryId) {
+    public Optional<Category> getCategoryById(final Long categoryId) {
         return categoryRepository.findById(categoryId);
     }
 
@@ -25,7 +25,7 @@ public class CategoryAdaptor {
     }
 
     @Transactional(readOnly = true)
-    public List<Category> getCategoriesByDeviceId(String deviceId) {
+    public List<Category> getCategoriesByDeviceId(final String deviceId) {
         return categoryRepository.findAllByDeviceId(deviceId);
     }
 }

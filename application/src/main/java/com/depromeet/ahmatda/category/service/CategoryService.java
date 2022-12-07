@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface CategoryService {
 
-    CategoryResponse getCategoryById(Long id);
+    CategoryResponse getCategoryById(final Long id);
 
     List<CategoryResponse> getCategories();
 
-    List<CategoryResponse> getCategoriesByUser(String userId);
+    List<CategoryResponse> getCategoriesByUser(final String userId);
 }
