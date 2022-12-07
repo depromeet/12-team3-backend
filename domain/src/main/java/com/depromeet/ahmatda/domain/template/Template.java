@@ -5,6 +5,7 @@ import javax.persistence.*;
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.Item;
 import com.depromeet.ahmatda.domain.category.Category;
+import com.depromeet.ahmatda.domain.user.User;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -17,8 +18,8 @@ public class Template extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //TODO : User Entity 연관관계 매핑
-    private Long userId;
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    private User user;
 
     private String templateName;
 
@@ -28,5 +29,9 @@ public class Template extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }

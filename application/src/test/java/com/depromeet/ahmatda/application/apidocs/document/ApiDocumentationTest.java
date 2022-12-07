@@ -2,6 +2,8 @@ package com.depromeet.ahmatda.application.apidocs.document;
 
 import com.depromeet.ahmatda.category.CategoryController;
 import com.depromeet.ahmatda.category.service.CategoryService;
+import com.depromeet.ahmatda.template.TemplateController;
+import com.depromeet.ahmatda.template.service.TemplateService;
 import com.depromeet.ahmatda.user.UserController;
 import com.depromeet.ahmatda.user.service.UserService;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -19,7 +21,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(controllers = {
         CommonController.class,
         UserController.class,
-        CategoryController.class
+        CategoryController.class,
+        TemplateController.class
 })
 @AutoConfigureRestDocs
 @ActiveProfiles("test")
@@ -42,4 +45,7 @@ public abstract class ApiDocumentationTest {
 
     @MockBean
     protected CategoryService categoryService;
+
+    @MockBean
+    protected TemplateService templateService;
 }
