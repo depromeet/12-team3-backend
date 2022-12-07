@@ -61,6 +61,16 @@ class CategoryControllerTest extends ApiDocumentationTest {
 
         mockMvc.perform(get("/api/category/{id}", 99L))
                 .andExpect(status().isNotFound())
+                .andDo(document("category-by-id-error",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        responseFields(
+                                fieldWithPath("result").type(JsonFieldType.NULL).description("결과"),
+                                fieldWithPath("error").type(JsonFieldType.OBJECT).description("에러"),
+                                fieldWithPath("error.code").type(JsonFieldType.STRING).description("에러코드"),
+                                fieldWithPath("error.message").type(JsonFieldType.STRING).description("에러메세지"),
+                                fieldWithPath("error.detail").type(JsonFieldType.NULL).description("상세")
+                        )))
                 .andDo(print());
     }
 
