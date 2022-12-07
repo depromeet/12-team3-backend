@@ -27,10 +27,10 @@ public class CategoryController {
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponse));
     }
 
-    @GetMapping(value = "/user/{userId}")
-    public ResponseEntity<RestResponse<List<Category>>> getCategoriesByUserId(@PathVariable String userId) {
-        List<Category> categories =  categoryService.getCategoriesByUser(userId);
-        return ResponseEntity.ok().body(RestResponse.ok(categories));
+    @GetMapping(value = "/user/{deviceId}")
+    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByUserId(@PathVariable String deviceId) {
+        List<CategoryResponse> categoryResponses =  categoryService.getCategoriesByUser(deviceId);
+        return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 
     @GetMapping
