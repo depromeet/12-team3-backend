@@ -3,6 +3,7 @@ package com.depromeet.ahmatda.application.apidocs.document.category;
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
+import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
@@ -16,6 +17,8 @@ import java.util.List;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -105,11 +108,11 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 .andDo(print());
     }
 
-    @DisplayName("GET: /api/category/user/{deviceId} 요청 시 해당 유저의 카테고리 리스트를 반환한다")
+    @DisplayName("GET: /api/category/user/{userId} 요청 시 해당 유저의 카테고리 리스트를 반환한다")
     @Test
-    void getCategoriesByDeviceId() throws Exception {
+    void getCategoriesByUserId() throws Exception {
         User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
-        String deviceId = userWithDeviceId.getDeviceId();
+        String userId = userWithDeviceId.getDeviceId();
 
         List<CategoryResponse> categoryResponses = List.of(
                 CategoryResponse.builder()
@@ -119,15 +122,17 @@ class CategoryControllerTest extends ApiDocumentationTest {
                         .id(2L).emoji(Emoji.BICEPS)
                         .type("HEALTH").name("HEALTH").build());
 
-        given(categoryService.getCategoriesByUser(deviceId)).willReturn(categoryResponses);
+        given(categoryService.getCategoriesByUser(userId)).willReturn(categoryResponses);
 
-        mockMvc.perform(get("/api/category/user/{deviceId}", deviceId))
+        mockMvc.perform(get("/api/category/user")
+                        .header(HttpHeader.USER_ID_KEY, userId))
                 .andExpect(status().isOk())
                 .andDo(document("category-by-user",
                         getDocumentRequest(),
                         getDocumentResponse(),
-                        pathParameters(
-                                parameterWithName("deviceId").description("디바이스ID")),
+                        requestHeaders(
+                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                        ),
                         responseFields(
                                 fieldWithPath("result").type(JsonFieldType.ARRAY).description("결과"),
                                 fieldWithPath("result[].id").type(JsonFieldType.NUMBER).description("카테고리 ID"),

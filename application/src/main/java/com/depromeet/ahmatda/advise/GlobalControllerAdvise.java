@@ -1,6 +1,5 @@
 package com.depromeet.ahmatda.advise;
 
-import com.depromeet.ahmatda.category.CategoryExceptionHandler;
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.ErrorResponse;

@@ -62,8 +62,8 @@ include::{snippets}/category/response-fields.adoc[]
 ==== Method : Get
 ==== curl-request
 include::{snippets}/category-by-user/curl-request.adoc[]
-==== Path Parameter
-include::{snippets}/category-by-user/path-parameters.adoc[]
+==== Request Header
+include::{snippets}/category-by-user/request-headers.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/category-by-user/response-body.adoc[]
 ==== 응답 필드 테이블

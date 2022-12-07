@@ -25,7 +25,7 @@ public class CategoryAdaptor {
     }
 
     @Transactional(readOnly = true)
-    public List<Category> getCategoriesByDeviceId(final String deviceId) {
-        return categoryRepository.findAllByDeviceId(deviceId);
+    public List<Category> getCategoriesByUserId(final String userId) {
+        return categoryRepository.findAllByUserId(userId);
     }
 }

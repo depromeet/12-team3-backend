@@ -34,8 +34,8 @@ public class DeviceCategoryService implements CategoryService {
     }
 
     @Override
-    public List<CategoryResponse> getCategoriesByUser(final String deviceId) {
-        final List<Category> userCategories = categoryAdaptor.getCategoriesByDeviceId(deviceId);
+    public List<CategoryResponse> getCategoriesByUser(final String userId) {
+        final List<Category> userCategories = categoryAdaptor.getCategoriesByUserId(userId);
         return userCategories.stream()
                 .map(category -> CategoryResponse.createByEntity(category))
                 .collect(Collectors.toList());
