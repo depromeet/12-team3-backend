@@ -28,7 +28,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/user/{deviceId}")
-    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByUserId(@PathVariable String deviceId) {
+    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByDeviceId(@PathVariable String deviceId) {
         List<CategoryResponse> categoryResponses =  categoryService.getCategoriesByUser(deviceId);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }

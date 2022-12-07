@@ -47,8 +47,7 @@ include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
 include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
 
 [[Category]]
-=== Category - 조회
-
+=== Category - 전체 조회
 ==== Method : Get
 ==== curl-request
 include::{snippets}/category/curl-request.adoc[]
@@ -56,3 +55,12 @@ include::{snippets}/category/curl-request.adoc[]
 include::{snippets}/category/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/category/response-body.adoc[]
+
+=== Category - 유저별 조회
+==== Method : Get
+==== curl-request
+include::{snippets}/category-by-user/curl-request.adoc[]
+==== Request Body
+include::{snippets}/category-by-user/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/category-by-user/response-body.adoc[]
