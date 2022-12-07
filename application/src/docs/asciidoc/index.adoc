@@ -79,3 +79,9 @@ include::{snippets}/category-by-id/path-parameters.adoc[]
 include::{snippets}/category-by-id/response-body.adoc[]
 ==== 응답 필드 테이블
 include::{snippets}/category-by-id/response-fields.adoc[]
+==== 에러 Request
+include::{snippets}/category-by-id-error/path-parameters.adoc[]
+==== 에러 응답
+include::{snippets}/category-by-id-error/http-response.adoc[]
+==== 에러응답 테이블
+include::{snippets}/category-by-id-error/response-fields.adoc[]

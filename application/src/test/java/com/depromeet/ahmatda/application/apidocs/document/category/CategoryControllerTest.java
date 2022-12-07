@@ -64,6 +64,9 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 .andDo(document("category-by-id-error",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("id").description("존재하지 않는 카테고리 ID")
+                        ),
                         responseFields(
                                 fieldWithPath("result").type(JsonFieldType.NULL).description("결과"),
                                 fieldWithPath("error").type(JsonFieldType.OBJECT).description("에러"),
