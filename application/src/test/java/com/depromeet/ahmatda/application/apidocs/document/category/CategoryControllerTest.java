@@ -2,6 +2,8 @@ package com.depromeet.ahmatda.application.apidocs.document.category;
 
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
+import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
+import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
@@ -49,6 +51,16 @@ class CategoryControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("result.type").type(JsonFieldType.STRING).description("카테고리 타입"),
                                 fieldWithPath("result.emoji").type(JsonFieldType.STRING).description("이모지"),
                                 fieldWithPath("error").type(JsonFieldType.NULL).description("에러"))))
+                .andDo(print());
+    }
+
+    @DisplayName("GET: /api/category/{id} 요청에 존재하지 않는 카테고리 id를 입력하면 예외처리한다")
+    @Test
+    void getCategoryById_throwException() throws Exception {
+        given(categoryService.getCategoryById(99L)).willThrow(new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+
+        mockMvc.perform(get("/api/category/{id}", 99L))
+                .andExpect(status().isNotFound())
                 .andDo(print());
     }
 
