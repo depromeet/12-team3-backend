@@ -71,3 +71,16 @@ include::{snippets}/template-by-user-category/request-body.adoc[]
 include::{snippets}/template-by-user-category/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 카테고리
 include::{snippets}/template-by-user-category/http-response.adoc[]
+
+[[Template]]
+=== Template - 유저템플릿 생성
+
+==== Method : Get
+==== curl-request
+include::{snippets}/template-create/curl-request.adoc[]
+==== Request Body
+include::{snippets}/template-create/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-create/response-body.adoc[]
+==== 에러 응답 - 존재하지 않는 카테고리
+include::{snippets}/template-create/http-response.adoc[]
