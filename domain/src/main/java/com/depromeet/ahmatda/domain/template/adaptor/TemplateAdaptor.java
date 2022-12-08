@@ -18,7 +18,7 @@ public class TemplateAdaptor {
         return templateRepository.findById(templateId);
     }
 
-    public List<Template> findByCategoryAndUserId(Long categoryId, String deviceId) {
-        return templateRepository.findByCategoryAndUserId(categoryId, deviceId);
+    public List<Template> findByCategoryAndUserId(Long categoryId, String userId) {
+        return templateRepository.findByCategoryAndUserId(categoryId, userId);
     }
 }

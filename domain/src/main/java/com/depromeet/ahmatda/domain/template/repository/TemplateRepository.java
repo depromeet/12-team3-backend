@@ -11,6 +11,6 @@ import java.util.List;
 public interface TemplateRepository extends JpaRepository<Template, Long> {
     @Query(value = "select t from Template t" +
             " join fetch t.items" +
-            " where t.category.id = :categoryId and t.user.deviceId = :deviceId")
-    List<Template> findByCategoryAndUserId(Long categoryId, String deviceId);
+            " where t.category.id = :categoryId and t.user.userToken = :userId")
+    List<Template> findByCategoryAndUserId(Long categoryId, String userId);
 }

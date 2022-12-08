@@ -25,8 +25,8 @@ public class DeviceTemplateService implements TemplateService {
     }
 
     @Override
-    public List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String deviceId) {
-        List<Template> templates = templateAdaptor.findByCategoryAndUserId(categoryId, deviceId);
+    public List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String userId) {
+        List<Template> templates = templateAdaptor.findByCategoryAndUserId(categoryId, userId);
         return templates.stream()
                 .map(template -> TemplateResponse.createByEntity(template))
                 .collect(Collectors.toList());

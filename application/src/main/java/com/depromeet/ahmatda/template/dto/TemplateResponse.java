@@ -13,7 +13,7 @@ import java.util.List;
 public class TemplateResponse {
     private Long id;
 
-    private String deviceId;
+    private String userToken;
 
     private String templateName;
 
@@ -26,7 +26,7 @@ public class TemplateResponse {
         }
         return TemplateResponse.builder()
                 .id(template.getId())
-                .deviceId(template.getUser().getDeviceId())
+                .userToken(template.getUser().getUserToken())
                 .templateName(template.getTemplateName())
                 .items(items)
                 .build();

@@ -1,5 +1,6 @@
 package com.depromeet.ahmatda.template;
 
+import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.template.adaptor.TemplateAdaptor;
@@ -12,6 +13,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -27,9 +29,10 @@ public class TemplateController {
         return ResponseEntity.ok().body(RestResponse.ok(template));
     }
 
-    @GetMapping(value = "/user/{deviceId}")
-    public ResponseEntity<RestResponse<List<TemplateResponse>>> getByUserTemplates(@PathVariable String deviceId, @RequestParam("category") Long categoryId ) {
-        List<TemplateResponse> template = templateService.findByCategoryAndUserId(categoryId, deviceId);
+    @GetMapping(value = "/user")
+    public ResponseEntity<RestResponse<List<TemplateResponse>>> getByUserTemplates(HttpServletRequest request, @RequestParam("category") Long categoryId ) {
+        String userId = request.getHeader(HttpHeader.USER_ID_KEY);
+        List<TemplateResponse> template = templateService.findByCategoryAndUserId(categoryId, userId);
         return ResponseEntity.ok().body(RestResponse.ok(template));
     }
 }

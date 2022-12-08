@@ -1,6 +1,7 @@
 package com.depromeet.ahmatda.application.apidocs.document.template;
 
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
+import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
@@ -17,6 +18,8 @@ import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocu
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
 import static com.depromeet.ahmatda.application.apidocs.util.DocumentConstraintsGenerator.getConstraintsAttribute;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -32,7 +35,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
     @Test
     void getByUserTemplates() throws Exception {
         User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
-        String deviceId = userWithDeviceId.getDeviceId();
+        String userId = userWithDeviceId.getUserToken();
         Long categoryId = 1L;
         List<TemplateItemResponse> items = List.of(
                 TemplateItemResponse.builder()
@@ -48,21 +51,21 @@ public class TemplateControllerTest extends ApiDocumentationTest {
         List<TemplateResponse> templateResponses = List.of(
                 TemplateResponse.builder()
                         .id(100L)
-                        .deviceId(deviceId)
+                        .userToken(userId)
                         .templateName("일상에서 중요한거").items(items)
                         .build());
 
-        given(templateService.findByCategoryAndUserId(1L,deviceId)).willReturn(templateResponses);
+        given(templateService.findByCategoryAndUserId(1L,userId)).willReturn(templateResponses);
 
-        mockMvc.perform(get("/api/template/user/{deviceId}?category={categoryId}", deviceId, categoryId))
+        mockMvc.perform(get("/api/template/user?category={categoryId}", categoryId).header(HttpHeader.USER_ID_KEY, userId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("template-by-user-category",
                         getDocumentRequest(),
                         getDocumentResponse(),
-                        pathParameters(
-                                parameterWithName("deviceId").description("디바이스ID")
-                               )));
+                        requestHeaders(
+                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                        )));
 
     }
 }

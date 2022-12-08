@@ -9,5 +9,5 @@ public interface TemplateService {
 
     Template getTemplateById(Long id);
 
-    List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String deviceId);
+    List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String userId);
 }
