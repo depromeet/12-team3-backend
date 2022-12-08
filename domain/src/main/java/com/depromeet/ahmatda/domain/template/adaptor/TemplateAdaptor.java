@@ -21,4 +21,8 @@ public class TemplateAdaptor {
     public List<Template> findByCategoryAndUserId(Long categoryId, String userId) {
         return templateRepository.findByCategoryAndUserId(categoryId, userId);
     }
+
+    public void createUserTemplate(Template template) {
+        templateRepository.save(template);
+    }
 }
