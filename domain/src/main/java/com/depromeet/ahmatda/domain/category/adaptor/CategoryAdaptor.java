@@ -28,4 +28,8 @@ public class CategoryAdaptor {
     public List<Category> getCategoriesByUserId(final String userId) {
         return categoryRepository.findAllByUserId(userId);
     }
+
+    public void createCategory(Category category) {
+        categoryRepository.save(category);
+    }
 }

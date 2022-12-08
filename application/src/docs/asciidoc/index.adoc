@@ -85,3 +85,12 @@ include::{snippets}/category-by-id-error/path-parameters.adoc[]
 include::{snippets}/category-by-id-error/http-response.adoc[]
 ==== 에러응답 테이블
 include::{snippets}/category-by-id-error/response-fields.adoc[]
+
+=== Category - 저장
+==== Method : Post
+==== curl-request
+include::{snippets}/category-create/curl-request.adoc[]
+==== Request Header
+include::{snippets}/category-create/request-headers.adoc[]
+==== Request Body
+include::{snippets}/category-create/request-body.adoc[]

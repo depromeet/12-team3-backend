@@ -1,15 +1,18 @@
 package com.depromeet.ahmatda.application.apidocs.document.category;
 
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
+import com.depromeet.ahmatda.category.dto.CategoryRequest;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
 import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.common.response.ErrorCode;
+import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 
 import java.util.List;
@@ -17,15 +20,17 @@ import java.util.List;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class CategoryControllerTest extends ApiDocumentationTest {
@@ -140,6 +145,36 @@ class CategoryControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("result[].type").type(JsonFieldType.STRING).description("카테고리 타입"),
                                 fieldWithPath("result[].emoji").type(JsonFieldType.STRING).description("이모지"),
                                 fieldWithPath("error").type(JsonFieldType.NULL).description("에러"))))
+                .andDo(print());
+    }
+
+    @DisplayName("POST: /api/category 요청 시 카테고리가 저장된다")
+    @Test
+    void createCategory() throws Exception {
+        User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+        CategoryRequest categoryRequest = CategoryRequest.builder()
+                .type("HEALTH").emoji(Emoji.BICEPS).name("CUSTOM")
+                .build();
+        String request = objectMapper.writeValueAsString(categoryRequest);
+        String response = objectMapper.writeValueAsString(RestResponse.ok());
+
+        mockMvc.perform(post("/api/category")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request)
+                        .header(HttpHeader.USER_ID_KEY, userWithDeviceId.getDeviceId()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(response))
+                .andDo(document("category-create",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                        ),
+                        requestFields(
+                                fieldWithPath("name").description("카테고리명"),
+                                fieldWithPath("type").description("카테고리 분류"),
+                                fieldWithPath("emoji").description("이모지")
+                        )))
                 .andDo(print());
     }
 }
