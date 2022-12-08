@@ -55,4 +55,14 @@ public class DeviceCategoryService implements CategoryService {
 
         categoryAdaptor.createCategory(category);
     }
+
+    @Override
+    public CategoryResponse modifyCategory(Long id, CategoryRequest categoryRequest) {
+        Category category = categoryAdaptor.getCategoryById(id)
+                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+
+        Category modifiedCategory = categoryRequest.modifyEntity(category);
+
+        return CategoryResponse.createByEntity(categoryAdaptor.modify(modifiedCategory));
+    }
 }

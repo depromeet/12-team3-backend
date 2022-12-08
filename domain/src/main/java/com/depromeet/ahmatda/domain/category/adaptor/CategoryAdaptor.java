@@ -32,4 +32,8 @@ public class CategoryAdaptor {
     public void createCategory(Category category) {
         categoryRepository.save(category);
     }
+
+    public Category modify(Category category) {
+        return categoryRepository.save(category);
+    }
 }

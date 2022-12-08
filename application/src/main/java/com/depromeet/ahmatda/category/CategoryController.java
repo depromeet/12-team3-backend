@@ -44,4 +44,10 @@ public class CategoryController {
         categoryService.createCategory(userId, categoryRequest);
         return ResponseEntity.ok(RestResponse.ok());
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<RestResponse<CategoryResponse>> modifyCategory(@PathVariable Long id, @RequestBody final CategoryRequest categoryRequest) {
+        CategoryResponse categoryResponse = categoryService.modifyCategory(id, categoryRequest);
+        return ResponseEntity.ok().body(RestResponse.ok(categoryResponse));
+    }
 }

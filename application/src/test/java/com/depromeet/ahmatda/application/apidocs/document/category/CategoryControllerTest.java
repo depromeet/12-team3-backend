@@ -7,25 +7,26 @@ import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
 import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.RestResponse;
+import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.BDDMockito;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
@@ -34,6 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class CategoryControllerTest extends ApiDocumentationTest {
+
+    private final String TEST_DEVICE_ID = "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0";
 
     @DisplayName("GET: /api/category/{id} 요청 시 단일 카테고리를 반환한다")
     @Test
@@ -116,7 +119,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
     @DisplayName("GET: /api/category/user/{userId} 요청 시 해당 유저의 카테고리 리스트를 반환한다")
     @Test
     void getCategoriesByUserId() throws Exception {
-        User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+        User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, TEST_DEVICE_ID);
         String userId = userWithDeviceId.getDeviceId();
 
         List<CategoryResponse> categoryResponses = List.of(
@@ -151,7 +154,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
     @DisplayName("POST: /api/category 요청 시 카테고리가 저장된다")
     @Test
     void createCategory() throws Exception {
-        User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+        User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, TEST_DEVICE_ID);
         CategoryRequest categoryRequest = CategoryRequest.builder()
                 .type("HEALTH").emoji(Emoji.BICEPS).name("CUSTOM")
                 .build();
@@ -177,4 +180,54 @@ class CategoryControllerTest extends ApiDocumentationTest {
                         )))
                 .andDo(print());
     }
+
+    @DisplayName("PATCH: /api/category/{id} 요청 시 카테고리를 수정한다")
+    @Test
+    void modifyCategory() throws Exception {
+        //given
+        CategoryRequest categoryRequest = CategoryRequest.builder()
+                .name("MODIFIED_NAME").emoji(Emoji.AIRPLANE).type("MODIFIED_TYPE")
+                .build();
+        Category category = Category.builder()
+                .id(1L).emoji(Emoji.BICEPS).name("NAME").type("TYPE")
+                .build();
+        CategoryResponse categoryResponse = CategoryResponse.createByEntity(categoryRequest.modifyEntity(category));
+        given(categoryService.modifyCategory(1L, categoryRequest)).willReturn(categoryResponse);
+
+        String request = objectMapper.writeValueAsString(categoryRequest);
+        String response = objectMapper.writeValueAsString(RestResponse.ok(categoryResponse));
+
+        //when
+        ResultActions result = mockMvc.perform(
+                patch("/api/category/{id}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(content().string(response))
+                .andDo(document("category-modify",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("id").description("변경 대상 카테고리의 ID")
+                        ),
+                        requestFields(
+                                fieldWithPath("name").description("변경할 카테고리명"),
+                                fieldWithPath("type").description("변경할 카테고리 타입"),
+                                fieldWithPath("emoji").description("변경할 카테고리 이미지")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").type(JsonFieldType.OBJECT).description("결과"),
+                                fieldWithPath("result.id").type(JsonFieldType.NUMBER).description("카테고리 ID"),
+                                fieldWithPath("result.name").type(JsonFieldType.STRING).description("변경된 카테고리명"),
+                                fieldWithPath("result.type").type(JsonFieldType.STRING).description("변경된 카테고리 타입"),
+                                fieldWithPath("result.emoji").type(JsonFieldType.STRING).description("변경된 카테고리 이모지"),
+                                fieldWithPath("error").type(JsonFieldType.NULL).description("에러")
+                        )
+                ))
+                .andDo(print());
+    }
+
 }

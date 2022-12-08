@@ -94,3 +94,18 @@ include::{snippets}/category-create/curl-request.adoc[]
 include::{snippets}/category-create/request-headers.adoc[]
 ==== Request Body
 include::{snippets}/category-create/request-body.adoc[]
+==== Request Fields
+include::{snippets}/category-create/request-fields.adoc[]
+
+=== Category - 수정(단일)
+==== Method : PATCH
+==== curl-request
+include::{snippets}/category-modify/curl-request.adoc[]
+==== Request Body
+include::{snippets}/category-modify/request-body.adoc[]
+==== Request Fields
+include::{snippets}/category-modify/request-fields.adoc[]
+==== Response Body
+include::{snippets}/category-modify/response-body.adoc[]
+==== Response Filed
+include::{snippets}/category-modify/response-fields.adoc[]
