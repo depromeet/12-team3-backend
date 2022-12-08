@@ -17,6 +17,8 @@ public class TemplateResponse {
 
     private String templateName;
 
+    private Long categoryId;
+
     private final List<TemplateItemResponse> items;
 
     public static TemplateResponse createByEntity(Template template) {
@@ -28,6 +30,7 @@ public class TemplateResponse {
                 .id(template.getId())
                 .userToken(template.getUser().getUserToken())
                 .templateName(template.getTemplateName())
+                .categoryId(template.getCategory().getId())
                 .items(items)
                 .build();
     }
