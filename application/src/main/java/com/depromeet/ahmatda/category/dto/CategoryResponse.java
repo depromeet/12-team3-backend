@@ -16,10 +16,10 @@ public class CategoryResponse {
 
     public static CategoryResponse createByEntity(Category category) {
         return CategoryResponse.builder()
-                .id(category.getId())
-                .name(category.getName())
-                .type(category.getType())
-                .emoji(category.getEmoji())
-                .build();
+            .id(category.getId())
+            .name(category.getName())
+            .type(category.getType())
+            .emoji(category.getEmoji())
+            .build();
     }
 }
