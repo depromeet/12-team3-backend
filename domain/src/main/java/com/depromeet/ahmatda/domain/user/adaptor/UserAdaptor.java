@@ -19,7 +19,7 @@ public class UserAdaptor {
         return userRepository.save(user);
     }
 
-    public Optional<User> getByDeviceId(String deviceId) {
-        return userRepository.findByDeviceId(deviceId);
+    public Optional<User> findByUserToken(String userToken) {
+        return userRepository.findByUserToken(userToken);
     }
 }
