@@ -3,6 +3,7 @@ package com.depromeet.ahmatda.category.service.impl;
 import com.depromeet.ahmatda.category.dto.CategoryRequest;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
+import com.depromeet.ahmatda.category.exception.CategoryUserAuthenticationException;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.category.Category;
@@ -64,5 +65,19 @@ public class DeviceCategoryService implements CategoryService {
         Category modifiedCategory = categoryRequest.modifyEntity(category);
 
         return CategoryResponse.createByEntity(categoryAdaptor.modify(modifiedCategory));
+    }
+
+    @Override
+    public void removeCategory(String userId, Long categoryId) {
+        Category category = categoryAdaptor.getCategoryById(categoryId)
+                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+
+        boolean isAuthenticated = category.authenticateUser(userId);
+
+        if(!isAuthenticated){
+            throw new CategoryUserAuthenticationException(ErrorCode.CATEGORY_AUTHENTICATION_ERROR);
+        }
+
+        categoryAdaptor.removeCategory(category);
     }
 }

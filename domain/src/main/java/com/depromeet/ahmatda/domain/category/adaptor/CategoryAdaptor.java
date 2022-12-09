@@ -36,4 +36,8 @@ public class CategoryAdaptor {
     public Category modify(Category category) {
         return categoryRepository.save(category);
     }
+
+    public void removeCategory(Category category) {
+        categoryRepository.delete(category);
+    }
 }

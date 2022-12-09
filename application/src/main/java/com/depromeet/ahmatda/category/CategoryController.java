@@ -51,4 +51,11 @@ public class CategoryController {
         CategoryResponse categoryResponse = categoryService.modifyCategory(id, categoryRequest);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponse));
     }
+
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<RestResponse<Object>> removeCategory(@PathVariable Long categoryId, HttpServletRequest request) {
+        String userId = request.getHeader(HttpHeader.USER_ID_KEY);
+        categoryService.removeCategory(userId, categoryId);
+        return ResponseEntity.ok(RestResponse.ok());
+    }
 }

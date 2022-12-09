@@ -4,6 +4,7 @@ import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.RecommendTemplate;
 import com.depromeet.ahmatda.domain.Template;
 import com.depromeet.ahmatda.domain.user.User;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -28,7 +29,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Category extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -49,4 +51,12 @@ public class Category extends BaseTimeEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private Emoji emoji;
+
+    public boolean authenticateUser(String userId) {
+        if (this.user.getDeviceId().equals(userId)) {
+            return true;
+        }
+
+        return false;
+    }
 }

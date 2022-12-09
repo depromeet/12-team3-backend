@@ -11,13 +11,11 @@ import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.BDDMockito;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -313,6 +311,47 @@ class CategoryControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("error.message").type(JsonFieldType.STRING).description("에러 메세지"),
                                 fieldWithPath("error.detail").type(JsonFieldType.OBJECT).description("에러 상세"),
                                 fieldWithPath("error.detail.name").type(JsonFieldType.STRING).description("에러 상세 메세지")
+                        )))
+                .andDo(print());
+    }
+
+    @DisplayName("카테고리 저장 시 타입에 공백 또는 NULL이 들어오면 예외처리 한다")
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"", " "})
+    void createCategory_type_valid_exception(String type) throws Exception {
+        //given
+        CategoryRequest categoryRequest = CategoryRequest.builder()
+                .type(type).name("CATEGORY_NAME").emoji(Emoji.AIRPLANE)
+                .build();
+
+        String request = objectMapper.writeValueAsString(categoryRequest);
+        String response = objectMapper.writeValueAsString(RestResponse.error(ErrorCode.BINDING_ERROR, Map.of("type", "카테고리 타입은 공백 또는 NULL 일 수 없습니다.")));
+        //when
+        ResultActions result = mockMvc.perform(
+                post("/api/category")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request)
+                        .header(HttpHeader.USER_ID_KEY, TEST_DEVICE_ID));
+
+        //then
+        result.andExpect(status().isBadRequest())
+                .andExpect(content().string(response))
+                .andDo(document("category-error-type-null",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestFields(
+                                fieldWithPath("name").description("카테고리 이름"),
+                                fieldWithPath("type").description("NULL 또는 공백의 카테고리 타입"),
+                                fieldWithPath("emoji").description("카테고리 이모지")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").type(JsonFieldType.NULL).description("결과"),
+                                fieldWithPath("error").type(JsonFieldType.OBJECT).description("에러"),
+                                fieldWithPath("error.code").type(JsonFieldType.STRING).description("에러 코드"),
+                                fieldWithPath("error.message").type(JsonFieldType.STRING).description("에러 메세지"),
+                                fieldWithPath("error.detail").type(JsonFieldType.OBJECT).description("에러 상세"),
+                                fieldWithPath("error.detail.type").type(JsonFieldType.STRING).description("에러 상세 메세지")
                         )))
                 .andDo(print());
     }
