@@ -77,10 +77,10 @@ include::{snippets}/template-by-user-category/http-response.adoc[]
 
 ==== Method : Get
 ==== curl-request
-include::{snippets}/template-create/curl-request.adoc[]
+include::{snippets}/create-template/curl-request.adoc[]
 ==== Request Body
-include::{snippets}/template-create/request-body.adoc[]
+include::{snippets}/create-template/request-body.adoc[]
 ==== 정상 응답 - 정상
-include::{snippets}/template-create/response-body.adoc[]
+include::{snippets}/create-template/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 카테고리
-include::{snippets}/template-create/http-response.adoc[]
+include::{snippets}/create-template/http-response.adoc[]

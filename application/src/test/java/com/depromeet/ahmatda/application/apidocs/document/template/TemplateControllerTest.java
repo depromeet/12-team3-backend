@@ -46,12 +46,12 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                 TemplateItemResponse.builder()
                         .id(1L)
                         .templateId(2L)
-                        .categoryId(1L).name("노트북").alarmId(11L).isTake(0L)
+                        .categoryId(1L).name("노트북").alarmId(11L).isTake(false)
                         .build(),
                 TemplateItemResponse.builder()
                         .id(2L)
                         .templateId(2L)
-                        .categoryId(1L).name("핸드폰").alarmId(10L).isTake(0L)
+                        .categoryId(1L).name("핸드폰").alarmId(10L).isTake(false)
                         .build());
         List<TemplateResponse> templateResponses = List.of(
                 TemplateResponse.builder()
