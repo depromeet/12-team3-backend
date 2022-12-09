@@ -2,7 +2,6 @@ package com.depromeet.ahmatda.domain.user;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.category.Category;
-import com.depromeet.ahmatda.domain.user.type.DeviceCode;
 import com.depromeet.ahmatda.domain.user.type.UserStatusCode;
 import lombok.*;
 
@@ -21,10 +20,7 @@ public class User extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(value = EnumType.STRING)
-    private DeviceCode deviceCode;
-
-    private String deviceId;
+    private String userToken;
 
     @Enumerated(value = EnumType.STRING)
     private UserStatusCode statusCd;
@@ -32,10 +28,9 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user")
     private List<Category> categories = new ArrayList<>();
 
-    public static User createUserWithDeviceId(DeviceCode deviceCode, String deviceId) {
+    public static User createUserWithUserToken(String userToken) {
         return User.builder()
-                .deviceCode(deviceCode)
-                .deviceId(deviceId)
+                .userToken(userToken)
                 .statusCd(UserStatusCode.ACTIVATED)
                 .build();
     }
