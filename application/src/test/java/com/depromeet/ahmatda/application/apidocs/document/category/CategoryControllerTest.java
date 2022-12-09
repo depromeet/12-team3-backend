@@ -11,6 +11,7 @@ import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -19,6 +20,7 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
@@ -230,4 +232,47 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 .andDo(print());
     }
 
+    @DisplayName("카테고리 저장 시 ENUM에 존재하지 않는 EMOJI가 들어오면 예외처리한다")
+    @Test
+    void createCategory_exception() throws Exception {
+        //given
+        CategoryRequest categoryRequest = CategoryRequest.builder()
+                .emoji(Emoji.EXCEPTION).type("CATEGORY_TYPE").name("CATEGORY_NAME")
+                .build();
+        String request = objectMapper.writeValueAsString(categoryRequest);
+        String response = objectMapper.writeValueAsString(RestResponse.error(ErrorCode.BINDING_ERROR, Map.of("emoji", "일치하는 이모지가 없습니다.")));
+
+        //when
+        ResultActions result = mockMvc.perform(
+                post("/api/category")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request)
+                        .header(HttpHeader.USER_ID_KEY, TEST_DEVICE_ID)
+        );
+
+        //then
+        result.andExpect(status().isBadRequest())
+                .andExpect(content().string(response))
+                .andDo(document("category-emoji-error",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                        ),
+                        requestFields(
+                                fieldWithPath("name").description("카테고리명"),
+                                fieldWithPath("type").description("카테고리 타입"),
+                                fieldWithPath("emoji").description("ENUM에 존재하지 않는 이모지 이름")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").type(JsonFieldType.NULL).description("결과"),
+                                fieldWithPath("error").type(JsonFieldType.OBJECT).description("에러"),
+                                fieldWithPath("error.code").type(JsonFieldType.STRING).description("에러 코드"),
+                                fieldWithPath("error.message").type(JsonFieldType.STRING).description("에러 메세지"),
+                                fieldWithPath("error.detail").type(JsonFieldType.OBJECT).description("에러 상세"),
+                                fieldWithPath("error.detail.emoji").type(JsonFieldType.STRING).description("에러 상세 메세지")
+                        )
+                        ))
+                .andDo(print());
+    }
 }

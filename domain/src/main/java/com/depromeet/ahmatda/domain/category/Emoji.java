@@ -18,8 +18,9 @@ public enum Emoji {
     public static Emoji emojiValidator(String requestEmoji) {
         Emoji[] emojis = Emoji.values();
         for (Emoji emoji : emojis) {
-            if(requestEmoji.equals(emoji))
+            if (requestEmoji.equals(emoji.toString())) {
                 return emoji;
+            }
         }
         return Emoji.EXCEPTION;
     }

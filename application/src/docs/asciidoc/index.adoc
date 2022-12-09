@@ -51,8 +51,6 @@ include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
 ==== Method : Get
 ==== curl-request
 include::{snippets}/category/curl-request.adoc[]
-==== Request Body
-include::{snippets}/category/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/category/response-body.adoc[]
 ==== 응답 필드 테이블
@@ -79,9 +77,9 @@ include::{snippets}/category-by-id/path-parameters.adoc[]
 include::{snippets}/category-by-id/response-body.adoc[]
 ==== 응답 필드 테이블
 include::{snippets}/category-by-id/response-fields.adoc[]
-==== 에러 Request
+==== 에러 응답 - 존재하지 않는 카테고리 ID에 대한 조회
 include::{snippets}/category-by-id-error/path-parameters.adoc[]
-==== 에러 응답
+==== Response Fields
 include::{snippets}/category-by-id-error/http-response.adoc[]
 ==== 에러응답 테이블
 include::{snippets}/category-by-id-error/response-fields.adoc[]
@@ -94,8 +92,11 @@ include::{snippets}/category-create/curl-request.adoc[]
 include::{snippets}/category-create/request-headers.adoc[]
 ==== Request Body
 include::{snippets}/category-create/request-body.adoc[]
-==== Request Fields
 include::{snippets}/category-create/request-fields.adoc[]
+==== 에러 응답 - ENUM에 존재하지 않는 이모지에 대한 요청
+include::{snippets}/category-emoji-error/request-fields.adoc[]
+include::{snippets}/category-emoji-error/response-fields.adoc[]
+include::{snippets}/category-emoji-error/response-body.adoc[]
 
 === Category - 수정(단일)
 ==== Method : PATCH
@@ -103,9 +104,7 @@ include::{snippets}/category-create/request-fields.adoc[]
 include::{snippets}/category-modify/curl-request.adoc[]
 ==== Request Body
 include::{snippets}/category-modify/request-body.adoc[]
-==== Request Fields
 include::{snippets}/category-modify/request-fields.adoc[]
 ==== Response Body
 include::{snippets}/category-modify/response-body.adoc[]
-==== Response Filed
 include::{snippets}/category-modify/response-fields.adoc[]

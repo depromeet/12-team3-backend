@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -39,7 +40,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<RestResponse<Object>> createCategory(HttpServletRequest request, final CategoryRequest categoryRequest) {
+    public ResponseEntity<RestResponse<Object>> createCategory(HttpServletRequest request, @Valid @RequestBody final CategoryRequest categoryRequest) {
         final String userId = request.getHeader(HttpHeader.USER_ID_KEY);
         categoryService.createCategory(userId, categoryRequest);
         return ResponseEntity.ok(RestResponse.ok());
