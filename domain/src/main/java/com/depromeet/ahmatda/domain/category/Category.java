@@ -2,7 +2,7 @@ package com.depromeet.ahmatda.domain.category;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.RecommendTemplate;
-import com.depromeet.ahmatda.domain.Template;
+import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.user.User;
 import java.util.ArrayList;
 import java.util.List;
