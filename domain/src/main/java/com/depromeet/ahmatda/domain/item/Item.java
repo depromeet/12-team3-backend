@@ -1,5 +1,6 @@
-package com.depromeet.ahmatda.domain;
+package com.depromeet.ahmatda.domain.item;
 
+import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.template.Template;
 import lombok.AccessLevel;
 import lombok.Getter;
