@@ -17,7 +17,7 @@ public class TemplateItemResponse {
 
     private final Long alarmId;
 
-    private final Long isTake;
+    private final boolean isTake;
 
     public static TemplateItemResponse from(Item item) {
         return TemplateItemResponse.builder()
@@ -26,7 +26,7 @@ public class TemplateItemResponse {
                 .categoryId(item.getCategoryId())
                 .name(item.getName())
                 .alarmId(item.getAlarmId())
-                .isTake(item.getIsTake())
+                .isTake(item.isTake())
                 .build();
     }
 

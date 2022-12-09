@@ -5,6 +5,7 @@ import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.item.Item;
 import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.adaptor.CategoryAdaptor;
+import com.depromeet.ahmatda.domain.item.adaptor.ItemAdaptor;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.template.adaptor.TemplateAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
@@ -28,6 +29,7 @@ public class DeviceTemplateService implements TemplateService {
     private final TemplateAdaptor templateAdaptor;
     private final UserAdaptor userAdaptor;
     private final CategoryAdaptor categoryAdaptor;
+    private final ItemAdaptor itemAdaptor;
 
     @Override
     public Template getTemplateById(Long id) {
@@ -55,14 +57,14 @@ public class DeviceTemplateService implements TemplateService {
 
         Template template = Template.createTemplate(createTemplateRequest.getTemplateName(), category, user);
 
+        templateAdaptor.createUserTemplate(template);
+
         if(createTemplateRequest.getItems() != null && createTemplateRequest.getItems().size() > 0) {
             for (TemplateItemRequest itemRequest : createTemplateRequest.getItems()) {
                 Item item = Item.createItem(createTemplateRequest.getCategoryId(), template, itemRequest.getName());
-                template.addUserTemplateItem(item);
+                itemAdaptor.createItem(item);
             }
         }
-
-        templateAdaptor.createUserTemplate(template);
 
     }
 }

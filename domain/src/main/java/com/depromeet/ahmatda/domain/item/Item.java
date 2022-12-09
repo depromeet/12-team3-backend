@@ -32,7 +32,7 @@ public class Item extends BaseTimeEntity {
     private Long alarmId;
 
     @Column
-    private Long isTake;
+    private boolean isTake;
 
     //==생성 메서드==//
     public static Item createItem(Long categoryId, Template template, String name) {
@@ -40,6 +40,9 @@ public class Item extends BaseTimeEntity {
         item.categoryId = categoryId;
         item.template = template;
         item.name = name;
+        //TODO : 알람 ID는 임의로 저장 추 후 변경
+        item.alarmId = 0L;
+        item.isTake = false;
         return item;
     }
 }
