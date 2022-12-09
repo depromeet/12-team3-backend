@@ -97,6 +97,14 @@ include::{snippets}/category-create/request-fields.adoc[]
 include::{snippets}/category-emoji-error/request-fields.adoc[]
 include::{snippets}/category-emoji-error/response-fields.adoc[]
 include::{snippets}/category-emoji-error/response-body.adoc[]
+==== 에러 응답 - 널 또는 공백의 카테고리 name 요청
+include::{snippets}/category-error-name-null/request-fields.adoc[]
+include::{snippets}/category-error-name-null/response-fields.adoc[]
+include::{snippets}/category-error-name-null/response-body.adoc[]
+==== 에러 응답 - 널 또는 공백의 카테고리 type 요청
+include::{snippets}/category-error-type-null/request-fields.adoc[]
+include::{snippets}/category-error-type-null/response-fields.adoc[]
+include::{snippets}/category-error-type-null/response-body.adoc[]
 
 === Category - 수정(단일)
 ==== Method : PATCH

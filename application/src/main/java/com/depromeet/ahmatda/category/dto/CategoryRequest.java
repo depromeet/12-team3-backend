@@ -15,10 +15,10 @@ import javax.validation.constraints.NotBlank;
 @EqualsAndHashCode
 public class CategoryRequest {
 
-    @NotBlank
+    @NotBlank(message = "카테고리 이름은 공백 또는 NULL 일 수 없습니다.")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "카테고리 타입은 공백 또는 NULL 일 수 없습니다.")
     private String type;
 
     @EmojiConstraint
