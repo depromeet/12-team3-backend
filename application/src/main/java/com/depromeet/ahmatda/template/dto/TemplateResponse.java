@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -22,10 +23,10 @@ public class TemplateResponse {
     private final List<TemplateItemResponse> items;
 
     public static TemplateResponse createByEntity(Template template) {
-        List<TemplateItemResponse> items = new ArrayList<>();
-        for (Item item: template.getItems()) {
-            items.add(TemplateItemResponse.from(item));
-        }
+        List<TemplateItemResponse> items = template.getItems().stream()
+                .map(TemplateItemResponse::from)
+                .collect(Collectors.toList());
+
         return TemplateResponse.builder()
                 .id(template.getId())
                 .userToken(template.getUser().getUserToken())

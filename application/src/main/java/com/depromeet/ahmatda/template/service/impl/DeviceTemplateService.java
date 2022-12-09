@@ -48,6 +48,7 @@ public class DeviceTemplateService implements TemplateService {
     }
 
     @Override
+    @Transactional
     public void createUserTemplate(String userId, CreateTemplateRequest createTemplateRequest) {
         //TODO:유저 검증 수정 필요
         User user = userAdaptor.getByDeviceId(userId)
@@ -61,7 +62,7 @@ public class DeviceTemplateService implements TemplateService {
 
         templateAdaptor.createUserTemplate(template);
 
-        if(createTemplateRequest.getItems() != null && createTemplateRequest.getItems().size() > 0) {
+        if(createTemplateRequest.getItems() != null) {
             for (TemplateItemRequest itemRequest : createTemplateRequest.getItems()) {
                 Item item = Item.createItem(createTemplateRequest.getCategoryId(), template, itemRequest.getName());
                 itemAdaptor.createItem(item);
@@ -83,13 +84,10 @@ public class DeviceTemplateService implements TemplateService {
             throw new TemplateUserAuthenticationException(ErrorCode.BINDING_ERROR);
         }
 
-        int checkItemSize = template.checkItemsSize();
-
-        if(checkItemSize > 0) {
-            for(Item item : template.getItems()) {
-                itemAdaptor.deleteItem(item);
-            }
+        for(Item item : template.getItems()) {
+            itemAdaptor.deleteItem(item);
         }
+
         templateAdaptor.deleteUserTemplate(template);
     }
 }

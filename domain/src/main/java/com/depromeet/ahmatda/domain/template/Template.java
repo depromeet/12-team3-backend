@@ -58,11 +58,4 @@ public class Template extends BaseTimeEntity {
     public boolean authenticateUser(String userId) {
         return this.user.getUserToken().equals(userId);
     }
-
-    public int checkItemsSize() {
-        if(items != null) {
-            return items.size();
-        }
-        return 0;
-    }
 }

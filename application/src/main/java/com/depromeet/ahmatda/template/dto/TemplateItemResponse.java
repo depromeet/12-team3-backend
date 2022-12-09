@@ -29,6 +29,4 @@ public class TemplateItemResponse {
                 .isTake(item.isTake())
                 .build();
     }
-
-
 }
