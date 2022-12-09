@@ -3,7 +3,7 @@ package com.depromeet.ahmatda.domain.template;
 import javax.persistence.*;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
-import com.depromeet.ahmatda.domain.Item;
+import com.depromeet.ahmatda.domain.item.Item;
 import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.user.User;
 import lombok.AccessLevel;
@@ -34,6 +34,10 @@ public class Template extends BaseTimeEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    private boolean isReservedAlarm;
+
+    private boolean isPin;
+
     //==연관관계 메서드==//
     public void addUserTemplateItem(Item item){
         items.add(item);
@@ -45,6 +49,8 @@ public class Template extends BaseTimeEntity {
         template.templateName = templateName;
         template.category = category;
         template.user = user;
+        template.isReservedAlarm = false;
+        template.isPin = false;
         return template;
     }
 }

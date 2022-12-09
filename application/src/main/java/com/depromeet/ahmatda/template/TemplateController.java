@@ -38,7 +38,7 @@ public class TemplateController {
     }
 
     @PostMapping
-    public ResponseEntity<RestResponse<Object>> createUserTemplate(HttpServletRequest request, CreateTemplateRequest createTemplateRequest) {
+    public ResponseEntity<RestResponse<Object>> createUserTemplate(HttpServletRequest request, @RequestBody CreateTemplateRequest createTemplateRequest) {
         final String userId = request.getHeader(HttpHeader.USER_ID_KEY);
         templateService.createUserTemplate(userId, createTemplateRequest);
         return ResponseEntity.ok(RestResponse.ok());

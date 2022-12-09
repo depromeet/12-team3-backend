@@ -1,7 +1,6 @@
 package com.depromeet.ahmatda.template.dto;
 
-import com.depromeet.ahmatda.domain.Item;
-import com.depromeet.ahmatda.domain.template.Template;
+import com.depromeet.ahmatda.domain.item.Item;
 import lombok.Builder;
 import lombok.Data;
 
