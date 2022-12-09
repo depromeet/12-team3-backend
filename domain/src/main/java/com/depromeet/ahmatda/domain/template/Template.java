@@ -9,13 +9,12 @@ import com.depromeet.ahmatda.domain.user.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Template extends BaseTimeEntity {
 
@@ -23,6 +22,7 @@ public class Template extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     private String templateName;
@@ -42,9 +42,9 @@ public class Template extends BaseTimeEntity {
     //==생성 메서드==//
     public static Template createTemplate(String templateName, Category category, User user) {
         Template template = new Template();
-        template.setTemplateName(templateName);
-        template.setUser(user);
-        template.setCategory(category);
+        template.templateName = templateName;
+        template.category = category;
+        template.user = user;
         return template;
     }
 }

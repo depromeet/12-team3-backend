@@ -4,16 +4,12 @@ import com.depromeet.ahmatda.domain.template.Template;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static javax.persistence.FetchType.LAZY;
 
-@Getter @Setter
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item extends BaseTimeEntity {
@@ -40,9 +36,9 @@ public class Item extends BaseTimeEntity {
     //==생성 메서드==//
     public static Item createItem(Long categoryId, Template template, String name) {
         Item item = new Item();
-        item.setName(name);
-        item.setTemplate(template);
-        item.setCategoryId(categoryId);
+        item.categoryId = categoryId;
+        item.template = template;
+        item.name = name;
         return item;
     }
 }
