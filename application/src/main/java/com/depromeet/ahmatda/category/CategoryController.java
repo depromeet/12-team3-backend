@@ -28,7 +28,7 @@ public class CategoryController {
     @GetMapping(value = "/user")
     public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByUserId(HttpServletRequest request) {
         final String userId = request.getHeader(HttpHeader.USER_ID_KEY);
-        final List<CategoryResponse> categoryResponses =  categoryService.getCategoriesByUser(userId);
+        final List<CategoryResponse> categoryResponses = categoryService.getCategoriesByUser(userId);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 
