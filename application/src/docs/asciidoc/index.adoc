@@ -116,3 +116,14 @@ include::{snippets}/category-modify/request-fields.adoc[]
 ==== Response Body
 include::{snippets}/category-modify/response-body.adoc[]
 include::{snippets}/category-modify/response-fields.adoc[]
+
+=== Category - 삭제(단일)
+==== Method : DELETE
+==== curl-request
+include::{snippets}/category-delete/curl-request.adoc[]
+==== Request Header(유저 인증용)
+include::{snippets}/category-delete/request-headers.adoc[]
+==== Path Parameter
+include::{snippets}/category-delete/path-parameters.adoc[]
+==== Response Body
+include::{snippets}/category-create/response-body.adoc[]

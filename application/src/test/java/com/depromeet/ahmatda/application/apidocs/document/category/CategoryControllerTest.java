@@ -355,4 +355,35 @@ class CategoryControllerTest extends ApiDocumentationTest {
                         )))
                 .andDo(print());
     }
+
+    @DisplayName("DELETE: /api/category/{id} 요청 시 카테고리를 삭제한다.")
+    @Test
+    void removeCategory() throws Exception {
+        mockMvc.perform(
+                        delete("/api/category/{categoryId}", 1L)
+                                .header(HttpHeader.USER_ID_KEY, TEST_DEVICE_ID))
+                .andExpect(status().isOk())
+                .andDo(document("category-delete",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                        ),
+                        pathParameters(
+                                parameterWithName("categoryId").description("삭제할 카테고리 ID")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").description("결과"),
+                                fieldWithPath("error").description("에러")
+                        )
+                ))
+                .andDo(print());
+    }
+
+    @DisplayName("카테고리 삭제 시 이용자와 생성한 유저가 다를 경우 예외 처리한다")
+    @Test
+    void removeCategory_authentication_exception() {
+
+    }
+
 }
