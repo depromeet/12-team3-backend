@@ -10,7 +10,6 @@ import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
 import com.depromeet.ahmatda.template.dto.TemplateItemRequest;
 import com.depromeet.ahmatda.template.dto.TemplateItemResponse;
 import com.depromeet.ahmatda.template.dto.TemplateResponse;
-import com.depromeet.ahmatda.user.dto.SignUpRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -39,7 +38,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
     @DisplayName("GET: /api/template/user 요청 시 유저가 가지고 있는 해당 카테고리 하위 유저템플릿을 반환한다.")
     @Test
     void getByUserTemplates() throws Exception {
-        User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+        User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
         String userId = userWithDeviceId.getUserToken();
         Long categoryId = 1L;
         List<TemplateItemResponse> items = List.of(
@@ -78,7 +77,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
     @DisplayName("POST: /api/template 요청 시 유저템플릿이 저장된다.")
     @Test
     void createUserTemplate() throws Exception {
-        User userWithDeviceId = User.createUserWithDeviceId(DeviceCode.IOS, "FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+        User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
         List<TemplateItemRequest> templateItemRequests = List.of(
                 TemplateItemRequest.builder()
                         .categoryId(1L)

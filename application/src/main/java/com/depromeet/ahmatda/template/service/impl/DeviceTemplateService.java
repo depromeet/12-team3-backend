@@ -16,7 +16,6 @@ import com.depromeet.ahmatda.template.dto.TemplateResponse;
 import com.depromeet.ahmatda.template.exception.TemplateNotExistException;
 import com.depromeet.ahmatda.template.exception.TemplateUserAuthenticationException;
 import com.depromeet.ahmatda.template.service.TemplateService;
-import com.depromeet.ahmatda.user.exception.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,9 +49,9 @@ public class DeviceTemplateService implements TemplateService {
     @Override
     @Transactional
     public void createUserTemplate(String userId, CreateTemplateRequest createTemplateRequest) {
-        //TODO:유저 검증 수정 필요
-        User user = userAdaptor.getByDeviceId(userId)
-                .orElseThrow(() -> new UserNotExistException(ErrorCode.BINDING_ERROR.getDesc()));
+        //TODO:유저 검증 수정 필요, Exception 처리필요
+        User user = userAdaptor.findByUserToken(userId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.BINDING_ERROR));
 
         Long categoryId = createTemplateRequest.getCategoryId();
         Category category = categoryAdaptor.getCategoryById(categoryId)
