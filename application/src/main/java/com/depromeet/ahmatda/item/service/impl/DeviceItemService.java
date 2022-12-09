@@ -16,4 +16,9 @@ public class DeviceItemService implements ItemService {
     public void createItem(Item item) {
         itemAdaptor.createItem(item);
     }
+
+    @Override
+    public void deleteItem(Item item) {
+        itemAdaptor.deleteItem(item);
+    }
 }

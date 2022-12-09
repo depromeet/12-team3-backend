@@ -43,4 +43,11 @@ public class TemplateController {
         templateService.createUserTemplate(userId, createTemplateRequest);
         return ResponseEntity.ok(RestResponse.ok());
     }
+
+    @DeleteMapping("/{templateId}")
+    public ResponseEntity<RestResponse<Object>> deleteUserTemplate(HttpServletRequest request, @PathVariable Long templateId) {
+        String userId = request.getHeader(HttpHeader.USER_ID_KEY);
+        templateService.deleteUserTemplate(userId, templateId);
+        return ResponseEntity.ok(RestResponse.ok());
+    }
 }

@@ -53,4 +53,16 @@ public class Template extends BaseTimeEntity {
         template.isPin = false;
         return template;
     }
+
+    //== 비지니스 로직 ==//
+    public boolean authenticateUser(String userId) {
+        return this.user.getUserToken().equals(userId);
+    }
+
+    public int checkItemsSize() {
+        if(items != null) {
+            return items.size();
+        }
+        return 0;
+    }
 }

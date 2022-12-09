@@ -15,4 +15,8 @@ public class ItemAdaptor {
         itemRepository.save(item);
     }
 
+    public void deleteItem(Item item) {
+        itemRepository.delete(item);
+    }
+
 }

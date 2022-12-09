@@ -14,10 +14,12 @@ import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
 import com.depromeet.ahmatda.template.dto.TemplateItemRequest;
 import com.depromeet.ahmatda.template.dto.TemplateResponse;
 import com.depromeet.ahmatda.template.exception.TemplateNotExistException;
+import com.depromeet.ahmatda.template.exception.TemplateUserAuthenticationException;
 import com.depromeet.ahmatda.template.service.TemplateService;
 import com.depromeet.ahmatda.user.exception.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,5 +68,28 @@ public class DeviceTemplateService implements TemplateService {
             }
         }
 
+    }
+
+    @Override
+    @Transactional
+    public void deleteUserTemplate(String userId, Long templateId) {
+        Template template = templateAdaptor.getTemplateById(templateId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
+
+        boolean isAuthenticated = template.authenticateUser(userId);
+
+        if (!isAuthenticated) {
+            //TODO: errorcode 수정필요
+            throw new TemplateUserAuthenticationException(ErrorCode.BINDING_ERROR);
+        }
+
+        int checkItemSize = template.checkItemsSize();
+
+        if(checkItemSize > 0) {
+            for(Item item : template.getItems()) {
+                itemAdaptor.deleteItem(item);
+            }
+        }
+        templateAdaptor.deleteUserTemplate(template);
     }
 }

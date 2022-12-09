@@ -25,4 +25,8 @@ public class TemplateAdaptor {
     public void createUserTemplate(Template template) {
         templateRepository.save(template);
     }
+
+    public void deleteUserTemplate(Template template) {
+        templateRepository.delete(template);
+    }
 }
