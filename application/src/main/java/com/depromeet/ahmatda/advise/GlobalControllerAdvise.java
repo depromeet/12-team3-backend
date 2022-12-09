@@ -1,6 +1,7 @@
 package com.depromeet.ahmatda.advise;
 
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
+import com.depromeet.ahmatda.category.exception.CategoryUserAuthenticationException;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.ErrorResponse;
 import com.depromeet.ahmatda.common.response.RestResponse;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.naming.AuthenticationException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,5 +39,10 @@ public class GlobalControllerAdvise {
     @ExceptionHandler(CategoryNotExistException.class)
     public ResponseEntity<RestResponse<Object>> handleCategoryNotExistsException(CategoryNotExistException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(RestResponse.error(exception.getErrorCode()));
+    }
+
+    @ExceptionHandler(CategoryUserAuthenticationException.class)
+    public ResponseEntity<RestResponse<Object>> handleCategoryUserAuthenticationException(CategoryUserAuthenticationException exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(RestResponse.error(exception.getErrorCode()));
     }
 }

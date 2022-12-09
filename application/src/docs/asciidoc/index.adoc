@@ -126,4 +126,8 @@ include::{snippets}/category-delete/request-headers.adoc[]
 ==== Path Parameter
 include::{snippets}/category-delete/path-parameters.adoc[]
 ==== Response Body
-include::{snippets}/category-create/response-body.adoc[]
+include::{snippets}/category-delete/response-body.adoc[]
+==== 에러 응답 - 카테고리를 작성자와 삭제 이용자가 다를 경우
+include::{snippets}/category-delete-error/request-headers.adoc[]
+include::{snippets}/category-delete-error/response-body.adoc[]
+include::{snippets}/category-delete-error/response-fields.adoc[]

@@ -4,6 +4,7 @@ import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.category.dto.CategoryRequest;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
+import com.depromeet.ahmatda.category.exception.CategoryUserAuthenticationException;
 import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.RestResponse;
@@ -26,6 +27,7 @@ import java.util.Map;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doThrow;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -382,8 +384,27 @@ class CategoryControllerTest extends ApiDocumentationTest {
 
     @DisplayName("카테고리 삭제 시 이용자와 생성한 유저가 다를 경우 예외 처리한다")
     @Test
-    void removeCategory_authentication_exception() {
+    void removeCategory_authentication_exception() throws Exception {
+        doThrow(new CategoryUserAuthenticationException(ErrorCode.CATEGORY_AUTHENTICATION_ERROR))
+                .when(categoryService).removeCategory(TEST_DEVICE_ID, 99L);
 
+        mockMvc.perform(delete("/api/category/{categoryId}", 99L)
+                        .header(HttpHeader.USER_ID_KEY, TEST_DEVICE_ID))
+                .andExpect(status().isUnauthorized())
+                .andDo(document("category-delete-error",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("ahmatda-user-id").description("카테고리를 작성한 유저가 아닌 다른 유저 UUID를 보낼 경우")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").type(JsonFieldType.NULL).description("결과"),
+                                fieldWithPath("error").type(JsonFieldType.OBJECT).description("에러"),
+                                fieldWithPath("error.code").type(JsonFieldType.STRING).description("에러코드"),
+                                fieldWithPath("error.message").type(JsonFieldType.STRING).description("에러메세지"),
+                                fieldWithPath("error.detail").type(JsonFieldType.NULL).description("상세")
+                        )))
+                .andDo(print());
     }
 
 }
