@@ -35,14 +35,4 @@ public class GlobalControllerAdvise {
 
         return ResponseEntity.badRequest().body(RestResponse.error(ErrorCode.BINDING_ERROR, details));
     }
-
-    @ExceptionHandler(CategoryNotExistException.class)
-    public ResponseEntity<RestResponse<Object>> handleCategoryNotExistsException(CategoryNotExistException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(RestResponse.error(exception.getErrorCode()));
-    }
-
-    @ExceptionHandler(CategoryUserAuthenticationException.class)
-    public ResponseEntity<RestResponse<Object>> handleCategoryUserAuthenticationException(CategoryUserAuthenticationException exception) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(RestResponse.error(exception.getErrorCode()));
-    }
 }
