@@ -33,16 +33,16 @@ public class DeviceCategoryService implements CategoryService {
     public List<CategoryResponse> getCategories() {
         List<Category> categories = categoryAdaptor.getCategories();
         return categories.stream()
-                .map(category -> CategoryResponse.createByEntity(category))
-                .collect(Collectors.toList());
+            .map(category -> CategoryResponse.createByEntity(category))
+            .collect(Collectors.toList());
     }
 
     @Override
     public List<CategoryResponse> getCategoriesByUser(final String userId) {
         final List<Category> userCategories = categoryAdaptor.getCategoriesByUserId(userId);
         return userCategories.stream()
-                .map(category -> CategoryResponse.createByEntity(category))
-                .collect(Collectors.toList());
+            .map(category -> CategoryResponse.createByEntity(category))
+            .collect(Collectors.toList());
     }
 
     @Override
@@ -56,7 +56,7 @@ public class DeviceCategoryService implements CategoryService {
     @Override
     public CategoryResponse modifyCategory(Long id, CategoryRequest categoryRequest) {
         Category category = categoryAdaptor.getCategoryById(id)
-                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+            .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
         Category modifiedCategory = categoryRequest.modifyEntity(category);
 
@@ -66,11 +66,11 @@ public class DeviceCategoryService implements CategoryService {
     @Override
     public void removeCategory(String userId, Long categoryId) {
         Category category = categoryAdaptor.getCategoryById(categoryId)
-                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+            .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
         boolean isAuthenticated = category.authenticateUser(userId);
 
-        if(!isAuthenticated){
+        if (!isAuthenticated) {
             throw new CategoryUserAuthenticationException(ErrorCode.CATEGORY_AUTHENTICATION_ERROR);
         }
 
