@@ -4,13 +4,17 @@ import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
 import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class CategoryRequest {
 
     @NotBlank(message = "카테고리 이름은 공백 또는 NULL 일 수 없습니다.")

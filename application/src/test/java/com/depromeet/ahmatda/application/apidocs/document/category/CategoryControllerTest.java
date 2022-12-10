@@ -1,5 +1,25 @@
 package com.depromeet.ahmatda.application.apidocs.document.category;
 
+import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
+import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doThrow;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.category.dto.CategoryRequest;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
@@ -11,7 +31,8 @@ import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
-import com.depromeet.ahmatda.domain.user.type.DeviceCode;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -22,24 +43,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
-
-import java.util.List;
-import java.util.Map;
-
-import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
-import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doThrow;
-import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
-import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class CategoryControllerTest extends ApiDocumentationTest {
 
