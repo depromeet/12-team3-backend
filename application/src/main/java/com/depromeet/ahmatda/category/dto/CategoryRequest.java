@@ -1,7 +1,7 @@
 package com.depromeet.ahmatda.category.dto;
 
 import com.depromeet.ahmatda.domain.category.Category;
-import com.depromeet.ahmatda.domain.category.Emoji;
+import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import com.depromeet.ahmatda.domain.user.User;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,7 +25,7 @@ public class CategoryRequest {
     @NotBlank(message = "카테고리 타입은 공백 또는 NULL 일 수 없습니다.")
     private String type;
 
-    private Emoji emoji;
+    private AhmatdaEmoji emoji;
 
     public static Category toEntity(User user, CategoryRequest categoryRequest) {
         return Category.builder()

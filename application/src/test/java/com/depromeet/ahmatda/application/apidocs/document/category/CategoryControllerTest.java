@@ -29,7 +29,7 @@ import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.category.Category;
-import com.depromeet.ahmatda.domain.category.Emoji;
+import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import com.depromeet.ahmatda.domain.user.User;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +52,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
     @Test
     void getCategoryById() throws Exception {
         CategoryResponse categoryResponse = CategoryResponse.builder()
-            .id(1L).emoji(Emoji.BICEPS)
+            .id(1L).emoji(AhmatdaEmoji.BUS)
             .type("HEALTH").name("HEALTH").build();
 
         given(categoryService.getCategoryById(1L)).willReturn(categoryResponse);
@@ -104,10 +104,10 @@ class CategoryControllerTest extends ApiDocumentationTest {
     void getCategories() throws Exception {
         List<CategoryResponse> categoryResponses = List.of(
             CategoryResponse.builder()
-                .id(1L).emoji(Emoji.AIRPLANE)
+                .id(1L).emoji(AhmatdaEmoji.BOWLING)
                 .type("DAILY").name("DAILY").build(),
             CategoryResponse.builder()
-                .id(2L).emoji(Emoji.BICEPS)
+                .id(2L).emoji(AhmatdaEmoji.EMPTY_CARD)
                 .type("HEALTH").name("HEALTH").build());
 
         given(categoryService.getCategories()).willReturn(categoryResponses);
@@ -136,10 +136,10 @@ class CategoryControllerTest extends ApiDocumentationTest {
 
         List<CategoryResponse> categoryResponses = List.of(
             CategoryResponse.builder()
-                .id(1L).emoji(Emoji.AIRPLANE)
+                .id(1L).emoji(AhmatdaEmoji.GYM)
                 .type("DAILY").name("DAILY").build(),
             CategoryResponse.builder()
-                .id(2L).emoji(Emoji.BICEPS)
+                .id(2L).emoji(AhmatdaEmoji.PLANE)
                 .type("HEALTH").name("HEALTH").build());
 
         given(categoryService.getCategoriesByUser(userId)).willReturn(categoryResponses);
@@ -169,7 +169,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
     void createCategory() throws Exception {
         User userWithDeviceId = User.createUserWithUserToken(TEST_USER_TOKEN);
         CategoryRequest categoryRequest = CategoryRequest.builder()
-            .type("HEALTH").emoji(Emoji.BICEPS).name("CUSTOM")
+            .type("HEALTH").emoji(AhmatdaEmoji.TUBE).name("CUSTOM")
             .build();
         String request = objectMapper.writeValueAsString(categoryRequest);
         String response = objectMapper.writeValueAsString(RestResponse.ok());
@@ -199,7 +199,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
     void createCategory_name_length_exception() throws Exception {
         //given
         CategoryRequest categoryRequest = CategoryRequest.builder()
-            .name("열글자초과카테고리이름").type("TYPE").emoji(Emoji.AIRPLANE)
+            .name("열글자초과카테고리이름").type("TYPE").emoji(AhmatdaEmoji.CAMERA)
             .build();
 
         String request = objectMapper.writeValueAsString(categoryRequest);
@@ -235,10 +235,10 @@ class CategoryControllerTest extends ApiDocumentationTest {
     void modifyCategory() throws Exception {
         //given
         CategoryRequest categoryRequest = CategoryRequest.builder()
-            .name("MODIFIED_NAME").emoji(Emoji.AIRPLANE).type("MODIFIED_TYPE")
+            .name("MODIFIED_NAME").emoji(AhmatdaEmoji.FRIENDS).type("MODIFIED_TYPE")
             .build();
         Category category = Category.builder()
-            .id(1L).emoji(Emoji.BICEPS).name("NAME").type("TYPE")
+            .id(1L).emoji(AhmatdaEmoji.RUN).name("NAME").type("TYPE")
             .build();
         CategoryResponse categoryResponse = CategoryResponse.createByEntity(
             categoryRequest.modifyEntity(category));
@@ -283,13 +283,13 @@ class CategoryControllerTest extends ApiDocumentationTest {
             .andDo(print());
     }
 
-    @Disabled("이모지 시스템 변경으로 인해 일시적 테스트 예외")
+    @Disabled("이모지 변경으로 인해 일시적 테스트 무시")
     @DisplayName("카테고리 저장 시 ENUM에 존재하지 않는 EMOJI가 들어오면 예외처리한다")
     @Test
     void createCategory_emoji_exception() throws Exception {
         //given
         CategoryRequest categoryRequest = CategoryRequest.builder()
-            .emoji(Emoji.EXCEPTION).type("CATEGORY_TYPE").name("CATEGORY_NAME")
+            .emoji(AhmatdaEmoji.SCHOOL).type("CATEGORY_TYPE").name("NAME")
             .build();
         String request = objectMapper.writeValueAsString(categoryRequest);
         String response = objectMapper.writeValueAsString(
@@ -334,7 +334,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
     void createCategory_name_valid_exception(String name) throws Exception {
         //given
         CategoryRequest categoryRequest = CategoryRequest.builder()
-            .type("CATEGORY_TYPE").name(name).emoji(Emoji.AIRPLANE)
+            .type("CATEGORY_TYPE").name(name).emoji(AhmatdaEmoji.WORK)
             .build();
 
         String request = objectMapper.writeValueAsString(categoryRequest);
@@ -378,7 +378,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
     void createCategory_type_valid_exception(String type) throws Exception {
         //given
         CategoryRequest categoryRequest = CategoryRequest.builder()
-            .type(type).name("NAME").emoji(Emoji.AIRPLANE)
+            .type(type).name("NAME").emoji(AhmatdaEmoji.SCHOOL)
             .build();
 
         String request = objectMapper.writeValueAsString(categoryRequest);

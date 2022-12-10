@@ -2,6 +2,7 @@ package com.depromeet.ahmatda.domain.category;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.RecommendTemplate;
+import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.user.User;
 
@@ -42,7 +43,7 @@ public class Category extends BaseTimeEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private Emoji emoji;
+    private AhmatdaEmoji emoji;
 
     public boolean authenticateUser(String userId) {
         return this.user.getUserToken().equals(userId);

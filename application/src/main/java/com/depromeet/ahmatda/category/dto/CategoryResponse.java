@@ -1,7 +1,7 @@
 package com.depromeet.ahmatda.category.dto;
 
 import com.depromeet.ahmatda.domain.category.Category;
-import com.depromeet.ahmatda.domain.category.Emoji;
+import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,7 +12,7 @@ public class CategoryResponse {
     private Long id;
     private String name;
     private String type;
-    private Emoji emoji;
+    private AhmatdaEmoji emoji;
 
     public static CategoryResponse createByEntity(final Category category) {
         return CategoryResponse.builder()
