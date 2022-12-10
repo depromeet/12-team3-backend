@@ -31,6 +31,7 @@ import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import com.depromeet.ahmatda.domain.user.User;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -283,15 +284,11 @@ class CategoryControllerTest extends ApiDocumentationTest {
             .andDo(print());
     }
 
-    @Disabled("이모지 변경으로 인해 일시적 테스트 무시")
     @DisplayName("카테고리 저장 시 ENUM에 존재하지 않는 EMOJI가 들어오면 예외처리한다")
     @Test
     void createCategory_emoji_exception() throws Exception {
         //given
-        CategoryRequest categoryRequest = CategoryRequest.builder()
-            .emoji(AhmatdaEmoji.SCHOOL).type("CATEGORY_TYPE").name("NAME")
-            .build();
-        String request = objectMapper.writeValueAsString(categoryRequest);
+        String request = "{\"name\":\"NAME\",\"type\":\"CATEGORY_TYPE\",\"emoji\":\"ENUM에없는이모지\"}";
         String response = objectMapper.writeValueAsString(
             RestResponse.error(ErrorCode.BINDING_ERROR, Map.of("emoji", "일치하는 이모지가 없습니다.")));
 
