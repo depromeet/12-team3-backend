@@ -4,6 +4,7 @@ import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class CategoryRequest {
 
     @NotBlank(message = "카테고리 이름은 공백 또는 NULL 일 수 없습니다.")
+    @Size(max = 10, message = "카테고리 이름의 길이는 열 글자 이하여야 합니다.")
     private String name;
 
     @NotBlank(message = "카테고리 타입은 공백 또는 NULL 일 수 없습니다.")

@@ -42,9 +42,9 @@ include::{snippets}/user-sign-up/request-fields.adoc[]
 ==== 정상 응답
 include::{snippets}/user-sign-up/response-body.adoc[]
 ==== 에러 응답 - 이미 존재하는 유저
-include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
-==== 에러 응답 - 바인딩 실패 (IOS, ANDROID 정규식)
-include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
+//include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
+//==== 에러 응답 - 바인딩 실패 (IOS, ANDROID 정규식)
+//include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
 
 [[Category]]
 === Category - 전체 조회
@@ -105,6 +105,11 @@ include::{snippets}/category-error-name-null/response-body.adoc[]
 include::{snippets}/category-error-type-null/request-fields.adoc[]
 include::{snippets}/category-error-type-null/response-fields.adoc[]
 include::{snippets}/category-error-type-null/response-body.adoc[]
+==== 에러 응답 - 카테고리 이름의 길이가 10글자 초과
+include::{snippets}/category-name-length-error/request-fields.adoc[]
+include::{snippets}/category-name-length-error/response-fields.adoc[]
+include::{snippets}/category-name-length-error/response-body.adoc[]
+
 
 === Category - 수정(단일)
 ==== Method : PATCH
