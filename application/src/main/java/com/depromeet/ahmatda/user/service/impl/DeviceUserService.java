@@ -1,12 +1,10 @@
 package com.depromeet.ahmatda.user.service.impl;
 
-import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
-import com.depromeet.ahmatda.user.exception.UserExistException;
-import com.depromeet.ahmatda.user.dto.SignUpRequestDto;
-import com.depromeet.ahmatda.user.exception.UserNotExistException;
+import com.depromeet.ahmatda.user.UserRegisterCode;
 import com.depromeet.ahmatda.user.service.UserService;
+import com.depromeet.ahmatda.user.token.UserToken;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,24 +17,18 @@ public class DeviceUserService implements UserService {
     }
 
     @Override
-    public User createUser(SignUpRequestDto request) {
-        String deviceId = request.getDeviceId();
-        checkExistUser(deviceId);
+    public UserRegisterCode checkUser(UserToken userToken) {
+        String userTokenValue = userToken.getValue();
 
-        User user = User.createUserWithDeviceId(request.getDeviceCode(), request.getDeviceId());
-        return userAdaptor.createUser(user);
-    }
-
-    private void checkExistUser(String deviceId) {
-        userAdaptor.getByDeviceId(deviceId).ifPresent(t -> {
-            throw new UserExistException(ErrorCode.EXIST_USER);
-        });
+        return UserRegisterCode.getByUserFound(
+                userAdaptor.findByUserToken(userTokenValue).isPresent()
+        );
     }
 
     @Override
-    public User getByDeviceId(String deviceId) {
-        return userAdaptor.getByDeviceId(deviceId).orElseThrow(() ->
-                new UserNotExistException("유저가 존재하지 않습니다")
-        );
+    public User createUser() {
+        UserToken userToken = UserToken.generate();
+        User user = User.createUserWithUserToken(userToken.getValue());
+        return userAdaptor.createUser(user);
     }
 }

@@ -38,7 +38,7 @@ public class CategoryController {
         final List<CategoryResponse> categoryResponses = categoryService.getCategories();
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
-
+  
     @PostMapping
     public ResponseEntity<RestResponse<Object>> createCategory(HttpServletRequest request, @Valid @RequestBody final CategoryRequest categoryRequest) {
         final String userId = request.getHeader(HttpHeader.USER_ID_KEY);
@@ -58,4 +58,5 @@ public class CategoryController {
         categoryService.removeCategory(userId, categoryId);
         return ResponseEntity.ok(RestResponse.ok());
     }
+}
 }

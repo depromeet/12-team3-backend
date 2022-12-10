@@ -1,10 +1,9 @@
 package com.depromeet.ahmatda.user;
 
 import com.depromeet.ahmatda.common.response.RestResponse;
-import com.depromeet.ahmatda.user.dto.SignUpRequestDto;
 import com.depromeet.ahmatda.user.service.UserService;
+import com.depromeet.ahmatda.user.token.UserToken;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,9 +16,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<RestResponse<Object>> createUser(@RequestBody @Validated SignUpRequestDto request) {
-        userService.createUser(request);
-        return ResponseEntity.ok().body(RestResponse.ok());
+    @GetMapping
+    public ResponseEntity<RestResponse<UserRegisterCode>> checkUser(@RequestParam UserToken userToken) {
+        return ResponseEntity.ok().body(
+                RestResponse.ok(userService.checkUser(userToken))
+        );
     }
 }
