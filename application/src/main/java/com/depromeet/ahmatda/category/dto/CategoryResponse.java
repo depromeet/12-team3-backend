@@ -14,7 +14,7 @@ public class CategoryResponse {
     private String type;
     private Emoji emoji;
 
-    public static CategoryResponse createByEntity(Category category) {
+    public static CategoryResponse createByEntity(final Category category) {
         return CategoryResponse.builder()
             .id(category.getId())
             .name(category.getName())

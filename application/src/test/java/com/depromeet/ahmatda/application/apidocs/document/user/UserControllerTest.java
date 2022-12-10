@@ -1,9 +1,22 @@
 package com.depromeet.ahmatda.application.apidocs.document.user;
 
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
+import com.depromeet.ahmatda.common.response.ErrorCode;
+import com.depromeet.ahmatda.common.response.RestResponse;
+import com.depromeet.ahmatda.domain.user.type.DeviceCode;
+import com.depromeet.ahmatda.user.dto.SignUpRequestDto;
+import com.depromeet.ahmatda.user.exception.UserExistException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
+import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.test.web.servlet.ResultActions;
 import com.depromeet.ahmatda.user.token.UserToken;
 
 import static org.mockito.Mockito.doThrow;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
