@@ -1,6 +1,5 @@
 package com.depromeet.ahmatda.domain.category;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -13,15 +12,4 @@ public enum Emoji {
 
     private final String utf8;
     private final String unicode;
-
-    @JsonCreator
-    public static Emoji emojiValidator(String requestEmoji) {
-        Emoji[] emojis = Emoji.values();
-        for (Emoji emoji : emojis) {
-            if (requestEmoji.equals(emoji.toString())) {
-                return emoji;
-            }
-        }
-        return Emoji.EXCEPTION;
-    }
 }

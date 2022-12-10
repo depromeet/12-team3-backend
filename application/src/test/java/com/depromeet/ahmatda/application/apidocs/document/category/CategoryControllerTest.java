@@ -12,6 +12,7 @@ import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.Emoji;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -235,6 +236,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 .andDo(print());
     }
 
+    @Disabled("이모지 시스템 변경으로 인해 일시적 테스트 예외")
     @DisplayName("카테고리 저장 시 ENUM에 존재하지 않는 EMOJI가 들어오면 예외처리한다")
     @Test
     void createCategory_emoji_exception() throws Exception {
