@@ -10,12 +10,10 @@ import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.category.adaptor.CategoryAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
-import com.depromeet.ahmatda.user.exception.UserNotExistException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
@@ -49,9 +47,7 @@ public class DeviceCategoryService implements CategoryService {
 
     @Override
     public void createCategory(final String userId, final CategoryRequest categoryRequest) {
-        User user = userAdaptor.getByDeviceId(userId)
-                .orElseThrow(() -> new UserNotExistException(ErrorCode.USER_NOT_FOUND.getDesc()));
-
+        User user = userAdaptor.findByUserToken(userId).get();
         Category category = CategoryRequest.toEntity(user, categoryRequest);
 
         categoryAdaptor.createCategory(category);

@@ -4,8 +4,6 @@ import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.user.type.DeviceCode;
-import com.depromeet.ahmatda.user.dto.SignUpRequestDto;
-import com.depromeet.ahmatda.user.exception.UserExistException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
