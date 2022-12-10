@@ -45,6 +45,6 @@ public class Category extends BaseTimeEntity {
     private Emoji emoji;
 
     public boolean authenticateUser(String userId) {
-        return this.user.getDeviceId().equals(userId)
+        return this.user.getDeviceId().equals(userId);
     }
 }
