@@ -46,7 +46,7 @@ public class Category extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private AhmatdaEmoji emoji;
 
-    public boolean authenticateUser(String userId) {
-        return this.user.getUserToken().equals(userId);
+    public boolean authenticateUser(final String userToken) {
+        return this.user.getUserToken().equals(userToken);
     }
 }

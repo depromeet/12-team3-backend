@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    @Query("SELECT category FROM Category category WHERE category.user.userToken=:userId")
-    List<Category> findAllByUserId(String userId);
+    @Query("SELECT category FROM Category category WHERE category.user.userToken=:userToken")
+    List<Category> findAllByUserToken(String userToken);
 }

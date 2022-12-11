@@ -38,16 +38,16 @@ public class DeviceCategoryService implements CategoryService {
     }
 
     @Override
-    public List<CategoryResponse> getCategoriesByUser(final String userId) {
-        final List<Category> userCategories = categoryAdaptor.getCategoriesByUserId(userId);
+    public List<CategoryResponse> getCategoriesByUser(final String userToken) {
+        final List<Category> userCategories = categoryAdaptor.getCategoriesByUserToken(userToken);
         return userCategories.stream()
             .map(category -> CategoryResponse.createByEntity(category))
             .collect(Collectors.toList());
     }
 
     @Override
-    public void createCategory(final String userId, final CategoryRequest categoryRequest) {
-        User user = userAdaptor.findByUserToken(userId).get();
+    public void createCategory(final String userToken, final CategoryRequest categoryRequest) {
+        User user = userAdaptor.findByUserToken(userToken).get();
         Category category = CategoryRequest.toEntity(user, categoryRequest);
 
         categoryAdaptor.createCategory(category);
@@ -64,11 +64,11 @@ public class DeviceCategoryService implements CategoryService {
     }
 
     @Override
-    public void removeCategory(String userId, Long categoryId) {
+    public void removeCategory(String userToken, Long categoryId) {
         Category category = categoryAdaptor.getCategoryById(categoryId)
             .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
-        boolean isAuthenticated = category.authenticateUser(userId);
+        boolean isAuthenticated = category.authenticateUser(userToken);
 
         if (!isAuthenticated) {
             throw new CategoryUserAuthenticationException(ErrorCode.CATEGORY_AUTHENTICATION_ERROR);

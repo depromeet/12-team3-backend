@@ -11,11 +11,11 @@ public interface CategoryService {
 
     List<CategoryResponse> getCategories();
 
-    List<CategoryResponse> getCategoriesByUser(final String userId);
+    List<CategoryResponse> getCategoriesByUser(final String userToken);
 
-    void createCategory(String userId, CategoryRequest categoryRequest);
+    void createCategory(String userToken, CategoryRequest categoryRequest);
 
     CategoryResponse modifyCategory(Long id, CategoryRequest categoryRequest);
 
-    void removeCategory(String userId, Long categoryId);
+    void removeCategory(String userToken, Long categoryId);
 }

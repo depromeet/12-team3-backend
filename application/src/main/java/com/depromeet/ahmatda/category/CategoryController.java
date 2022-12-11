@@ -27,9 +27,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/user")
-    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByUserId(HttpServletRequest request) {
-        final String userId = request.getHeader(HttpHeader.USER_ID_KEY);
-        final List<CategoryResponse> categoryResponses = categoryService.getCategoriesByUser(userId);
+    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByUserToken(HttpServletRequest request) {
+        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        final List<CategoryResponse> categoryResponses = categoryService.getCategoriesByUser(userToken);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 
@@ -41,8 +41,8 @@ public class CategoryController {
   
     @PostMapping
     public ResponseEntity<RestResponse<Object>> createCategory(HttpServletRequest request, @Valid @RequestBody final CategoryRequest categoryRequest) {
-        final String userId = request.getHeader(HttpHeader.USER_ID_KEY);
-        categoryService.createCategory(userId, categoryRequest);
+        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        categoryService.createCategory(userToken, categoryRequest);
         return ResponseEntity.ok(RestResponse.ok());
     }
 
@@ -54,8 +54,8 @@ public class CategoryController {
 
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<RestResponse<Object>> removeCategory(@PathVariable Long categoryId, HttpServletRequest request) {
-        String userId = request.getHeader(HttpHeader.USER_ID_KEY);
-        categoryService.removeCategory(userId, categoryId);
+        String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        categoryService.removeCategory(userToken, categoryId);
         return ResponseEntity.ok(RestResponse.ok());
     }
 }

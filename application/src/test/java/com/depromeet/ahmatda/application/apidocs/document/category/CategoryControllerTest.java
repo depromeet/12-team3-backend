@@ -128,11 +128,11 @@ class CategoryControllerTest extends ApiDocumentationTest {
             .andDo(print());
     }
 
-    @DisplayName("GET: /api/category/user/{userId} 요청 시 해당 유저의 카테고리 리스트를 반환한다")
+    @DisplayName("GET: /api/category/user/{userToken} 요청 시 해당 유저의 카테고리 리스트를 반환한다")
     @Test
-    void getCategoriesByUserId() throws Exception {
+    void getCategoriesByUserToken() throws Exception {
         User userWithDeviceId = User.createUserWithUserToken(TEST_USER_TOKEN);
-        String userId = userWithDeviceId.getUserToken();
+        String userToken = userWithDeviceId.getUserToken();
 
         List<CategoryResponse> categoryResponses = List.of(
             CategoryResponse.builder()
@@ -142,10 +142,10 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 .id(2L).emoji(AhmatdaEmoji.PLANE)
                 .type(CategoryType.TRAVEL).name("HEALTH").build());
 
-        given(categoryService.getCategoriesByUser(userId)).willReturn(categoryResponses);
+        given(categoryService.getCategoriesByUser(userToken)).willReturn(categoryResponses);
 
         mockMvc.perform(get("/api/category/user")
-                .header(HttpHeader.USER_ID_KEY, userId))
+                .header(HttpHeader.USER_TOKEN, userToken))
             .andExpect(status().isOk())
             .andDo(document("category-by-user",
                 getDocumentRequest(),
@@ -177,7 +177,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
         mockMvc.perform(post("/api/category")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(request)
-                .header(HttpHeader.USER_ID_KEY, userWithDeviceId.getUserToken()))
+                .header(HttpHeader.USER_TOKEN, userWithDeviceId.getUserToken()))
             .andExpect(status().isOk())
             .andExpect(content().string(response))
             .andDo(document("category-create",
@@ -296,7 +296,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
             post("/api/category")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(request)
-                .header(HttpHeader.USER_ID_KEY, TEST_USER_TOKEN)
+                .header(HttpHeader.USER_TOKEN, TEST_USER_TOKEN)
         );
 
         //then
@@ -342,7 +342,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
             post("/api/category")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(request)
-                .header(HttpHeader.USER_ID_KEY, TEST_USER_TOKEN));
+                .header(HttpHeader.USER_TOKEN, TEST_USER_TOKEN));
 
         //then
         result.andExpect(status().isBadRequest())
@@ -379,7 +379,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
             post("/api/category")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(request)
-                .header(HttpHeader.USER_ID_KEY, TEST_USER_TOKEN));
+                .header(HttpHeader.USER_TOKEN, TEST_USER_TOKEN));
 
         //then
         result.andExpect(status().isBadRequest())
@@ -409,7 +409,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
     void removeCategory() throws Exception {
         mockMvc.perform(
                 delete("/api/category/{categoryId}", 1L)
-                    .header(HttpHeader.USER_ID_KEY, TEST_USER_TOKEN))
+                    .header(HttpHeader.USER_TOKEN, TEST_USER_TOKEN))
             .andExpect(status().isOk())
             .andDo(document("category-delete",
                 getDocumentRequest(),
@@ -435,7 +435,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
             .when(categoryService).removeCategory(TEST_USER_TOKEN, 99L);
 
         mockMvc.perform(delete("/api/category/{categoryId}", 99L)
-                .header(HttpHeader.USER_ID_KEY, TEST_USER_TOKEN))
+                .header(HttpHeader.USER_TOKEN, TEST_USER_TOKEN))
             .andExpect(status().isUnauthorized())
             .andDo(document("category-delete-error",
                 getDocumentRequest(),
