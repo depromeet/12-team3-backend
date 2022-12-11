@@ -15,7 +15,7 @@ public class CategoryAdaptor {
 
     private final CategoryRepository categoryRepository;
 
-    public Optional<Category> getCategoryById(Long categoryId) {
+    public Optional<Category> getCategoryById(final Long categoryId) {
         return categoryRepository.findById(categoryId);
     }
 
@@ -25,7 +25,19 @@ public class CategoryAdaptor {
     }
 
     @Transactional(readOnly = true)
-    public List<Category> getCategoriesByDeviceId(String deviceId) {
-        return categoryRepository.findAll();
+    public List<Category> getCategoriesByUserId(final String userId) {
+        return categoryRepository.findAllByUserId(userId);
+    }
+
+    public void createCategory(Category category) {
+        categoryRepository.save(category);
+    }
+
+    public Category modify(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    public void removeCategory(Category category) {
+        categoryRepository.delete(category);
     }
 }

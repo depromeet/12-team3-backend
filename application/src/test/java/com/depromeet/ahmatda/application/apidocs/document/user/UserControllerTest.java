@@ -3,10 +3,6 @@ package com.depromeet.ahmatda.application.apidocs.document.user;
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.user.token.UserToken;
 
-import static org.mockito.Mockito.doThrow;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 public class UserControllerTest extends ApiDocumentationTest {
     private final UserToken userToken = new UserToken("");
 
