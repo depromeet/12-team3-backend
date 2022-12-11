@@ -29,4 +29,8 @@ public class TemplateAdaptor {
     public void deleteUserTemplate(Template template) {
         templateRepository.delete(template);
     }
+
+    public Template modifyTemplateNameAndIsPin(Template modfiyTemplate) {
+        return templateRepository.save(modfiyTemplate);
+    }
 }

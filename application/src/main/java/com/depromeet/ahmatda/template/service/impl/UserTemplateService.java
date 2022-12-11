@@ -11,6 +11,7 @@ import com.depromeet.ahmatda.domain.template.adaptor.TemplateAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
 import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
+import com.depromeet.ahmatda.template.dto.ModifyTemplateRequest;
 import com.depromeet.ahmatda.template.dto.TemplateItemRequest;
 import com.depromeet.ahmatda.template.dto.TemplateResponse;
 import com.depromeet.ahmatda.template.exception.TemplateNotExistException;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class DeviceTemplateService implements TemplateService {
+public class UserTemplateService implements TemplateService {
 
     private final TemplateAdaptor templateAdaptor;
     private final UserAdaptor userAdaptor;
@@ -88,5 +89,26 @@ public class DeviceTemplateService implements TemplateService {
         }
 
         templateAdaptor.deleteUserTemplate(template);
+    }
+
+    @Override
+    @Transactional
+    public TemplateResponse modfiyTemplateNameAndIsPin(String userId, ModifyTemplateRequest modifyTemplateRequest) {
+        //TODO:유저 검증 수정 필요, Exception 처리필요
+        User user = userAdaptor.findByUserToken(userId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.BINDING_ERROR));
+
+        //TODO: 카테고리검증 이모지오류 수정필요
+//        Long categoryId = modifyTemplateRequest.getCategoryId();
+//        Category category = categoryAdaptor.getCategoryById(categoryId)
+//                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+
+        Long templateId = modifyTemplateRequest.getTemplateId();
+        Template template = templateAdaptor.getTemplateById(templateId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
+
+        Template modifyTemplate = Template.modifyTemplateNameAndIsPin(template, modifyTemplateRequest.getTemplateName(), modifyTemplateRequest.isPin());
+
+        return TemplateResponse.createByEntity(templateAdaptor.modifyTemplateNameAndIsPin(modifyTemplate));
     }
 }

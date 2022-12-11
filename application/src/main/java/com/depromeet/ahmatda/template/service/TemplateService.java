@@ -2,6 +2,7 @@ package com.depromeet.ahmatda.template.service;
 
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
+import com.depromeet.ahmatda.template.dto.ModifyTemplateRequest;
 import com.depromeet.ahmatda.template.dto.TemplateResponse;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface TemplateService {
     void createUserTemplate(String userId, CreateTemplateRequest createTemplateRequest);
     
     void deleteUserTemplate(String userId, Long templateId);
+
+    TemplateResponse modfiyTemplateNameAndIsPin(String userId, ModifyTemplateRequest modifyTemplateRequest);
 }
