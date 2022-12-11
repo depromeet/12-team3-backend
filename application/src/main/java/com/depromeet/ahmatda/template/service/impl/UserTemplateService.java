@@ -47,9 +47,8 @@ public class UserTemplateService implements TemplateService {
     @Override
     @Transactional
     public void createUserTemplate(String userId, CreateTemplateRequest createTemplateRequest) {
-        //TODO:유저 검증 수정 필요, Exception 처리필요
         User user = userAdaptor.findByUserToken(userId)
-                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.BINDING_ERROR));
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.AUTHENTICATION_ERROR));
 
         Long categoryId = createTemplateRequest.getCategoryId();
         Category category = categoryAdaptor.getCategoryById(categoryId)
@@ -77,8 +76,7 @@ public class UserTemplateService implements TemplateService {
         boolean isAuthenticated = template.authenticateUser(userId);
 
         if (!isAuthenticated) {
-            //TODO: errorcode 수정필요
-            throw new TemplateUserAuthenticationException(ErrorCode.BINDING_ERROR);
+            throw new TemplateUserAuthenticationException(ErrorCode.AUTHENTICATION_ERROR);
         }
 
         for(Item item : template.getItems()) {
@@ -91,10 +89,6 @@ public class UserTemplateService implements TemplateService {
     @Override
     @Transactional
     public TemplateResponse modfiyTemplateNameAndIsPin(String userId, ModifyTemplateRequest modifyTemplateRequest) {
-        //TODO:유저 검증 수정 필요, Exception 처리필요
-        User user = userAdaptor.findByUserToken(userId)
-                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.BINDING_ERROR));
-
         //TODO: 카테고리검증 이모지오류 수정필요
 //        Long categoryId = modifyTemplateRequest.getCategoryId();
 //        Category category = categoryAdaptor.getCategoryById(categoryId)
@@ -104,6 +98,12 @@ public class UserTemplateService implements TemplateService {
         Template template = templateAdaptor.getTemplateById(templateId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
 
+        boolean isAuthenticated = template.authenticateUser(userId);
+
+        if (!isAuthenticated) {
+            throw new TemplateUserAuthenticationException(ErrorCode.AUTHENTICATION_ERROR);
+        }
+
         Template modifyTemplate = Template.modifyTemplateNameAndIsPin(template, modifyTemplateRequest.getTemplateName(), modifyTemplateRequest.isPin());
 
         return TemplateResponse.createByEntity(templateAdaptor.modifyTemplateNameAndIsPin(modifyTemplate));
@@ -112,10 +112,6 @@ public class UserTemplateService implements TemplateService {
     @Override
     @Transactional
     public void templateAddItem(String userId, TemplateAddItemRequest templateAddItemRequest) {
-        //TODO:유저 검증 수정 필요, Exception 처리필요
-        User user = userAdaptor.findByUserToken(userId)
-                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.BINDING_ERROR));
-
         //TODO: 카테고리검증 이모지오류 수정필요
 //        Long categoryId = templateAddItemRequest.getCategoryId();
 //        Category category = categoryAdaptor.getCategoryById(categoryId)
@@ -125,9 +121,33 @@ public class UserTemplateService implements TemplateService {
         Template template = templateAdaptor.getTemplateById(templateId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
 
+        boolean isAuthenticated = template.authenticateUser(userId);
+
+        if (!isAuthenticated) {
+            throw new TemplateUserAuthenticationException(ErrorCode.AUTHENTICATION_ERROR);
+        }
+
         Item item = Item.UserTemplateAddItem(templateAddItemRequest.getCategoryId(), template,
                 templateAddItemRequest.getItemName(), templateAddItemRequest.isImportant());
 
         itemAdaptor.createItem(item);
+    }
+
+    @Override
+    @Transactional
+    public void templateDeleteItem(String userId, Long templateId, Long itemId) {
+        Template template = templateAdaptor.getTemplateById(templateId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
+
+        boolean isAuthenticated = template.authenticateUser(userId);
+
+        if (!isAuthenticated) {
+            throw new TemplateUserAuthenticationException(ErrorCode.AUTHENTICATION_ERROR);
+        }
+
+        Item item = itemAdaptor.findByItem(itemId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.ITEM_NOT_FOUND));
+
+        itemAdaptor.deleteItem(item);
     }
 }

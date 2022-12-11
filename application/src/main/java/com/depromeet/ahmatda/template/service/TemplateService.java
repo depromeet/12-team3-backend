@@ -21,4 +21,6 @@ public interface TemplateService {
     TemplateResponse modfiyTemplateNameAndIsPin(String userId, ModifyTemplateRequest modifyTemplateRequest);
 
     void templateAddItem(String userId, TemplateAddItemRequest templateAddItemRequest);
+
+    void templateDeleteItem(String userId, Long templateId, Long itemId);
 }
