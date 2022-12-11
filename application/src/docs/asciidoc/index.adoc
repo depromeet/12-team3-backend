@@ -177,3 +177,12 @@ include::{snippets}/modify-template/curl-request.adoc[]
 include::{snippets}/modify-template/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/modify-template/response-body.adoc[]
+
+=== Template - 유저템플릿 소지품추가
+==== Method : PATCH
+==== curl-request
+include::{snippets}/template-add-item/curl-request.adoc[]
+==== Request Body
+include::{snippets}/template-add-item/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-add-item/response-body.adoc[]

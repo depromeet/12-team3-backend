@@ -223,7 +223,45 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         )
                 ))
                 .andDo(print());
+    }
+
+    @Test
+    void 유저템플릿의_소지품추가() throws Exception {
+        //given
+        User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+
+        TemplateAddItemRequest templateAddItemRequest = TemplateAddItemRequest.builder()
+                .itemName("토비의 스프링")
+                .templateId(1L)
+                .categoryId(10L)
+                .important(true)
+                .build();
+
+        String request = objectMapper.writeValueAsString(templateAddItemRequest);
 
 
+        mockMvc.perform(post("/api/template/item")
+                        .header(HttpHeader.USER_ID_KEY, userWithDeviceId.getUserToken())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isOk())
+                .andDo(document("template-add-item",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                        ),
+                        requestFields(
+                                fieldWithPath("itemName").description("소지품 이름"),
+                                fieldWithPath("templateId").description("유저템플릿 ID"),
+                                fieldWithPath("categoryId").description("유저템플릿의 카테고리 ID"),
+                                fieldWithPath("important").description("소지품 중요체크여부")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").description("결과"),
+                                fieldWithPath("error").description("에러")
+                        )
+                ))
+                .andDo(print());
     }
 }
