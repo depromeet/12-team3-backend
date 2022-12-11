@@ -152,6 +152,7 @@ include::{snippets}/template-by-user-category/http-response.adoc[]
 ==== curl-request
 include::{snippets}/create-template/curl-request.adoc[]
 ==== Request Body
+include::{snippets}/create-template/request-fields.adoc[]
 include::{snippets}/create-template/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/create-template/response-body.adoc[]
@@ -162,8 +163,6 @@ include::{snippets}/create-template/http-response.adoc[]
 ==== Method : DELETE
 ==== curl-request
 include::{snippets}/delete-template/curl-request.adoc[]
-==== Request Body
-include::{snippets}/delete-template/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/delete-template/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 유저템플릿
@@ -174,6 +173,7 @@ include::{snippets}/delete-template/http-response.adoc[]
 ==== curl-request
 include::{snippets}/modify-template/curl-request.adoc[]
 ==== Request Body
+include::{snippets}/modify-template/request-fields.adoc[]
 include::{snippets}/modify-template/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/modify-template/response-body.adoc[]
@@ -183,6 +183,7 @@ include::{snippets}/modify-template/response-body.adoc[]
 ==== curl-request
 include::{snippets}/template-add-item/curl-request.adoc[]
 ==== Request Body
+include::{snippets}/template-add-item/request-fields.adoc[]
 include::{snippets}/template-add-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-add-item/response-body.adoc[]

@@ -107,7 +107,6 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         requestFields(
                                 fieldWithPath("templateName").description("유저템플릿 이름"),
                                 fieldWithPath("categoryId").description("카테고리 ID"),
-                                //TODO: 형식 수정필요 items 안에 안보임
                                 fieldWithPath("items.[].categoryId").type(JsonFieldType.NUMBER).description("소지품의 카테고리 ID"),
                                 fieldWithPath("items.[].name").type(JsonFieldType.STRING).description("소지품 이름")
                         )))
