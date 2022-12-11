@@ -1,6 +1,5 @@
 package com.depromeet.ahmatda.template;
 
-import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.template.Template;
