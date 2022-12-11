@@ -5,6 +5,7 @@ import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
 import com.depromeet.ahmatda.template.dto.ModifyTemplateRequest;
+import com.depromeet.ahmatda.template.dto.TemplateAddItemRequest;
 import com.depromeet.ahmatda.template.dto.TemplateResponse;
 import com.depromeet.ahmatda.template.service.TemplateService;
 import lombok.RequiredArgsConstructor;
@@ -53,5 +54,12 @@ public class TemplateController {
         String userId = request.getHeader(HttpHeader.USER_ID_KEY);
         TemplateResponse templateResponse = templateService.modfiyTemplateNameAndIsPin(userId, modifyTemplateRequest);
         return ResponseEntity.ok().body(RestResponse.ok(templateResponse));
+    }
+
+    @PostMapping("/item")
+    public ResponseEntity<RestResponse<TemplateResponse>> templateAddItem(HttpServletRequest request, @RequestBody TemplateAddItemRequest templateAddItemRequest) {
+        String userId = request.getHeader(HttpHeader.USER_ID_KEY);
+        templateService.templateAddItem(userId, templateAddItemRequest);
+        return ResponseEntity.ok().body(RestResponse.ok());
     }
 }

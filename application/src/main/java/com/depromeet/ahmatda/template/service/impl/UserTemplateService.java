@@ -10,10 +10,7 @@ import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.template.adaptor.TemplateAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
-import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
-import com.depromeet.ahmatda.template.dto.ModifyTemplateRequest;
-import com.depromeet.ahmatda.template.dto.TemplateItemRequest;
-import com.depromeet.ahmatda.template.dto.TemplateResponse;
+import com.depromeet.ahmatda.template.dto.*;
 import com.depromeet.ahmatda.template.exception.TemplateNotExistException;
 import com.depromeet.ahmatda.template.exception.TemplateUserAuthenticationException;
 import com.depromeet.ahmatda.template.service.TemplateService;
@@ -110,5 +107,27 @@ public class UserTemplateService implements TemplateService {
         Template modifyTemplate = Template.modifyTemplateNameAndIsPin(template, modifyTemplateRequest.getTemplateName(), modifyTemplateRequest.isPin());
 
         return TemplateResponse.createByEntity(templateAdaptor.modifyTemplateNameAndIsPin(modifyTemplate));
+    }
+
+    @Override
+    @Transactional
+    public void templateAddItem(String userId, TemplateAddItemRequest templateAddItemRequest) {
+        //TODO:유저 검증 수정 필요, Exception 처리필요
+        User user = userAdaptor.findByUserToken(userId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.BINDING_ERROR));
+
+        //TODO: 카테고리검증 이모지오류 수정필요
+//        Long categoryId = templateAddItemRequest.getCategoryId();
+//        Category category = categoryAdaptor.getCategoryById(categoryId)
+//                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+
+        Long templateId = templateAddItemRequest.getTemplateId();
+        Template template = templateAdaptor.getTemplateById(templateId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
+
+        Item item = Item.UserTemplateAddItem(templateAddItemRequest.getCategoryId(), template,
+                templateAddItemRequest.getItemName(), templateAddItemRequest.isImportant());
+
+        itemAdaptor.createItem(item);
     }
 }

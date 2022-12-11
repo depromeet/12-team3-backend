@@ -11,8 +11,8 @@ public class ItemAdaptor {
 
     private final ItemRepository itemRepository;
 
-    public Item createItem(Item item) {
-        return itemRepository.save(item);
+    public void createItem(Item item) {
+        itemRepository.save(item);
     }
 
     public void deleteItem(Item item) {
