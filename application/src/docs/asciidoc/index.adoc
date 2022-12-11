@@ -175,6 +175,8 @@ include::{snippets}/modify-template/curl-request.adoc[]
 ==== Request Body
 include::{snippets}/modify-template/request-fields.adoc[]
 include::{snippets}/modify-template/request-body.adoc[]
+==== Response Body
+include::{snippets}/modify-template/response-fields.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/modify-template/response-body.adoc[]
 
