@@ -159,6 +159,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         .name("여권")
                         .alarmId(10L)
                         .isTake(true)
+                        .isImportant(false)
                         .build(),
                 TemplateItemResponse.builder()
                         .id(4L)
@@ -167,6 +168,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         .name("신분증")
                         .alarmId(11L)
                         .isTake(false)
+                        .isImportant(true)
                         .build());
         TemplateResponse templateResponse = TemplateResponse.builder()
                 .id(6L)
@@ -216,6 +218,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("result.items.[].categoryId").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품의 카테고리 ID"),
                                 fieldWithPath("result.items.[].alarmId").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품 알람 ID"),
                                 fieldWithPath("result.items.[].take").type(JsonFieldType.BOOLEAN).description("유저템플릿의 소지품 체크여부"),
+                                fieldWithPath("result.items.[].important").type(JsonFieldType.BOOLEAN).description("유저템플릿의 소지품의 중요도 여부"),
                                 fieldWithPath("error").type(JsonFieldType.NULL).description("에러")
                         )
                 ))

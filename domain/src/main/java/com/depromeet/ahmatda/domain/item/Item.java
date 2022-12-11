@@ -1,6 +1,7 @@
 package com.depromeet.ahmatda.domain.item;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
+import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.template.Template;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -34,6 +35,9 @@ public class Item extends BaseTimeEntity {
     @Column
     private boolean isTake;
 
+    @Column
+    private boolean isImportant;
+
     //==생성 메서드==//
     public static Item createItem(Long categoryId, Template template, String name) {
         Item item = new Item();
@@ -43,6 +47,19 @@ public class Item extends BaseTimeEntity {
         //TODO : 알람 ID는 임의로 저장 추 후 변경
         item.alarmId = 0L;
         item.isTake = false;
+        item.isImportant = false;
+        return item;
+    }
+
+    public static Item UserTemplateAddItem(Long categoryId, Template template, String itemName, boolean important) {
+        Item item = new Item();
+        item.categoryId = categoryId;
+        item.template = template;
+        item.name = itemName;
+        //TODO : 알람 ID는 임의로 저장 추 후 변경
+        item.alarmId = 0L;
+        item.isTake = false;
+        item.isImportant = important;
         return item;
     }
 }
