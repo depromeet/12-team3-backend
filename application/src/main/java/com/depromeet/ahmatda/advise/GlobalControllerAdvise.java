@@ -28,10 +28,6 @@ public class GlobalControllerAdvise {
                         FieldError::getField, FieldError::getDefaultMessage)
                 );
 
-        System.out.println(details.get("name"));
-        System.out.println(details.get("name"));
-        System.out.println(details.get("name"));
-        System.out.println(details.get("name"));
         return ResponseEntity.badRequest().body(RestResponse.error(ErrorCode.BINDING_ERROR, details));
     }
 }

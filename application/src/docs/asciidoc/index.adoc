@@ -121,6 +121,10 @@ include::{snippets}/category-modify/request-fields.adoc[]
 ==== Response Body
 include::{snippets}/category-modify/response-body.adoc[]
 include::{snippets}/category-modify/response-fields.adoc[]
+==== 에러 응답 - 카테고리 작성자와 수정 이용자가 다를 경우
+include::{snippets}/category-modify-error/request-headers.adoc[]
+include::{snippets}/category-modify-error/response-body.adoc[]
+include::{snippets}/category-modify-error/response-fields.adoc[]
 
 === Category - 삭제(단일)
 ==== Method : DELETE
@@ -132,7 +136,7 @@ include::{snippets}/category-delete/request-headers.adoc[]
 include::{snippets}/category-delete/path-parameters.adoc[]
 ==== Response Body
 include::{snippets}/category-delete/response-body.adoc[]
-==== 에러 응답 - 카테고리를 작성자와 삭제 이용자가 다를 경우
+==== 에러 응답 - 카테고리 작성자와 삭제 이용자가 다를 경우
 include::{snippets}/category-delete-error/request-headers.adoc[]
 include::{snippets}/category-delete-error/response-body.adoc[]
 include::{snippets}/category-delete-error/response-fields.adoc[]

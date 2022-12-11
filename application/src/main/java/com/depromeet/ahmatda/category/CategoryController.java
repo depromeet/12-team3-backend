@@ -46,9 +46,10 @@ public class CategoryController {
         return ResponseEntity.ok(RestResponse.ok());
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<RestResponse<CategoryResponse>> modifyCategory(@PathVariable Long id, @RequestBody final CategoryRequest categoryRequest) {
-        CategoryResponse categoryResponse = categoryService.modifyCategory(id, categoryRequest);
+    @PatchMapping("/{categoryId}")
+    public ResponseEntity<RestResponse<CategoryResponse>> modifyCategory(HttpServletRequest request, @PathVariable Long categoryId, @RequestBody final CategoryRequest categoryRequest) {
+        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        CategoryResponse categoryResponse = categoryService.modifyCategory(userToken, categoryId, categoryRequest);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponse));
     }
 

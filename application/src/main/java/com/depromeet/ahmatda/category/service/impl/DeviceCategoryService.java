@@ -47,33 +47,39 @@ public class DeviceCategoryService implements CategoryService {
 
     @Override
     public void createCategory(final String userToken, final CategoryRequest categoryRequest) {
-        User user = userAdaptor.findByUserToken(userToken).get();
-        Category category = CategoryRequest.toEntity(user, categoryRequest);
+        final User user = userAdaptor.findByUserToken(userToken).get();
+        final Category category = CategoryRequest.toEntity(user, categoryRequest);
 
         categoryAdaptor.createCategory(category);
     }
 
     @Override
-    public CategoryResponse modifyCategory(Long id, CategoryRequest categoryRequest) {
-        Category category = categoryAdaptor.getCategoryById(id)
+    public CategoryResponse modifyCategory(final String userToken, final Long categoryId, final CategoryRequest categoryRequest) {
+        final Category category = categoryAdaptor.getCategoryById(categoryId)
             .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
-        Category modifiedCategory = categoryRequest.modifyEntity(category);
+        authenticateCategory(userToken, category);
+
+        final Category modifiedCategory = categoryRequest.modifyEntity(category);
 
         return CategoryResponse.createByEntity(categoryAdaptor.modify(modifiedCategory));
     }
 
     @Override
-    public void removeCategory(String userToken, Long categoryId) {
-        Category category = categoryAdaptor.getCategoryById(categoryId)
+    public void removeCategory(final String userToken, final Long categoryId) {
+        final Category category = categoryAdaptor.getCategoryById(categoryId)
             .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
-        boolean isAuthenticated = category.authenticateUser(userToken);
+        authenticateCategory(userToken, category);
+
+        categoryAdaptor.removeCategory(category);
+    }
+
+    private void authenticateCategory(final String userToken, final Category category) {
+        final boolean isAuthenticated = category.authenticateUser(userToken);
 
         if (!isAuthenticated) {
             throw new CategoryUserAuthenticationException(ErrorCode.CATEGORY_AUTHENTICATION_ERROR);
         }
-
-        categoryAdaptor.removeCategory(category);
     }
 }

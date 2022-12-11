@@ -15,7 +15,7 @@ public interface CategoryService {
 
     void createCategory(String userToken, CategoryRequest categoryRequest);
 
-    CategoryResponse modifyCategory(Long id, CategoryRequest categoryRequest);
+    CategoryResponse modifyCategory(String userToken, Long categoryId, CategoryRequest categoryRequest);
 
     void removeCategory(String userToken, Long categoryId);
 }

@@ -225,7 +225,8 @@ class CategoryControllerTest extends ApiDocumentationTest {
                     fieldWithPath("error.code").type(JsonFieldType.STRING).description("에러코드"),
                     fieldWithPath("error.message").type(JsonFieldType.STRING).description("에러메세지"),
                     fieldWithPath("error.detail").type(JsonFieldType.OBJECT).description("에러 상세"),
-                    fieldWithPath("error.detail.name").type(JsonFieldType.STRING).description("에러 상세 메세지")
+                    fieldWithPath("error.detail.name").type(JsonFieldType.STRING)
+                        .description("에러 상세 메세지")
                 )))
             .andDo(print());
     }
@@ -242,7 +243,8 @@ class CategoryControllerTest extends ApiDocumentationTest {
             .build();
         CategoryResponse categoryResponse = CategoryResponse.createByEntity(
             categoryRequest.modifyEntity(category));
-        given(categoryService.modifyCategory(1L, categoryRequest)).willReturn(categoryResponse);
+        given(categoryService.modifyCategory(TEST_USER_TOKEN, 1L, categoryRequest)).willReturn(
+            categoryResponse);
 
         String request = objectMapper.writeValueAsString(categoryRequest);
         String response = objectMapper.writeValueAsString(RestResponse.ok(categoryResponse));
@@ -252,7 +254,8 @@ class CategoryControllerTest extends ApiDocumentationTest {
             patch("/api/category/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(request)
-                .accept(MediaType.APPLICATION_JSON));
+                .accept(MediaType.APPLICATION_JSON)
+                .header(HttpHeader.USER_TOKEN, TEST_USER_TOKEN));
 
         //then
         result.andExpect(status().isOk())
@@ -260,6 +263,9 @@ class CategoryControllerTest extends ApiDocumentationTest {
             .andDo(document("category-modify",
                 getDocumentRequest(),
                 getDocumentResponse(),
+                requestHeaders(
+                    headerWithName("ahmatda-user-id").description("유저 검증용 유저 UUID")
+                ),
                 pathParameters(
                     parameterWithName("id").description("변경 대상 카테고리의 ID")
                 ),
@@ -280,6 +286,41 @@ class CategoryControllerTest extends ApiDocumentationTest {
                     fieldWithPath("error").type(JsonFieldType.NULL).description("에러")
                 )
             ))
+            .andDo(print());
+    }
+
+    @DisplayName("카테고리 수정 시 수정자와 생성한 유저가 다를 경우 예외 처리한다")
+    @Test
+    void modifyCategory_authentication_exception() throws Exception {
+        CategoryRequest categoryRequest = CategoryRequest.builder()
+            .name("NAME").type(CategoryType.EXERCISE).emoji(AhmatdaEmoji.CAMERA)
+            .build();
+
+        given(categoryService.modifyCategory(TEST_USER_TOKEN, 99L, categoryRequest))
+            .willThrow(new CategoryUserAuthenticationException(ErrorCode.CATEGORY_AUTHENTICATION_ERROR));
+
+        String request = objectMapper.writeValueAsString(categoryRequest);
+
+        mockMvc.perform(
+                patch("/api/category/{categoryId}", 99L)
+                    .header(HttpHeader.USER_TOKEN, TEST_USER_TOKEN)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(request))
+            .andExpect(status().isUnauthorized())
+            .andDo(document("category-modify-error",
+                getDocumentRequest(),
+                getDocumentResponse(),
+                requestHeaders(
+                    headerWithName("ahmatda-user-id").description(
+                        "카테고리를 작성한 유저가 아닌 다른 유저 UUID를 보낼 경우")
+                ),
+                responseFields(
+                    fieldWithPath("result").type(JsonFieldType.NULL).description("결과"),
+                    fieldWithPath("error").type(JsonFieldType.OBJECT).description("에러"),
+                    fieldWithPath("error.code").type(JsonFieldType.STRING).description("에러코드"),
+                    fieldWithPath("error.message").type(JsonFieldType.STRING).description("에러메세지"),
+                    fieldWithPath("error.detail").type(JsonFieldType.NULL).description("상세")
+                )))
             .andDo(print());
     }
 
