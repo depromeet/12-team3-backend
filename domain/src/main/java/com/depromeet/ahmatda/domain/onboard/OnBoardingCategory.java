@@ -9,7 +9,7 @@ import lombok.Getter;
 public enum OnBoardingCategory {
 
     DAILY(AhmatdaEmoji.WORK, "일상"),
-    WORKING(AhmatdaEmoji.GYM, "운동"),
+    EXERCISE(AhmatdaEmoji.GYM, "운동"),
     TRAVEL(AhmatdaEmoji.PLANE, "여행");
 
     private AhmatdaEmoji emoji;
