@@ -36,7 +36,8 @@ public class Category extends BaseTimeEntity {
     private List<RecommendTemplate> recommendTemplates = new ArrayList<>();
 
     @Column
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private CategoryType type;
 
     @Column
     private String name;
