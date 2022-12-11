@@ -137,7 +137,7 @@ include::{snippets}/category/http-response.adoc[]
 [[Template]]
 === Template - 유저템플릿 조회
 
-==== Method : Get
+==== Method : GET
 ==== curl-request
 include::{snippets}/template-by-user-category/curl-request.adoc[]
 ==== Request Body
@@ -147,10 +147,8 @@ include::{snippets}/template-by-user-category/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 카테고리
 include::{snippets}/template-by-user-category/http-response.adoc[]
 
-[[Template]]
 === Template - 유저템플릿 생성
-
-==== Method : Get
+==== Method : GET
 ==== curl-request
 include::{snippets}/create-template/curl-request.adoc[]
 ==== Request Body
@@ -159,3 +157,14 @@ include::{snippets}/create-template/request-body.adoc[]
 include::{snippets}/create-template/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 카테고리
 include::{snippets}/create-template/http-response.adoc[]
+
+=== Template - 유저템플릿 삭제
+==== Method : DELETE
+==== curl-request
+include::{snippets}/delete-template/curl-request.adoc[]
+==== Request Body
+include::{snippets}/delete-template/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/delete-template/response-body.adoc[]
+==== 에러 응답 - 존재하지 않는 유저템플릿
+include::{snippets}/delete-template/http-response.adoc[]

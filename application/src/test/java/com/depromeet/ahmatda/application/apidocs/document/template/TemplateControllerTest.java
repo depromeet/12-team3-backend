@@ -26,6 +26,7 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.requestHe
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
@@ -116,5 +117,30 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         )))
                 .andDo(print());
 
+    }
+
+    @Test
+    void 유저템플릿을_삭제할_수_있다() throws Exception{
+        User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+        Long templateId = 1L;
+
+        mockMvc.perform(delete("/api/template/{templateId}", templateId)
+                .header(HttpHeader.USER_ID_KEY, userWithDeviceId.getUserToken()))
+                .andExpect(status().isOk())
+                .andDo(document("delete-template",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                        ),
+                        pathParameters(
+                                parameterWithName("templateId").description("삭제할 유저템플릿 ID")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").description("결과"),
+                                fieldWithPath("error").description("에러")
+                        )
+                ))
+                .andDo(print());
     }
 }
