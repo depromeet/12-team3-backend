@@ -168,3 +168,12 @@ include::{snippets}/delete-template/request-body.adoc[]
 include::{snippets}/delete-template/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 유저템플릿
 include::{snippets}/delete-template/http-response.adoc[]
+
+=== Template - 유저템플릿 수정
+==== Method : PATCH
+==== curl-request
+include::{snippets}/modify-template/curl-request.adoc[]
+==== Request Body
+include::{snippets}/modify-template/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/modify-template/response-body.adoc[]

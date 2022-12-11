@@ -12,5 +12,5 @@ public class ModifyTemplateRequest {
 
     private Long categoryId;
 
-    private boolean isPin;
+    private boolean pin;
 }

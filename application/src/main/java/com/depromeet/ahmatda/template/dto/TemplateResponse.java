@@ -22,6 +22,8 @@ public class TemplateResponse {
 
     private final List<TemplateItemResponse> items;
 
+    private boolean pin;
+
     public static TemplateResponse createByEntity(Template template) {
         List<TemplateItemResponse> items = template.getItems().stream()
                 .map(TemplateItemResponse::from)
@@ -33,6 +35,7 @@ public class TemplateResponse {
                 .templateName(template.getTemplateName())
                 .categoryId(template.getCategory().getId())
                 .items(items)
+                .pin(template.isPin())
                 .build();
     }
 }
