@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.common;
+package com.depromeet.ahmatda;
 
 public class HttpHeader {
 

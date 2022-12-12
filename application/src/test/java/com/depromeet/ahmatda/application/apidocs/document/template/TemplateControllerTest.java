@@ -1,7 +1,7 @@
 package com.depromeet.ahmatda.application.apidocs.document.template;
 
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
-import com.depromeet.ahmatda.common.HttpHeader;
+import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;

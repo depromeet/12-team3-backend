@@ -3,7 +3,7 @@ package com.depromeet.ahmatda.category;
 import com.depromeet.ahmatda.category.dto.CategoryRequest;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
-import com.depromeet.ahmatda.common.HttpHeader;
+import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
