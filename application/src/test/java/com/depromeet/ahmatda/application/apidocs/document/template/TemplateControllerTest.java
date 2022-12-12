@@ -310,6 +310,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                 .itemId(6L)
                 .modifiedItemName("아이패드")
                 .isImportant(true)
+                .isTake(true)
                 .build();
 
         String request = objectMapper.writeValueAsString(templateItemModfiyRequest);
@@ -331,7 +332,8 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("itemId").description("소지품 ID"),
                                 fieldWithPath("templateId").description("유저템플릿 ID"),
                                 fieldWithPath("modifiedItemName").description("변경할 소지품 이름"),
-                                fieldWithPath("important").description("소지품 중요체크여부")
+                                fieldWithPath("important").description("소지품 중요체크여부"),
+                                fieldWithPath("isTake").description("소지품 챙김여부")
                         ),
                         responseFields(
                                 fieldWithPath("result").description("결과"),

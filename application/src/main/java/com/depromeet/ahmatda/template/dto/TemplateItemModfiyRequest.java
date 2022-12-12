@@ -12,5 +12,7 @@ public class TemplateItemModfiyRequest {
 
     private String modifiedItemName;
 
+    private Boolean isTake;
+
     private boolean isImportant;
 }

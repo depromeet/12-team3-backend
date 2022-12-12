@@ -170,8 +170,11 @@ public class UserTemplateService implements TemplateService {
         Item item = itemAdaptor.findByItem(itemId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.ITEM_NOT_FOUND));
 
-        Item.UserTemplateModfiyItemName(item, templateItemModfiyRequest.getModifiedItemName(), templateItemModfiyRequest.isImportant());
-
+        if(templateItemModfiyRequest.getIsTake() != null) {
+            Item.modifyItemIsTack(item, templateItemModfiyRequest.getIsTake());
+        } else {
+            Item.modfiyItemNameAndIsImportant(item, templateItemModfiyRequest.getModifiedItemName(), templateItemModfiyRequest.isImportant());
+        }
         itemAdaptor.modfiyItem(item);
     }
 }
