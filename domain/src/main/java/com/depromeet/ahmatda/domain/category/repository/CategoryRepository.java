@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    @Query("SELECT category FROM Category category WHERE category.user.userToken=:userToken")
+    @Query("SELECT category " +
+            "FROM Category category " +
+            "JOIN category.user user " +
+            "WHERE user.userToken=:userToken")
     List<Category> findAllByUserToken(String userToken);
 }
