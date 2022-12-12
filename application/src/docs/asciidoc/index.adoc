@@ -189,3 +189,13 @@ include::{snippets}/template-add-item/request-fields.adoc[]
 include::{snippets}/template-add-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-add-item/response-body.adoc[]
+
+=== Template - 유저템플릿 소지품삭제
+==== Method : DELETE
+==== curl-request
+include::{snippets}/template-delete-item/curl-request.adoc[]
+include::{snippets}/template-delete-item/path-parameters.adoc[]
+==== Request Body
+include::{snippets}/template-delete-item/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-delete-item/response-body.adoc[]
