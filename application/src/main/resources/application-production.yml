@@ -1,7 +1,4 @@
 spring:
-  jackson:
-    deserialization:
-      READ_UNKNOWN_ENUM_VALUES_AS_NULL: true
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: substituted-by-github-secrets
