@@ -27,24 +27,23 @@ public class OnboardingService {
 
     @Transactional(propagation = Propagation.MANDATORY)
     public UserToken setUserOnboarding(final User user, OnboardingRequest request) {
-        long userId = user.getId();
-        Category category = createOnboardingCategory(userId, request.getCategory());
-        createOnboardingTemplate(userId, request.getTemplateName(), category, request.getItems());
+        Category category = createOnboardingCategory(user, request.getCategory());
+        createOnboardingTemplate(user, request.getTemplateName(), category, request.getItems());
 
         return new UserToken(user.getUserToken());
     }
 
-    private Category createOnboardingCategory(Long userId, OnBoardingCategory category) {
+    private Category createOnboardingCategory(User user, OnBoardingCategory category) {
         CategoryRequest categoryRequest = CategoryRequest.builder()
                 .name(category.getCategoryName())
                 .type(CategoryType.valueOf(category.name()))
                 .emoji(category.getEmoji())
                 .build();
 
-        return categoryService.createCategory(userId.toString(), categoryRequest);
+        return categoryService.createCategory(user, categoryRequest);
     }
 
-    private void createOnboardingTemplate(Long userId, String templateName, Category category, List<String> items) {
+    private void createOnboardingTemplate(User user, String templateName, Category category, List<String> items) {
         long categoryId = category.getId();
 
         List<TemplateItemRequest> itemsRequests = items.stream()
@@ -61,6 +60,6 @@ public class OnboardingService {
                 .items(itemsRequests)
                 .build();
 
-        templateService.createUserTemplate(userId.toString(), templateRequest);
+        templateService.createUserTemplate(user, templateRequest);
     }
 }

@@ -48,11 +48,21 @@ public class DeviceTemplateService implements TemplateService {
 
     @Override
     @Transactional
+    public void createUserTemplate(User user, CreateTemplateRequest createTemplateRequest) {
+        createWithUser(user, createTemplateRequest);
+    }
+
+    @Override
+    @Transactional
     public void createUserTemplate(String userId, CreateTemplateRequest createTemplateRequest) {
         //TODO:유저 검증 수정 필요, Exception 처리필요
         User user = userAdaptor.findByUserToken(userId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.BINDING_ERROR));
 
+        createWithUser(user, createTemplateRequest);
+    }
+
+    private void createWithUser(User user, CreateTemplateRequest createTemplateRequest) {
         Long categoryId = createTemplateRequest.getCategoryId();
         Category category = categoryAdaptor.getCategoryById(categoryId)
                 .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
@@ -67,7 +77,6 @@ public class DeviceTemplateService implements TemplateService {
                 itemAdaptor.createItem(item);
             }
         }
-
     }
 
     @Override
