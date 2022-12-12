@@ -151,7 +151,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestHeaders(
-                    headerWithName("ahmatda-user-id").description("유저 UUID")
+                    headerWithName("ahmatda-user-token").description("유저 UUID")
                 ),
                 responseFields(
                     fieldWithPath("result").type(JsonFieldType.ARRAY).description("결과"),
@@ -184,7 +184,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestHeaders(
-                    headerWithName("ahmatda-user-id").description("유저 UUID")
+                    headerWithName("ahmatda-user-token").description("유저 UUID")
                 ),
                 requestFields(
                     fieldWithPath("name").description("카테고리명"),
@@ -264,7 +264,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestHeaders(
-                    headerWithName("ahmatda-user-id").description("유저 검증용 유저 UUID")
+                    headerWithName("ahmatda-user-token").description("유저 검증용 유저 UUID")
                 ),
                 pathParameters(
                     parameterWithName("id").description("변경 대상 카테고리의 ID")
@@ -311,7 +311,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestHeaders(
-                    headerWithName("ahmatda-user-id").description(
+                    headerWithName("ahmatda-user-token").description(
                         "카테고리를 작성한 유저가 아닌 다른 유저 UUID를 보낼 경우")
                 ),
                 responseFields(
@@ -456,7 +456,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestHeaders(
-                    headerWithName("ahmatda-user-id").description("유저 UUID")
+                    headerWithName("ahmatda-user-token").description("유저 UUID")
                 ),
                 pathParameters(
                     parameterWithName("categoryId").description("삭제할 카테고리 ID")
@@ -482,7 +482,7 @@ class CategoryControllerTest extends ApiDocumentationTest {
                 getDocumentRequest(),
                 getDocumentResponse(),
                 requestHeaders(
-                    headerWithName("ahmatda-user-id").description(
+                    headerWithName("ahmatda-user-token").description(
                         "카테고리를 작성한 유저가 아닌 다른 유저 UUID를 보낼 경우")
                 ),
                 responseFields(
