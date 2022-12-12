@@ -172,8 +172,8 @@ include::{snippets}/delete-template/http-response.adoc[]
 ==== Method : PATCH
 ==== curl-request
 include::{snippets}/modify-template/curl-request.adoc[]
-==== Request Body
 include::{snippets}/modify-template/request-fields.adoc[]
+==== Request Body
 include::{snippets}/modify-template/request-body.adoc[]
 ==== Response Body
 include::{snippets}/modify-template/response-fields.adoc[]
@@ -184,8 +184,8 @@ include::{snippets}/modify-template/response-body.adoc[]
 ==== Method : PATCH
 ==== curl-request
 include::{snippets}/template-add-item/curl-request.adoc[]
-==== Request Body
 include::{snippets}/template-add-item/request-fields.adoc[]
+==== Request Body
 include::{snippets}/template-add-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-add-item/response-body.adoc[]
@@ -195,8 +195,18 @@ include::{snippets}/template-add-item/response-body.adoc[]
 ==== curl-request
 include::{snippets}/template-delete-item/curl-request.adoc[]
 include::{snippets}/template-delete-item/path-parameters.adoc[]
-==== Request Body
 include::{snippets}/template-delete-item/request-fields.adoc[]
+==== Request Body
 include::{snippets}/template-delete-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-delete-item/response-body.adoc[]
+
+=== Template - 유저템플릿 소지품 수정
+==== Method : PATCH
+==== curl-request
+include::{snippets}/template-modfiy-item/curl-request.adoc[]
+include::{snippets}/template-modfiy-item/request-fields.adoc[]
+==== Request Body
+include::{snippets}/template-modfiy-item/request-body.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-modfiy-item/response-body.adoc[]
