@@ -89,10 +89,9 @@ public class UserTemplateService implements TemplateService {
     @Override
     @Transactional
     public TemplateResponse modfiyTemplateNameAndIsPin(String userId, ModifyTemplateRequest modifyTemplateRequest) {
-        //TODO: 카테고리검증 이모지오류 수정필요
-//        Long categoryId = modifyTemplateRequest.getCategoryId();
-//        Category category = categoryAdaptor.getCategoryById(categoryId)
-//                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+          Long categoryId = modifyTemplateRequest.getCategoryId();
+          Category category = categoryAdaptor.getCategoryById(categoryId)
+                  .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
         Long templateId = modifyTemplateRequest.getTemplateId();
         Template template = templateAdaptor.getTemplateById(templateId)
@@ -112,10 +111,9 @@ public class UserTemplateService implements TemplateService {
     @Override
     @Transactional
     public void templateAddItem(String userId, TemplateAddItemRequest templateAddItemRequest) {
-        //TODO: 카테고리검증 이모지오류 수정필요
-//        Long categoryId = templateAddItemRequest.getCategoryId();
-//        Category category = categoryAdaptor.getCategoryById(categoryId)
-//                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+          Long categoryId = templateAddItemRequest.getCategoryId();
+          Category category = categoryAdaptor.getCategoryById(categoryId)
+                  .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
         Long templateId = templateAddItemRequest.getTemplateId();
         Template template = templateAdaptor.getTemplateById(templateId)

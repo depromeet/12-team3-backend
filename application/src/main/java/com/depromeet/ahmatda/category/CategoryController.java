@@ -3,7 +3,7 @@ package com.depromeet.ahmatda.category;
 import com.depromeet.ahmatda.category.dto.CategoryRequest;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
-import com.depromeet.ahmatda.common.HttpHeader;
+import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +27,9 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/user")
-    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByUserId(HttpServletRequest request) {
-        final String userId = request.getHeader(HttpHeader.USER_ID_KEY);
-        final List<CategoryResponse> categoryResponses = categoryService.getCategoriesByUser(userId);
+    public ResponseEntity<RestResponse<List<CategoryResponse>>> getCategoriesByUserToken(HttpServletRequest request) {
+        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        final List<CategoryResponse> categoryResponses = categoryService.getCategoriesByUser(userToken);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 
@@ -41,21 +41,22 @@ public class CategoryController {
   
     @PostMapping
     public ResponseEntity<RestResponse<Object>> createCategory(HttpServletRequest request, @Valid @RequestBody final CategoryRequest categoryRequest) {
-        final String userId = request.getHeader(HttpHeader.USER_ID_KEY);
-        categoryService.createCategory(userId, categoryRequest);
+        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        categoryService.createCategory(userToken, categoryRequest);
         return ResponseEntity.ok(RestResponse.ok());
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<RestResponse<CategoryResponse>> modifyCategory(@PathVariable Long id, @RequestBody final CategoryRequest categoryRequest) {
-        CategoryResponse categoryResponse = categoryService.modifyCategory(id, categoryRequest);
+    @PatchMapping("/{categoryId}")
+    public ResponseEntity<RestResponse<CategoryResponse>> modifyCategory(HttpServletRequest request, @PathVariable Long categoryId, @RequestBody final CategoryRequest categoryRequest) {
+        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        CategoryResponse categoryResponse = categoryService.modifyCategory(userToken, categoryId, categoryRequest);
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponse));
     }
 
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<RestResponse<Object>> removeCategory(@PathVariable Long categoryId, HttpServletRequest request) {
-        String userId = request.getHeader(HttpHeader.USER_ID_KEY);
-        categoryService.removeCategory(userId, categoryId);
+        String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        categoryService.removeCategory(userToken, categoryId);
         return ResponseEntity.ok(RestResponse.ok());
     }
 }

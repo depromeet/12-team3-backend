@@ -7,6 +7,7 @@ import com.depromeet.ahmatda.template.service.TemplateService;
 import com.depromeet.ahmatda.user.UserController;
 import com.depromeet.ahmatda.user.service.UserService;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,8 @@ public abstract class ApiDocumentationTest {
 
     @BeforeAll
     void init() {
-        objectMapper.configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
+        objectMapper.configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true)
+            .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
     }
 
     @Autowired
