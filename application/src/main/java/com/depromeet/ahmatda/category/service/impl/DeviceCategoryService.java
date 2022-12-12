@@ -33,47 +33,53 @@ public class DeviceCategoryService implements CategoryService {
     public List<CategoryResponse> getCategories() {
         List<Category> categories = categoryAdaptor.getCategories();
         return categories.stream()
-                .map(category -> CategoryResponse.createByEntity(category))
-                .collect(Collectors.toList());
+            .map(category -> CategoryResponse.createByEntity(category))
+            .collect(Collectors.toList());
     }
 
     @Override
-    public List<CategoryResponse> getCategoriesByUser(final String userId) {
-        final List<Category> userCategories = categoryAdaptor.getCategoriesByUserId(userId);
+    public List<CategoryResponse> getCategoriesByUser(final String userToken) {
+        final List<Category> userCategories = categoryAdaptor.getCategoriesByUserToken(userToken);
         return userCategories.stream()
-                .map(category -> CategoryResponse.createByEntity(category))
-                .collect(Collectors.toList());
+            .map(category -> CategoryResponse.createByEntity(category))
+            .collect(Collectors.toList());
     }
 
     @Override
-    public void createCategory(final String userId, final CategoryRequest categoryRequest) {
-        User user = userAdaptor.findByUserToken(userId).get();
-        Category category = CategoryRequest.toEntity(user, categoryRequest);
+    public void createCategory(final String userToken, final CategoryRequest categoryRequest) {
+        final User user = userAdaptor.findByUserToken(userToken).get();
+        final Category category = CategoryRequest.toEntity(user, categoryRequest);
 
         categoryAdaptor.createCategory(category);
     }
 
     @Override
-    public CategoryResponse modifyCategory(Long id, CategoryRequest categoryRequest) {
-        Category category = categoryAdaptor.getCategoryById(id)
-                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+    public CategoryResponse modifyCategory(final String userToken, final Long categoryId, final CategoryRequest categoryRequest) {
+        final Category category = categoryAdaptor.getCategoryById(categoryId)
+            .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
-        Category modifiedCategory = categoryRequest.modifyEntity(category);
+        authenticateCategory(userToken, category);
+
+        final Category modifiedCategory = categoryRequest.modifyEntity(category);
 
         return CategoryResponse.createByEntity(categoryAdaptor.modify(modifiedCategory));
     }
 
     @Override
-    public void removeCategory(String userId, Long categoryId) {
-        Category category = categoryAdaptor.getCategoryById(categoryId)
-                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+    public void removeCategory(final String userToken, final Long categoryId) {
+        final Category category = categoryAdaptor.getCategoryById(categoryId)
+            .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
 
-        boolean isAuthenticated = category.authenticateUser(userId);
-
-        if(!isAuthenticated){
-            throw new CategoryUserAuthenticationException(ErrorCode.CATEGORY_AUTHENTICATION_ERROR);
-        }
+        authenticateCategory(userToken, category);
 
         categoryAdaptor.removeCategory(category);
+    }
+
+    private void authenticateCategory(final String userToken, final Category category) {
+        final boolean isAuthenticated = category.authenticateUser(userToken);
+
+        if (!isAuthenticated) {
+            throw new CategoryUserAuthenticationException(ErrorCode.CATEGORY_AUTHENTICATION_ERROR);
+        }
     }
 }

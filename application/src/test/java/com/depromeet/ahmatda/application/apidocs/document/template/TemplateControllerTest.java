@@ -1,11 +1,9 @@
 package com.depromeet.ahmatda.application.apidocs.document.template;
 
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
-import com.depromeet.ahmatda.common.HttpHeader;
+import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
-import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.user.User;
-import com.depromeet.ahmatda.domain.user.type.DeviceCode;
 import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
 import com.depromeet.ahmatda.template.dto.TemplateItemRequest;
 import com.depromeet.ahmatda.template.dto.TemplateItemResponse;
@@ -19,7 +17,6 @@ import java.util.List;
 
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
-import static com.depromeet.ahmatda.application.apidocs.util.DocumentConstraintsGenerator.getConstraintsAttribute;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -27,7 +24,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -62,14 +58,14 @@ public class TemplateControllerTest extends ApiDocumentationTest {
 
         given(templateService.findByCategoryAndUserId(1L,userId)).willReturn(templateResponses);
 
-        mockMvc.perform(get("/api/template/user?category={categoryId}", categoryId).header(HttpHeader.USER_ID_KEY, userId))
+        mockMvc.perform(get("/api/template/user?category={categoryId}", categoryId).header(HttpHeader.USER_TOKEN, userId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("template-by-user-category",
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestHeaders(
-                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                                headerWithName("ahmatda-user-token").description("유저 UUID")
                         )));
 
     }
@@ -98,7 +94,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
         mockMvc.perform(post("/api/template")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(request)
-                        .header(HttpHeader.USER_ID_KEY, userWithDeviceId.getUserToken()))
+                        .header(HttpHeader.USER_TOKEN, userWithDeviceId.getUserToken()))
                 .andExpect(status().isOk())
                 .andExpect(content().string(response))
                 .andDo(document("create-template",
