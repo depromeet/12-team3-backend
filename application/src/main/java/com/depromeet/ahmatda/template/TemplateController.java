@@ -3,10 +3,7 @@ package com.depromeet.ahmatda.template;
 import com.depromeet.ahmatda.common.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.template.Template;
-import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
-import com.depromeet.ahmatda.template.dto.ModifyTemplateRequest;
-import com.depromeet.ahmatda.template.dto.TemplateAddItemRequest;
-import com.depromeet.ahmatda.template.dto.TemplateResponse;
+import com.depromeet.ahmatda.template.dto.*;
 import com.depromeet.ahmatda.template.service.TemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +64,13 @@ public class TemplateController {
     public ResponseEntity<RestResponse<Object>> templateDeleteItem(HttpServletRequest request, @PathVariable Long templateId, @PathVariable Long itemId) {
         String userId = request.getHeader(HttpHeader.USER_ID_KEY);
         templateService.templateDeleteItem(userId, templateId, itemId);
+        return ResponseEntity.ok().body(RestResponse.ok());
+    }
+
+    @PatchMapping("/item")
+    public ResponseEntity<RestResponse<Object>> templateItemModfiy(HttpServletRequest request, @RequestBody TemplateItemModfiyRequest templateItemModfiyRequest) {
+        String userId = request.getHeader(HttpHeader.USER_ID_KEY);
+        templateService.templateItemModfiy(userId, templateItemModfiyRequest);
         return ResponseEntity.ok().body(RestResponse.ok());
     }
 }

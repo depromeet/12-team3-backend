@@ -25,4 +25,8 @@ public class ItemAdaptor {
         return itemRepository.findById(itemId);
     }
 
+    public void modfiyItem(Item item){
+        itemRepository.save(item);
+    }
+
 }

@@ -150,4 +150,26 @@ public class UserTemplateService implements TemplateService {
 
         itemAdaptor.deleteItem(item);
     }
+
+    @Override
+    @Transactional
+    public void templateItemModfiy(String userId, TemplateItemModfiyRequest templateItemModfiyRequest) {
+        Long templateId = templateItemModfiyRequest.getTemplateId();
+        Template template = templateAdaptor.getTemplateById(templateId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
+
+        boolean isAuthenticated = template.authenticateUser(userId);
+
+        if (!isAuthenticated) {
+            throw new TemplateUserAuthenticationException(ErrorCode.AUTHENTICATION_ERROR);
+        }
+
+        Long itemId = templateItemModfiyRequest.getItemId();
+        Item item = itemAdaptor.findByItem(itemId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.ITEM_NOT_FOUND));
+
+        Item.UserTemplateModfiyItemName(item, templateItemModfiyRequest.getModifiedItemName(), templateItemModfiyRequest.isImportant());
+
+        itemAdaptor.modfiyItem(item);
+    }
 }

@@ -1,10 +1,7 @@
 package com.depromeet.ahmatda.template.service;
 
 import com.depromeet.ahmatda.domain.template.Template;
-import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
-import com.depromeet.ahmatda.template.dto.ModifyTemplateRequest;
-import com.depromeet.ahmatda.template.dto.TemplateAddItemRequest;
-import com.depromeet.ahmatda.template.dto.TemplateResponse;
+import com.depromeet.ahmatda.template.dto.*;
 
 import java.util.List;
 
@@ -23,4 +20,6 @@ public interface TemplateService {
     void templateAddItem(String userId, TemplateAddItemRequest templateAddItemRequest);
 
     void templateDeleteItem(String userId, Long templateId, Long itemId);
+
+    void templateItemModfiy(String userId, TemplateItemModfiyRequest templateItemModfiyRequest);
 }

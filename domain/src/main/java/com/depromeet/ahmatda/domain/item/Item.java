@@ -62,4 +62,10 @@ public class Item extends BaseTimeEntity {
         item.isImportant = important;
         return item;
     }
+
+    public static Item UserTemplateModfiyItemName(Item item, String itemName, boolean isImportant) {
+        item.isImportant = isImportant;
+        item.name = itemName;
+        return item;
+    }
 }
