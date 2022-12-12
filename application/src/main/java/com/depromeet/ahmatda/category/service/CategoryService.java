@@ -12,11 +12,11 @@ public interface CategoryService {
 
     List<CategoryResponse> getCategories();
 
-    List<CategoryResponse> getCategoriesByUser(final String userId);
+    List<CategoryResponse> getCategoriesByUser(final String userToken);
 
     Category createCategory(String userId, CategoryRequest categoryRequest);
 
-    CategoryResponse modifyCategory(Long id, CategoryRequest categoryRequest);
+    CategoryResponse modifyCategory(String userToken, Long categoryId, CategoryRequest categoryRequest);
 
-    void removeCategory(String userId, Long categoryId);
+    void removeCategory(String userToken, Long categoryId);
 }

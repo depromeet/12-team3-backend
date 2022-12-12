@@ -42,9 +42,9 @@ include::{snippets}/user-sign-up/request-fields.adoc[]
 ==== 정상 응답
 include::{snippets}/user-sign-up/response-body.adoc[]
 ==== 에러 응답 - 이미 존재하는 유저
-include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
-==== 에러 응답 - 바인딩 실패 (IOS, ANDROID 정규식)
-include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
+//include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
+//==== 에러 응답 - 바인딩 실패 (IOS, ANDROID 정규식)
+//include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
 
 [[Category]]
 === Category - 전체 조회
@@ -105,6 +105,11 @@ include::{snippets}/category-error-name-null/response-body.adoc[]
 include::{snippets}/category-error-type-null/request-fields.adoc[]
 include::{snippets}/category-error-type-null/response-fields.adoc[]
 include::{snippets}/category-error-type-null/response-body.adoc[]
+==== 에러 응답 - 카테고리 이름의 길이가 10글자 초과
+include::{snippets}/category-name-length-error/request-fields.adoc[]
+include::{snippets}/category-name-length-error/response-fields.adoc[]
+include::{snippets}/category-name-length-error/response-body.adoc[]
+
 
 === Category - 수정(단일)
 ==== Method : PATCH
@@ -116,6 +121,10 @@ include::{snippets}/category-modify/request-fields.adoc[]
 ==== Response Body
 include::{snippets}/category-modify/response-body.adoc[]
 include::{snippets}/category-modify/response-fields.adoc[]
+==== 에러 응답 - 카테고리 작성자와 수정 이용자가 다를 경우
+include::{snippets}/category-modify-error/request-headers.adoc[]
+include::{snippets}/category-modify-error/response-body.adoc[]
+include::{snippets}/category-modify-error/response-fields.adoc[]
 
 === Category - 삭제(단일)
 ==== Method : DELETE
@@ -127,7 +136,7 @@ include::{snippets}/category-delete/request-headers.adoc[]
 include::{snippets}/category-delete/path-parameters.adoc[]
 ==== Response Body
 include::{snippets}/category-delete/response-body.adoc[]
-==== 에러 응답 - 카테고리를 작성자와 삭제 이용자가 다를 경우
+==== 에러 응답 - 카테고리 작성자와 삭제 이용자가 다를 경우
 include::{snippets}/category-delete-error/request-headers.adoc[]
 include::{snippets}/category-delete-error/response-body.adoc[]
 include::{snippets}/category-delete-error/response-fields.adoc[]

@@ -25,8 +25,8 @@ public class CategoryAdaptor {
     }
 
     @Transactional(readOnly = true)
-    public List<Category> getCategoriesByUserId(final String userId) {
-        return categoryRepository.findAllByUserId(userId);
+    public List<Category> getCategoriesByUserToken(final String userToken) {
+        return categoryRepository.findAllByUserToken(userToken);
     }
 
     public Category createCategory(Category category) {
