@@ -11,7 +11,7 @@ import java.util.List;
 public class OnboardingRequest {
 
     @NotNull
-    OnBoardingCategory category;
+    private OnBoardingCategory category;
     @NotBlank
     private String templateName;
     private List<String> items;

@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 public class SignUpOnBoardRequest {
 
-    private OnboardingRequest onboardingRequestDto;
+    private OnboardingRequest onboardingRequest;
 }
