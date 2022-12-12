@@ -1,0 +1,4 @@
+:doctype: book
+:icons: font
+
+include::{snippets}/common-enums/custom-response-fields-userRegisterCode.adoc[]

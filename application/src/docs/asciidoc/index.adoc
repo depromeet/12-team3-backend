@@ -31,20 +31,23 @@ include::{snippets}/common-error-response/http-response.adoc[]
 == APIs
 
 [[User]]
-=== User - 등록
-
-==== Method : Post
+=== userToken 으로 유저 체크
 ==== curl-request
-include::{snippets}/user-sign-up/curl-request.adoc[]
-==== Request Body
-include::{snippets}/user-sign-up/request-body.adoc[]
-include::{snippets}/user-sign-up/request-fields.adoc[]
+include::{snippets}/check-user-token/curl-request.adoc[]
+==== 요청 필드
+include::{snippets}/check-user-token/request-parameters.adoc[]
 ==== 정상 응답
-include::{snippets}/user-sign-up/response-body.adoc[]
-==== 에러 응답 - 이미 존재하는 유저
-//include::{snippets}/user-sign-up-exist-error/http-response.adoc[]
-//==== 에러 응답 - 바인딩 실패 (IOS, ANDROID 정규식)
-//include::{snippets}/user-sign-up-validate-error/response-body.adoc[]
+include::{snippets}/check-user-token/response-body.adoc[]
+include::{snippets}/check-user-token/response-fields.adoc[]
+
+=== 온보딩 저장 및 유저 토큰 반환
+==== curl-request
+include::{snippets}/sign-up-onboarding/curl-request.adoc[]
+==== 요청 바디
+include::{snippets}/sign-up-onboarding/request-body.adoc[]
+include::{snippets}/sign-up-onboarding/request-fields.adoc[]
+==== 정상 응답
+include::{snippets}/sign-up-onboarding/response-body.adoc[]
 
 [[Category]]
 === Category - 전체 조회
