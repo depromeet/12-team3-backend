@@ -65,7 +65,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestHeaders(
-                                headerWithName("ahmatda-user-id").description("유저 UUID")
+                                headerWithName("ahmatda-user-token").description("유저 UUID")
                         )));
 
     }
