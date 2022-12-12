@@ -3,6 +3,7 @@ package com.depromeet.ahmatda.onboard;
 import com.depromeet.ahmatda.category.dto.CategoryRequest;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.domain.category.Category;
+import com.depromeet.ahmatda.domain.category.CategoryType;
 import com.depromeet.ahmatda.domain.onboard.OnBoardingCategory;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
@@ -11,8 +12,9 @@ import com.depromeet.ahmatda.template.service.TemplateService;
 import com.depromeet.ahmatda.user.token.UserToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +25,7 @@ public class OnboardingService {
     private final CategoryService categoryService;
     private final TemplateService templateService;
 
-    @Transactional
+    @Transactional(propagation = Propagation.MANDATORY)
     public UserToken setUserOnboarding(final User user, OnboardingRequest request) {
         long userId = user.getId();
         Category category = createOnboardingCategory(userId, request.getCategory());
@@ -35,7 +37,7 @@ public class OnboardingService {
     private Category createOnboardingCategory(Long userId, OnBoardingCategory category) {
         CategoryRequest categoryRequest = CategoryRequest.builder()
                 .name(category.getCategoryName())
-                .type(category.getCategoryName())
+                .type(CategoryType.valueOf(category.name()))
                 .emoji(category.getEmoji())
                 .build();
 

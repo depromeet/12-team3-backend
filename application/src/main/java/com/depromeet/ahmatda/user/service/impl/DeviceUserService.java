@@ -9,8 +9,7 @@ import com.depromeet.ahmatda.user.service.UserService;
 import com.depromeet.ahmatda.user.token.UserToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +36,7 @@ public class DeviceUserService implements UserService {
             User.createUserWithUserToken(userToken.getValue())
         );
 
-        onboardingService.setUserOnboarding(user, request.getOnboardingRequestDto());
+        onboardingService.setUserOnboarding(user, request.getOnboardingRequest());
 
         return new UserToken(user.getUserToken());
     }
