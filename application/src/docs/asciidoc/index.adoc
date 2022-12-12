@@ -196,6 +196,7 @@ include::{snippets}/template-add-item/response-body.adoc[]
 include::{snippets}/template-delete-item/curl-request.adoc[]
 include::{snippets}/template-delete-item/path-parameters.adoc[]
 ==== Request Body
+include::{snippets}/template-delete-item/request-fields.adoc[]
 include::{snippets}/template-delete-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-delete-item/response-body.adoc[]

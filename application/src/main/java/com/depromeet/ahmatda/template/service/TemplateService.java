@@ -19,7 +19,7 @@ public interface TemplateService {
 
     void templateAddItem(String userId, TemplateAddItemRequest templateAddItemRequest);
 
-    void templateDeleteItem(String userId, Long templateId, Long itemId);
+    void templateDeleteItem(String userId, TemplateDeleteItemRequest templateDeleteItemRequest);
 
     void templateItemModfiy(String userId, TemplateItemModfiyRequest templateItemModfiyRequest);
 }

@@ -135,7 +135,8 @@ public class UserTemplateService implements TemplateService {
 
     @Override
     @Transactional
-    public void templateDeleteItem(String userId, Long templateId, Long itemId) {
+    public void templateDeleteItem(String userId, TemplateDeleteItemRequest templateDeleteItemRequest) {
+        Long templateId = templateDeleteItemRequest.getTemplateId();
         Template template = templateAdaptor.getTemplateById(templateId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
 
@@ -145,6 +146,7 @@ public class UserTemplateService implements TemplateService {
             throw new TemplateUserAuthenticationException(ErrorCode.AUTHENTICATION_ERROR);
         }
 
+        Long itemId = templateDeleteItemRequest.getItemId();
         Item item = itemAdaptor.findByItem(itemId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.ITEM_NOT_FOUND));
 

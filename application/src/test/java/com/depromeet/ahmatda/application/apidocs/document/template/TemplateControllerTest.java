@@ -268,11 +268,18 @@ public class TemplateControllerTest extends ApiDocumentationTest {
     void 유저템플릿의_소지품단건삭제() throws Exception {
         //given
         User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
-        Long templateId = 1L;
-        Long itemId = 2L;
 
-        mockMvc.perform(delete("/api/template/{templateId}/item/{itemId}", templateId, itemId)
-                        .header(HttpHeader.USER_ID_KEY, userWithDeviceId.getUserToken()))
+        TemplateDeleteItemRequest templateDeleteItemRequest = TemplateDeleteItemRequest.builder()
+                .itemId(1L)
+                .templateId(6L)
+                .build();
+
+        String request = objectMapper.writeValueAsString(templateDeleteItemRequest);
+
+        mockMvc.perform(delete("/api/template/item")
+                        .header(HttpHeader.USER_ID_KEY, userWithDeviceId.getUserToken())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
                 .andExpect(status().isOk())
                 .andDo(document("template-delete-item",
                         getDocumentRequest(),
@@ -280,9 +287,9 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         requestHeaders(
                                 headerWithName("ahmatda-user-id").description("유저 UUID")
                         ),
-                        pathParameters(
-                                parameterWithName("templateId").description("삭제할 소지품의 유저템플릿 ID"),
-                                parameterWithName("itemId").description("삭제할 소지품의 ID")
+                        requestFields(
+                                fieldWithPath("itemId").description("소지품 이름"),
+                                fieldWithPath("templateId").description("유저템플릿 ID")
                         ),
                         responseFields(
                                 fieldWithPath("result").description("결과"),
