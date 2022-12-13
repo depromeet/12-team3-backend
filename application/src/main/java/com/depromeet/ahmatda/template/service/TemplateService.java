@@ -12,7 +12,7 @@ public interface TemplateService {
     List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String userId);
 
     void createUserTemplate(String userId, CreateTemplateRequest createTemplateRequest);
-    
+
     void deleteUserTemplate(String userId, Long templateId);
 
     TemplateResponse modfiyTemplateNameAndIsPin(String userId, ModifyTemplateRequest modifyTemplateRequest);
