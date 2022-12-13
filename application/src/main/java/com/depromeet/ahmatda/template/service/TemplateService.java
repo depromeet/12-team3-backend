@@ -1,6 +1,7 @@
 package com.depromeet.ahmatda.template.service;
 
 import com.depromeet.ahmatda.domain.template.Template;
+import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.template.dto.*;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface TemplateService {
     List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String userId);
 
     void createUserTemplate(String userId, CreateTemplateRequest createTemplateRequest);
+
+    void createUserTemplate(User user, CreateTemplateRequest createTemplateRequest);
 
     void deleteUserTemplate(String userId, Long templateId);
 
