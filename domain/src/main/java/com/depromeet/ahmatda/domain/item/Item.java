@@ -34,6 +34,9 @@ public class Item extends BaseTimeEntity {
     @Column
     private boolean isTake;
 
+    @Column
+    private boolean isImportant;
+
     //==생성 메서드==//
     public static Item createItem(Long categoryId, Template template, String name) {
         Item item = new Item();
@@ -43,6 +46,7 @@ public class Item extends BaseTimeEntity {
         //TODO : 알람 ID는 임의로 저장 추 후 변경
         item.alarmId = 0L;
         item.isTake = false;
+        item.isImportant = false;
         return item;
     }
 }

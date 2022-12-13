@@ -15,9 +15,8 @@ public interface DocumentEnumLinkGenerator {
 
     @RequiredArgsConstructor
     enum DocUrl {
-        //TODO : enum 클래스가 만들어지면 src/docs/asciidoc/common 경로에 enum 의 adoc 파일을 만들고, 해당 파일의 이름을 pageId 로 셋팅
-//        COLOR("color", "색")
-        ;
+        ONBOARDING_CATEGORY("onboardingCategory", "온보딩_카테고리"),
+        USER_REGISTER_CODE("userRegisterCode", "유저_등록");
 
         private final String pageId;
         @Getter

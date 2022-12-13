@@ -5,6 +5,7 @@ import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.common.utils.EnumType;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,15 +20,14 @@ import java.util.stream.Collectors;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 
 @Getter
+@Builder(builderClassName = "EnumDocsBuilder", builderMethodName = "enumDocsBuilder")
 @NoArgsConstructor
+@AllArgsConstructor
 public class EnumDocs {
 
     Map<String, String> errorCodes;
-
-    @Builder(builderClassName = "EnumDocsBuilder", builderMethodName = "enumDocsBuilder")
-    public EnumDocs(Map<String, String> errorCodes) {
-        this.errorCodes = errorCodes;
-    }
+    Map<String, String> userRegisterCode;
+    Map<String, String> onBoardingCategory;
 
     public static EnumDocs getEnumDocs() {
         return enumDocsBuilder()
