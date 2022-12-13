@@ -149,6 +149,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                 .pin(true)
                 .templateName("성민의 갓템들")
                 .categoryId(2L)
+                .pin(true)
                 .build();
 
         List<TemplateItemResponse> templateItemResponses = List.of(

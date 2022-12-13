@@ -1,15 +1,13 @@
 package com.depromeet.ahmatda.template.dto;
-import com.depromeet.ahmatda.domain.item.Item;
 import com.depromeet.ahmatda.domain.template.Template;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-@Data
+@Getter
 @Builder
 public class TemplateResponse {
     private Long id;

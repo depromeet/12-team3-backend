@@ -2,9 +2,9 @@ package com.depromeet.ahmatda.template.dto;
 
 import com.depromeet.ahmatda.domain.item.Item;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 public class TemplateItemResponse {
     private final Long id;
