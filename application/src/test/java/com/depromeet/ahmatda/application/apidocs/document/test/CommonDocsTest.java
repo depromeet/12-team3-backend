@@ -79,6 +79,14 @@ class CommonDocsTest extends ApiDocumentationTest {
                 customResponseFields("custom-response", beneathPath("result.errorCodes").withSubsectionId("errorCodes"),
                     attributes(key("title").value("예외 코드")),
                     enumConvertFieldDescriptor(docs.getErrorCodes())
+                ),
+                customResponseFields("custom-response", beneathPath("result.onBoardingCategory").withSubsectionId("onBoardingCategory"),
+                        attributes(key("title").value("온보딩용 카테고리 타입")),
+                        enumConvertFieldDescriptor(docs.getOnBoardingCategory())
+                ),
+                customResponseFields("custom-response", beneathPath("result.userRegisterCode").withSubsectionId("userRegisterCode"),
+                        attributes(key("title").value("유저 체크 결과 코드")),
+                        enumConvertFieldDescriptor(docs.getUserRegisterCode())
                 )
             ));
     }

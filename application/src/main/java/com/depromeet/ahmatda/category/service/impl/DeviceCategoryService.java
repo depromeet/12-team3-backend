@@ -46,11 +46,20 @@ public class DeviceCategoryService implements CategoryService {
     }
 
     @Override
+    public Category createCategory(final User user, final CategoryRequest categoryRequest) {
+        return createWithUser(user, categoryRequest);
+    }
+
+    @Override
     public void createCategory(final String userToken, final CategoryRequest categoryRequest) {
         final User user = userAdaptor.findByUserToken(userToken).get();
+        createWithUser(user, categoryRequest);
+    }
+
+    private Category createWithUser(User user, CategoryRequest categoryRequest) {
         final Category category = CategoryRequest.toEntity(user, categoryRequest);
 
-        categoryAdaptor.createCategory(category);
+        return categoryAdaptor.createCategory(category);
     }
 
     @Override

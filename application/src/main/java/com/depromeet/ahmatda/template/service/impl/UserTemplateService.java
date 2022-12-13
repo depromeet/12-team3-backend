@@ -46,6 +46,30 @@ public class UserTemplateService implements TemplateService {
 
     @Override
     @Transactional
+    public void createUserTemplate(User user, CreateTemplateRequest createTemplateRequest) {
+        createWithUser(user, createTemplateRequest);
+    }
+
+    private void createWithUser(User user, CreateTemplateRequest createTemplateRequest) {
+        Long categoryId = createTemplateRequest.getCategoryId();
+        Category category = categoryAdaptor.getCategoryById(categoryId)
+                .orElseThrow(() -> new CategoryNotExistException(ErrorCode.CATEGORY_NOT_FOUND));
+
+        Template template = Template.createTemplate(createTemplateRequest.getTemplateName(), category, user);
+
+        templateAdaptor.createUserTemplate(template);
+
+        if(createTemplateRequest.getItems() != null) {
+            for (TemplateItemRequest itemRequest : createTemplateRequest.getItems()) {
+                Item item = Item.createItem(createTemplateRequest.getCategoryId(), template, itemRequest.getName());
+                itemAdaptor.createItem(item);
+            }
+        }
+    }
+
+
+    @Override
+    @Transactional
     public void createUserTemplate(String userId, CreateTemplateRequest createTemplateRequest) {
         User user = userAdaptor.findByUserToken(userId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.AUTHENTICATION_ERROR));
@@ -64,7 +88,6 @@ public class UserTemplateService implements TemplateService {
                 itemAdaptor.createItem(item);
             }
         }
-
     }
 
     @Override
