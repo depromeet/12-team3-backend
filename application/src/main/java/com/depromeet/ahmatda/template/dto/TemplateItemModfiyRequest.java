@@ -1,10 +1,12 @@
 package com.depromeet.ahmatda.template.dto;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @Builder
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class TemplateItemModfiyRequest {
     private Long templateId;
 
