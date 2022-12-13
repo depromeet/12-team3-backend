@@ -1,16 +1,16 @@
 package com.depromeet.ahmatda.template.dto;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
-import java.util.List;
-
-@Getter
+@Data
 @Builder
-public class CreateTemplateRequest {
+public class ModifyTemplateRequest {
+    private Long templateId;
+
     private String templateName;
 
     private Long categoryId;
 
-    private final List<TemplateItemRequest> items;
+    private boolean pin;
 }

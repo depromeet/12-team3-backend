@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class TemplateItemRequest {
-    private final Long categoryId;
+public class TemplateDeleteItemRequest {
+    private Long templateId;
 
-    private final String name;
+    private Long itemId;
 }

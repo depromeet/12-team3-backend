@@ -2,9 +2,9 @@ package com.depromeet.ahmatda.template.dto;
 
 import com.depromeet.ahmatda.domain.item.Item;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 public class TemplateItemResponse {
     private final Long id;
@@ -19,6 +19,8 @@ public class TemplateItemResponse {
 
     private final boolean isTake;
 
+    private final boolean isImportant;
+
     public static TemplateItemResponse from(Item item) {
         return TemplateItemResponse.builder()
                 .id(item.getId())
@@ -27,6 +29,7 @@ public class TemplateItemResponse {
                 .name(item.getName())
                 .alarmId(item.getAlarmId())
                 .isTake(item.isTake())
+                .isImportant(item.isImportant())
                 .build();
     }
 }

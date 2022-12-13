@@ -3,8 +3,7 @@ package com.depromeet.ahmatda.template;
 import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.template.Template;
-import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
-import com.depromeet.ahmatda.template.dto.TemplateResponse;
+import com.depromeet.ahmatda.template.dto.*;
 import com.depromeet.ahmatda.template.service.TemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +44,34 @@ public class TemplateController {
         String userId = request.getHeader(HttpHeader.USER_TOKEN);
         templateService.deleteUserTemplate(userId, templateId);
         return ResponseEntity.ok(RestResponse.ok());
+    }
+
+    @PatchMapping
+    public ResponseEntity<RestResponse<TemplateResponse>> modfiyTemplateNameAndIsPin(HttpServletRequest request, @RequestBody ModifyTemplateRequest modifyTemplateRequest) {
+        String userId = request.getHeader(HttpHeader.USER_TOKEN);
+        //TODO : 고정핀, 이름수정 분리필요
+        TemplateResponse templateResponse = templateService.modfiyTemplateNameAndIsPin(userId, modifyTemplateRequest);
+        return ResponseEntity.ok().body(RestResponse.ok(templateResponse));
+    }
+
+    @PostMapping("/item")
+    public ResponseEntity<RestResponse<Object>> templateAddItem(HttpServletRequest request, @RequestBody TemplateAddItemRequest templateAddItemRequest) {
+        String userId = request.getHeader(HttpHeader.USER_TOKEN);
+        templateService.templateAddItem(userId, templateAddItemRequest);
+        return ResponseEntity.ok().body(RestResponse.ok());
+    }
+
+    @DeleteMapping("/item")
+    public ResponseEntity<RestResponse<Object>> templateDeleteItem(HttpServletRequest request, @RequestBody TemplateDeleteItemRequest templateDeleteItemRequest) {
+        String userId = request.getHeader(HttpHeader.USER_TOKEN);
+        templateService.templateDeleteItem(userId, templateDeleteItemRequest);
+        return ResponseEntity.ok().body(RestResponse.ok());
+    }
+
+    @PatchMapping("/item")
+    public ResponseEntity<RestResponse<Object>> templateItemModfiy(HttpServletRequest request, @RequestBody TemplateItemModfiyRequest templateItemModfiyRequest) {
+        String userId = request.getHeader(HttpHeader.USER_TOKEN);
+        templateService.templateItemModfiy(userId, templateItemModfiyRequest);
+        return ResponseEntity.ok().body(RestResponse.ok());
     }
 }
