@@ -4,7 +4,7 @@ import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
 import com.depromeet.ahmatda.onboard.OnboardingService;
 import com.depromeet.ahmatda.user.UserRegisterCode;
-import com.depromeet.ahmatda.user.dto.SignUpOnBoardRequest;
+import com.depromeet.ahmatda.user.dto.SignUpRequest;
 import com.depromeet.ahmatda.user.service.UserService;
 import com.depromeet.ahmatda.user.token.UserToken;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class DeviceUserService implements UserService {
 
     @Override
     @Transactional
-    public UserToken createUser(SignUpOnBoardRequest request) {
+    public UserToken createUser(SignUpRequest request) {
         UserToken userToken = UserToken.generate();
 
         User user = userAdaptor.createUser(

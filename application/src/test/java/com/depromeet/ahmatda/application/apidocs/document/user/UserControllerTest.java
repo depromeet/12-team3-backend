@@ -6,7 +6,7 @@ import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.onboard.OnBoardingCategory;
 import com.depromeet.ahmatda.onboard.OnboardingRequest;
 import com.depromeet.ahmatda.user.UserRegisterCode;
-import com.depromeet.ahmatda.user.dto.SignUpOnBoardRequest;
+import com.depromeet.ahmatda.user.dto.SignUpRequest;
 import com.depromeet.ahmatda.user.token.UserToken;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -71,7 +71,7 @@ public class UserControllerTest extends ApiDocumentationTest {
     @Test
     void signInTest() throws Exception {
         // given
-        SignUpOnBoardRequest request = new SignUpOnBoardRequest(
+        SignUpRequest request = new SignUpRequest(
             new OnboardingRequest(OnBoardingCategory.DAILY, "Tomorrow Checklist", List.of("MacBook", "Airpods"))
         );
 

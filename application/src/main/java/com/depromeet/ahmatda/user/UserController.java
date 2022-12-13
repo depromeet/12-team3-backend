@@ -1,7 +1,7 @@
 package com.depromeet.ahmatda.user;
 
 import com.depromeet.ahmatda.common.response.RestResponse;
-import com.depromeet.ahmatda.user.dto.SignUpOnBoardRequest;
+import com.depromeet.ahmatda.user.dto.SignUpRequest;
 import com.depromeet.ahmatda.user.service.UserService;
 import com.depromeet.ahmatda.user.token.UserToken;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<RestResponse<UserToken>> signUp(@Valid @RequestBody SignUpOnBoardRequest request) {
+    public ResponseEntity<RestResponse<UserToken>> signUp(@Valid @RequestBody SignUpRequest request) {
         UserToken token = userService.createUser(request);
 
         return ResponseEntity.ok().body(

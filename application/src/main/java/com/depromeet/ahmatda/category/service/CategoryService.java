@@ -16,7 +16,7 @@ public interface CategoryService {
     List<CategoryResponse> getCategoriesByUser(final String userToken);
 
     Category createCategory(User user, CategoryRequest categoryRequest);
-    Category createCategory(String userId, CategoryRequest categoryRequest);
+    void createCategory(String userId, CategoryRequest categoryRequest);
 
     CategoryResponse modifyCategory(String userToken, Long categoryId, CategoryRequest categoryRequest);
 

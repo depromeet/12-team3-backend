@@ -16,9 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class OnboardingRequest {
 
-    @NotNull
+    @NotNull(message = "온보딩 카테고리를 선택해야합니다.")
     private OnBoardingCategory category;
-    @NotBlank
+    @NotBlank(message = "템플릿 이름이 존재해야합니다.")
     private String templateName;
     private List<String> items;
 }

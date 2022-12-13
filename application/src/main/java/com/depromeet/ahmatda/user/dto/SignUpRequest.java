@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignUpOnBoardRequest {
+public class SignUpRequest {
 
     private OnboardingRequest onboardingRequest;
 }
