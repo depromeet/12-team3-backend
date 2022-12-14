@@ -15,8 +15,6 @@ public class TemplateItemResponse {
 
     private final String name;
 
-    private final Long alarmId;
-
     private final boolean isTake;
 
     private final boolean isImportant;
@@ -27,7 +25,6 @@ public class TemplateItemResponse {
                 .templateId(item.getTemplate().getId())
                 .categoryId(item.getCategoryId())
                 .name(item.getName())
-                .alarmId(item.getAlarmId())
                 .isTake(item.isTake())
                 .isImportant(item.isImportant())
                 .build();

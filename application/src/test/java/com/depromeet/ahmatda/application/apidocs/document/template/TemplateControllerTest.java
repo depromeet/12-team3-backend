@@ -43,12 +43,12 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                 TemplateItemResponse.builder()
                         .id(1L)
                         .templateId(2L)
-                        .categoryId(1L).name("노트북").alarmId(11L).isTake(false)
+                        .categoryId(1L).name("노트북").isTake(false)
                         .build(),
                 TemplateItemResponse.builder()
                         .id(2L)
                         .templateId(2L)
-                        .categoryId(1L).name("핸드폰").alarmId(10L).isTake(false)
+                        .categoryId(1L).name("핸드폰").isTake(false)
                         .build());
         List<TemplateResponse> templateResponses = List.of(
                 TemplateResponse.builder()
@@ -158,7 +158,6 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         .categoryId(2L)
                         .templateId(6L)
                         .name("여권")
-                        .alarmId(10L)
                         .isTake(true)
                         .isImportant(false)
                         .build(),
@@ -167,7 +166,6 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                         .categoryId(2L)
                         .templateId(6L)
                         .name("신분증")
-                        .alarmId(11L)
                         .isTake(false)
                         .isImportant(true)
                         .build());
@@ -217,7 +215,6 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("result.items.[].name").type(JsonFieldType.STRING).description("유저템플릿의 소지품 명"),
                                 fieldWithPath("result.items.[].templateId").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품의 템플릿 ID"),
                                 fieldWithPath("result.items.[].categoryId").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품의 카테고리 ID"),
-                                fieldWithPath("result.items.[].alarmId").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품 알람 ID"),
                                 fieldWithPath("result.items.[].take").type(JsonFieldType.BOOLEAN).description("유저템플릿의 소지품 체크여부"),
                                 fieldWithPath("result.items.[].important").type(JsonFieldType.BOOLEAN).description("유저템플릿의 소지품의 중요도 여부"),
                                 fieldWithPath("error").type(JsonFieldType.NULL).description("에러")
