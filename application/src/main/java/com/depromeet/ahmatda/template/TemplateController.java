@@ -48,7 +48,7 @@ public class TemplateController {
     }
 
     @PatchMapping
-    public ResponseEntity<RestResponse<TemplateResponse>> modfiyTemplateNameAndIsPin(HttpServletRequest request, @RequestBody ModifyTemplateRequest modifyTemplateRequest) {
+    public ResponseEntity<RestResponse<TemplateResponse>> modfiyTemplateNameAndIsPin(HttpServletRequest request, @Valid @RequestBody ModifyTemplateRequest modifyTemplateRequest) {
         String userId = request.getHeader(HttpHeader.USER_TOKEN);
         //TODO : 고정핀, 이름수정 분리필요
         TemplateResponse templateResponse = templateService.modfiyTemplateNameAndIsPin(userId, modifyTemplateRequest);
@@ -63,14 +63,14 @@ public class TemplateController {
     }
 
     @DeleteMapping("/item")
-    public ResponseEntity<RestResponse<Object>> templateDeleteItem(HttpServletRequest request, @RequestBody TemplateDeleteItemRequest templateDeleteItemRequest) {
+    public ResponseEntity<RestResponse<Object>> templateDeleteItem(HttpServletRequest request, @Valid @RequestBody TemplateDeleteItemRequest templateDeleteItemRequest) {
         String userId = request.getHeader(HttpHeader.USER_TOKEN);
         templateService.templateDeleteItem(userId, templateDeleteItemRequest);
         return ResponseEntity.ok().body(RestResponse.ok());
     }
 
     @PatchMapping("/item")
-    public ResponseEntity<RestResponse<Object>> templateItemModfiy(HttpServletRequest request, @RequestBody TemplateItemModfiyRequest templateItemModfiyRequest) {
+    public ResponseEntity<RestResponse<Object>> templateItemModfiy(HttpServletRequest request, @Valid @RequestBody TemplateItemModfiyRequest templateItemModfiyRequest) {
         String userId = request.getHeader(HttpHeader.USER_TOKEN);
         templateService.templateItemModfiy(userId, templateItemModfiyRequest);
         return ResponseEntity.ok().body(RestResponse.ok());

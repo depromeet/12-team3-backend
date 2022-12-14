@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 public class TemplateAddItemRequest {
     @NotNull(message = "템플릿을 확인해주세요.")
     private Long templateId;
+
     @NotNull(message = "카테고리를 확인해주세요.")
     private Long categoryId;
 
