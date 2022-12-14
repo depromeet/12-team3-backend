@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,7 +34,7 @@ public class TemplateController {
     }
 
     @PostMapping
-    public ResponseEntity<RestResponse<Object>> createUserTemplate(HttpServletRequest request, @RequestBody CreateTemplateRequest createTemplateRequest) {
+    public ResponseEntity<RestResponse<Object>> createUserTemplate(HttpServletRequest request, @Valid @RequestBody CreateTemplateRequest createTemplateRequest) {
         final String userId = request.getHeader(HttpHeader.USER_TOKEN);
         templateService.createUserTemplate(userId, createTemplateRequest);
         return ResponseEntity.ok(RestResponse.ok());
