@@ -56,7 +56,7 @@ public class TemplateController {
     }
 
     @PostMapping("/item")
-    public ResponseEntity<RestResponse<Object>> templateAddItem(HttpServletRequest request, @RequestBody TemplateAddItemRequest templateAddItemRequest) {
+    public ResponseEntity<RestResponse<Object>> templateAddItem(HttpServletRequest request, @Valid @RequestBody TemplateAddItemRequest templateAddItemRequest) {
         String userId = request.getHeader(HttpHeader.USER_TOKEN);
         templateService.templateAddItem(userId, templateAddItemRequest);
         return ResponseEntity.ok().body(RestResponse.ok());
