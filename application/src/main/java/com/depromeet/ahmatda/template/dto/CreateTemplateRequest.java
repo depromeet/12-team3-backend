@@ -1,12 +1,14 @@
 package com.depromeet.ahmatda.template.dto;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Builder
+@EqualsAndHashCode
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 public class CreateTemplateRequest {
     private String templateName;
 
