@@ -50,7 +50,6 @@ public class TemplateController {
     @PatchMapping
     public ResponseEntity<RestResponse<TemplateResponse>> modfiyTemplateNameAndIsPin(HttpServletRequest request, @Valid @RequestBody ModifyTemplateRequest modifyTemplateRequest) {
         String userId = request.getHeader(HttpHeader.USER_TOKEN);
-        //TODO : 고정핀, 이름수정 분리필요
         TemplateResponse templateResponse = templateService.modfiyTemplateNameAndIsPin(userId, modifyTemplateRequest);
         return ResponseEntity.ok().body(RestResponse.ok(templateResponse));
     }
