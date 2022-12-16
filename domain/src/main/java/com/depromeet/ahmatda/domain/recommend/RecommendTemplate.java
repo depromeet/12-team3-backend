@@ -1,16 +1,12 @@
-package com.depromeet.ahmatda.domain;
+package com.depromeet.ahmatda.domain.recommend;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.depromeet.ahmatda.domain.category.Category;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -26,4 +22,8 @@ public class RecommendTemplate {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "recommendTemplate")
+    private List<RecommendItem> recommendItems = new ArrayList<>();
+
 }

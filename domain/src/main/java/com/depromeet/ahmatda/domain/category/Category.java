@@ -1,7 +1,7 @@
 package com.depromeet.ahmatda.domain.category;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
-import com.depromeet.ahmatda.domain.RecommendTemplate;
+import com.depromeet.ahmatda.domain.recommend.RecommendTemplate;
 import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.user.User;
