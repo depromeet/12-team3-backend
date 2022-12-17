@@ -5,15 +5,13 @@ import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.RestResponse;
+import com.depromeet.ahmatda.recommend.dto.RecommendAddUserTemplateRequest;
 import com.depromeet.ahmatda.recommend.dto.RecommendTemplateResponse;
 import com.depromeet.ahmatda.recommend.service.RecommendService;
 import com.depromeet.ahmatda.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -24,8 +22,6 @@ import java.util.List;
 public class RecommendController {
 
     private final CategoryService categoryService;
-
-    private final UserService userService;
 
     private final RecommendService recommendService;
 
@@ -44,4 +40,11 @@ public class RecommendController {
         return ResponseEntity.ok().body(RestResponse.ok(recommendTemplateResponses));
     }
     // 유저템플릿에 추가(기존 템플릿에 추가, 새로운 템플릿으로 추가)
+
+    @PostMapping()
+    public ResponseEntity<RestResponse<Object>> UserTemplateAddRecommendItem(HttpServletRequest request, @RequestBody RecommendAddUserTemplateRequest recommendAddUserTemplateRequest) {
+        String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        recommendService.addUserTemplate(userToken, recommendAddUserTemplateRequest);
+        return ResponseEntity.ok(RestResponse.ok());
+    }
 }

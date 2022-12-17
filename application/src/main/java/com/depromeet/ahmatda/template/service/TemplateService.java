@@ -2,6 +2,7 @@ package com.depromeet.ahmatda.template.service;
 
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.user.User;
+import com.depromeet.ahmatda.template.dto.TemplateAddItemsRequest;
 import com.depromeet.ahmatda.template.dto.*;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public interface TemplateService {
     TemplateResponse modfiyTemplateNameAndIsPin(String userId, ModifyTemplateRequest modifyTemplateRequest);
 
     void templateAddItem(String userId, TemplateAddItemRequest templateAddItemRequest);
+
+    void templateAddItems(String userToken, TemplateAddItemsRequest templateAddItemsRequest);
 
     void templateDeleteItem(String userId, TemplateDeleteItemRequest templateDeleteItemRequest);
 

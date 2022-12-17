@@ -1,10 +1,17 @@
 package com.depromeet.ahmatda.recommend.service.impl;
 
 
+import com.depromeet.ahmatda.category.service.CategoryService;
+import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.recommend.RecommendTemplate;
 import com.depromeet.ahmatda.domain.recommend.adaptor.RecommendAdaptor;
+import com.depromeet.ahmatda.domain.user.User;
+import com.depromeet.ahmatda.recommend.dto.RecommendAddUserTemplateRequest;
 import com.depromeet.ahmatda.recommend.dto.RecommendTemplateResponse;
 import com.depromeet.ahmatda.recommend.service.RecommendService;
+import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
+import com.depromeet.ahmatda.template.dto.TemplateItemRequest;
+import com.depromeet.ahmatda.template.service.TemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +23,8 @@ import java.util.stream.Collectors;
 public class RecommendTemplateService implements RecommendService {
 
     private final RecommendAdaptor recommendAdaptor;
+    private final CategoryService categoryService;
+    private final TemplateService templateService;
 
     @Override
     public List<RecommendTemplateResponse> findByCategory_Id(Long categoryId) {
@@ -24,4 +33,38 @@ public class RecommendTemplateService implements RecommendService {
                 .map(RecommendTemplate -> RecommendTemplateResponse.createByEntity(RecommendTemplate))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void addUserTemplate(String userToken, RecommendAddUserTemplateRequest recommendAddUserTemplateRequest) {
+        User user = User.createUserWithUserToken(userToken);
+
+        if(recommendAddUserTemplateRequest.getCreateAllRequest() != null) {
+            Category category =  categoryService.createCategory(user, recommendAddUserTemplateRequest.getCreateAllRequest().getCategoryRequest());
+
+            List<TemplateItemRequest> items = recommendAddUserTemplateRequest.getCreateAllRequest().getCreateTemplateRequest().getItems().stream()
+                    .map(itemName ->
+                            TemplateItemRequest.builder()
+                                    .categoryId(category.getId())
+                                    .name(itemName)
+                                    .build()
+                    ).collect(Collectors.toList());
+
+            CreateTemplateRequest createTemplateRequest = CreateTemplateRequest.builder()
+                    .templateName(recommendAddUserTemplateRequest.getCreateAllRequest().getCreateTemplateRequest().getTemplateName())
+                    .categoryId(category.getId())
+                    .items(items)
+                    .build();
+            templateService.createUserTemplate(userToken, createTemplateRequest);
+        }
+
+        if(recommendAddUserTemplateRequest.getCreateTemplateRequest() != null) {
+            templateService.createUserTemplate(userToken, recommendAddUserTemplateRequest.getCreateTemplateRequest());
+        }
+
+        if(recommendAddUserTemplateRequest.getTemplateAddItemsRequest() != null) {
+            templateService.templateAddItems(userToken, recommendAddUserTemplateRequest.getTemplateAddItemsRequest());
+        }
+    }
+
+
 }
