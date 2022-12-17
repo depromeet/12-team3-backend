@@ -127,6 +127,7 @@ public class UserTemplateService implements TemplateService {
     }
 
     @Override
+    @Transactional
     public void templateAddItems(String userToken, TemplateAddItemsRequest templateAddItemsRequest) {
         Long templateId = templateAddItemsRequest.getUserTemplateId();
         Template template = templateAdaptor.getTemplateById(templateId)
