@@ -219,3 +219,10 @@ include::{snippets}/template-modfiy-item/response-body.adoc[]
 include::{snippets}/recommend-category/curl-request.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/recommend-category/response-body.adoc[]
+
+=== RecommendCategory - 추천템플릿 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/recommend-templates/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-templates/response-body.adoc[]

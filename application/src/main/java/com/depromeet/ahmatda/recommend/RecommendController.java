@@ -1,11 +1,13 @@
 package com.depromeet.ahmatda.recommend;
 
 
+import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.recommend.dto.RecommendTemplateResponse;
 import com.depromeet.ahmatda.recommend.service.RecommendService;
+import com.depromeet.ahmatda.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -21,6 +24,8 @@ import java.util.List;
 public class RecommendController {
 
     private final CategoryService categoryService;
+
+    private final UserService userService;
 
     private final RecommendService recommendService;
 
@@ -33,7 +38,8 @@ public class RecommendController {
     }
 
     @GetMapping(value = "/templates")
-    public ResponseEntity<RestResponse<List<RecommendTemplateResponse>>> getRecommendTemplates(@RequestParam("category") Long categoryId) {
+    public ResponseEntity<RestResponse<List<RecommendTemplateResponse>>> getRecommendTemplates(HttpServletRequest request, @RequestParam("category") Long categoryId) {
+        // 유저검증 필요
         List<RecommendTemplateResponse> recommendTemplateResponses = recommendService.findByCategory_Id(categoryId);
         return ResponseEntity.ok().body(RestResponse.ok(recommendTemplateResponses));
     }
