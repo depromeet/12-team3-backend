@@ -58,7 +58,21 @@ public class RecommendTemplateService implements RecommendService {
         }
 
         if(recommendAddUserTemplateRequest.getCreateTemplateRequest() != null) {
-            templateService.createUserTemplate(userToken, recommendAddUserTemplateRequest.getCreateTemplateRequest());
+            List<TemplateItemRequest> items = recommendAddUserTemplateRequest.getCreateTemplateRequest().getItems().stream()
+                    .map(itemName ->
+                            TemplateItemRequest.builder()
+                                    .categoryId(recommendAddUserTemplateRequest.getCreateTemplateRequest().getUserCategoryId())
+                                    .name(itemName)
+                                    .build()
+                    ).collect(Collectors.toList());
+
+            CreateTemplateRequest createTemplateRequest = CreateTemplateRequest.builder()
+                    .templateName(recommendAddUserTemplateRequest.getCreateTemplateRequest().getTemplateName())
+                    .items(items)
+                    .categoryId(recommendAddUserTemplateRequest.getCreateTemplateRequest().getUserCategoryId())
+                    .build();
+
+            templateService.createUserTemplate(userToken, createTemplateRequest);
         }
 
         if(recommendAddUserTemplateRequest.getTemplateAddItemsRequest() != null) {
