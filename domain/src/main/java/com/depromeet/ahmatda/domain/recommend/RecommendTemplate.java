@@ -2,6 +2,7 @@ package com.depromeet.ahmatda.domain.recommend;
 
 import javax.persistence.*;
 
+import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.category.Category;
 import lombok.Getter;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Entity
-public class RecommendTemplate {
+public class RecommendTemplate extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
