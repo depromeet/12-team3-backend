@@ -210,3 +210,12 @@ include::{snippets}/template-modfiy-item/request-fields.adoc[]
 include::{snippets}/template-modfiy-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-modfiy-item/response-body.adoc[]
+
+[[RecommendTemplate]]
+
+=== RecommendCategory - 추천카테고리 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/recommend-category/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-category/response-body.adoc[]

@@ -2,6 +2,8 @@ package com.depromeet.ahmatda.application.apidocs.document;
 
 import com.depromeet.ahmatda.category.CategoryController;
 import com.depromeet.ahmatda.category.service.CategoryService;
+import com.depromeet.ahmatda.recommend.RecommendController;
+import com.depromeet.ahmatda.recommend.service.RecommendService;
 import com.depromeet.ahmatda.template.TemplateController;
 import com.depromeet.ahmatda.template.service.TemplateService;
 import com.depromeet.ahmatda.user.UserController;
@@ -23,7 +25,8 @@ import org.springframework.test.web.servlet.MockMvc;
         CommonController.class,
         UserController.class,
         CategoryController.class,
-        TemplateController.class
+        TemplateController.class,
+        RecommendController.class
 })
 @AutoConfigureRestDocs
 @ActiveProfiles("test")
@@ -50,4 +53,7 @@ public abstract class ApiDocumentationTest {
 
     @MockBean
     protected TemplateService templateService;
+
+    @MockBean
+    protected RecommendService recommendService;
 }
