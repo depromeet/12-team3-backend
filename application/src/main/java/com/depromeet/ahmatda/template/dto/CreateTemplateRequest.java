@@ -8,12 +8,13 @@ import java.util.List;
 @Getter
 @Builder
 @EqualsAndHashCode
-@NoArgsConstructor(force = true)
+@NoArgsConstructor
 @AllArgsConstructor
 public class CreateTemplateRequest {
     private String templateName;
 
+    @NotNull(message = "카테고리를 확인해주세요.")
     private Long categoryId;
 
-    private final List<TemplateItemRequest> items;
+    private List<TemplateItemRequest> items;
 }

@@ -42,6 +42,7 @@ public class CategoryRequest {
     public Category modifyEntity(Category category) {
         return Category.builder()
                 .id(category.getId())
+                .user(category.getUser())
                 .name(this.name)
                 .type(this.type)
                 .emoji(this.emoji)
