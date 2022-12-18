@@ -54,18 +54,16 @@ public class Template extends BaseTimeEntity {
         return template;
     }
 
-    public static Template modifyTemplateName(Template template, String templateName) {
-        template.templateName = templateName;
-        return template;
-    }
-
-    public static Template modifyTemplateIsPIn(Template template, boolean isPin) {
-        template.isPin = isPin;
-        return template;
-    }
-
     //== 비지니스 로직 ==//
     public boolean authenticateUser(String userId) {
         return this.user.getUserToken().equals(userId);
+    }
+
+    public void modifyTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
+
+    public void modifyTemplateIsPIn(boolean isPin) {
+        this.isPin = isPin;
     }
 }

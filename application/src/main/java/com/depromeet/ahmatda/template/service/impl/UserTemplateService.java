@@ -101,14 +101,13 @@ public class UserTemplateService implements TemplateService {
 
         authenticateTemplate(userToken, template);
 
-        Template modifyTemplate;
         if (modifyTemplateRequest.getTemplateName() == null) {
-            modifyTemplate = Template.modifyTemplateIsPIn(template, modifyTemplateRequest.isPin());
+            template.modifyTemplateIsPIn(modifyTemplateRequest.isPin());
         } else {
-            modifyTemplate = Template.modifyTemplateName(template, modifyTemplateRequest.getTemplateName());
+            template.modifyTemplateName(modifyTemplateRequest.getTemplateName());
         }
 
-        return TemplateResponse.createByEntity(templateAdaptor.modifyTemplateNameAndIsPin(modifyTemplate));
+        return TemplateResponse.createByEntity(templateAdaptor.modifyTemplateNameAndIsPin(template));
     }
 
     @Override
