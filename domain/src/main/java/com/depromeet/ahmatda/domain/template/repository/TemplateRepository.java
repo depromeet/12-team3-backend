@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TemplateRepository extends JpaRepository<Template, Long> {
-    @Query(value = "select t from Template t" +
+    @Query(value = "select distinct t from Template t" +
             " join fetch t.user" +
             " join fetch t.items" +
             " where t.category.id = :categoryId and t.user.userToken = :userId")
