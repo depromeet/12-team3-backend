@@ -1,12 +1,18 @@
 package com.depromeet.ahmatda.template.dto;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Builder
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class TemplateItemRequest {
-    private final Long categoryId;
+    @NotNull(message = "카테고리를 확인해주세요.")
+    private Long categoryId;
 
-    private final String name;
+    @NotNull(message = "소지품명은 필수입니다.")
+    private String name;
 }

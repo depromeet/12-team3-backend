@@ -30,9 +30,6 @@ public class Item extends BaseTimeEntity {
     private String name;
 
     @Column
-    private Long alarmId;
-
-    @Column
     private boolean isTake;
 
     @Column
@@ -44,8 +41,6 @@ public class Item extends BaseTimeEntity {
         item.categoryId = categoryId;
         item.template = template;
         item.name = name;
-        //TODO : 알람 ID는 임의로 저장 추 후 변경
-        item.alarmId = 0L;
         item.isTake = false;
         item.isImportant = false;
         return item;
@@ -56,8 +51,6 @@ public class Item extends BaseTimeEntity {
         item.categoryId = categoryId;
         item.template = template;
         item.name = itemName;
-        //TODO : 알람 ID는 임의로 저장 추 후 변경
-        item.alarmId = 0L;
         item.isTake = false;
         item.isImportant = important;
         return item;
