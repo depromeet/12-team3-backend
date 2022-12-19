@@ -15,7 +15,6 @@ public class LoggingAspect {
 
     public static final String REQUEST = "REQUEST_Method::";
     public static final String REQUEST_PARAM = "REQUEST_PARAMETER::";
-    public static final String RESPONSE = "RESPONSE::";
     public static final String WHITE_SPACE = "  ";
 
     @Pointcut("execution (* com.depromeet.ahmatda..*.*Controller.*(..))")
