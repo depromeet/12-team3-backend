@@ -6,6 +6,7 @@ on:
     
 env:
   RESOURCE_PATH: ./application/src/main/resources/application-production.yml
+  FIREBASE_ACCOUNT_PATH: ./application/src/main/resources/firebase/fcm-account.json
   TEST_RESOURCE_PATH: ./application/src/test/resources/application-production.yml
   AWS_REGION: ap-northeast-2
   EB_ENVIRONMENT_NAME: 3Team-ahmatda-ENV
@@ -34,6 +35,17 @@ jobs:
         spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
         spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
         jpa.hibernate.ddl-auto: none
+
+    - name: Set FCM account json
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: ${{ env.FIREBASE_ACCOUNT_PATH }}
+      env:
+        private_key_id: ${{ secrets.FIREBASE_PRIVATE_KEY_ID }}
+        private_key: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+        client_emial: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+        client_id: ${{ secrets.FIREBASE_CLIENT_ID }}
+
 
     - name: Grant for Gradle
       run : chmod +x gradlew
@@ -89,6 +101,3 @@ jobs:
         deployment_package: ${{ env.EB_DEPLOYMENT_PACKAGE }}
         version_label: github-action-${{steps.current-time.outputs.formattedTime}}
         wait_for_environment_recovery: 90
-
-      
-      
