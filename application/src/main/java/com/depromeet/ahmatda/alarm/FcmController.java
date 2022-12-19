@@ -1,12 +1,14 @@
 package com.depromeet.ahmatda.alarm;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/alarm")
@@ -15,11 +17,8 @@ public class FcmController {
     private final FcmService fcmService;
 
     @GetMapping
-    public void hello() throws IOException {
-        FcmMessage.Notification notification = FcmMessage.Notification.builder()
-                .body("body")
-                .title("title")
-                .build();
-        fcmService.sendMessage(notification);
+    public void pushTest(String token) throws IOException {
+        log.info(token);
+        fcmService.sendMessage(token);
     }
 }
