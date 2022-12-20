@@ -90,7 +90,7 @@ public class RecommendControllerTest extends ApiDocumentationTest {
 
         given(recommendService.findByCategory_Id(categoryId)).willReturn(recommendTemplateResponses);
 
-        mockMvc.perform(get("/api/recommend/templates?category={categoryId}", categoryId).header(HttpHeader.USER_TOKEN, userId))
+        mockMvc.perform(get("/api/recommend/templates?category={categoryId}", categoryId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("recommend-templates",
