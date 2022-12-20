@@ -2,16 +2,19 @@ package com.depromeet.ahmatda.recommend.service.impl;
 
 
 import com.depromeet.ahmatda.category.service.CategoryService;
+import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.recommend.RecommendTemplate;
 import com.depromeet.ahmatda.domain.recommend.adaptor.RecommendAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.recommend.dto.RecommendAddUserTemplateRequest;
 import com.depromeet.ahmatda.recommend.dto.RecommendTemplateResponse;
+import com.depromeet.ahmatda.recommend.exception.RecommendException;
 import com.depromeet.ahmatda.recommend.service.RecommendService;
 import com.depromeet.ahmatda.template.dto.CreateTemplateRequest;
 import com.depromeet.ahmatda.template.dto.TemplateItemRequest;
 import com.depromeet.ahmatda.template.service.TemplateService;
+import com.depromeet.ahmatda.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,8 @@ public class RecommendTemplateService implements RecommendService {
     private final CategoryService categoryService;
     private final TemplateService templateService;
 
+    private final UserService userService;
+
     @Override
     public List<RecommendTemplateResponse> findByCategory_Id(Long categoryId) {
         List<RecommendTemplate> recommendTemplates = recommendAdaptor.findByCategory_Id(categoryId);
@@ -36,7 +41,9 @@ public class RecommendTemplateService implements RecommendService {
 
     @Override
     public void addUserTemplate(String userToken, RecommendAddUserTemplateRequest recommendAddUserTemplateRequest) {
-        User user = User.createUserWithUserToken(userToken);
+
+        User user = userService.getUserByToken(userToken)
+                .orElseThrow(() -> new RecommendException(ErrorCode.USER_NOT_FOUND));
 
         if(recommendAddUserTemplateRequest.getCreateAllRequest() != null) {
             Category category =  categoryService.createCategory(user, recommendAddUserTemplateRequest.getCreateAllRequest().getCategoryRequest());
@@ -54,7 +61,7 @@ public class RecommendTemplateService implements RecommendService {
                     .categoryId(category.getId())
                     .items(items)
                     .build();
-            templateService.createUserTemplate(userToken, createTemplateRequest);
+            templateService.createUserTemplate(user.getId(), createTemplateRequest);
         }
 
         if(recommendAddUserTemplateRequest.getCreateTemplateRequest() != null) {
@@ -72,11 +79,11 @@ public class RecommendTemplateService implements RecommendService {
                     .categoryId(recommendAddUserTemplateRequest.getCreateTemplateRequest().getUserCategoryId())
                     .build();
 
-            templateService.createUserTemplate(userToken, createTemplateRequest);
+            templateService.createUserTemplate(user.getId(), createTemplateRequest);
         }
 
         if(recommendAddUserTemplateRequest.getTemplateAddItemsRequest() != null) {
-            templateService.templateAddItems(userToken, recommendAddUserTemplateRequest.getTemplateAddItemsRequest());
+            templateService.templateAddItems(user.getUserToken(), recommendAddUserTemplateRequest.getTemplateAddItemsRequest());
         }
     }
 

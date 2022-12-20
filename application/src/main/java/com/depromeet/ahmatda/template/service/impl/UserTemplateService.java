@@ -68,11 +68,18 @@ public class UserTemplateService implements TemplateService {
         }
     }
 
-
     @Override
     @Transactional
     public void createUserTemplate(String userToken, CreateTemplateRequest createTemplateRequest) {
         User user = userAdaptor.findByUserToken(userToken)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.AUTHENTICATION_ERROR));
+        createWithUser(user, createTemplateRequest);
+    }
+
+    @Override
+    @Transactional
+    public void createUserTemplate(Long userId, CreateTemplateRequest createTemplateRequest) {
+        User user = userAdaptor.findUserById(userId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.AUTHENTICATION_ERROR));
         createWithUser(user, createTemplateRequest);
     }
@@ -134,11 +141,11 @@ public class UserTemplateService implements TemplateService {
 
         authenticateTemplate(userToken, template);
 
-        for(String itemName : templateAddItemsRequest.getItems()) {
-            Item item = Item.UserTemplateAddItem(templateAddItemsRequest.getUserCategoryId(), template,
-                    itemName, false);
-            itemAdaptor.createItem(item);
-        }
+        List<Item> items = templateAddItemsRequest.getItems().stream()
+                .map(itemName -> Item.UserTemplateAddItem(templateAddItemsRequest.getUserCategoryId(), template, itemName, false))
+                .collect(Collectors.toList());
+
+        itemAdaptor.createAllItem(items);
 
     }
 

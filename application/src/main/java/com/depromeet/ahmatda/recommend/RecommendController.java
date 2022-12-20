@@ -27,22 +27,20 @@ public class RecommendController {
 
     @GetMapping(value ="/category")
     public ResponseEntity<RestResponse<List<CategoryResponse>>> getRecommendCategories() {
-        //추천에 띄워줄 유저정보(임시) 추후 고민
-        final String userToken = "recommendUser";
-        final List<CategoryResponse> categoryResponses = categoryService.getCategoriesByUser(userToken);
+        //TODO: 추천카테고리 조회 기준 확립 필요
+        final List<CategoryResponse> categoryResponses = categoryService.getRecommendCategory();
         return ResponseEntity.ok().body(RestResponse.ok(categoryResponses));
     }
 
     @GetMapping(value = "/templates")
-    public ResponseEntity<RestResponse<List<RecommendTemplateResponse>>> getRecommendTemplates(HttpServletRequest request, @RequestParam("category") Long categoryId) {
-        // 유저검증 필요
+    public ResponseEntity<RestResponse<List<RecommendTemplateResponse>>> getRecommendTemplates(@RequestParam("category") Long categoryId) {
+        //TODO : 유저의 정보로 추천템플릿을 보여주는 로직필요
         List<RecommendTemplateResponse> recommendTemplateResponses = recommendService.findByCategory_Id(categoryId);
         return ResponseEntity.ok().body(RestResponse.ok(recommendTemplateResponses));
     }
-    // 유저템플릿에 추가(기존 템플릿에 추가, 새로운 템플릿으로 추가)
 
     @PostMapping()
-    public ResponseEntity<RestResponse<Object>> UserTemplateAddRecommendItem(HttpServletRequest request, @RequestBody RecommendAddUserTemplateRequest recommendAddUserTemplateRequest) {
+    public ResponseEntity<RestResponse<Object>> userTemplateAddRecommendItem(HttpServletRequest request, @RequestBody RecommendAddUserTemplateRequest recommendAddUserTemplateRequest) {
         String userToken = request.getHeader(HttpHeader.USER_TOKEN);
         recommendService.addUserTemplate(userToken, recommendAddUserTemplateRequest);
         return ResponseEntity.ok(RestResponse.ok());

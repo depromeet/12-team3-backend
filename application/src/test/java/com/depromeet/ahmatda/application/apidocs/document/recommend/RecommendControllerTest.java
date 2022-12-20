@@ -39,7 +39,6 @@ public class RecommendControllerTest extends ApiDocumentationTest {
 
     @Test
     void 추천카테고리_조회() throws Exception {
-        String userToken = "recommendUser";
         List<CategoryResponse> categoryResponses = List.of(
                 CategoryResponse.builder()
                         .id(1L).emoji(AhmatdaEmoji.BOWLING)
@@ -48,7 +47,7 @@ public class RecommendControllerTest extends ApiDocumentationTest {
                         .id(2L).emoji(AhmatdaEmoji.EMPTY_CARD)
                         .type(CategoryType.EXERCISE).name("HEALTH").build());
 
-        given(categoryService.getCategoriesByUser(userToken)).willReturn(categoryResponses);
+        given(categoryService.getRecommendCategory()).willReturn(categoryResponses);
 
         mockMvc.perform(get("/api/recommend/category"))
                 .andExpect(status().isOk())
