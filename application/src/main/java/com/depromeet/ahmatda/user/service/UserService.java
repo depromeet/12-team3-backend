@@ -9,5 +9,5 @@ public interface UserService {
 
     UserRegisterCode checkUser(UserToken userToken);
     UserToken createUser(SignUpRequest request);
-    void updateFcmToken(final String userToken, final FcmToken token);
+    void renewFcmToken(final String userToken, final FcmToken token);
 }

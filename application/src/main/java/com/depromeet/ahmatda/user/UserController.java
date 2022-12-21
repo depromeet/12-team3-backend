@@ -39,9 +39,9 @@ public class UserController {
     }
 
     @PostMapping("/token")
-    public ResponseEntity<RestResponse<Object>> updateFcmToken(@Valid @RequestBody FcmToken fcmToken, HttpServletRequest request) {
+    public ResponseEntity<RestResponse<Object>> renewFcmToken(@Valid @RequestBody FcmToken fcmToken, HttpServletRequest request) {
         final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
-        userService.updateFcmToken(userToken, fcmToken);
+        userService.renewFcmToken(userToken, fcmToken);
         return ResponseEntity.ok().body(RestResponse.ok());
     }
 }

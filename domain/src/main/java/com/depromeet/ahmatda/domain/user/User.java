@@ -37,7 +37,7 @@ public class User extends BaseTimeEntity {
                 .build();
     }
 
-    public void updateFcmToken(final String fcmToken) {
+    public void renewFcmToken(final String fcmToken) {
         this.fcmToken = fcmToken;
     }
 }
