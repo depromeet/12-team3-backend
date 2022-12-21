@@ -48,7 +48,7 @@ public class RecommendTemplateService implements RecommendService {
         if(recommendAddUserTemplateRequest.getCreateAllRequest() != null) {
             Category category =  categoryService.createCategory(user, recommendAddUserTemplateRequest.getCreateAllRequest().getCategoryRequest());
 
-            List<TemplateItemRequest> items = recommendAddUserTemplateRequest.getCreateAllNewItems().stream()
+            List<TemplateItemRequest> items = recommendAddUserTemplateRequest.getCreateTemplateRequest().getItems().stream()
                     .map(itemName ->
                             TemplateItemRequest.builder()
                                     .categoryId(category.getId())
