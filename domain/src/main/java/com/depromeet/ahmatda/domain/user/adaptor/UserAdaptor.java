@@ -22,4 +22,8 @@ public class UserAdaptor {
     public Optional<User> findByUserToken(String userToken) {
         return userRepository.findByUserToken(userToken);
     }
+
+    public void updateFcmToken(final User user) {
+        userRepository.save(user);
+    }
 }
