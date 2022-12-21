@@ -1,7 +1,6 @@
 package com.depromeet.ahmatda.template.service.impl;
 
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
-import com.depromeet.ahmatda.category.exception.CategoryUserAuthenticationException;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.item.Item;
 import com.depromeet.ahmatda.domain.category.Category;
@@ -11,6 +10,7 @@ import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.template.adaptor.TemplateAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
+import com.depromeet.ahmatda.template.dto.TemplateAddItemsRequest;
 import com.depromeet.ahmatda.template.dto.*;
 import com.depromeet.ahmatda.template.exception.TemplateNotExistException;
 import com.depromeet.ahmatda.template.exception.TemplateUserAuthenticationException;
@@ -68,11 +68,18 @@ public class UserTemplateService implements TemplateService {
         }
     }
 
-
     @Override
     @Transactional
     public void createUserTemplate(String userToken, CreateTemplateRequest createTemplateRequest) {
         User user = userAdaptor.findByUserToken(userToken)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.AUTHENTICATION_ERROR));
+        createWithUser(user, createTemplateRequest);
+    }
+
+    @Override
+    @Transactional
+    public void createUserTemplate(Long userId, CreateTemplateRequest createTemplateRequest) {
+        User user = userAdaptor.findUserById(userId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.AUTHENTICATION_ERROR));
         createWithUser(user, createTemplateRequest);
     }
@@ -123,6 +130,23 @@ public class UserTemplateService implements TemplateService {
                 templateAddItemRequest.getItemName(), templateAddItemRequest.isImportant());
 
         itemAdaptor.createItem(item);
+    }
+
+    @Override
+    @Transactional
+    public void templateAddItems(String userToken, TemplateAddItemsRequest templateAddItemsRequest) {
+        Long templateId = templateAddItemsRequest.getUserTemplateId();
+        Template template = templateAdaptor.getTemplateById(templateId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
+
+        authenticateTemplate(userToken, template);
+
+        List<Item> items = templateAddItemsRequest.getItems().stream()
+                .map(itemName -> Item.UserTemplateAddItem(templateAddItemsRequest.getUserCategoryId(), template, itemName, false))
+                .collect(Collectors.toList());
+
+        itemAdaptor.createAllItem(items);
+
     }
 
     @Override

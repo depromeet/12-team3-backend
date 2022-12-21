@@ -21,4 +21,6 @@ public interface CategoryService {
     CategoryResponse modifyCategory(String userToken, Long categoryId, CategoryRequest categoryRequest);
 
     void removeCategory(String userToken, Long categoryId);
+
+    List<CategoryResponse> getRecommendCategory();
 }

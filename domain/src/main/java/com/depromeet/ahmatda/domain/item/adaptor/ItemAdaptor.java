@@ -5,6 +5,7 @@ import com.depromeet.ahmatda.domain.item.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -29,4 +30,7 @@ public class ItemAdaptor {
         itemRepository.save(item);
     }
 
+    public void createAllItem(List<Item> items) {
+        itemRepository.saveAll(items);
+    }
 }

@@ -22,4 +22,9 @@ public class UserAdaptor {
     public Optional<User> findByUserToken(String userToken) {
         return userRepository.findByUserToken(userToken);
     }
+
+    public Optional<User> findUserById(Long userId) {
+        return userRepository.findUserById(userId);
+    }
+
 }
