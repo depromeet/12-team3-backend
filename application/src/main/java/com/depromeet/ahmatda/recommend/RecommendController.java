@@ -35,11 +35,11 @@ public class RecommendController {
     @GetMapping(value = "/templates")
     public ResponseEntity<RestResponse<List<RecommendTemplateResponse>>> getRecommendTemplates(@RequestParam("category") Long categoryId) {
         //TODO : 유저의 정보로 추천템플릿을 보여주는 로직필요
-        List<RecommendTemplateResponse> recommendTemplateResponses = recommendService.findByCategory_Id(categoryId);
+        List<RecommendTemplateResponse> recommendTemplateResponses = recommendService.findByCategoryId(categoryId);
         return ResponseEntity.ok().body(RestResponse.ok(recommendTemplateResponses));
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<RestResponse<Object>> userTemplateAddRecommendItem(HttpServletRequest request, @RequestBody RecommendAddUserTemplateRequest recommendAddUserTemplateRequest) {
         String userToken = request.getHeader(HttpHeader.USER_TOKEN);
         recommendService.addUserTemplate(userToken, recommendAddUserTemplateRequest);

@@ -32,7 +32,7 @@ public class RecommendTemplateService implements RecommendService {
     private final UserService userService;
 
     @Override
-    public List<RecommendTemplateResponse> findByCategory_Id(Long categoryId) {
+    public List<RecommendTemplateResponse> findByCategoryId(Long categoryId) {
         List<RecommendTemplate> recommendTemplates = recommendAdaptor.findByCategory_Id(categoryId);
         return recommendTemplates.stream()
                 .map(RecommendTemplate -> RecommendTemplateResponse.createByEntity(RecommendTemplate))
@@ -48,7 +48,7 @@ public class RecommendTemplateService implements RecommendService {
         if(recommendAddUserTemplateRequest.getCreateAllRequest() != null) {
             Category category =  categoryService.createCategory(user, recommendAddUserTemplateRequest.getCreateAllRequest().getCategoryRequest());
 
-            List<TemplateItemRequest> items = recommendAddUserTemplateRequest.getCreateAllRequest().getCreateTemplateRequest().getItems().stream()
+            List<TemplateItemRequest> items = recommendAddUserTemplateRequest.getCreateAllNewItems().stream()
                     .map(itemName ->
                             TemplateItemRequest.builder()
                                     .categoryId(category.getId())

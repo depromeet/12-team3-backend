@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RecommendService {
 
-    List<RecommendTemplateResponse> findByCategory_Id(Long categoryId);
+    List<RecommendTemplateResponse> findByCategoryId(Long categoryId);
 
     void addUserTemplate(String userToken, RecommendAddUserTemplateRequest recommendAddUserTemplateRequest);
 }

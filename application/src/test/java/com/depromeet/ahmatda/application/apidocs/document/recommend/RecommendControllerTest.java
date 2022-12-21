@@ -88,17 +88,15 @@ public class RecommendControllerTest extends ApiDocumentationTest {
                         .templateName("일상에서 중요한거").items(items)
                         .build());
 
-        given(recommendService.findByCategory_Id(categoryId)).willReturn(recommendTemplateResponses);
+        given(recommendService.findByCategoryId(categoryId)).willReturn(recommendTemplateResponses);
 
         mockMvc.perform(get("/api/recommend/templates?category={categoryId}", categoryId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("recommend-templates",
                         getDocumentRequest(),
-                        getDocumentResponse(),
-                        requestHeaders(
-                                headerWithName("ahmatda-user-token").description("유저 UUID")
-                        )));
+                        getDocumentResponse()
+                ));
     }
 
     @Test
