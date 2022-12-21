@@ -1,14 +1,15 @@
 package com.depromeet.ahmatda.user.token;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
-
-import javax.validation.constraints.NotBlank;
+import lombok.NoArgsConstructor;
 
 @Getter
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class FcmToken {
 
-    @NotBlank(message = "FCM 토큰은 필수입니다.")
     private String fcmToken;
+
+
 }
