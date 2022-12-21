@@ -60,8 +60,8 @@ jobs:
         title: 테스트 커버리지 리포트
         paths: ${{ github.workspace }}/application/build/reports/jacoco/test/jacocoTestReport.xml
         token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 20
-          min-coverage-changed-files: 20
+        min-coverage-overall: 20
+        min-coverage-changed-files: 20
     
     - name: Get current time
       uses: josStorer/get-current-time@v2.0.2
