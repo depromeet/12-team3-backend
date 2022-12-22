@@ -50,6 +50,8 @@ include::{snippets}/sign-up-onboarding/request-fields.adoc[]
 === FCM TOKEN 갱신
 ==== curl-request
 include::{snippets}/fcm-token-update/curl-request.adoc[]
+==== Request Header
+include::{snippets}/fcm-token-update/request-headers.adoc[]
 ==== 요청 바디
 include::{snippets}/fcm-token-update/request-body.adoc[]
 include::{snippets}/fcm-token-update/request-fields.adoc[]
