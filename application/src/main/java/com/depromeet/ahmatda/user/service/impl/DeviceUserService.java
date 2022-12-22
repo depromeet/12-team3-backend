@@ -49,11 +49,12 @@ public class DeviceUserService implements UserService {
     @Override
     public void renewFcmToken(final String userToken, final FcmToken fcmToken) {
         final User user = userAdaptor.findByUserToken(userToken)
-                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+            .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
         user.renewFcmToken(fcmToken.getFcmToken());
 
         userAdaptor.renewFcmToken(user);
+    }
 
     public Optional<User> getUserByToken(String userToken) {
         return userAdaptor.findByUserToken(userToken);
