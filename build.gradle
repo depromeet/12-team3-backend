@@ -41,10 +41,6 @@ subprojects {
         finalizedBy 'jacocoTestReport'
     }
 
-    jacoco {
-        toolVersion = '0.8.5'
-    }
-
     jacocoTestReport {
         reports {
             html.enabled true
