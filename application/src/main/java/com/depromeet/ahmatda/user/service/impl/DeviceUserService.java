@@ -1,11 +1,14 @@
 package com.depromeet.ahmatda.user.service.impl;
 
+import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
+import com.depromeet.ahmatda.exception.BusinessException;
 import com.depromeet.ahmatda.onboard.OnboardingService;
 import com.depromeet.ahmatda.user.UserRegisterCode;
 import com.depromeet.ahmatda.user.dto.SignUpRequest;
 import com.depromeet.ahmatda.user.service.UserService;
+import com.depromeet.ahmatda.user.token.FcmToken;
 import com.depromeet.ahmatda.user.token.UserToken;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,6 +47,14 @@ public class DeviceUserService implements UserService {
     }
 
     @Override
+    public void renewFcmToken(final String userToken, final FcmToken fcmToken) {
+        final User user = userAdaptor.findByUserToken(userToken)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+
+        user.renewFcmToken(fcmToken.getFcmToken());
+
+        userAdaptor.renewFcmToken(user);
+
     public Optional<User> getUserByToken(String userToken) {
         return userAdaptor.findByUserToken(userToken);
     }

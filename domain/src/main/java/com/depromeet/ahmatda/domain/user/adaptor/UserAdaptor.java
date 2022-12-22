@@ -23,8 +23,11 @@ public class UserAdaptor {
         return userRepository.findByUserToken(userToken);
     }
 
+    public void renewFcmToken(final User user) {
+        userRepository.save(user);
+    }
+  
     public Optional<User> findUserById(Long userId) {
         return userRepository.findUserById(userId);
     }
-
 }

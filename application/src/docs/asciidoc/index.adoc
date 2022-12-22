@@ -47,6 +47,13 @@ include::{snippets}/sign-up-onboarding/curl-request.adoc[]
 include::{snippets}/sign-up-onboarding/request-body.adoc[]
 include::{snippets}/sign-up-onboarding/request-fields.adoc[]
 
+=== FCM TOKEN 갱신
+==== curl-request
+include::{snippets}/fcm-token-update/curl-request.adoc[]
+==== 요청 바디
+include::{snippets}/fcm-token-update/request-body.adoc[]
+include::{snippets}/fcm-token-update/request-fields.adoc[]
+
 [[Category]]
 === Category - 전체 조회
 ==== Method : Get
