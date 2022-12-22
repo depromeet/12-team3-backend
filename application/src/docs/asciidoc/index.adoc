@@ -217,3 +217,40 @@ include::{snippets}/template-modfiy-item/request-fields.adoc[]
 include::{snippets}/template-modfiy-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-modfiy-item/response-body.adoc[]
+
+[[RecommendTemplate]]
+
+=== RecommendCategory - 추천카테고리 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/recommend-category/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-category/response-body.adoc[]
+
+=== RecommendCategory - 추천템플릿 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/recommend-templates/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-templates/response-body.adoc[]
+
+=== RecommendCategory - 추천템플릿 새로운카테고리에 저장
+==== Method : POST
+==== curl-request
+include::{snippets}/recommend-create-category/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-create-category/response-body.adoc[]
+
+=== RecommendCategory - 추천소지품 유저템플릿에 저장
+==== Method : POST
+==== curl-request
+include::{snippets}/recommend-add-user-template-add-items/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-add-user-template-add-items/response-body.adoc[]
+
+=== RecommendCategory - 추천템플릿 유저템플릿에 저장
+==== Method : POST
+==== curl-request
+include::{snippets}/recommend-create-template/curl-request.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-create-template/response-body.adoc[]

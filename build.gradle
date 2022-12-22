@@ -1,9 +1,9 @@
 plugins {
-	id 'java'
-	id 'java-library'
-	id 'org.springframework.boot' version '2.7.4'
-	id 'io.spring.dependency-management' version '1.1.0'
-	id 'jacoco'
+    id 'java'
+    id 'java-library'
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'jacoco'
 }
 
 group = 'com.depromeet'
@@ -11,88 +11,96 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 bootJar {
-	mainClass = 'com.depromeet.ahmatda.Application'
+    mainClass = 'com.depromeet.ahmatda.Application'
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
     gradlePluginPortal()
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 subprojects {
-	apply plugin: 'java'
-	apply plugin: 'java-library'
-	apply plugin: 'org.springframework.boot'
-	apply plugin: 'io.spring.dependency-management'
-	apply plugin: 'jacoco'
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'jacoco'
 
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 
-	dependencies {
-		compileOnly 'org.projectlombok:lombok'
-		annotationProcessor 'org.projectlombok:lombok'
-		developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    test {
+        useJUnitPlatform()
+        finalizedBy 'jacocoTestReport'
+    }
 
-		testImplementation 'org.projectlombok:lombok'
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
-		testAnnotationProcessor 'org.projectlombok:lombok'
-	}
-}
+    jacocoTestReport {
+        reports {
+            html.enabled true
+            xml.enabled true
+        }
 
-jacocoTestCoverageVerification {
-	violationRules {
-		rule {
-			// 'element'가 없으면 프로젝트의 전체 파일을 합친 값을 기준으로 한다.
-			limit {
-				// 'counter'를 지정하지 않으면 default는 'INSTRUCTION'
-				// 'value'를 지정하지 않으면 default는 'COVEREDRATIO'
-				minimum = 0.30
-			}
-		}
+        finalizedBy 'jacocoTestCoverageVerification'
+    }
 
-		rule {
-			enabled = true
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                // 'element'가 없으면 프로젝트의 전체 파일을 합친 값을 기준으로 한다.
+                limit {
+                    // 'counter'를 지정하지 않으면 default는 'INSTRUCTION'
+                    // 'value'를 지정하지 않으면 default는 'COVEREDRATIO'
+                    minimum = 0.3
+                }
+            }
 
-			// 룰을 체크할 단위는 클래스 단위
-			element = 'CLASS'
+            rule {
+                enabled = true
 
-			// 브랜치 커버리지를 최소한 90% 만족시켜야 한다.
-			limit {
-				counter = 'BRANCH'
-				value = 'COVEREDRATIO'
-				minimum = 0.90
-			}
+                // 룰을 체크할 단위는 클래스 단위
+                element = 'CLASS'
 
-			// 라인 커버리지를 최소한 80% 만족시켜야 한다.
-			limit {
-				counter = 'LINE'
-				value = 'COVEREDRATIO'
-				minimum = 0.80
-			}
+                // 브랜치 커버리지를 최소한 0% 만족시켜야 한다.
+                limit {
+                    counter = 'BRANCH'
+                    value = 'COVEREDRATIO'
+                    minimum = 0
+                }
 
-			// 빈 줄을 제외한 코드의 라인수를 최대 200라인으로 제한한다.
-			limit {
-				counter = 'LINE'
-				value = 'TOTALCOUNT'
-				maximum = 200
-			}
+                // 라인 커버리지를 최소한 0% 만족시켜야 한다.
+                limit {
+                    counter = 'LINE'
+                    value = 'COVEREDRATIO'
+                    minimum = 0
+                }
 
-			// 커버리지 체크를 제외할 클래스들
-			excludes = [
-//                    '*.test.*',
-			]
-		}
-	}
+                // 빈 줄을 제외한 코드의 라인수를 최대 200라인으로 제한한다.
+                limit {
+                    counter = 'LINE'
+                    value = 'TOTALCOUNT'
+                    maximum = 200
+                }
+
+                // 커버리지 체크를 제외할 클래스들
+                excludes = ['*.test.*']
+            }
+        }
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+        testImplementation 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+    }
 }
