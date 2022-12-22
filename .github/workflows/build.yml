@@ -59,6 +59,16 @@ jobs:
         cd ${{ github.workspace }}
         pwd
         ls -a .
+        cd application
+        ls -a .
+        cd build
+        ls -a .
+        cd reports
+        ls -a .
+        cd jacoco
+        ls -a .
+        cd test
+        ls -a .
       
     - name: jacoco report
       id: jacoco
