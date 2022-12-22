@@ -52,6 +52,16 @@ jobs:
       
     - name: Build Gradle
       run: ./gradlew clean build
+
+    - name: jacoco report
+      id: jacoco
+      uses: madrapps/jacoco-report@v1.3
+      with:
+        title: 테스트 커버리지 리포트
+        paths: ${{ github.workspace }}/application/build/reports/jacoco/test/jacocoTestReport.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
+        min-coverage-overall: 20
+        min-coverage-changed-files: 20
     
     - name: Get current time
       uses: josStorer/get-current-time@v2.0.2
