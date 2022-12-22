@@ -52,24 +52,7 @@ jobs:
       
     - name: Build Gradle
       run: ./gradlew clean build
-      
-    - name: check jacocoReport
-      shell: bash
-      run: |
-        cd ${{ github.workspace }}
-        pwd
-        ls -a .
-        cd application
-        ls -a .
-        cd build
-        ls -a .
-        cd reports
-        ls -a .
-        cd jacoco
-        ls -a .
-        cd test
-        ls -a .
-      
+    
     - name: jacoco report
       id: jacoco
       uses: madrapps/jacoco-report@v1.3
