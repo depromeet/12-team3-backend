@@ -45,16 +45,6 @@ jobs:
         private_key: ${{ secrets.FIREBASE_PRIVATE_KEY }}
         client_email: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
         client_id: ${{ secrets.FIREBASE_CLIENT_ID }}
-    
-    - name: check fcm account
-      shell: bash
-      run: |
-        cd ./application/src/main/resources/firebase
-        cat fcm-account.json
-        echo "${{ secrets.FIREBASE_PRIVATE_KEY_ID }}"
-        echo "${{ secrets.FIREBASE_PRIVATE_KEY }}"
-        echo "${{ secrets.FIREBASE_CLIENT_EMAIL }}"
-        echo "${{ secrets.FIREBASE_CLIENT_ID }}"
         
     - name: Grant for Gradle
       run : chmod +x gradlew
