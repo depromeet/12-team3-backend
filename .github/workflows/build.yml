@@ -51,10 +51,10 @@ jobs:
       run: |
         cd ./application/src/main/resources/firebase
         cat fcm-account.json
-        cat ${{ secrets.FIREBASE_PRIVATE_KEY_ID }}
-        cat ${{ secrets.FIREBASE_PRIVATE_KEY }}
-        cat ${{ secrets.FIREBASE_CLIENT_EMAIL }}
-        cat ${{ secrets.FIREBASE_CLIENT_ID }}
+        ${{ secrets.FIREBASE_PRIVATE_KEY_ID }}
+        ${{ secrets.FIREBASE_PRIVATE_KEY }}
+        ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+        ${{ secrets.FIREBASE_CLIENT_ID }}
         
     - name: Grant for Gradle
       run : chmod +x gradlew
