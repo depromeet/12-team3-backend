@@ -43,15 +43,6 @@ public class FcmService {
     private String getAccessToken() throws IOException {
         final String fcmAccountPath = "firebase/fcm-account.json";
 
-        try {
-            final GoogleCredentials googleCredentials = GoogleCredentials
-                .fromStream(new ClassPathResource(fcmAccountPath).getInputStream())
-                .createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
-            googleCredentials.refreshIfExpired();
-            return googleCredentials.getAccessToken().getTokenValue();
-        } catch (Exception e) {
-            log.info(String.valueOf(e));
-        }
         final GoogleCredentials googleCredentials = GoogleCredentials
             .fromStream(new ClassPathResource(fcmAccountPath).getInputStream())
             .createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
