@@ -44,8 +44,8 @@ public class FcmService {
         final String fcmAccountPath = "firebase/fcm-account.json";
 
         final GoogleCredentials googleCredentials = GoogleCredentials
-                .fromStream(new ClassPathResource(fcmAccountPath).getInputStream())
-                .createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
+            .fromStream(new ClassPathResource(fcmAccountPath).getInputStream())
+            .createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
         googleCredentials.refreshIfExpired();
         return googleCredentials.getAccessToken().getTokenValue();
     }
