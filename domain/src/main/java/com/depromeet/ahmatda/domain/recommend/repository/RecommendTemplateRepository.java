@@ -13,5 +13,5 @@ public interface RecommendTemplateRepository extends JpaRepository<RecommendTemp
     @Query(value = "select t from RecommendTemplate t" +
             " join fetch t.recommendItems" +
             " where t.category.id = :categoryId")
-    List<RecommendTemplate> findByCategory_Id(Long categoryId);
+    List<RecommendTemplate> findByCategoryId(Long categoryId);
 }

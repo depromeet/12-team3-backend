@@ -33,7 +33,7 @@ public class RecommendTemplateService implements RecommendService {
 
     @Override
     public List<RecommendTemplateResponse> findByCategoryId(Long categoryId) {
-        List<RecommendTemplate> recommendTemplates = recommendAdaptor.findByCategory_Id(categoryId);
+        List<RecommendTemplate> recommendTemplates = recommendAdaptor.findByCategoryId(categoryId);
         return recommendTemplates.stream()
                 .map(RecommendTemplate -> RecommendTemplateResponse.createByEntity(RecommendTemplate))
                 .collect(Collectors.toList());

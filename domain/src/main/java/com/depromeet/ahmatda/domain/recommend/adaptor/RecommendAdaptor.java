@@ -15,7 +15,7 @@ public class RecommendAdaptor {
     private final RecommendTemplateRepository recommendTemplateRepository;
     private final RecommendItemRepository recommendItemRepository;
 
-    public List<RecommendTemplate> findByCategory_Id(Long categoryId){
-        return recommendTemplateRepository.findByCategory_Id(categoryId);
+    public List<RecommendTemplate> findByCategoryId(Long categoryId){
+        return recommendTemplateRepository.findByCategoryId(categoryId);
     }
 }
