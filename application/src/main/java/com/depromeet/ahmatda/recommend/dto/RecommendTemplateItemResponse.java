@@ -20,10 +20,9 @@ public class RecommendTemplateItemResponse {
     public static RecommendTemplateItemResponse from(RecommendItem recommendItem) {
         return RecommendTemplateItemResponse.builder()
                 .id(recommendItem.getId())
-                .categoryId(recommendItem.getCategoryId())
+                .categoryId(recommendItem.getCategory().getId())
                 .recommendTemplateId(recommendItem.getRecommendTemplate().getId())
                 .name(recommendItem.getItemName())
                 .build();
     }
-
 }

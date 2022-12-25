@@ -1,6 +1,7 @@
 package com.depromeet.ahmatda.domain.recommend;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
+import com.depromeet.ahmatda.domain.category.Category;
 import com.depromeet.ahmatda.domain.template.Template;
 import lombok.Getter;
 
@@ -20,8 +21,9 @@ public class RecommendItem extends BaseTimeEntity {
     @JoinColumn(name = "recommend_template_id")
     private RecommendTemplate recommendTemplate;
 
-    @Column
-    private Long categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Column
     private String itemName;

@@ -1,13 +1,16 @@
 package com.depromeet.ahmatda.recommend.service.impl;
 
 
+import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.category.Category;
+import com.depromeet.ahmatda.domain.recommend.RecommendItem;
 import com.depromeet.ahmatda.domain.recommend.RecommendTemplate;
 import com.depromeet.ahmatda.domain.recommend.adaptor.RecommendAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.recommend.dto.RecommendAddUserTemplateRequest;
+import com.depromeet.ahmatda.recommend.dto.RecommendItemResponse;
 import com.depromeet.ahmatda.recommend.dto.RecommendTemplateResponse;
 import com.depromeet.ahmatda.recommend.exception.RecommendException;
 import com.depromeet.ahmatda.recommend.service.RecommendService;
@@ -87,5 +90,11 @@ public class RecommendTemplateService implements RecommendService {
         }
     }
 
+    @Override
+    public RecommendItemResponse findByRecommendItems(Long categoryId) {
+        CategoryResponse categoryResponse = categoryService.getCategoryById(categoryId);
+        List<RecommendItem> recommendItems = recommendAdaptor.findByItemsCategoryType(categoryResponse.getType());
+        return RecommendItemResponse.from(recommendItems);
+    }
 
 }
