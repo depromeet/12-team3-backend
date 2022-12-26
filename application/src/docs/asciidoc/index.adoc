@@ -222,6 +222,15 @@ include::{snippets}/template-modfiy-item/response-body.adoc[]
 
 [[RecommendTemplate]]
 
+=== RecommendCategory - 추천소지품 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/recommend-items/curl-request.adoc[]
+include::{snippets}/recommend-items/request-parameters.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/recommend-items/response-body.adoc[]
+include::{snippets}/recommend-items/response-fields.adoc[]
+
 === RecommendCategory - 추천카테고리 조회
 ==== Method : GET
 ==== curl-request
@@ -233,6 +242,7 @@ include::{snippets}/recommend-category/response-body.adoc[]
 ==== Method : GET
 ==== curl-request
 include::{snippets}/recommend-templates/curl-request.adoc[]
+include::{snippets}/recommend-templates/request-parameters.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/recommend-templates/response-body.adoc[]
 

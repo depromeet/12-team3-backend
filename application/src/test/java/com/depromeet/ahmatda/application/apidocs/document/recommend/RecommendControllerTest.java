@@ -31,12 +31,36 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class RecommendControllerTest extends ApiDocumentationTest {
 
+    @Test
+    void 추천소지품_조회() throws Exception {
+        Long userCategoryId = 1L;
+        List<String> items = List.of("지갑", "렌즈", "핸드폰", "노트북");
+        RecommendItemResponse recommendItemResponse = RecommendItemResponse.builder()
+                .items(items)
+                .build();
+
+        given(recommendService.findByRecommendItems(userCategoryId)).willReturn(recommendItemResponse);
+
+        mockMvc.perform(get("/api/recommend/items?category={categoryId}", userCategoryId))
+                .andExpect(status().isOk())
+                .andDo(document("recommend-items",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestParameters(
+                                parameterWithName("category").description("유저 카테고리 ID")
+                        ),
+                        responseFields(
+                                fieldWithPath("result.items").type(JsonFieldType.ARRAY).description("추천소지품항목"),
+                                fieldWithPath("error").type(JsonFieldType.NULL).description("에러"))))
+                .andDo(print());
+    }
     @Test
     void 추천카테고리_조회() throws Exception {
         List<CategoryResponse> categoryResponses = List.of(
@@ -95,7 +119,10 @@ public class RecommendControllerTest extends ApiDocumentationTest {
                 .andDo(print())
                 .andDo(document("recommend-templates",
                         getDocumentRequest(),
-                        getDocumentResponse()
+                        getDocumentResponse(),
+                        requestParameters(
+                                parameterWithName("category").description("추천 카테고리 ID")
+                        )
                 ));
     }
 
