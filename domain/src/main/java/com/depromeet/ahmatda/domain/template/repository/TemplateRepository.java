@@ -2,6 +2,7 @@ package com.depromeet.ahmatda.domain.template.repository;
 
 import com.depromeet.ahmatda.domain.template.Template;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,8 @@ public interface TemplateRepository extends JpaRepository<Template, Long> {
             " join fetch t.items" +
             " where t.category.id = :categoryId and t.user.userToken = :userId")
     List<Template> findByCategoryAndUserId(Long categoryId, String userId);
+
+    @Modifying
+    @Query("update Template t set t.isPin = false where t.category.id = :categoryId")
+    int templatesAllOffPin(Long categoryId);
 }

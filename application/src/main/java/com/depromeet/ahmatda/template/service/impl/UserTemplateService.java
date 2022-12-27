@@ -109,6 +109,7 @@ public class UserTemplateService implements TemplateService {
         authenticateTemplate(userToken, template);
 
         if (modifyTemplateRequest.getTemplateName() == null) {
+            templatesAllOffPin(modifyTemplateRequest.getCategoryId(), modifyTemplateRequest.isPin());
             template.modifyTemplateIsPIn(modifyTemplateRequest.isPin());
         } else {
             template.modifyTemplateName(modifyTemplateRequest.getTemplateName());
@@ -191,6 +192,12 @@ public class UserTemplateService implements TemplateService {
 
         if (!isAuthenticated) {
             throw new TemplateUserAuthenticationException(ErrorCode.USER_NOT_FOUND);
+        }
+    }
+
+    private void templatesAllOffPin(Long categoryId, boolean isPin) {
+        if (isPin == true) {
+            templateAdaptor.templatesAllOffPin(categoryId);
         }
     }
 }
