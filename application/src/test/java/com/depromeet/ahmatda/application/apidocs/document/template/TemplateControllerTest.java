@@ -299,7 +299,48 @@ public class TemplateControllerTest extends ApiDocumentationTest {
     }
 
     @Test
-    void 유저템플릿의_소지품단건수정() throws Exception {
+    void 유저템플릿의_소지품챙김_수정() throws Exception {
+        //given
+        User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+
+        TemplateItemModfiyRequest templateItemModfiyRequest = TemplateItemModfiyRequest.builder()
+                .templateId(1L)
+                .itemId(6L)
+                .isTake(true)
+                .build();
+
+        String request = objectMapper.writeValueAsString(templateItemModfiyRequest);
+
+        //when
+        ResultActions result = mockMvc.perform(
+                patch("/api/template/item")
+                        .header(HttpHeader.USER_TOKEN, userWithDeviceId.getUserToken())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        //then
+        result.andExpect(status().isOk())
+                .andDo(document("template-modfiy-pin-item",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestFields(
+                                fieldWithPath("itemId").description("소지품 ID"),
+                                fieldWithPath("templateId").description("유저템플릿 ID"),
+                                fieldWithPath("isTake").description("소지품 챙김여부"),
+                                fieldWithPath("modifiedItemName").description("변경할 소지품 이름").ignored(),
+                                fieldWithPath("important").description("소지품 중요체크여부").ignored()
+                        ),
+                        responseFields(
+                                fieldWithPath("result").description("결과"),
+                                fieldWithPath("error").description("에러")
+                        )
+                ))
+                .andDo(print());
+    }
+
+    @Test
+    void 유저템플릿의_소지품_수정() throws Exception {
         //given
         User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
 
@@ -307,8 +348,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                 .templateId(1L)
                 .itemId(6L)
                 .modifiedItemName("아이패드")
-                .isImportant(true)
-                .isTake(true)
+                .important(true)
                 .build();
 
         String request = objectMapper.writeValueAsString(templateItemModfiyRequest);
@@ -331,7 +371,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("templateId").description("유저템플릿 ID"),
                                 fieldWithPath("modifiedItemName").description("변경할 소지품 이름"),
                                 fieldWithPath("important").description("소지품 중요체크여부"),
-                                fieldWithPath("isTake").description("소지품 챙김여부")
+                                fieldWithPath("isTake").description("소지품 챙김여부").ignored()
                         ),
                         responseFields(
                                 fieldWithPath("result").description("결과"),
