@@ -6,6 +6,7 @@ import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.recommend.dto.RecommendAddUserTemplateRequest;
+import com.depromeet.ahmatda.recommend.dto.RecommendItemResponse;
 import com.depromeet.ahmatda.recommend.dto.RecommendTemplateResponse;
 import com.depromeet.ahmatda.recommend.service.RecommendService;
 import com.depromeet.ahmatda.user.service.UserService;
@@ -44,5 +45,12 @@ public class RecommendController {
         String userToken = request.getHeader(HttpHeader.USER_TOKEN);
         recommendService.addUserTemplate(userToken, recommendAddUserTemplateRequest);
         return ResponseEntity.ok(RestResponse.ok());
+    }
+
+    @GetMapping(value = "/items")
+    public ResponseEntity<RestResponse<RecommendItemResponse>> getRecommendItems(@RequestParam("category") Long categoryId) {
+        //TODO : 해당 카테고리가 요청한 유저의 카테고리인지 검증 추가
+        RecommendItemResponse recommendItemResponses = recommendService.findByRecommendItems(categoryId);
+        return ResponseEntity.ok().body(RestResponse.ok(recommendItemResponses));
     }
 }
