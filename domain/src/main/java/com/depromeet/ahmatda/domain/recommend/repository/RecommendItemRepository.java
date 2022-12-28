@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface RecommendItemRepository extends JpaRepository<RecommendItem, Long> {
 
-    @Query(value = "select i from RecommendItem i" +
+    @Query(value = "select distinct i from RecommendItem i" +
             " inner join i.category" +
             " where i.category.type = :categoryType")
     List<RecommendItem> findByCategoryType(CategoryType categoryType);

@@ -21,6 +21,7 @@ import com.depromeet.ahmatda.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -94,7 +95,20 @@ public class RecommendTemplateService implements RecommendService {
     public RecommendItemResponse findByRecommendItems(Long categoryId) {
         CategoryResponse categoryResponse = categoryService.getCategoryById(categoryId);
         List<RecommendItem> recommendItems = recommendAdaptor.findByItemsCategoryType(categoryResponse.getType());
-        return RecommendItemResponse.from(recommendItems);
+        RecommendItemResponse recommendItemResponse = RecommendItemResponse.from(recommendItems);
+        if (recommendItemResponse != null) {
+            recommendItemResponse.setItems(recommendItemsRandomShuffle(recommendItemResponse.getItems()));
+        }
+        return recommendItemResponse;
     }
+
+    private List<String> recommendItemsRandomShuffle(List<String> items) {
+        Collections.shuffle(items);
+        if (items.size() > 5) {
+            return items.subList(0, 5);
+        }
+        return items;
+    }
+
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
+@Setter
 @Builder
 @EqualsAndHashCode
 @NoArgsConstructor
