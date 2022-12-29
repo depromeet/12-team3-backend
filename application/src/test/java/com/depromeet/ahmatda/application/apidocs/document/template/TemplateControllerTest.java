@@ -141,13 +141,11 @@ public class TemplateControllerTest extends ApiDocumentationTest {
     }
 
     @Test
-    void 유저템플릿의_이름이나_고정여부_수정() throws Exception {
+    void 유저템플릿_고정여부_수정() throws Exception {
         //given
         User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
         ModifyTemplateRequest modifyTemplateRequest = ModifyTemplateRequest.builder()
                 .templateId(6L)
-                .pin(true)
-                .templateName("성민의 갓템들")
                 .categoryId(2L)
                 .pin(true)
                 .build();
@@ -195,14 +193,95 @@ public class TemplateControllerTest extends ApiDocumentationTest {
         //then
         result.andExpect(status().isOk())
                 .andExpect(content().string(response))
-                .andDo(document("modify-template",
+                .andDo(document("modify-template-pin",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestFields(
+                                fieldWithPath("templateId").description("유저템플릿 ID"),
+                                fieldWithPath("templateName").description("변경할 유저템플릿 이름").ignored(),
+                                fieldWithPath("categoryId").description("유저템플릿의 카테고리 ID"),
+                                fieldWithPath("pin").description("변경할 유저템플릿 고정여부")
+                        ),
+                        responseFields(
+                                fieldWithPath("result").type(JsonFieldType.OBJECT).description("결과"),
+                                fieldWithPath("result.id").type(JsonFieldType.NUMBER).description("유저템플릿 ID"),
+                                fieldWithPath("result.userToken").type(JsonFieldType.STRING).description("유저템플릿 소유자 ID"),
+                                fieldWithPath("result.templateName").type(JsonFieldType.STRING).description("변경된 유저템플릿 ID"),
+                                fieldWithPath("result.categoryId").type(JsonFieldType.NUMBER).description("유저템플릿의 카테고리 ID"),
+                                fieldWithPath("result.pin").type(JsonFieldType.BOOLEAN).description("유저템플릿의 고정여부"),
+                                fieldWithPath("result.items.[].id").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품 ID"),
+                                fieldWithPath("result.items.[].name").type(JsonFieldType.STRING).description("유저템플릿의 소지품 명"),
+                                fieldWithPath("result.items.[].templateId").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품의 템플릿 ID"),
+                                fieldWithPath("result.items.[].categoryId").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품의 카테고리 ID"),
+                                fieldWithPath("result.items.[].take").type(JsonFieldType.BOOLEAN).description("유저템플릿의 소지품 체크여부"),
+                                fieldWithPath("result.items.[].important").type(JsonFieldType.BOOLEAN).description("유저템플릿의 소지품의 중요도 여부"),
+                                fieldWithPath("error").type(JsonFieldType.NULL).description("에러")
+                        )
+                ))
+                .andDo(print());
+    }
+
+    @Test
+    void 유저템플릿_이름_수정() throws Exception {
+        //given
+        User userWithDeviceId = User.createUserWithUserToken("FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F0");
+        ModifyTemplateRequest modifyTemplateRequest = ModifyTemplateRequest.builder()
+                .templateId(6L)
+                .templateName("성민의 갓템들")
+                .categoryId(2L)
+                .build();
+
+        List<TemplateItemResponse> templateItemResponses = List.of(
+                TemplateItemResponse.builder()
+                        .id(3L)
+                        .categoryId(2L)
+                        .templateId(6L)
+                        .name("여권")
+                        .isTake(true)
+                        .isImportant(false)
+                        .build(),
+                TemplateItemResponse.builder()
+                        .id(4L)
+                        .categoryId(2L)
+                        .templateId(6L)
+                        .name("신분증")
+                        .isTake(false)
+                        .isImportant(true)
+                        .build());
+        TemplateResponse templateResponse = TemplateResponse.builder()
+                .id(6L)
+                .templateName("성민의 갓템들")
+                .categoryId(2L)
+                .pin(true)
+                .userToken(userWithDeviceId.getUserToken())
+                .items(templateItemResponses)
+                .build();
+
+
+        given(templateService.modfiyTemplateNameAndIsPin(userWithDeviceId.getUserToken(), modifyTemplateRequest)).willReturn(templateResponse);
+
+        String request = objectMapper.writeValueAsString(modifyTemplateRequest);
+        String response = objectMapper.writeValueAsString(RestResponse.ok(templateResponse));
+
+        //when
+        ResultActions result = mockMvc.perform(
+                patch("/api/template/")
+                        .header(HttpHeader.USER_TOKEN, userWithDeviceId.getUserToken())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request)
+                        .accept(MediaType.APPLICATION_JSON));
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(content().string(response))
+                .andDo(document("modify-template-name",
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestFields(
                                 fieldWithPath("templateId").description("유저템플릿 ID"),
                                 fieldWithPath("templateName").description("변경할 유저템플릿 이름"),
                                 fieldWithPath("categoryId").description("유저템플릿의 카테고리 ID"),
-                                fieldWithPath("pin").description("변경할 유저템플릿 고정여부")
+                                fieldWithPath("pin").description("변경할 유저템플릿 고정여부").ignored()
                         ),
                         responseFields(
                                 fieldWithPath("result").type(JsonFieldType.OBJECT).description("결과"),
