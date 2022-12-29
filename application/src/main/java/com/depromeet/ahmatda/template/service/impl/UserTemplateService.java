@@ -38,6 +38,7 @@ public class UserTemplateService implements TemplateService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String userId) {
         List<Template> templates = templateAdaptor.findByCategoryAndUserId(categoryId, userId);
         return templates.stream()
