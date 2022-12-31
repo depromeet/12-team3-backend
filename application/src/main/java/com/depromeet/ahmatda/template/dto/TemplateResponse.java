@@ -1,8 +1,10 @@
 package com.depromeet.ahmatda.template.dto;
+import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.template.Template;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,7 @@ public class TemplateResponse {
 
     public static TemplateResponse createByEntity(Template template) {
         List<TemplateItemResponse> items = template.getItems().stream()
+                .sorted(Comparator.comparing(BaseTimeEntity::getCreatedAt))
                 .map(TemplateItemResponse::from)
                 .collect(Collectors.toList());
 
