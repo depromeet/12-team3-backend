@@ -8,12 +8,14 @@ import com.depromeet.ahmatda.domain.template.adaptor.TemplateAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.template.exception.TemplateNotExistException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AlarmServiceImpl implements AlarmService {
 
     private final AlarmAdaptor alarmAdaptor;
@@ -26,6 +28,7 @@ public class AlarmServiceImpl implements AlarmService {
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
 
         if (!Objects.equals(template.getUser().getId(), user.getId())) {
+            log.error("userId 와 template 의 userId 가 다릅니다.");
             throw new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND);
         }
 
