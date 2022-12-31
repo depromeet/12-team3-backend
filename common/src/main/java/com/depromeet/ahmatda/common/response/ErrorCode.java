@@ -16,7 +16,8 @@ public enum ErrorCode implements EnumType {
     CATEGORY_AUTHENTICATION_ERROR("유저 인증이 실패했습니다."),
     TEMPLATE_NOT_FOUND("템플릿이 존재하지 않습니다."),
     AUTHENTICATION_ERROR("유저 인증이 실패했습니다."),
-    ITEM_NOT_FOUND("소지품이 존재하지 않습니다.");
+    ITEM_NOT_FOUND("소지품이 존재하지 않습니다."),
+    ALARM_EXIST("알람이 이미 존재합니다.");
 
     private final String desc;
 
