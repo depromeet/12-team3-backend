@@ -183,10 +183,6 @@ include::{snippets}/delete-template/http-response.adoc[]
 ==== curl-request
 include::{snippets}/modify-template-pin/curl-request.adoc[]
 include::{snippets}/modify-template-pin/request-fields.adoc[]
-==== Request Body
-include::{snippets}/modify-template-pin/request-body.adoc[]
-==== Response Body
-include::{snippets}/modify-template-pin/response-fields.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/modify-template-pin/response-body.adoc[]
 
@@ -195,10 +191,6 @@ include::{snippets}/modify-template-pin/response-body.adoc[]
 ==== curl-request
 include::{snippets}/modify-template-name/curl-request.adoc[]
 include::{snippets}/modify-template-name/request-fields.adoc[]
-==== Request Body
-include::{snippets}/modify-template-name/request-body.adoc[]
-==== Response Body
-include::{snippets}/modify-template-name/response-fields.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/modify-template-name/response-body.adoc[]
 
@@ -227,8 +219,6 @@ include::{snippets}/template-delete-item/response-body.adoc[]
 ==== curl-request
 include::{snippets}/template-modfiy-item/curl-request.adoc[]
 include::{snippets}/template-modfiy-item/request-fields.adoc[]
-==== Request Body
-include::{snippets}/template-modfiy-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-modfiy-item/response-body.adoc[]
 
@@ -237,8 +227,6 @@ include::{snippets}/template-modfiy-item/response-body.adoc[]
 ==== curl-request
 include::{snippets}/template-modfiy-pin-item/curl-request.adoc[]
 include::{snippets}/template-modfiy-pin-item/request-fields.adoc[]
-==== Request Body
-include::{snippets}/template-modfiy-pin-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-modfiy-pin-item/response-body.adoc[]
 
