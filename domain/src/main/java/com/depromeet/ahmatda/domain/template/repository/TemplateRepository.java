@@ -13,7 +13,7 @@ public interface TemplateRepository extends JpaRepository<Template, Long> {
     @Query(value = "select distinct t from Template t" +
             " join fetch t.user" +
             " left join fetch t.items" +
-            " where t.category.id = :categoryId and t.user.userToken = :userId order by t.isPin desc")
+            " where t.category.id = :categoryId and t.user.userToken = :userId order by t.isPin desc, t.createdAt")
     List<Template> findByCategoryAndUserId(Long categoryId, String userId);
 
     @Modifying
