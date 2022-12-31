@@ -6,11 +6,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+
 @Getter
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignUpRequest {
 
+    @Valid
     private OnboardingRequest onboardingRequest;
 }
