@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration
 public class JsonConfig {
@@ -12,7 +13,8 @@ public class JsonConfig {
     @Bean
     @Primary
     ObjectMapper objectMapper() {
-        return new ObjectMapper()
-            .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
+        return Jackson2ObjectMapperBuilder.json()
+                .featuresToEnable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)
+                .build();
     }
 }
