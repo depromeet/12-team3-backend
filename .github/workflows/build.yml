@@ -43,7 +43,6 @@ jobs:
       env:
         private_key_id: ${{ secrets.FIREBASE_PRIVATE_KEY_ID }}
         private_key: ${{ secrets.FIREBASE_PRIVATE_KEY }}
-        client_email: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
         client_id: ${{ secrets.FIREBASE_CLIENT_ID }}
         
     - name: Grant for Gradle
