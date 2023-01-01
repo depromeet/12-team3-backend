@@ -16,7 +16,7 @@ public class FcmController {
 
     private final FcmService fcmService;
 
-    @GetMapping
+    @GetMapping("test")
     public String pushTest(String token) throws IOException {
         log.info("token = {}", token);
         fcmService.sendMessage(token);
