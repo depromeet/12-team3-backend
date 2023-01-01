@@ -29,21 +29,13 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(controllers = {
-<<<<<<< HEAD
-        CommonController.class,
-        UserController.class,
-        CategoryController.class,
-        TemplateController.class,
-        RecommendController.class,
-        UserAlarmController.class
-=======
     CommonController.class,
     UserController.class,
     CategoryController.class,
     TemplateController.class,
     RecommendController.class,
+    UserAlarmController.class,
     FcmController.class
->>>>>>> 79d45aea9f6d44be7e571cfed94693a10ac262f3
 })
 @AutoConfigureRestDocs
 @ActiveProfiles("test")
