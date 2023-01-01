@@ -53,13 +53,15 @@ public class Alarm extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private AlarmTimeOption timeOption;
 
-    public static Alarm createAlarm(String token, long templateId, String reservationCron, boolean isActivated) {
+    public static Alarm createDaily(String token, long templateId, boolean isActivated, LocalDateTime alarmDateTime, AlarmTimeOption timeOption) {
         return Alarm.builder()
             .pushToken(token)
-            .templateId(templateId)
-            .reserveTime(reservationCron)
-            .isSend(false)
             .isActivated(isActivated)
+            .templateId(templateId)
+            .isSend(false)
+            .alarmType(AlarmType.DAILY)
+            .alarmDateTime(alarmDateTime)
+            .timeOption(timeOption)
             .build();
     }
 }

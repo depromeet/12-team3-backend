@@ -37,10 +37,12 @@ public class AlarmServiceImpl implements AlarmService {
                 throw new AlarmExistException(ErrorCode.ALARM_EXIST);
             });
 
-        String alarmTime = userAlarmRequest.getReservationCron();
-
-        final Alarm alarm = Alarm.createAlarm(
-            user.getFcmToken(), userAlarmRequest.getTemplateId(), alarmTime, userAlarmRequest.getIsActivated()
+        final Alarm alarm = Alarm.createDaily(
+            user.getFcmToken(),
+            userAlarmRequest.getTemplateId(),
+            userAlarmRequest.getIsActivated(),
+            userAlarmRequest.getAlarmTime(),
+            userAlarmRequest.getDailyAlarmOption()
         );
 
         alarmAdaptor.save(alarm);
