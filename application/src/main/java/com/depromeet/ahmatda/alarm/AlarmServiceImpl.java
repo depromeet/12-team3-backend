@@ -42,16 +42,16 @@ public class AlarmServiceImpl implements AlarmService {
     public Alarm setTemplateDailyAlarm(final User user, final UserAlarmRequest userAlarmRequest) {
 
         final Template template = validateAndGetTemplate(user.getId(), userAlarmRequest.getTemplateId());
-        Alarm alarm = createOrUpdateAlarm(user, userAlarmRequest, template);
+        Alarm alarm = createOrUpdateAlarm(userAlarmRequest, template);
 
         return alarmAdaptor.save(alarm);
     }
 
-    private Alarm createOrUpdateAlarm(User user, UserAlarmRequest userAlarmRequest, Template template) {
+    private Alarm createOrUpdateAlarm(UserAlarmRequest userAlarmRequest, Template template) {
         Optional<Alarm> alarm = alarmAdaptor.findAlarmByTemplateId(template.getId());
 
         return alarm.map(value -> setAlarmIfExist(value, userAlarmRequest))
-                .orElseGet(() -> createDailyAlarm(user, userAlarmRequest));
+                .orElseGet(() -> createDailyAlarm(userAlarmRequest));
     }
 
     private Alarm setAlarmIfExist(Alarm alarm, UserAlarmRequest userAlarmRequest) {
@@ -68,9 +68,8 @@ public class AlarmServiceImpl implements AlarmService {
         return alarm;
     }
 
-    private Alarm createDailyAlarm(User user, UserAlarmRequest userAlarmRequest) {
+    private Alarm createDailyAlarm(UserAlarmRequest userAlarmRequest) {
         return Alarm.createDaily(
-                user.getFcmToken(),
                 userAlarmRequest.getTemplateId(),
                 userAlarmRequest.getIsActivated(),
                 userAlarmRequest.getAlarmDateTime(),

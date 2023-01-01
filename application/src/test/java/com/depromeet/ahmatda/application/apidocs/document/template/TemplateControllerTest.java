@@ -174,6 +174,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                 .categoryId(2L)
                 .pin(true)
                 .userToken(userWithDeviceId.getUserToken())
+                .alarmInfo(null)
                 .items(templateItemResponses)
                 .build();
 
@@ -208,6 +209,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("result.id").type(JsonFieldType.NUMBER).description("유저템플릿 ID"),
                                 fieldWithPath("result.userToken").type(JsonFieldType.STRING).description("유저템플릿 소유자 ID"),
                                 fieldWithPath("result.templateName").type(JsonFieldType.STRING).description("변경된 유저템플릿 ID"),
+                                fieldWithPath("result.alarmInfo").type(JsonFieldType.NULL).description("템플릿 알람 시간정보 (임시 Null)"),
                                 fieldWithPath("result.categoryId").type(JsonFieldType.NUMBER).description("유저템플릿의 카테고리 ID"),
                                 fieldWithPath("result.pin").type(JsonFieldType.BOOLEAN).description("유저템플릿의 고정여부"),
                                 fieldWithPath("result.items.[].id").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품 ID"),

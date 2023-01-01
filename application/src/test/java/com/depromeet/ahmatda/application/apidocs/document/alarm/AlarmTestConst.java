@@ -14,7 +14,6 @@ public class AlarmTestConst {
 
     final static Alarm dailyAlarm = Alarm.builder()
             .id(1L)
-            .pushToken("token")
             .isActivated(true)
             .isSend(false)
             .templateId(1L)

@@ -27,7 +27,7 @@ public class FcmController {
     private final FcmPushService fcmPushService;
     private final FcmService fcmService;
 
-    @GetMapping("/api/alarm")
+    @GetMapping("/api/alarm/fcm-test")
     public String pushTest(String token) throws IOException {
         log.info("token = {}", token);
         fcmPushService.sendMessage(token);

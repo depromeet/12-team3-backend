@@ -23,9 +23,6 @@ public class Alarm extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "push_token")
-    private String pushToken;
-
     @Column(name = "is_activated")
     private boolean isActivated;
 
@@ -57,9 +54,8 @@ public class Alarm extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private AlarmTimeOption timeOption;
 
-    public static Alarm createDaily(String token, long templateId, boolean isActivated, LocalDateTime alarmDateTime, AlarmTimeOption timeOption) {
+    public static Alarm createDaily(long templateId, boolean isActivated, LocalDateTime alarmDateTime, AlarmTimeOption timeOption) {
         return Alarm.builder()
-            .pushToken(token)
             .isActivated(isActivated)
             .templateId(templateId)
             .isSend(false)
