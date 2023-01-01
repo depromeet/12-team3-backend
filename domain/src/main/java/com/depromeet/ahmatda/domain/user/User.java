@@ -28,8 +28,6 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user")
     private List<Category> categories = new ArrayList<>();
 
-    private String fcmToken;
-
     public static User createUserWithUserToken(String userToken) {
         return User.builder()
                 .userToken(userToken)
