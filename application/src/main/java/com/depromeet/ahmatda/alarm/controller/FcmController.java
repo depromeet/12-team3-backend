@@ -21,20 +21,20 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/alarm")
+@RequestMapping()
 public class FcmController {
 
     private final FcmPushService fcmPushService;
     private final FcmService fcmService;
 
-    @GetMapping
+    @GetMapping("/api/alarm")
     public String pushTest(String token) throws IOException {
         log.info("token = {}", token);
         fcmPushService.sendMessage(token);
         return token;
     }
 
-    @PostMapping("/token")
+    @PostMapping("/api/user/token")
     public ResponseEntity<RestResponse<Object>> renewFcmToken(@Valid @RequestBody FcmTokenRequest fcmTokenRequest, HttpServletRequest request) {
         final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
         fcmService.renewFcmToken(userToken, fcmTokenRequest);
