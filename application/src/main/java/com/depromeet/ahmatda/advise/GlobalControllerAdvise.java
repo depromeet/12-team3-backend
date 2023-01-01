@@ -36,6 +36,14 @@ public class GlobalControllerAdvise {
         );
     }
 
+    @ExceptionHandler(UnsupportedOperationException.class)
+    public ResponseEntity<RestResponse<ErrorResponse>> handleUnsupportedOperationException(UnsupportedOperationException e) {
+        return new ResponseEntity(
+                RestResponse.error(ErrorCode.NOT_IMPLEMENTED),
+                HttpStatus.NOT_IMPLEMENTED
+        );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<RestResponse<ErrorResponse>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<FieldError> errors = e.getBindingResult().getFieldErrors();

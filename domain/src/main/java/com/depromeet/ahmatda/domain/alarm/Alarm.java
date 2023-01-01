@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Entity
+@DynamicUpdate
 @Table(name = "alarm")
 public class Alarm extends BaseTimeEntity {
 
@@ -65,5 +67,11 @@ public class Alarm extends BaseTimeEntity {
             .alarmDateTime(alarmDateTime)
             .timeOption(timeOption)
             .build();
+    }
+
+    public void updateDailyAlarm(boolean isActivated, LocalDateTime alarmDateTime, AlarmTimeOption timeOption) {
+        this.isActivated = isActivated;
+        this.alarmDateTime = alarmDateTime;
+        this.timeOption = timeOption;
     }
 }

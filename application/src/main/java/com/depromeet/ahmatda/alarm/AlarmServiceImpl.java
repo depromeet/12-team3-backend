@@ -4,6 +4,7 @@ import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.AlarmAdaptor;
 import com.depromeet.ahmatda.domain.alarm.AlarmInfo;
+import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.template.adaptor.TemplateAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,24 +39,46 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     @Transactional
-    public void setTemplateAlarm(final User user, final UserAlarmRequest userAlarmRequest) {
+    public void setTemplateDailyAlarm(final User user, final UserAlarmRequest userAlarmRequest) {
 
         final Template template = validateAndGetTemplate(user.getId(), userAlarmRequest.getTemplateId());
-
-        alarmAdaptor.findAlarmByTemplateId(template.getId())
-            .ifPresent(t -> {
-                throw new AlarmExistException(ErrorCode.ALARM_EXIST);
-            });
-
-        final Alarm alarm = Alarm.createDaily(
-            user.getFcmToken(),
-            userAlarmRequest.getTemplateId(),
-            userAlarmRequest.getIsActivated(),
-            userAlarmRequest.getAlarmTime(),
-            userAlarmRequest.getDailyAlarmOption()
-        );
+        Alarm alarm = createOrUpdateAlarm(user, userAlarmRequest, template);
 
         alarmAdaptor.save(alarm);
+    }
+
+    private Alarm createOrUpdateAlarm(User user, UserAlarmRequest userAlarmRequest, Template template) {
+        Optional<Alarm> alarm = alarmAdaptor.findAlarmByTemplateId(template.getId());
+
+        if (alarm.isPresent()) {
+            return setAlarmIfExist(alarm.get(), userAlarmRequest);
+        } else {
+            return createDailyAlarm(user, userAlarmRequest);
+        }
+    }
+
+    private Alarm setAlarmIfExist(Alarm alarm, UserAlarmRequest userAlarmRequest) {
+
+        if (AlarmType.isWeekly(userAlarmRequest.getAlarmType())) {
+            // TODO : Weekly 알림 설정이 구현되면 여기서 기존 알람을 Weekly 알람으로 바꿔서 반환
+            throw new UnsupportedOperationException();
+        } else if (AlarmType.isDaily(userAlarmRequest.getAlarmType())) {
+            alarm.updateDailyAlarm(
+                userAlarmRequest.getIsActivated(), userAlarmRequest.getAlarmTime(), userAlarmRequest.getDailyAlarmOption()
+            );
+        }
+
+        return alarm;
+    }
+
+    private Alarm createDailyAlarm(User user, UserAlarmRequest userAlarmRequest) {
+        return Alarm.createDaily(
+                user.getFcmToken(),
+                userAlarmRequest.getTemplateId(),
+                userAlarmRequest.getIsActivated(),
+                userAlarmRequest.getAlarmTime(),
+                userAlarmRequest.getDailyAlarmOption()
+        );
     }
 
     private Template validateAndGetTemplate(final Long userId, final Long templateId) {

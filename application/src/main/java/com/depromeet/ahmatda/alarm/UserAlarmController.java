@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
@@ -38,27 +39,13 @@ public class UserAlarmController {
     @PostMapping("/daily")
     public RestResponse<Object> dailyAlarmCreate(
         HttpServletRequest request,
-        @RequestBody UserAlarmRequest userAlarmRequest
+        @RequestBody @Valid UserAlarmRequest userAlarmRequest
     ) {
         final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
         final User user = userService.getUserByToken(userToken)
                 .orElseThrow(() -> new UserNotExistException(ErrorCode.USER_NOT_FOUND));
 
-        alarmService.setTemplateAlarm(user, userAlarmRequest);
-
-        return RestResponse.ok();
-    }
-
-    @PatchMapping
-    public RestResponse<Object> changeAlarmAvailability(
-            HttpServletRequest request,
-            @RequestBody UserAlarmRequest userAlarmRequest
-    ) {
-        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
-        final User user = userService.getUserByToken(userToken)
-                .orElseThrow(() -> new UserNotExistException(ErrorCode.USER_NOT_FOUND));
-
-//        alarmService.changeAlarmAvailability(user, userAlarmRequest);
+        alarmService.setTemplateDailyAlarm(user, userAlarmRequest);
 
         return RestResponse.ok();
     }
