@@ -1,15 +1,12 @@
 package com.depromeet.ahmatda.user;
 
-import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.user.dto.SignUpRequest;
 import com.depromeet.ahmatda.user.service.UserService;
-import com.depromeet.ahmatda.user.token.FcmToken;
 import com.depromeet.ahmatda.user.token.UserToken;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -36,12 +33,5 @@ public class UserController {
         return ResponseEntity.ok().body(
                 RestResponse.ok(token)
         );
-    }
-
-    @PostMapping("/token")
-    public ResponseEntity<RestResponse<Object>> renewFcmToken(@Valid @RequestBody FcmToken fcmToken, HttpServletRequest request) {
-        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
-        userService.renewFcmToken(userToken, fcmToken);
-        return ResponseEntity.ok().body(RestResponse.ok());
     }
 }

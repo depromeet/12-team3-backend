@@ -8,7 +8,7 @@ import com.depromeet.ahmatda.domain.onboard.OnBoardingCategory;
 import com.depromeet.ahmatda.onboard.OnboardingRequest;
 import com.depromeet.ahmatda.user.UserRegisterCode;
 import com.depromeet.ahmatda.user.dto.SignUpRequest;
-import com.depromeet.ahmatda.user.token.FcmToken;
+import com.depromeet.ahmatda.alarm.dto.FcmTokenRequest;
 import com.depromeet.ahmatda.user.token.UserToken;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -118,8 +118,8 @@ public class UserControllerTest extends ApiDocumentationTest {
     @DisplayName("유저 FCM Token 갱신")
     @Test
     void updateFcmToken() throws Exception {
-        FcmToken fcmToken = new FcmToken("TEST-TOKEN");
-        String request = objectMapper.writeValueAsString(fcmToken);
+        FcmTokenRequest fcmTokenRequest = new FcmTokenRequest("TEST-TOKEN");
+        String request = objectMapper.writeValueAsString(fcmTokenRequest);
 
         mockMvc.perform(post("/api/user/token")
                         .contentType(MediaType.APPLICATION_JSON)
