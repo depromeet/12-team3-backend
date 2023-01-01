@@ -22,15 +22,15 @@ public class AlarmServiceImpl implements AlarmService {
     private final TemplateAdaptor templateAdaptor;
 
     @Override
+    public Alarm getAlarm(User user, Long templateId) {
+        validateAndGetTemplate(user, templateId);
+        return alarmAdaptor.findAlarmByTemplateId(templateId).orElseGet(null);
+    }
+
+    @Override
     public void setTemplateAlarm(final User user, final UserAlarmRequest userAlarmRequest) {
 
-        final Template template = templateAdaptor.getTemplateById(userAlarmRequest.getTemplateId())
-                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
-
-        if (!Objects.equals(template.getUser().getId(), user.getId())) {
-            log.error("userId 와 template 의 userId 가 다릅니다.");
-            throw new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND);
-        }
+        final Template template = validateAndGetTemplate(user, userAlarmRequest.getTemplateId());
 
         alarmAdaptor.findAlarmByTemplateId(template.getId())
             .ifPresent(t -> {
@@ -44,5 +44,17 @@ public class AlarmServiceImpl implements AlarmService {
         );
 
         alarmAdaptor.save(alarm);
+    }
+
+    private Template validateAndGetTemplate(final User user, final Long templateId) {
+        final Template template = templateAdaptor.getTemplateById(templateId)
+                .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
+
+        if (!Objects.equals(template.getUser().getId(), user.getId())) {
+            log.error("userId 와 template 의 userId 가 다릅니다.");
+            throw new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND);
+        }
+
+        return template;
     }
 }
