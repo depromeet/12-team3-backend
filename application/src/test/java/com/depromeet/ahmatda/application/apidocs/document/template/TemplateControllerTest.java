@@ -54,6 +54,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                 TemplateResponse.builder()
                         .id(100L)
                         .userToken(userId)
+                        .alarmInfo("2022-12-31 12시 00분 10분 전")
                         .categoryId(1L)
                         .templateName("일상에서 중요한거").items(items)
                         .build());
@@ -174,6 +175,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                 .templateName("성민의 갓템들")
                 .categoryId(2L)
                 .pin(true)
+                .alarmInfo("")
                 .userToken(userWithDeviceId.getUserToken())
                 .items(templateItemResponses)
                 .build();
@@ -211,6 +213,7 @@ public class TemplateControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("result.templateName").type(JsonFieldType.STRING).description("변경된 유저템플릿 ID"),
                                 fieldWithPath("result.categoryId").type(JsonFieldType.NUMBER).description("유저템플릿의 카테고리 ID"),
                                 fieldWithPath("result.pin").type(JsonFieldType.BOOLEAN).description("유저템플릿의 고정여부"),
+                                fieldWithPath("result.alarmInfo").type(JsonFieldType.STRING).description("수정 시에는 이 값이 null"),
                                 fieldWithPath("result.items.[].id").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품 ID"),
                                 fieldWithPath("result.items.[].name").type(JsonFieldType.STRING).description("유저템플릿의 소지품 명"),
                                 fieldWithPath("result.items.[].templateId").type(JsonFieldType.NUMBER).description("유저템플릿의 소지품의 템플릿 ID"),

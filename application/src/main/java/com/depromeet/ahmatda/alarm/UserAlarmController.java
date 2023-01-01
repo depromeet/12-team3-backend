@@ -3,7 +3,6 @@ package com.depromeet.ahmatda.alarm;
 import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.RestResponse;
-import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.user.UserNotExistException;
 import com.depromeet.ahmatda.user.service.UserService;
@@ -29,13 +28,13 @@ public class UserAlarmController {
         final User user = userService.getUserByToken(userToken)
                 .orElseThrow(() -> new UserNotExistException(ErrorCode.USER_NOT_FOUND));
 
-        final String alarm = alarmService.getAlarmInfo(user, templateId);
+        final String alarm = alarmService.getAlarmInfo(user.getId(), templateId);
 
         return RestResponse.ok(alarm);
     }
 
-    @PostMapping
-    public RestResponse<Object> alarm(
+    @PostMapping("/daily")
+    public RestResponse<Object> dailyAlarmCreate(
         HttpServletRequest request,
         @RequestBody UserAlarmRequest userAlarmRequest
     ) {
@@ -47,5 +46,18 @@ public class UserAlarmController {
 
         return RestResponse.ok();
     }
-}
 
+    @PatchMapping
+    public RestResponse<Object> changeAlarmAvailability(
+            HttpServletRequest request,
+            @RequestBody UserAlarmRequest userAlarmRequest
+    ) {
+        final String userToken = request.getHeader(HttpHeader.USER_TOKEN);
+        final User user = userService.getUserByToken(userToken)
+                .orElseThrow(() -> new UserNotExistException(ErrorCode.USER_NOT_FOUND));
+
+//        alarmService.changeAlarmAvailability(user, userAlarmRequest);
+
+        return RestResponse.ok();
+    }
+}

@@ -11,7 +11,7 @@ public class AlarmInfo {
         this.alarm = alarm;
     }
 
-    public static final String DAILY_INFO_FORMAT = "%s %d시 %d분 %s";
+    private static final String DAILY_INFO_FORMAT = "%s %d시 %d분 %s";
 
     public static String getDailyAlarmInfo(Alarm alarm) {
         LocalDateTime alarmDateTime = alarm.getAlarmDateTime();

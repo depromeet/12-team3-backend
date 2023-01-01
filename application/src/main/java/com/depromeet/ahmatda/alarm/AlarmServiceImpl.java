@@ -11,6 +11,7 @@ import com.depromeet.ahmatda.template.exception.TemplateNotExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -23,21 +24,22 @@ public class AlarmServiceImpl implements AlarmService {
     private final TemplateAdaptor templateAdaptor;
 
     @Override
-    public String getAlarmInfo(User user, Long templateId) {
-        Alarm alarm = getAlarm(user, templateId);
+    public String getAlarmInfo(Long userId, Long templateId) {
+        Alarm alarm = getAlarm(userId, templateId);
         return AlarmInfo.getDailyAlarmInfo(alarm);
     }
 
     @Override
-    public Alarm getAlarm(User user, Long templateId) {
-        validateAndGetTemplate(user, templateId);
+    public Alarm getAlarm(Long userId, Long templateId) {
+        validateAndGetTemplate(userId, templateId);
         return alarmAdaptor.findAlarmByTemplateId(templateId).orElse(null);
     }
 
     @Override
+    @Transactional
     public void setTemplateAlarm(final User user, final UserAlarmRequest userAlarmRequest) {
 
-        final Template template = validateAndGetTemplate(user, userAlarmRequest.getTemplateId());
+        final Template template = validateAndGetTemplate(user.getId(), userAlarmRequest.getTemplateId());
 
         alarmAdaptor.findAlarmByTemplateId(template.getId())
             .ifPresent(t -> {
@@ -55,11 +57,11 @@ public class AlarmServiceImpl implements AlarmService {
         alarmAdaptor.save(alarm);
     }
 
-    private Template validateAndGetTemplate(final User user, final Long templateId) {
+    private Template validateAndGetTemplate(final Long userId, final Long templateId) {
         final Template template = templateAdaptor.getTemplateById(templateId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND));
 
-        if (!Objects.equals(template.getUser().getId(), user.getId())) {
+        if (!Objects.equals(template.getUser().getId(), userId)) {
             log.error("userId 와 template 의 userId 가 다릅니다.");
             throw new TemplateNotExistException(ErrorCode.TEMPLATE_NOT_FOUND);
         }

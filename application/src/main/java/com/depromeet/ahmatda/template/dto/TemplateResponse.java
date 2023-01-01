@@ -18,11 +18,15 @@ public class TemplateResponse {
 
     private Long categoryId;
 
+    private String alarmInfo;
+
     private final List<TemplateItemResponse> items;
 
     private boolean pin;
 
-    public static TemplateResponse createByEntity(Template template) {
+    public static TemplateResponse createByEntity(Template template, String alarmInfo) {
+        alarmInfo = alarmInfo == null ? "" : alarmInfo;
+
         List<TemplateItemResponse> items = template.getItems().stream()
                 .map(TemplateItemResponse::from)
                 .collect(Collectors.toList());
@@ -31,6 +35,7 @@ public class TemplateResponse {
                 .id(template.getId())
                 .userToken(template.getUser().getUserToken())
                 .templateName(template.getTemplateName())
+                .alarmInfo(alarmInfo)
                 .categoryId(template.getCategory().getId())
                 .items(items)
                 .pin(template.isPin())
