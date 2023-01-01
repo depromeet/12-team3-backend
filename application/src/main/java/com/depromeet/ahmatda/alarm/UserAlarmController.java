@@ -3,6 +3,8 @@ package com.depromeet.ahmatda.alarm;
 import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.RestResponse;
+import com.depromeet.ahmatda.domain.alarm.Alarm;
+import com.depromeet.ahmatda.domain.alarm.AlarmResponse;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.user.UserNotExistException;
 import com.depromeet.ahmatda.user.service.UserService;
@@ -20,7 +22,7 @@ public class UserAlarmController {
     private final AlarmService alarmService;
 
     @GetMapping
-    public RestResponse<String> getAlarmInfo(
+    public RestResponse<AlarmResponse> getAlarm(
         HttpServletRequest request,
         @RequestParam Long templateId
     ) {
@@ -28,9 +30,9 @@ public class UserAlarmController {
         final User user = userService.getUserByToken(userToken)
                 .orElseThrow(() -> new UserNotExistException(ErrorCode.USER_NOT_FOUND));
 
-        final String alarm = alarmService.getAlarmInfo(user.getId(), templateId);
+        final Alarm alarm = alarmService.getAlarm(user.getId(), templateId);
 
-        return RestResponse.ok(alarm);
+        return RestResponse.ok(AlarmResponse.of(alarm));
     }
 
     @PostMapping("/daily")

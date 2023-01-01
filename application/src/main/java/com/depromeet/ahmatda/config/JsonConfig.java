@@ -14,6 +14,7 @@ public class JsonConfig {
     @Primary
     ObjectMapper objectMapper() {
         return Jackson2ObjectMapperBuilder.json()
+                .simpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 .featuresToEnable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)
                 .build();
     }
