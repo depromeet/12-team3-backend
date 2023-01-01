@@ -24,8 +24,8 @@ public class FcmServiceImpl implements FcmService {
             .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
         FcmToken fcmToken = FcmToken.builder()
+            .userId(user.getId())
             .fcmToken(fcmTokenRequest.getFcmToken())
-            .user(user)
             .build();
 
         fcmAdaptor.renewFcmToken(fcmToken);
