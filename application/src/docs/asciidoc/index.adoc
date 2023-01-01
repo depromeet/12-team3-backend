@@ -178,17 +178,21 @@ include::{snippets}/delete-template/response-body.adoc[]
 ==== 에러 응답 - 존재하지 않는 유저템플릿
 include::{snippets}/delete-template/http-response.adoc[]
 
-=== Template - 유저템플릿 수정
+=== Template - 유저템플릿 고정여부 수정
 ==== Method : PATCH
 ==== curl-request
-include::{snippets}/modify-template/curl-request.adoc[]
-include::{snippets}/modify-template/request-fields.adoc[]
-==== Request Body
-include::{snippets}/modify-template/request-body.adoc[]
-==== Response Body
-include::{snippets}/modify-template/response-fields.adoc[]
+include::{snippets}/modify-template-pin/curl-request.adoc[]
+include::{snippets}/modify-template-pin/request-fields.adoc[]
 ==== 정상 응답 - 정상
-include::{snippets}/modify-template/response-body.adoc[]
+include::{snippets}/modify-template-pin/response-body.adoc[]
+
+=== Template - 유저템플릿 이름 수정
+==== Method : PATCH
+==== curl-request
+include::{snippets}/modify-template-name/curl-request.adoc[]
+include::{snippets}/modify-template-name/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/modify-template-name/response-body.adoc[]
 
 === Template - 유저템플릿 소지품추가
 ==== Method : PATCH
@@ -215,10 +219,16 @@ include::{snippets}/template-delete-item/response-body.adoc[]
 ==== curl-request
 include::{snippets}/template-modfiy-item/curl-request.adoc[]
 include::{snippets}/template-modfiy-item/request-fields.adoc[]
-==== Request Body
-include::{snippets}/template-modfiy-item/request-body.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/template-modfiy-item/response-body.adoc[]
+
+=== Template - 유저템플릿 소지품 챙김 여부 수정
+==== Method : PATCH
+==== curl-request
+include::{snippets}/template-modfiy-pin-item/curl-request.adoc[]
+include::{snippets}/template-modfiy-pin-item/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/template-modfiy-pin-item/response-body.adoc[]
 
 [[RecommendTemplate]]
 

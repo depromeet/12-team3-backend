@@ -33,4 +33,8 @@ public class TemplateAdaptor {
     public Template modifyTemplateNameAndIsPin(Template modfiyTemplate) {
         return templateRepository.save(modfiyTemplate);
     }
+
+    public int templatesAllOffPin(Long categoryId) {
+        return templateRepository.templatesAllOffPin(categoryId);
+    }
 }

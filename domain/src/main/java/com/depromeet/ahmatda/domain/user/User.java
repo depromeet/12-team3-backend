@@ -2,6 +2,7 @@ package com.depromeet.ahmatda.domain.user;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import com.depromeet.ahmatda.domain.category.Category;
+import com.depromeet.ahmatda.domain.fcm.FcmToken;
 import com.depromeet.ahmatda.domain.user.type.UserStatusCode;
 import lombok.*;
 
@@ -28,16 +29,10 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user")
     private List<Category> categories = new ArrayList<>();
 
-    private String fcmToken;
-
     public static User createUserWithUserToken(String userToken) {
         return User.builder()
-                .userToken(userToken)
-                .statusCd(UserStatusCode.ACTIVATED)
-                .build();
-    }
-
-    public void renewFcmToken(final String fcmToken) {
-        this.fcmToken = fcmToken;
+            .userToken(userToken)
+            .statusCd(UserStatusCode.ACTIVATED)
+            .build();
     }
 }

@@ -20,5 +20,5 @@ public class TemplateItemModfiyRequest {
 
     private Boolean isTake;
 
-    private boolean isImportant;
+    private boolean important;
 }
