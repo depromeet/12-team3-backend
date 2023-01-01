@@ -1,5 +1,8 @@
 package com.depromeet.ahmatda.application.apidocs.document;
 
+import com.depromeet.ahmatda.alarm.FcmPushService;
+import com.depromeet.ahmatda.alarm.controller.FcmController;
+import com.depromeet.ahmatda.alarm.controller.service.FcmService;
 import com.depromeet.ahmatda.category.CategoryController;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.recommend.RecommendController;
@@ -12,7 +15,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -22,11 +24,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(controllers = {
-        CommonController.class,
-        UserController.class,
-        CategoryController.class,
-        TemplateController.class,
-        RecommendController.class
+    CommonController.class,
+    UserController.class,
+    CategoryController.class,
+    TemplateController.class,
+    RecommendController.class,
+    FcmController.class
 })
 @AutoConfigureRestDocs
 @ActiveProfiles("test")
@@ -56,4 +59,10 @@ public abstract class ApiDocumentationTest {
 
     @MockBean
     protected RecommendService recommendService;
+
+    @MockBean
+    protected FcmService fcmService;
+
+    @MockBean
+    protected FcmPushService fcmPushService;
 }

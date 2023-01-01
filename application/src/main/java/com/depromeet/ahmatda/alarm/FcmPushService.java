@@ -16,7 +16,7 @@ import java.util.Arrays;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class FcmService {
+public class FcmPushService {
 
     private final ObjectMapper objectMapper;
 

@@ -1,6 +1,21 @@
 package com.depromeet.ahmatda.application.apidocs.document.user;
 
-import com.depromeet.ahmatda.HttpHeader;
+import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
+import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
+import static com.depromeet.ahmatda.application.apidocs.util.DocumentConstraintsGenerator.getConstraintsAttribute;
+import static com.depromeet.ahmatda.application.apidocs.util.DocumentEnumLinkGenerator.generateLinkCode;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.application.apidocs.util.DocumentEnumLinkGenerator;
 import com.depromeet.ahmatda.common.response.RestResponse;
@@ -8,32 +23,14 @@ import com.depromeet.ahmatda.domain.onboard.OnBoardingCategory;
 import com.depromeet.ahmatda.onboard.OnboardingRequest;
 import com.depromeet.ahmatda.user.UserRegisterCode;
 import com.depromeet.ahmatda.user.dto.SignUpRequest;
-import com.depromeet.ahmatda.user.token.FcmToken;
 import com.depromeet.ahmatda.user.token.UserToken;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
-
-import java.util.List;
-import java.util.UUID;
-
-import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
-import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
-import static com.depromeet.ahmatda.application.apidocs.util.DocumentConstraintsGenerator.getConstraintsAttribute;
-import static com.depromeet.ahmatda.application.apidocs.util.DocumentEnumLinkGenerator.generateLinkCode;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
-import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class UserControllerTest extends ApiDocumentationTest {
 
@@ -113,28 +110,5 @@ public class UserControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("onboardingRequest.items").type(JsonFieldType.ARRAY).description("온보딩 선택 아이템 이름 리스트")
                         )
                 ));
-    }
-
-    @DisplayName("유저 FCM Token 갱신")
-    @Test
-    void updateFcmToken() throws Exception {
-        FcmToken fcmToken = new FcmToken("TEST-TOKEN");
-        String request = objectMapper.writeValueAsString(fcmToken);
-
-        mockMvc.perform(post("/api/user/token")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeader.USER_TOKEN, UUID.randomUUID().toString())
-                        .content(request))
-                .andExpect(status().isOk())
-                .andDo(MockMvcRestDocumentation.document("fcm-token-update",
-                        getDocumentRequest(),
-                        getDocumentResponse(),
-                        requestHeaders(
-                                headerWithName("ahmatda-user-token").description("유저 UUID")
-                        ),
-                        requestFields(
-                                fieldWithPath("fcmToken").type(JsonFieldType.STRING).description("유저 FCM Token 갱신")
-                        )))
-                .andDo(print());
     }
 }
