@@ -3,6 +3,7 @@ package com.depromeet.ahmatda.domain.alarm;
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.time.LocalTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Entity
 @Table(name = "alarm")
 public class Alarm extends BaseTimeEntity {

@@ -21,7 +21,7 @@ public class UserAlarmController {
     private final AlarmService alarmService;
 
     @GetMapping
-    public RestResponse<Alarm> getAlarm(
+    public RestResponse<String> getAlarmInfo(
         HttpServletRequest request,
         @RequestParam Long templateId
     ) {
@@ -29,7 +29,7 @@ public class UserAlarmController {
         final User user = userService.getUserByToken(userToken)
                 .orElseThrow(() -> new UserNotExistException(ErrorCode.USER_NOT_FOUND));
 
-        final Alarm alarm = alarmService.getAlarm(user, templateId);
+        final String alarm = alarmService.getAlarmInfo(user, templateId);
 
         return RestResponse.ok(alarm);
     }

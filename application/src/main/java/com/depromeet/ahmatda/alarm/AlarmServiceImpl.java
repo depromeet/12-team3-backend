@@ -3,6 +3,7 @@ package com.depromeet.ahmatda.alarm;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.AlarmAdaptor;
+import com.depromeet.ahmatda.domain.alarm.AlarmInfo;
 import com.depromeet.ahmatda.domain.template.Template;
 import com.depromeet.ahmatda.domain.template.adaptor.TemplateAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
@@ -22,9 +23,15 @@ public class AlarmServiceImpl implements AlarmService {
     private final TemplateAdaptor templateAdaptor;
 
     @Override
+    public String getAlarmInfo(User user, Long templateId) {
+        Alarm alarm = getAlarm(user, templateId);
+        return AlarmInfo.getDailyAlarmInfo(alarm);
+    }
+
+    @Override
     public Alarm getAlarm(User user, Long templateId) {
         validateAndGetTemplate(user, templateId);
-        return alarmAdaptor.findAlarmByTemplateId(templateId).orElseGet(null);
+        return alarmAdaptor.findAlarmByTemplateId(templateId).orElse(null);
     }
 
     @Override
