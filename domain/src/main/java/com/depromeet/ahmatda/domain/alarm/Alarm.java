@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Builder
 @NoArgsConstructor
@@ -21,20 +22,36 @@ public class Alarm extends BaseTimeEntity {
     @Column(name = "push_token")
     private String pushToken;
 
+    @Column(name = "is_activated")
+    private boolean isActivated;
+
     @Column(name = "template_id")
     private long templateId;
-
-    @Column(name = "reserve_time")
-    private String reserveTime;
 
     @Column(name = "is_send")
     private boolean isSend;
 
-    @Column(name = "is_activated")
-    private boolean isActivated;
+    @Column(name = "alarm_type")
+    @Enumerated(EnumType.STRING)
+    private AlarmType alarmType;
 
-    @Column(name = "alarm_form_id")
-    private long alarmFormId;
+    @Column(name = "day_of_week")
+    @Enumerated(EnumType.STRING)
+    private AlarmDayOfWeekType dayOfWeek;
+
+    @Column(name = "alarm_time")
+    private LocalTime alarmTime;
+
+    @Column(name = "replay_type")
+    @Enumerated(EnumType.STRING)
+    private AlarmReplayType replayType;
+
+    @Column(name = "alarm_date_time")
+    private LocalDateTime alarmDateTime;
+
+    @Column(name = "time_option")
+    @Enumerated(EnumType.STRING)
+    private AlarmTimeOption timeOption;
 
     public static Alarm createAlarm(String token, long templateId, String reservationCron, boolean isActivated) {
         return Alarm.builder()

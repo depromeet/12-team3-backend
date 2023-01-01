@@ -1,9 +1,9 @@
-package com.depromeet.ahmatda.alarm;
+package com.depromeet.ahmatda.domain.alarm;
 
 import java.time.LocalDateTime;
 import java.util.function.Function;
 
-public enum DailyAlarmOption {
+public enum AlarmTimeOption {
     ONTIME(t -> t),
     TEM_MINUTES(t -> t.minusMinutes(10)),
     THIRTY_MINUTES(t -> t.minusMinutes(30)),
@@ -15,7 +15,7 @@ public enum DailyAlarmOption {
 
     private final Function<LocalDateTime, LocalDateTime> function;
 
-    DailyAlarmOption(Function<LocalDateTime, LocalDateTime> function) {
+    AlarmTimeOption(Function<LocalDateTime, LocalDateTime> function) {
         this.function = function;
     }
 
