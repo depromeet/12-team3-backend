@@ -4,11 +4,13 @@ import com.depromeet.ahmatda.domain.alarm.AlarmTimeOption;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserAlarmRequest {
     @NotNull
