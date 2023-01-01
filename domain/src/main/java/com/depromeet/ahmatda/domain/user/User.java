@@ -36,8 +36,4 @@ public class User extends BaseTimeEntity {
                 .statusCd(UserStatusCode.ACTIVATED)
                 .build();
     }
-
-    public void renewFcmToken(final String fcmToken) {
-        this.fcmToken = fcmToken;
-    }
 }
