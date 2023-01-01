@@ -31,7 +31,7 @@ public class AlarmResponse {
                 .alarmTime(alarm.getAlarmTime())
                 .replayType(alarm.getReplayType())
                 .alarmDateTime(alarm.getAlarmDateTime())
-                .timeOption(alarm.getTimeOption().getDesc())
+                .timeOption(alarm.getTimeOption().getLabel())
                 .activated(alarm.isActivated())
                 .build();
     }

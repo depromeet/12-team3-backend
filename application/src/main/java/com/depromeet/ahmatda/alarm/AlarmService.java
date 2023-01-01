@@ -6,5 +6,5 @@ import com.depromeet.ahmatda.domain.user.User;
 public interface AlarmService {
     String getAlarmInfo(final Long userId, final Long templateId);
     Alarm getAlarm(final Long userId, final Long templateId);
-    void setTemplateDailyAlarm(final User user, final UserAlarmRequest userAlarmRequest);
+    Alarm setTemplateDailyAlarm(final User user, final UserAlarmRequest userAlarmRequest);
 }

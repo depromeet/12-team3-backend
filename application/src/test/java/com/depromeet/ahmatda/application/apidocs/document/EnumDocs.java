@@ -28,6 +28,8 @@ public class EnumDocs {
     Map<String, String> errorCodes;
     Map<String, String> userRegisterCode;
     Map<String, String> onBoardingCategory;
+    Map<String, String> alarmTimeOption;
+    Map<String, String> alarmType;
 
     public static EnumDocs getEnumDocs() {
         return enumDocsBuilder()

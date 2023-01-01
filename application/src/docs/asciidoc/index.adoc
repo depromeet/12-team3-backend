@@ -266,3 +266,23 @@ include::{snippets}/recommend-add-user-template-add-items/response-body.adoc[]
 include::{snippets}/recommend-create-template/curl-request.adoc[]
 ==== 정상 응답 - 정상
 include::{snippets}/recommend-create-template/response-body.adoc[]
+
+[[Alarm]]
+
+=== Alarm - 알람 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/get-alarm-by-template-id/curl-request.adoc[]
+include::{snippets}/get-alarm-by-template-id/request-parameters.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/get-alarm-by-template-id/response-body.adoc[]
+include::{snippets}/get-alarm-by-template-id/response-fields-result.adoc[]
+
+=== Alarm - 날짜별 알람 생성
+==== Method : GET
+==== curl-request
+include::{snippets}/create-alarm-daily/curl-request.adoc[]
+include::{snippets}/create-alarm-daily/request-body.adoc[]
+include::{snippets}/create-alarm-daily/request-fields.adoc[]
+==== 정상 응답 - 정상
+include::{snippets}/create-alarm-daily/response-body.adoc[]

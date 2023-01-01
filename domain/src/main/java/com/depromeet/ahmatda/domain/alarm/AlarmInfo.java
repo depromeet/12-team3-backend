@@ -19,7 +19,7 @@ public class AlarmInfo {
         LocalDate localDate = alarmDateTime.toLocalDate();
         int hour = alarmDateTime.getHour();
         int minute = alarmDateTime.getMinute();
-        String timeOption = alarm.getTimeOption().getDesc();
+        String timeOption = alarm.getTimeOption().getLabel();
 
         return String.format(DAILY_INFO_FORMAT, localDate, hour, minute, timeOption);
     }

@@ -39,22 +39,19 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     @Transactional
-    public void setTemplateDailyAlarm(final User user, final UserAlarmRequest userAlarmRequest) {
+    public Alarm setTemplateDailyAlarm(final User user, final UserAlarmRequest userAlarmRequest) {
 
         final Template template = validateAndGetTemplate(user.getId(), userAlarmRequest.getTemplateId());
         Alarm alarm = createOrUpdateAlarm(user, userAlarmRequest, template);
 
-        alarmAdaptor.save(alarm);
+        return alarmAdaptor.save(alarm);
     }
 
     private Alarm createOrUpdateAlarm(User user, UserAlarmRequest userAlarmRequest, Template template) {
         Optional<Alarm> alarm = alarmAdaptor.findAlarmByTemplateId(template.getId());
 
-        if (alarm.isPresent()) {
-            return setAlarmIfExist(alarm.get(), userAlarmRequest);
-        } else {
-            return createDailyAlarm(user, userAlarmRequest);
-        }
+        return alarm.map(value -> setAlarmIfExist(value, userAlarmRequest))
+                .orElseGet(() -> createDailyAlarm(user, userAlarmRequest));
     }
 
     private Alarm setAlarmIfExist(Alarm alarm, UserAlarmRequest userAlarmRequest) {
@@ -64,7 +61,7 @@ public class AlarmServiceImpl implements AlarmService {
             throw new UnsupportedOperationException();
         } else if (AlarmType.isDaily(userAlarmRequest.getAlarmType())) {
             alarm.updateDailyAlarm(
-                userAlarmRequest.getIsActivated(), userAlarmRequest.getAlarmTime(), userAlarmRequest.getDailyAlarmOption()
+                userAlarmRequest.getIsActivated(), userAlarmRequest.getAlarmDateTime(), userAlarmRequest.getAlarmTimeOption()
             );
         }
 
@@ -76,8 +73,8 @@ public class AlarmServiceImpl implements AlarmService {
                 user.getFcmToken(),
                 userAlarmRequest.getTemplateId(),
                 userAlarmRequest.getIsActivated(),
-                userAlarmRequest.getAlarmTime(),
-                userAlarmRequest.getDailyAlarmOption()
+                userAlarmRequest.getAlarmDateTime(),
+                userAlarmRequest.getAlarmTimeOption()
         );
     }
 
