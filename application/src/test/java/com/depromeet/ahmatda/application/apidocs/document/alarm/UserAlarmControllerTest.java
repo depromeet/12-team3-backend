@@ -54,7 +54,7 @@ class UserAlarmControllerTest extends ApiDocumentationTest {
         // given
         User user = User.builder().id(USER_ID).build();
 
-        given(alarmService.getAlarm(USER_ID, TEMPLATE_ID)).willReturn(dailyAlarm);
+        given(alarmService.getAlarm(USER_ID, TEMPLATE_ID)).willReturn(Optional.of(dailyAlarm));
         given(userService.getUserByToken(USER_TOKEN)).willReturn(Optional.of(user));
 
         String response = objectMapper.writeValueAsString(RestResponse.ok(AlarmResponse.of(dailyAlarm)));
