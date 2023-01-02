@@ -19,6 +19,8 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class FcmPushService {
 
+    private static final String MESSAGING_SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
+    private static final String[] SCOPES = {MESSAGING_SCOPE};
     private final ObjectMapper objectMapper;
 
     public void sendMessage(final String token) throws IOException {
@@ -43,17 +45,15 @@ public class FcmPushService {
 
     private String getAccessToken() throws IOException {
         try {
-            final String keyFilePath = "firebase/fcm-account.json";
-            FileInputStream keyStream = new FileInputStream(keyFilePath);
-            GoogleCredentials credentials = GoogleCredentials.fromStream(keyStream);
-            credentials.refreshIfExpired();
-            String token = credentials.getAccessToken().getTokenValue();
-            log.info("token = {}", token);
-            return token;
+            ClassPathResource keyFile = new ClassPathResource("firebase/fcm-account.json");
+            GoogleCredentials googleCredentials = GoogleCredentials
+                .fromStream(new FileInputStream(keyFile.getFile()))
+                .createScoped(Arrays.asList(SCOPES));
+            googleCredentials.refreshIfExpired();
+            return googleCredentials.getAccessToken().getTokenValue();
         } catch (Exception e) {
             log.error(String.valueOf(e));
         }
-
         return null;
     }
 
