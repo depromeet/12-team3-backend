@@ -27,14 +27,13 @@ public class AlarmServiceImpl implements AlarmService {
 
     @Override
     public String getAlarmInfo(Long userId, Long templateId) {
-        Alarm alarm = getAlarm(userId, templateId);
-        return AlarmInfo.getDailyAlarmInfo(alarm);
+        return getAlarm(userId, templateId).map(AlarmInfo::getDailyAlarmInfo).orElse(null);
     }
 
     @Override
-    public Alarm getAlarm(Long userId, Long templateId) {
+    public Optional<Alarm> getAlarm(Long userId, Long templateId) {
         validateAndGetTemplate(userId, templateId);
-        return alarmAdaptor.findAlarmByTemplateId(templateId).orElse(null);
+        return alarmAdaptor.findAlarmByTemplateId(templateId);
     }
 
     @Override

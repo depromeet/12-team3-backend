@@ -42,9 +42,10 @@ public class UserTemplateService implements TemplateService {
     @Override
     public List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String userId) {
         List<Template> templates = templateAdaptor.findByCategoryAndUserId(categoryId, userId);
+        User user = userAdaptor.findByUserToken(userId).orElseThrow();
         return templates.stream()
                 .map(template -> {
-                    String alarmInfo = alarmService.getAlarmInfo(Long.getLong(userId), template.getId());
+                    String alarmInfo = alarmService.getAlarmInfo(user.getId(), template.getId());
                     return TemplateResponse.createByEntity(template, alarmInfo);
                 })
                 .collect(Collectors.toList());
