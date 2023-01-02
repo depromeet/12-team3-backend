@@ -3,16 +3,19 @@ package com.depromeet.ahmatda.alarm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
-import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 @Slf4j
 @Service
@@ -45,9 +48,10 @@ public class FcmPushService {
 
     private String getAccessToken() throws IOException {
         try {
-            ClassPathResource keyFile = new ClassPathResource("firebase/fcm-account.json");
+            ClassPathResource keyFileResource = new ClassPathResource("firebase/fcm-account.json");
+            InputStream keyFileInputStream = keyFileResource.getInputStream();
             GoogleCredentials googleCredentials = GoogleCredentials
-                .fromStream(new FileInputStream(keyFile.getFile()))
+                .fromStream(keyFileInputStream)
                 .createScoped(Arrays.asList(SCOPES));
             googleCredentials.refreshIfExpired();
             return googleCredentials.getAccessToken().getTokenValue();
