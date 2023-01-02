@@ -45,7 +45,7 @@ public class FcmPushService {
         try {
             final GoogleCredentials googleCredentials = GoogleCredentials
                 .fromStream(new ClassPathResource(fcmAccountPath).getInputStream())
-                .createScoped(Arrays.asList("https://www.googleapis.com/auth/cloud-platform"));
+                .createScoped(Arrays.asList("https://www.googleapis.com/auth/firebase.messaging"));
             googleCredentials.refreshIfExpired();
             return googleCredentials.getAccessToken().getTokenValue();
         } catch (Exception e) {
