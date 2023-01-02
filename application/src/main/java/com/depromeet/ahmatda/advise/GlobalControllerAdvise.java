@@ -6,18 +6,42 @@ import com.depromeet.ahmatda.common.response.RestResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.depromeet.ahmatda.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalControllerAdvise {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<RestResponse<ErrorResponse>> handleException(Exception e) {
+        log.error(e.getMessage(), e);
         return ResponseEntity.internalServerError().body(RestResponse.error(ErrorCode.INTERNAL_SERVER_ERROR));
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<RestResponse<ErrorResponse>> handleBusinessException(BusinessException e) {
+        return new ResponseEntity(
+            RestResponse.error(e.getErrorCode()),
+            HttpStatus.valueOf(e.getErrorCode().getHttpStatus())
+        );
+    }
+
+    @ExceptionHandler(UnsupportedOperationException.class)
+    public ResponseEntity<RestResponse<ErrorResponse>> handleUnsupportedOperationException(UnsupportedOperationException e) {
+        return new ResponseEntity(
+                RestResponse.error(ErrorCode.NOT_IMPLEMENTED),
+                HttpStatus.NOT_IMPLEMENTED
+        );
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

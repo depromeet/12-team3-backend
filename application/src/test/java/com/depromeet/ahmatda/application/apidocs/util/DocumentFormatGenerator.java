@@ -10,7 +10,7 @@ public interface DocumentFormatGenerator {
     Function<String, Attributes.Attribute> getFormatAttribute = format -> Attributes.key(FORMAT_KEY).value(format);
 
     static Attributes.Attribute getDateTimeFormat() {
-        return getFormatAttribute.apply("yyyy-mm-dd HH:mm:ss");
+        return getFormatAttribute.apply("yyyy-mm-ddTHH:mm:ss");
     }
 
     static Attributes.Attribute getDateFormat() {

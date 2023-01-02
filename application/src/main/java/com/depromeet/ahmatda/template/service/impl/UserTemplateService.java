@@ -1,5 +1,6 @@
 package com.depromeet.ahmatda.template.service.impl;
 
+import com.depromeet.ahmatda.alarm.AlarmService;
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.item.Item;
@@ -30,6 +31,7 @@ public class UserTemplateService implements TemplateService {
     private final UserAdaptor userAdaptor;
     private final CategoryAdaptor categoryAdaptor;
     private final ItemAdaptor itemAdaptor;
+    private final AlarmService alarmService;
 
     @Override
     public Template getTemplateById(Long id) {
@@ -41,7 +43,10 @@ public class UserTemplateService implements TemplateService {
     public List<TemplateResponse> findByCategoryAndUserId(Long categoryId, String userId) {
         List<Template> templates = templateAdaptor.findByCategoryAndUserId(categoryId, userId);
         return templates.stream()
-                .map(template -> TemplateResponse.createByEntity(template))
+                .map(template -> {
+                    String alarmInfo = alarmService.getAlarmInfo(Long.getLong(userId), template.getId());
+                    return TemplateResponse.createByEntity(template, alarmInfo);
+                })
                 .collect(Collectors.toList());
     }
 
@@ -115,7 +120,7 @@ public class UserTemplateService implements TemplateService {
             template.modifyTemplateName(modifyTemplateRequest.getTemplateName());
         }
 
-        return TemplateResponse.createByEntity(templateAdaptor.modifyTemplateNameAndIsPin(template));
+        return TemplateResponse.createByEntity(templateAdaptor.modifyTemplateNameAndIsPin(template), null);
     }
 
     @Override

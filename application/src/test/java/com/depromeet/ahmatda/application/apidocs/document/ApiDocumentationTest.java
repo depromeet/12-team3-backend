@@ -1,5 +1,7 @@
 package com.depromeet.ahmatda.application.apidocs.document;
 
+import com.depromeet.ahmatda.alarm.AlarmService;
+import com.depromeet.ahmatda.alarm.UserAlarmController;
 import com.depromeet.ahmatda.alarm.FcmPushService;
 import com.depromeet.ahmatda.alarm.controller.FcmController;
 import com.depromeet.ahmatda.alarm.controller.service.FcmService;
@@ -29,6 +31,7 @@ import org.springframework.test.web.servlet.MockMvc;
     CategoryController.class,
     TemplateController.class,
     RecommendController.class,
+    UserAlarmController.class,
     FcmController.class
 })
 @AutoConfigureRestDocs
@@ -59,6 +62,9 @@ public abstract class ApiDocumentationTest {
 
     @MockBean
     protected RecommendService recommendService;
+
+    @MockBean
+    protected AlarmService alarmService;
 
     @MockBean
     protected FcmService fcmService;
