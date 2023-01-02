@@ -51,7 +51,7 @@ public class AlarmServiceImpl implements AlarmService {
         Optional<Alarm> alarm = alarmAdaptor.findAlarmByTemplateId(template.getId());
 
         return alarm.map(value -> setAlarmIfExist(value, userAlarmRequest))
-                .orElseGet(() -> createDailyAlarm(userAlarmRequest));
+                .orElseGet(() -> createDailyAlarm(userAlarmRequest, template));
     }
 
     private Alarm setAlarmIfExist(Alarm alarm, UserAlarmRequest userAlarmRequest) {
@@ -68,9 +68,9 @@ public class AlarmServiceImpl implements AlarmService {
         return alarm;
     }
 
-    private Alarm createDailyAlarm(UserAlarmRequest userAlarmRequest) {
+    private Alarm createDailyAlarm(UserAlarmRequest userAlarmRequest, Template template) {
         return Alarm.createDaily(
-                userAlarmRequest.getTemplateId(),
+                template,
                 userAlarmRequest.getIsActivated(),
                 userAlarmRequest.getAlarmDateTime(),
                 userAlarmRequest.getAlarmTimeOption()

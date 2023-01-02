@@ -25,7 +25,7 @@ public class AlarmResponse {
         }
 
         return AlarmResponse.builder()
-                .templateId(alarm.getTemplateId())
+                .templateId(alarm.getTemplate().getId())
                 .alarmType(alarm.getAlarmType())
                 .dayOfWeek(alarm.getDayOfWeek())
                 .alarmTime(alarm.getAlarmTime())

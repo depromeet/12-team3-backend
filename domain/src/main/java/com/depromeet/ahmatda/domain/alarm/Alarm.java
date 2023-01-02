@@ -1,6 +1,7 @@
 package com.depromeet.ahmatda.domain.alarm;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
+import com.depromeet.ahmatda.domain.template.Template;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,8 +27,9 @@ public class Alarm extends BaseTimeEntity {
     @Column(name = "is_activated")
     private boolean isActivated;
 
-    @Column(name = "template_id")
-    private long templateId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "template_id")
+    private Template template;
 
     @Column(name = "is_send")
     private boolean isSend;
@@ -54,10 +56,10 @@ public class Alarm extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private AlarmTimeOption timeOption;
 
-    public static Alarm createDaily(long templateId, boolean isActivated, LocalDateTime alarmDateTime, AlarmTimeOption timeOption) {
+    public static Alarm createDaily(Template template, boolean isActivated, LocalDateTime alarmDateTime, AlarmTimeOption timeOption) {
         return Alarm.builder()
             .isActivated(isActivated)
-            .templateId(templateId)
+            .template(template)
             .isSend(false)
             .alarmType(AlarmType.DAILY)
             .alarmDateTime(alarmDateTime)
