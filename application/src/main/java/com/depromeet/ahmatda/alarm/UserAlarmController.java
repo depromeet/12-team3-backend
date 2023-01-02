@@ -31,7 +31,7 @@ public class UserAlarmController {
         final User user = userService.getUserByToken(userToken)
                 .orElseThrow(() -> new UserNotExistException(ErrorCode.USER_NOT_FOUND));
 
-        final Alarm alarm = alarmService.getAlarm(user.getId(), templateId);
+        final Alarm alarm = alarmService.getAlarm(user.getId(), templateId).orElse(null);
 
         return RestResponse.ok(AlarmResponse.of(alarm));
     }
