@@ -76,11 +76,14 @@ public class Alarm extends BaseTimeEntity {
         this.timeOption = timeOption;
     }
 
-    public boolean checkMaximumAlarmOptionTime(Alarm alarm) {
-        LocalDateTime nowTime = LocalDateTime.now();
+    public boolean checkMaximumAlarmOption(Alarm alarm, LocalDateTime nowTime) {
         final int maximumAlarmOptionTime = 7;
-
-        return nowTime.isBefore(alarm.alarmDateTime) && nowTime.plusDays(maximumAlarmOptionTime)
+        return nowTime.isBefore(alarm.alarmDateTime.plusSeconds(1)) && nowTime.plusDays(maximumAlarmOptionTime)
             .isAfter(alarm.alarmDateTime);
+    }
+
+    public boolean isTargetAlarm(Alarm alarm, LocalDateTime nowTime) {
+        return alarm.getTimeOption()
+            .applyAlarmOption(alarm.getAlarmDateTime()).isEqual(nowTime);
     }
 }

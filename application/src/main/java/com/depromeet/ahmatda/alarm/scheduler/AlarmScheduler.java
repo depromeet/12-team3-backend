@@ -2,6 +2,7 @@ package com.depromeet.ahmatda.alarm.scheduler;
 
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.AlarmAdaptor;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,11 @@ public class AlarmScheduler {
     @Scheduled(fixedDelay = SCHEDULER_REPEAT_CYCLE)
     @Async(value = "alarmExecutor")
     public void findUnsentAlarm() {
+        LocalDateTime nowTime = LocalDateTime.now().withSecond(0).withNano(0);
         List<Alarm> unsentAlarms = alarmAdaptor.findUnsentAlarm();
-        List<Alarm> collect = unsentAlarms.stream()
-            .filter(alarm -> alarm.checkMaximumAlarmOptionTime(alarm))
+        List<Alarm> targetAlarms = unsentAlarms.stream()
+            .filter(alarm -> alarm.checkMaximumAlarmOption(alarm, nowTime))
+            .filter(alarm -> alarm.isTargetAlarm(alarm, nowTime))
             .collect(Collectors.toList());
     }
 }
