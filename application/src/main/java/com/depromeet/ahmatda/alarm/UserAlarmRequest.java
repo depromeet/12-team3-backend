@@ -1,6 +1,6 @@
 package com.depromeet.ahmatda.alarm;
 
-import com.depromeet.ahmatda.domain.alarm.AlarmTimeOption;
+import com.depromeet.ahmatda.domain.alarm.TimeOption;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,5 +22,5 @@ public class UserAlarmRequest {
     @NotNull
     private LocalDateTime alarmDateTime;
     @NotNull
-    private AlarmTimeOption alarmTimeOption;
+    private TimeOption timeOption;
 }

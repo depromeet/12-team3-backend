@@ -4,22 +4,15 @@ import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.alarm.UserAlarmRequest;
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.application.apidocs.util.DocumentEnumLinkGenerator;
-import com.depromeet.ahmatda.application.apidocs.util.DocumentFormatGenerator;
 import com.depromeet.ahmatda.common.response.RestResponse;
-import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.AlarmResponse;
-import com.depromeet.ahmatda.domain.alarm.AlarmTimeOption;
+import com.depromeet.ahmatda.domain.alarm.TimeOption;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import com.depromeet.ahmatda.domain.user.User;
-import com.depromeet.ahmatda.onboard.OnboardingRequest;
-import com.depromeet.ahmatda.user.UserRegisterCode;
-import com.depromeet.ahmatda.user.token.UserToken;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
-import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
@@ -32,8 +25,6 @@ import static com.depromeet.ahmatda.application.apidocs.util.DocumentConstraints
 import static com.depromeet.ahmatda.application.apidocs.util.DocumentEnumLinkGenerator.generateLinkCode;
 import static com.depromeet.ahmatda.application.apidocs.util.DocumentFormatGenerator.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
@@ -103,7 +94,7 @@ class UserAlarmControllerTest extends ApiDocumentationTest {
             1L,
             true,
             LocalDateTime.of(2020, 1, 1, 1, 1, 1),
-            AlarmTimeOption.TEN_MINUTES
+            TimeOption.TEN_MINUTES
         );
 
         given(alarmService.setTemplateDailyAlarm(user, request)).willReturn(dailyAlarm);

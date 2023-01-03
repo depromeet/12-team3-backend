@@ -54,9 +54,9 @@ public class Alarm extends BaseTimeEntity {
 
     @Column(name = "time_option")
     @Enumerated(EnumType.STRING)
-    private AlarmTimeOption timeOption;
+    private TimeOption timeOption;
 
-    public static Alarm createDaily(Template template, boolean isActivated, LocalDateTime alarmDateTime, AlarmTimeOption timeOption) {
+    public static Alarm createDaily(Template template, boolean isActivated, LocalDateTime alarmDateTime, TimeOption timeOption) {
         return Alarm.builder()
             .isActivated(isActivated)
             .template(template)
@@ -67,7 +67,7 @@ public class Alarm extends BaseTimeEntity {
             .build();
     }
 
-    public void updateDailyAlarm(boolean isActivated, LocalDateTime alarmDateTime, AlarmTimeOption timeOption) {
+    public void updateDailyAlarm(boolean isActivated, LocalDateTime alarmDateTime, TimeOption timeOption) {
         this.isActivated = isActivated;
         this.alarmDateTime = alarmDateTime;
         this.timeOption = timeOption;
