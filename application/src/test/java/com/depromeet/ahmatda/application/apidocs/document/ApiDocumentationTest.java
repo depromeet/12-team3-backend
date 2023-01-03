@@ -2,9 +2,9 @@ package com.depromeet.ahmatda.application.apidocs.document;
 
 import com.depromeet.ahmatda.alarm.AlarmService;
 import com.depromeet.ahmatda.alarm.UserAlarmController;
-import com.depromeet.ahmatda.alarm.FcmPushService;
+import com.depromeet.ahmatda.alarm.service.impl.FcmPushService;
 import com.depromeet.ahmatda.alarm.controller.FcmController;
-import com.depromeet.ahmatda.alarm.service.FcmService;
+import com.depromeet.ahmatda.alarm.service.FcmTokenService;
 import com.depromeet.ahmatda.category.CategoryController;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.recommend.RecommendController;
@@ -67,7 +67,7 @@ public abstract class ApiDocumentationTest {
     protected AlarmService alarmService;
 
     @MockBean
-    protected FcmService fcmService;
+    protected FcmTokenService fcmTokenService;
 
     @MockBean
     protected FcmPushService fcmPushService;

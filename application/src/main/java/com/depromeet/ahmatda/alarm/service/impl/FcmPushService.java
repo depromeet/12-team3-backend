@@ -1,5 +1,7 @@
-package com.depromeet.ahmatda.alarm;
+package com.depromeet.ahmatda.alarm.service.impl;
 
+import com.depromeet.ahmatda.alarm.FcmMessage;
+import com.depromeet.ahmatda.alarm.FcmMessage.Notification;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -32,7 +34,7 @@ public class FcmPushService {
     }
 
     private String makeMessage(final String token) throws JsonProcessingException {
-        final FcmMessage.Notification notification = FcmMessage.Notification.builder()
+        final Notification notification = FcmMessage.Notification.builder()
             .title("TestTitle")
             .body("TestBody")
             .build();

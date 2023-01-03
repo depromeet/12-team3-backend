@@ -1,6 +1,6 @@
 package com.depromeet.ahmatda.alarm.service.impl;
 
-import com.depromeet.ahmatda.alarm.service.FcmService;
+import com.depromeet.ahmatda.alarm.service.FcmTokenService;
 import com.depromeet.ahmatda.alarm.dto.FcmTokenRequest;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.fcm.FcmToken;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class FcmServiceImpl implements FcmService {
+public class FcmTokenServiceImpl implements FcmTokenService {
 
     private final FcmAdaptor fcmAdaptor;
     private final UserAdaptor userAdaptor;

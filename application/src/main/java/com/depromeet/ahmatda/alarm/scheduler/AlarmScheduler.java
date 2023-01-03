@@ -1,5 +1,7 @@
 package com.depromeet.ahmatda.alarm.scheduler;
 
+import com.depromeet.ahmatda.alarm.service.FcmTokenService;
+import com.depromeet.ahmatda.alarm.service.impl.FcmPushService;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.AlarmAdaptor;
 import java.time.LocalDateTime;
@@ -17,7 +19,9 @@ import org.springframework.stereotype.Component;
 public class AlarmScheduler {
 
     public static final long SCHEDULER_REPEAT_CYCLE = 10000L;
+    
     private final AlarmAdaptor alarmAdaptor;
+    private final FcmPushService fcmPushService;
 
     @Scheduled(fixedDelay = SCHEDULER_REPEAT_CYCLE)
     @Async(value = "alarmExecutor")
@@ -28,5 +32,7 @@ public class AlarmScheduler {
             .filter(alarm -> alarm.checkMaximumAlarmOption(alarm, nowTime))
             .filter(alarm -> alarm.isTargetAlarm(alarm, nowTime))
             .collect(Collectors.toList());
+
+
     }
 }
