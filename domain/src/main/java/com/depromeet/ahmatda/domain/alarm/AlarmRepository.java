@@ -10,6 +10,6 @@ public interface AlarmRepository extends JpaRepository<Alarm, Long> {
 
     Optional<Alarm> findByTemplateId(Long templateId);
 
-    @Query("SELECT alarm FROM Alarm alarm WHERE alarm.isSend = false")
+    @Query("SELECT alarm FROM Alarm alarm WHERE alarm.isSend = false AND alarm.isActivated = true")
     List<Alarm> findAllUnsentAlarm();
 }
