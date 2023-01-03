@@ -16,7 +16,7 @@ public class AlarmResponse {
     private LocalTime alarmTime;
     private AlarmReplayType replayType;
     private LocalDateTime alarmDateTime;
-    private String timeOption;
+    private TimeOption timeOption;
     private boolean activated;
 
     public static AlarmResponse of(Alarm alarm) {
@@ -31,7 +31,7 @@ public class AlarmResponse {
                 .alarmTime(alarm.getAlarmTime())
                 .replayType(alarm.getReplayType())
                 .alarmDateTime(alarm.getAlarmDateTime())
-                .timeOption(alarm.getTimeOption().getLabel())
+                .timeOption(alarm.getTimeOption())
                 .activated(alarm.isActivated())
                 .build();
     }

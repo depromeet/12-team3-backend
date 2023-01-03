@@ -3,7 +3,7 @@ package com.depromeet.ahmatda.application.apidocs.document;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.common.utils.EnumType;
-import com.depromeet.ahmatda.domain.alarm.AlarmTimeOption;
+import com.depromeet.ahmatda.domain.alarm.TimeOption;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import com.depromeet.ahmatda.domain.onboard.OnBoardingCategory;
 import com.depromeet.ahmatda.user.UserRegisterCode;
@@ -43,7 +43,7 @@ public class CommonController {
         Map<String, String> alarmType =
                 Arrays.stream(AlarmType.values()).collect(Collectors.toMap(EnumType::getName, EnumType::getLabel));
         Map<String, String> alarmTimeOption =
-                Arrays.stream(AlarmTimeOption.values()).collect(Collectors.toMap(EnumType::getName, EnumType::getLabel));
+                Arrays.stream(TimeOption.values()).collect(Collectors.toMap(EnumType::getName, EnumType::getLabel));
 
 
         return RestResponse.ok(
