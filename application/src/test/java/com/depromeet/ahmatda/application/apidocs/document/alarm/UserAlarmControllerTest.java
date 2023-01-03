@@ -77,7 +77,7 @@ class UserAlarmControllerTest extends ApiDocumentationTest {
                     fieldWithPath("alarmTime").type(NULL).description("요일별 알람 - 알람 시간(미구현)"),
                     fieldWithPath("replayType").type(NULL).description("요일별 알람 - 반복 유형(미구현)"),
                     fieldWithPath("alarmDateTime").type(STRING).attributes(getDateTimeFormat()).description("날짜별 알람 - 알람 날짜 및 시간"),
-                    fieldWithPath("timeOption").type(STRING).description(generateLinkCode(DocumentEnumLinkGenerator.DocUrl.ALARM_TIME_OPTION)),
+                    fieldWithPath("timeOption").type(STRING).description(generateLinkCode(DocumentEnumLinkGenerator.DocUrl.TIME_OPTION)),
                     fieldWithPath("activated").type(BOOLEAN).description("알람 활성화 여부")
                 )
             ));
@@ -126,7 +126,7 @@ class UserAlarmControllerTest extends ApiDocumentationTest {
                     fieldWithPath("templateId").type(NUMBER).attributes(getConstraintsAttribute(UserAlarmRequest.class, "templateId")).description("템플릿 id"),
                     fieldWithPath("isActivated").type(BOOLEAN).attributes(getConstraintsAttribute(UserAlarmRequest.class, "isActivated")).description("활성화 여부"),
                     fieldWithPath("alarmDateTime").type(STRING).attributes(getDateTimeFormat(), getConstraintsAttribute(UserAlarmRequest.class, "alarmDateTime")).description("알람 예약 날짜 및 시간"),
-                    fieldWithPath("alarmTimeOption").type(STRING).attributes(getConstraintsAttribute(UserAlarmRequest.class, "alarmTimeOption")).description(generateLinkCode(DocumentEnumLinkGenerator.DocUrl.ALARM_TIME_OPTION))
+                    fieldWithPath("timeOption").type(STRING).attributes(getConstraintsAttribute(UserAlarmRequest.class, "timeOption")).description(generateLinkCode(DocumentEnumLinkGenerator.DocUrl.TIME_OPTION))
                 )
             ));
     }

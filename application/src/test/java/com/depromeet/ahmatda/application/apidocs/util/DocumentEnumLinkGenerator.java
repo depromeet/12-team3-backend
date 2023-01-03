@@ -17,7 +17,7 @@ public interface DocumentEnumLinkGenerator {
     enum DocUrl {
         ONBOARDING_CATEGORY("onboardingCategory", "온보딩_카테고리"),
         USER_REGISTER_CODE("userRegisterCode", "유저_등록"),
-        ALARM_TIME_OPTION("alarmTimeOption", "알람_시간_조절_옵션"),
+        TIME_OPTION("timeOption", "알람_시간_조절_옵션"),
         ALARM_TYPE("alarmType", "알람_타입");
 
         private final String pageId;
