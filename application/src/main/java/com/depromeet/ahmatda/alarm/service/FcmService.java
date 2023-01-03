@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.alarm.controller.service;
+package com.depromeet.ahmatda.alarm.service;
 
 import com.depromeet.ahmatda.alarm.dto.FcmTokenRequest;
 

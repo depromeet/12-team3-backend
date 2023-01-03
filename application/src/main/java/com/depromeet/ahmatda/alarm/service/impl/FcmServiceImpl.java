@@ -1,6 +1,6 @@
-package com.depromeet.ahmatda.alarm.controller.service.impl;
+package com.depromeet.ahmatda.alarm.service.impl;
 
-import com.depromeet.ahmatda.alarm.controller.service.FcmService;
+import com.depromeet.ahmatda.alarm.service.FcmService;
 import com.depromeet.ahmatda.alarm.dto.FcmTokenRequest;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.fcm.FcmToken;

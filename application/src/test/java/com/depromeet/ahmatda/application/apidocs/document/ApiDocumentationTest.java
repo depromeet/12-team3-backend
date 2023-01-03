@@ -4,7 +4,7 @@ import com.depromeet.ahmatda.alarm.AlarmService;
 import com.depromeet.ahmatda.alarm.UserAlarmController;
 import com.depromeet.ahmatda.alarm.FcmPushService;
 import com.depromeet.ahmatda.alarm.controller.FcmController;
-import com.depromeet.ahmatda.alarm.controller.service.FcmService;
+import com.depromeet.ahmatda.alarm.service.FcmService;
 import com.depromeet.ahmatda.category.CategoryController;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.recommend.RecommendController;

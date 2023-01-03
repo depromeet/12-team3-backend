@@ -2,7 +2,7 @@ package com.depromeet.ahmatda.alarm.controller;
 
 import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.alarm.FcmPushService;
-import com.depromeet.ahmatda.alarm.controller.service.FcmService;
+import com.depromeet.ahmatda.alarm.service.FcmService;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.alarm.dto.FcmTokenRequest;
 import javax.servlet.http.HttpServletRequest;
