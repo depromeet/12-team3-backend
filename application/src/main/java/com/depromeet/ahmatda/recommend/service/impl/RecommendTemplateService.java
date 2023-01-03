@@ -97,6 +97,7 @@ public class RecommendTemplateService implements RecommendService {
         List<RecommendItem> recommendItems = recommendAdaptor.findByItemsCategoryType(categoryResponse.getType());
         RecommendItemResponse recommendItemResponse = RecommendItemResponse.from(recommendItems);
         if (recommendItemResponse.getItems() != null) {
+            recommendItemResponse.getItems().stream().distinct();
             recommendItemResponse.setItems(recommendItemsRandomShuffle(recommendItemResponse.getItems()));
         }
         return recommendItemResponse;
