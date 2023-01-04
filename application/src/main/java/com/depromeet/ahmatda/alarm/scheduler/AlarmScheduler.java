@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AlarmScheduler {
 
-    public static final long SCHEDULER_REPEAT_CYCLE = 5000L;
+    public static final long SCHEDULER_REPEAT_CYCLE = 10000L;
     
     private final AlarmAdaptor alarmAdaptor;
     private final FcmPushService fcmPushService;
