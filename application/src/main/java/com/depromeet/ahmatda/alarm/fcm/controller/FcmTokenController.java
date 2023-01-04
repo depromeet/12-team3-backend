@@ -1,10 +1,9 @@
-package com.depromeet.ahmatda.alarm.controller;
+package com.depromeet.ahmatda.alarm.fcm.controller;
 
 import com.depromeet.ahmatda.HttpHeader;
-import com.depromeet.ahmatda.alarm.service.impl.FcmPushService;
-import com.depromeet.ahmatda.alarm.service.FcmTokenService;
+import com.depromeet.ahmatda.alarm.fcm.service.FcmTokenService;
 import com.depromeet.ahmatda.common.response.RestResponse;
-import com.depromeet.ahmatda.alarm.dto.FcmTokenRequest;
+import com.depromeet.ahmatda.alarm.fcm.dto.FcmTokenRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
