@@ -90,4 +90,9 @@ public class Alarm extends BaseTimeEntity {
                 .getUser()
                 .getId();
     }
+
+    public String getTemplateName() {
+        return this.getTemplate()
+                .getTemplateName();
+    }
 }

@@ -1,5 +1,7 @@
-package com.depromeet.ahmatda.alarm.fcm;
+package com.depromeet.ahmatda.alarm.fcm.message;
 
+import com.depromeet.ahmatda.alarm.fcm.message.concept.MessageConcept;
+import com.depromeet.ahmatda.alarm.fcm.message.concept.MessageConceptFactory;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,14 +27,14 @@ public class FcmMessage {
         private String title;
         private String body;
 
-        public static Notification createNotificationByAlarmEntity(Alarm alarm) {
-            String titleMessage = MessageConst.BASIC_ALARM_TITLE_PREFIX + alarm.getTemplate().getTemplateName();
-
-            String itemNames = alarm.getTemplate().getItems().stream()
+        public static Notification createNotificationByAlarmEntity(final Alarm alarm) {
+            final String itemNames = alarm.getTemplate().getItems().stream()
                     .map(item -> item.getName())
                     .collect(Collectors.joining(","));
 
-            String bodyMessage = itemNames + MessageConst.BASIC_ALARM_BODY_POSTFIX;
+            final MessageConcept messageConcept = MessageConceptFactory.createMessageConcept();
+            final String titleMessage = messageConcept.makeTitle(alarm);
+            final String bodyMessage =  messageConcept.makeBody(itemNames);
 
             return Notification.builder()
                     .title(titleMessage)
