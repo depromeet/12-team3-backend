@@ -49,7 +49,6 @@ public class RecommendController {
 
     @GetMapping(value = "/items")
     public ResponseEntity<RestResponse<RecommendItemResponse>> getRecommendItems(@RequestParam("category") Long categoryId) {
-        //TODO : 해당 카테고리가 요청한 유저의 카테고리인지 검증 추가
         RecommendItemResponse recommendItemResponses = recommendService.findByRecommendItems(categoryId);
         return ResponseEntity.ok().body(RestResponse.ok(recommendItemResponses));
     }

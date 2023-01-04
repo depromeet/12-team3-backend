@@ -4,22 +4,15 @@ import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.alarm.UserAlarmRequest;
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.application.apidocs.util.DocumentEnumLinkGenerator;
-import com.depromeet.ahmatda.application.apidocs.util.DocumentFormatGenerator;
 import com.depromeet.ahmatda.common.response.RestResponse;
-import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.AlarmResponse;
-import com.depromeet.ahmatda.domain.alarm.AlarmTimeOption;
+import com.depromeet.ahmatda.domain.alarm.TimeOption;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import com.depromeet.ahmatda.domain.user.User;
-import com.depromeet.ahmatda.onboard.OnboardingRequest;
-import com.depromeet.ahmatda.user.UserRegisterCode;
-import com.depromeet.ahmatda.user.token.UserToken;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
-import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
@@ -32,8 +25,6 @@ import static com.depromeet.ahmatda.application.apidocs.util.DocumentConstraints
 import static com.depromeet.ahmatda.application.apidocs.util.DocumentEnumLinkGenerator.generateLinkCode;
 import static com.depromeet.ahmatda.application.apidocs.util.DocumentFormatGenerator.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
@@ -86,7 +77,7 @@ class UserAlarmControllerTest extends ApiDocumentationTest {
                     fieldWithPath("alarmTime").type(NULL).description("요일별 알람 - 알람 시간(미구현)"),
                     fieldWithPath("replayType").type(NULL).description("요일별 알람 - 반복 유형(미구현)"),
                     fieldWithPath("alarmDateTime").type(STRING).attributes(getDateTimeFormat()).description("날짜별 알람 - 알람 날짜 및 시간"),
-                    fieldWithPath("timeOption").type(STRING).description(generateLinkCode(DocumentEnumLinkGenerator.DocUrl.ALARM_TIME_OPTION)),
+                    fieldWithPath("timeOption").type(STRING).description(generateLinkCode(DocumentEnumLinkGenerator.DocUrl.TIME_OPTION)),
                     fieldWithPath("activated").type(BOOLEAN).description("알람 활성화 여부")
                 )
             ));
@@ -103,7 +94,7 @@ class UserAlarmControllerTest extends ApiDocumentationTest {
             1L,
             true,
             LocalDateTime.of(2020, 1, 1, 1, 1, 1),
-            AlarmTimeOption.TEN_MINUTES
+            TimeOption.TEN_MINUTES
         );
 
         given(alarmService.setTemplateDailyAlarm(user, request)).willReturn(dailyAlarm);
@@ -135,7 +126,7 @@ class UserAlarmControllerTest extends ApiDocumentationTest {
                     fieldWithPath("templateId").type(NUMBER).attributes(getConstraintsAttribute(UserAlarmRequest.class, "templateId")).description("템플릿 id"),
                     fieldWithPath("isActivated").type(BOOLEAN).attributes(getConstraintsAttribute(UserAlarmRequest.class, "isActivated")).description("활성화 여부"),
                     fieldWithPath("alarmDateTime").type(STRING).attributes(getDateTimeFormat(), getConstraintsAttribute(UserAlarmRequest.class, "alarmDateTime")).description("알람 예약 날짜 및 시간"),
-                    fieldWithPath("alarmTimeOption").type(STRING).attributes(getConstraintsAttribute(UserAlarmRequest.class, "alarmTimeOption")).description(generateLinkCode(DocumentEnumLinkGenerator.DocUrl.ALARM_TIME_OPTION))
+                    fieldWithPath("timeOption").type(STRING).attributes(getConstraintsAttribute(UserAlarmRequest.class, "timeOption")).description(generateLinkCode(DocumentEnumLinkGenerator.DocUrl.TIME_OPTION))
                 )
             ));
     }

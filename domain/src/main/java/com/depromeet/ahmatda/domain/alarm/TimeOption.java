@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.function.Function;
 
 @Getter
-public enum AlarmTimeOption implements EnumType {
+public enum TimeOption implements EnumType {
     ONTIME("정시", t -> t),
     TEN_MINUTES("10분 전", t -> t.minusMinutes(10)),
     THIRTY_MINUTES("30분 전", t -> t.minusMinutes(30)),
@@ -20,7 +20,7 @@ public enum AlarmTimeOption implements EnumType {
     private final String label;
     private final Function<LocalDateTime, LocalDateTime> function;
 
-    AlarmTimeOption(String label, Function<LocalDateTime, LocalDateTime> function) {
+    TimeOption(String label, Function<LocalDateTime, LocalDateTime> function) {
         this.label = label;
         this.function = function;
     }

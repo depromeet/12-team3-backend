@@ -60,7 +60,7 @@ public class AlarmServiceImpl implements AlarmService {
             throw new UnsupportedOperationException();
         } else if (AlarmType.isDaily(userAlarmRequest.getAlarmType())) {
             alarm.updateDailyAlarm(
-                userAlarmRequest.getIsActivated(), userAlarmRequest.getAlarmDateTime(), userAlarmRequest.getAlarmTimeOption()
+                userAlarmRequest.getIsActivated(), userAlarmRequest.getAlarmDateTime(), userAlarmRequest.getTimeOption()
             );
         }
 
@@ -72,7 +72,7 @@ public class AlarmServiceImpl implements AlarmService {
                 template,
                 userAlarmRequest.getIsActivated(),
                 userAlarmRequest.getAlarmDateTime(),
-                userAlarmRequest.getAlarmTimeOption()
+                userAlarmRequest.getTimeOption()
         );
     }
 

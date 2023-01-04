@@ -1,7 +1,7 @@
 package com.depromeet.ahmatda.application.apidocs.document.alarm;
 
 import com.depromeet.ahmatda.domain.alarm.Alarm;
-import com.depromeet.ahmatda.domain.alarm.AlarmTimeOption;
+import com.depromeet.ahmatda.domain.alarm.TimeOption;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import com.depromeet.ahmatda.domain.template.Template;
 
@@ -22,7 +22,7 @@ public class AlarmTestConst {
             .template(mock(Template.class))
             .alarmType(AlarmType.DAILY)
             .alarmDateTime(LocalDateTime.of(2023, 1, 1, 13, 55, 1))
-            .timeOption(AlarmTimeOption.ONE_DAY)
+            .timeOption(TimeOption.ONE_DAY)
             .build();
 }
 
