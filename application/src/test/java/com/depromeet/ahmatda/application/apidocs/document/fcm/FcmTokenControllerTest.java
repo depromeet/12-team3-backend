@@ -20,7 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.restdocs.payload.JsonFieldType;
 
-public class FcmControllerTest extends ApiDocumentationTest {
+public class FcmTokenControllerTest extends ApiDocumentationTest {
 
     @DisplayName("유저 FCM Token 갱신")
     @Test

@@ -3,7 +3,7 @@ package com.depromeet.ahmatda.application.apidocs.document;
 import com.depromeet.ahmatda.alarm.AlarmService;
 import com.depromeet.ahmatda.alarm.UserAlarmController;
 import com.depromeet.ahmatda.alarm.service.impl.FcmPushService;
-import com.depromeet.ahmatda.alarm.controller.FcmController;
+import com.depromeet.ahmatda.alarm.controller.FcmTokenController;
 import com.depromeet.ahmatda.alarm.service.FcmTokenService;
 import com.depromeet.ahmatda.category.CategoryController;
 import com.depromeet.ahmatda.category.service.CategoryService;
@@ -32,7 +32,7 @@ import org.springframework.test.web.servlet.MockMvc;
     TemplateController.class,
     RecommendController.class,
     UserAlarmController.class,
-    FcmController.class
+    FcmTokenController.class
 })
 @AutoConfigureRestDocs
 @ActiveProfiles("test")

@@ -4,7 +4,7 @@ import com.depromeet.ahmatda.alarm.service.FcmTokenService;
 import com.depromeet.ahmatda.alarm.dto.FcmTokenRequest;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.fcm.FcmToken;
-import com.depromeet.ahmatda.domain.fcm.adptor.FcmAdaptor;
+import com.depromeet.ahmatda.domain.fcm.adptor.FcmTokenAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
 import com.depromeet.ahmatda.exception.BusinessException;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FcmTokenServiceImpl implements FcmTokenService {
 
-    private final FcmAdaptor fcmAdaptor;
+    private final FcmTokenAdaptor fcmTokenAdaptor;
     private final UserAdaptor userAdaptor;
 
     @Override
@@ -28,6 +28,6 @@ public class FcmTokenServiceImpl implements FcmTokenService {
             .fcmToken(fcmTokenRequest.getFcmToken())
             .build();
 
-        fcmAdaptor.renewFcmToken(fcmToken);
+        fcmTokenAdaptor.renewFcmToken(fcmToken);
     }
 }

@@ -84,4 +84,10 @@ public class Alarm extends BaseTimeEntity {
         return alarm.getTimeOption()
             .applyAlarmOption(alarm.getAlarmDateTime()).isEqual(nowTime);
     }
+
+    public Long getUserId() {
+        return this.getTemplate()
+                .getUser()
+                .getId();
+    }
 }

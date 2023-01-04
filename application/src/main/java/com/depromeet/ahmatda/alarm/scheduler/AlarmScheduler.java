@@ -1,17 +1,18 @@
 package com.depromeet.ahmatda.alarm.scheduler;
 
-import com.depromeet.ahmatda.alarm.service.FcmTokenService;
 import com.depromeet.ahmatda.alarm.service.impl.FcmPushService;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.AlarmAdaptor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
@@ -23,9 +24,10 @@ public class AlarmScheduler {
     private final AlarmAdaptor alarmAdaptor;
     private final FcmPushService fcmPushService;
 
+
     @Scheduled(fixedDelay = SCHEDULER_REPEAT_CYCLE)
-    @Async(value = "alarmExecutor")
-    public void findUnsentAlarm() {
+    @Transactional
+    public void findUnsentAlarm() throws IOException {
         LocalDateTime nowTime = LocalDateTime.now().withSecond(0).withNano(0);
         List<Alarm> unsentAlarms = alarmAdaptor.findUnsentAlarm();
         List<Alarm> targetAlarms = unsentAlarms.stream()
@@ -33,6 +35,6 @@ public class AlarmScheduler {
             .filter(alarm -> alarm.isTargetAlarm(alarm, nowTime))
             .collect(Collectors.toList());
 
-
+        fcmPushService.sendAlarms(targetAlarms);
     }
 }
