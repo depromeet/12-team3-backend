@@ -1,5 +1,6 @@
 package com.depromeet.ahmatda.domain.alarm;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,9 @@ public class AlarmAdaptor {
 
     public Optional<Alarm> findAlarmByTemplateId(Long templateId) {
         return alarmRepository.findByTemplateId(templateId);
+    }
+
+    public List<Alarm> findUnsentAlarm() {
+        return alarmRepository.findAllUnsentAlarm();
     }
 }

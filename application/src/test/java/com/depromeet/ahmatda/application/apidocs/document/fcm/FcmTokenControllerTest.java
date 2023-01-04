@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.depromeet.ahmatda.HttpHeader;
-import com.depromeet.ahmatda.alarm.dto.FcmTokenRequest;
+import com.depromeet.ahmatda.alarm.fcm.dto.FcmTokenRequest;
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.restdocs.payload.JsonFieldType;
 
-public class FcmControllerTest extends ApiDocumentationTest {
+public class FcmTokenControllerTest extends ApiDocumentationTest {
 
     @DisplayName("유저 FCM Token 갱신")
     @Test

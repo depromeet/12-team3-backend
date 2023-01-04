@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.alarm.dto;
+package com.depromeet.ahmatda.alarm.fcm.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

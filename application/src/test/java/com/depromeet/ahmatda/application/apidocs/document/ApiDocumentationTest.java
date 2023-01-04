@@ -2,9 +2,9 @@ package com.depromeet.ahmatda.application.apidocs.document;
 
 import com.depromeet.ahmatda.alarm.AlarmService;
 import com.depromeet.ahmatda.alarm.UserAlarmController;
-import com.depromeet.ahmatda.alarm.FcmPushService;
-import com.depromeet.ahmatda.alarm.controller.FcmController;
-import com.depromeet.ahmatda.alarm.controller.service.FcmService;
+import com.depromeet.ahmatda.alarm.fcm.service.impl.FcmPushService;
+import com.depromeet.ahmatda.alarm.fcm.controller.FcmTokenController;
+import com.depromeet.ahmatda.alarm.fcm.service.FcmTokenService;
 import com.depromeet.ahmatda.category.CategoryController;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.recommend.RecommendController;
@@ -32,7 +32,7 @@ import org.springframework.test.web.servlet.MockMvc;
     TemplateController.class,
     RecommendController.class,
     UserAlarmController.class,
-    FcmController.class
+    FcmTokenController.class
 })
 @AutoConfigureRestDocs
 @ActiveProfiles("test")
@@ -67,7 +67,7 @@ public abstract class ApiDocumentationTest {
     protected AlarmService alarmService;
 
     @MockBean
-    protected FcmService fcmService;
+    protected FcmTokenService fcmTokenService;
 
     @MockBean
     protected FcmPushService fcmPushService;

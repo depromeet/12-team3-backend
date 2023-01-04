@@ -21,7 +21,8 @@ import java.time.LocalTime;
 @Table(name = "alarm")
 public class Alarm extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "is_activated")
@@ -71,5 +72,27 @@ public class Alarm extends BaseTimeEntity {
         this.isActivated = isActivated;
         this.alarmDateTime = alarmDateTime;
         this.timeOption = timeOption;
+    }
+
+    public boolean checkMaximumAlarmOption(Alarm alarm, LocalDateTime nowTime) {
+        final int maximumAlarmOptionTime = 7;
+        return nowTime.isBefore(alarm.alarmDateTime.plusSeconds(1)) && nowTime.plusDays(maximumAlarmOptionTime)
+            .isAfter(alarm.alarmDateTime);
+    }
+
+    public boolean isTargetAlarm(Alarm alarm, LocalDateTime nowTime) {
+        return alarm.getTimeOption()
+            .applyAlarmOption(alarm.getAlarmDateTime()).isEqual(nowTime);
+    }
+
+    public Long getUserId() {
+        return this.getTemplate()
+                .getUser()
+                .getId();
+    }
+
+    public String getTemplateName() {
+        return this.getTemplate()
+                .getTemplateName();
     }
 }
