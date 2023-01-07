@@ -1,6 +1,8 @@
 package com.depromeet.ahmatda.domain.recommend;
 
 import com.depromeet.ahmatda.domain.BaseTimeEntity;
+import com.depromeet.ahmatda.domain.category.CategoryType;
+import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -13,10 +15,14 @@ public class RecommendCategory extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recomment_category_id")
-    private RecommendCategory recommendCategory;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private CategoryType type;
 
     @Column
-    private String sectionName;
+    private String name;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private AhmatdaEmoji emoji;
 }
