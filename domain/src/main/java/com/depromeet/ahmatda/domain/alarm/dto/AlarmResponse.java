@@ -1,5 +1,10 @@
-package com.depromeet.ahmatda.domain.alarm;
+package com.depromeet.ahmatda.domain.alarm.dto;
 
+import com.depromeet.ahmatda.domain.alarm.Alarm;
+import com.depromeet.ahmatda.domain.alarm.AlarmDayOfWeekType;
+import com.depromeet.ahmatda.domain.alarm.AlarmReplayType;
+import com.depromeet.ahmatda.domain.alarm.AlarmType;
+import com.depromeet.ahmatda.domain.alarm.TimeOption;
 import lombok.Builder;
 import lombok.Getter;
 

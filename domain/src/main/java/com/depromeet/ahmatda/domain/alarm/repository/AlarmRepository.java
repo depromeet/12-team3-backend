@@ -1,5 +1,6 @@
-package com.depromeet.ahmatda.domain.alarm;
+package com.depromeet.ahmatda.domain.alarm.repository;
 
+import com.depromeet.ahmatda.domain.alarm.Alarm;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

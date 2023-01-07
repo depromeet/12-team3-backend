@@ -2,7 +2,7 @@ package com.depromeet.ahmatda.alarm.scheduler;
 
 import com.depromeet.ahmatda.alarm.fcm.service.impl.FcmPushService;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
-import com.depromeet.ahmatda.domain.alarm.AlarmAdaptor;
+import com.depromeet.ahmatda.domain.alarm.adaptor.AlarmAdaptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;

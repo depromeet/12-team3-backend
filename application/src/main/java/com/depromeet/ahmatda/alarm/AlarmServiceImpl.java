@@ -2,7 +2,7 @@ package com.depromeet.ahmatda.alarm;
 
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
-import com.depromeet.ahmatda.domain.alarm.AlarmAdaptor;
+import com.depromeet.ahmatda.domain.alarm.adaptor.AlarmAdaptor;
 import com.depromeet.ahmatda.domain.alarm.AlarmInfo;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import com.depromeet.ahmatda.domain.template.Template;

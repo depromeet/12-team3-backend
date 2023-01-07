@@ -1,5 +1,7 @@
-package com.depromeet.ahmatda.domain.alarm;
+package com.depromeet.ahmatda.domain.alarm.adaptor;
 
+import com.depromeet.ahmatda.domain.alarm.Alarm;
+import com.depromeet.ahmatda.domain.alarm.repository.AlarmRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

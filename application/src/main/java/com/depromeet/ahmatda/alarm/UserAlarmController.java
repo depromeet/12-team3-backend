@@ -4,7 +4,7 @@ import com.depromeet.ahmatda.HttpHeader;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.common.response.RestResponse;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
-import com.depromeet.ahmatda.domain.alarm.AlarmResponse;
+import com.depromeet.ahmatda.domain.alarm.dto.AlarmResponse;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.user.UserNotExistException;
 import com.depromeet.ahmatda.user.service.UserService;

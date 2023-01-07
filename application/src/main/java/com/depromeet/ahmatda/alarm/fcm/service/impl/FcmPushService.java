@@ -71,6 +71,7 @@ public class FcmPushService {
 
         final Response response = okHttpClient.newCall(request).execute();
         log.info("Response = {}", response.body().string());
+
     }
 
     private String getAccessToken() throws IOException {
