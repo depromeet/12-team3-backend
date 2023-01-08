@@ -23,13 +23,8 @@ public class RecommendItem extends BaseTimeEntity {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "recommend_section_id")
-    private RecommendTemplate recommendSection;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private Category category;
+    private RecommendSection recommendSection;
 
     @Column
     private String itemName;
-
 }
