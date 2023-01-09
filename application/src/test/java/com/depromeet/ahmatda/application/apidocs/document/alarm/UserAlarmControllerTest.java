@@ -1,11 +1,11 @@
 package com.depromeet.ahmatda.application.apidocs.document.alarm;
 
 import com.depromeet.ahmatda.HttpHeader;
-import com.depromeet.ahmatda.alarm.UserAlarmRequest;
+import com.depromeet.ahmatda.alarm.dto.UserAlarmRequest;
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import com.depromeet.ahmatda.application.apidocs.util.DocumentEnumLinkGenerator;
 import com.depromeet.ahmatda.common.response.RestResponse;
-import com.depromeet.ahmatda.domain.alarm.AlarmResponse;
+import com.depromeet.ahmatda.domain.alarm.dto.AlarmResponse;
 import com.depromeet.ahmatda.domain.alarm.TimeOption;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;
 import com.depromeet.ahmatda.domain.user.User;

@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.depromeet.ahmatda.HttpHeader;
-import com.depromeet.ahmatda.alarm.fcm.dto.FcmTokenRequest;
+import com.depromeet.ahmatda.fcm.dto.FcmTokenRequest;
 import com.depromeet.ahmatda.application.apidocs.document.ApiDocumentationTest;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
