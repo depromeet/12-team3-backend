@@ -29,6 +29,7 @@ public class FcmMessage {
 
         public static Notification createNotificationByAlarmEntity(final Alarm alarm) {
             final String itemNames = alarm.getTemplate().getItems().stream()
+                    .filter(item -> !item.isTake())
                     .map(item -> item.getName())
                     .collect(Collectors.joining(","));
 
