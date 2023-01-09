@@ -1,5 +1,7 @@
-package com.depromeet.ahmatda.alarm;
+package com.depromeet.ahmatda.alarm.service.impl;
 
+import com.depromeet.ahmatda.alarm.dto.UserAlarmRequest;
+import com.depromeet.ahmatda.alarm.service.AlarmService;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.adaptor.AlarmAdaptor;

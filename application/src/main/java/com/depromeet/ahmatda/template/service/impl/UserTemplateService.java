@@ -1,6 +1,6 @@
 package com.depromeet.ahmatda.template.service.impl;
 
-import com.depromeet.ahmatda.alarm.AlarmService;
+import com.depromeet.ahmatda.alarm.service.AlarmService;
 import com.depromeet.ahmatda.category.exception.CategoryNotExistException;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.item.Item;

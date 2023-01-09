@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.alarm;
+package com.depromeet.ahmatda.alarm.dto;
 
 import com.depromeet.ahmatda.domain.alarm.TimeOption;
 import com.depromeet.ahmatda.domain.alarm.AlarmType;

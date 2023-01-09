@@ -1,5 +1,6 @@
-package com.depromeet.ahmatda.alarm;
+package com.depromeet.ahmatda.alarm.service;
 
+import com.depromeet.ahmatda.alarm.dto.UserAlarmRequest;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.user.User;
 

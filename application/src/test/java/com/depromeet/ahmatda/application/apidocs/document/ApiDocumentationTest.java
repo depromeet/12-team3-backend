@@ -1,7 +1,7 @@
 package com.depromeet.ahmatda.application.apidocs.document;
 
-import com.depromeet.ahmatda.alarm.AlarmService;
-import com.depromeet.ahmatda.alarm.UserAlarmController;
+import com.depromeet.ahmatda.alarm.service.AlarmService;
+import com.depromeet.ahmatda.alarm.controller.UserAlarmController;
 import com.depromeet.ahmatda.alarm.fcm.service.impl.FcmPushService;
 import com.depromeet.ahmatda.alarm.fcm.controller.FcmTokenController;
 import com.depromeet.ahmatda.alarm.fcm.service.FcmTokenService;

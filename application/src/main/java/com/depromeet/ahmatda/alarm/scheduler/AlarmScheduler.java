@@ -24,7 +24,6 @@ public class AlarmScheduler {
     private final AlarmAdaptor alarmAdaptor;
     private final FcmPushService fcmPushService;
 
-    //TODO 알람 히스토리, 발송 플래그, 로직 재검토
     @Scheduled(fixedDelay = SCHEDULER_REPEAT_CYCLE)
     @Transactional
     public void sendAlarmSchedule() throws IOException {
