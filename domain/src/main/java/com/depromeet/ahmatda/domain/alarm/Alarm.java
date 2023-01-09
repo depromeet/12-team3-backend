@@ -95,4 +95,13 @@ public class Alarm extends BaseTimeEntity {
         return this.getTemplate()
                 .getTemplateName();
     }
+
+    public AlarmMessageHistory sendOK(String message) {
+        this.isSend = true;
+        return AlarmMessageHistory.builder()
+                .alarm(this)
+                .message(message)
+                .sentAt(LocalDateTime.now())
+                .build();
+    }
 }

@@ -34,7 +34,7 @@ public class FcmMessage {
 
             final MessageConcept messageConcept = MessageConceptFactory.createMessageConcept();
             final String titleMessage = messageConcept.makeTitle(alarm);
-            final String bodyMessage =  messageConcept.makeBody(itemNames);
+            final String bodyMessage = messageConcept.makeBody(itemNames);
 
             return Notification.builder()
                     .title(titleMessage)

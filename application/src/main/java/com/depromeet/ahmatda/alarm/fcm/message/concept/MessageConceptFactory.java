@@ -14,10 +14,6 @@ public class MessageConceptFactory {
     public static MessageConcept createMessageConcept() {
         int random = new Random().nextInt(3);
         String randomConcept = concepts[random];
-        System.out.println(random);
-        System.out.println(random);
-        System.out.println(random);
-        System.out.println(random);
         if (randomConcept == "BASIC") {
             return new BasicMessage();
         } else if (randomConcept == "CHEERFUL") {

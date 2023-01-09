@@ -27,7 +27,7 @@ public class AlarmScheduler {
     //TODO 알람 히스토리, 발송 플래그, 로직 재검토
     @Scheduled(fixedDelay = SCHEDULER_REPEAT_CYCLE)
     @Transactional
-    public void findUnsentAlarm() throws IOException {
+    public void sendAlarmSchedule() throws IOException {
         LocalDateTime nowTime = LocalDateTime.now().withSecond(0).withNano(0);
         List<Alarm> unsentAlarms = alarmAdaptor.findUnsentAlarm();
         List<Alarm> targetAlarms = unsentAlarms.stream()

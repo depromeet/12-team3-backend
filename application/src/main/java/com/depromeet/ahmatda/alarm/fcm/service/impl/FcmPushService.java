@@ -4,6 +4,8 @@ import com.depromeet.ahmatda.alarm.fcm.message.FcmMessage;
 import com.depromeet.ahmatda.alarm.fcm.message.FcmMessage.Notification;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
+import com.depromeet.ahmatda.domain.alarm.AlarmMessageHistory;
+import com.depromeet.ahmatda.domain.alarm.adaptor.AlarmMessageHistoryAdaptor;
 import com.depromeet.ahmatda.domain.fcm.adptor.FcmTokenAdaptor;
 import com.depromeet.ahmatda.exception.BusinessException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,15 +33,27 @@ public class FcmPushService {
 
     private final ObjectMapper objectMapper;
     private final FcmTokenAdaptor fcmTokenAdaptor;
+    private final AlarmMessageHistoryAdaptor alarmMessageHistoryAdaptor;
 
     public void sendAlarms(List<Alarm> alarms) throws IOException {
         for (Alarm alarm : alarms) {
-            String message = makeMessage(alarm);
-            sendAlarm(message);
+            FcmMessage message = makeMessage(alarm);
+            boolean isSendOk = sendAlarm(message);
+
+            if (isSendOk) {
+                String notificationContent = getNotificationContent(message);
+                AlarmMessageHistory alarmMessageHistory = alarm.sendOK(notificationContent);
+                alarmMessageHistoryAdaptor.save(alarmMessageHistory);
+            }
         }
     }
 
-    private String makeMessage(final Alarm alarm) throws JsonProcessingException {
+    private String getNotificationContent(FcmMessage message) {
+        return message.getMessage().getNotification().getTitle()
+                + message.getMessage().getNotification().getBody();
+    }
+
+    private FcmMessage makeMessage(final Alarm alarm) throws JsonProcessingException {
         final Long userId = alarm.getUserId();
         final String fcmToken = fcmTokenAdaptor.findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND))
@@ -54,10 +68,12 @@ public class FcmPushService {
                         .build())
                 .build();
 
-        return objectMapper.writeValueAsString(fcmMessage);
+        return fcmMessage;
     }
 
-    private void sendAlarm(final String message) throws IOException {
+    private boolean sendAlarm(final FcmMessage fcmMessage) throws IOException {
+        String message = objectMapper.writeValueAsString(fcmMessage);
+
         final OkHttpClient okHttpClient = new OkHttpClient();
         final RequestBody requestBody = RequestBody.create(message,
                 MediaType.get("application/json; charset=utf-8"));
@@ -72,6 +88,7 @@ public class FcmPushService {
         final Response response = okHttpClient.newCall(request).execute();
         log.info("Response = {}", response.body().string());
 
+        return response.isSuccessful();
     }
 
     private String getAccessToken() throws IOException {
