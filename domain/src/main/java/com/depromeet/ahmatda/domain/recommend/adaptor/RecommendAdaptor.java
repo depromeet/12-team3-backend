@@ -1,8 +1,10 @@
 package com.depromeet.ahmatda.domain.recommend.adaptor;
 
+import com.depromeet.ahmatda.domain.recommend.RecommendCategory;
 import com.depromeet.ahmatda.domain.recommend.RecommendItem;
 import com.depromeet.ahmatda.domain.recommend.RecommendSection;
 import com.depromeet.ahmatda.domain.recommend.RecommendTemplate;
+import com.depromeet.ahmatda.domain.recommend.repository.RecommendCategoryRepository;
 import com.depromeet.ahmatda.domain.recommend.repository.RecommendItemRepository;
 import com.depromeet.ahmatda.domain.recommend.repository.RecommendSectionRepository;
 import com.depromeet.ahmatda.domain.recommend.repository.RecommendTemplateRepository;
@@ -15,11 +17,16 @@ import java.util.List;
 @Service
 public class RecommendAdaptor {
 
+    private final RecommendCategoryRepository recommendCategoryRepository;
     private final RecommendTemplateRepository recommendTemplateRepository;
-    private final RecommendItemRepository recommendItemRepository;
     private final RecommendSectionRepository recommendSectionRepository;
+    private final RecommendItemRepository recommendItemRepository;
 
-    public List<RecommendTemplate> findByCategoryId(Long recommendCategoryId) {
+    public List<RecommendCategory> getAllRecommendCategory() {
+        return recommendCategoryRepository.findAll();
+    }
+
+    public List<RecommendTemplate> getRtsByRcId(Long recommendCategoryId) {
         return recommendTemplateRepository.findByRecommendCategoryId(recommendCategoryId);
     }
 
@@ -27,7 +34,7 @@ public class RecommendAdaptor {
         return recommendSectionRepository.findRandom();
     }
 
-    public List<RecommendItem> findAllByRecommendSectionId(Long recommendSectionId) {
+    public List<RecommendItem> getRiByRs(Long recommendSectionId) {
         return recommendItemRepository.findAllByRecommendSectionId(recommendSectionId);
     }
 }
