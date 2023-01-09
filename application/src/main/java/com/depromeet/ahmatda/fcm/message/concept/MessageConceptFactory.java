@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.alarm.fcm.message.concept;
+package com.depromeet.ahmatda.fcm.message.concept;
 
 import java.util.Random;
 

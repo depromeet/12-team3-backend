@@ -2,9 +2,9 @@ package com.depromeet.ahmatda.application.apidocs.document;
 
 import com.depromeet.ahmatda.alarm.service.AlarmService;
 import com.depromeet.ahmatda.alarm.controller.UserAlarmController;
-import com.depromeet.ahmatda.alarm.fcm.service.impl.FcmPushService;
-import com.depromeet.ahmatda.alarm.fcm.controller.FcmTokenController;
-import com.depromeet.ahmatda.alarm.fcm.service.FcmTokenService;
+import com.depromeet.ahmatda.fcm.service.impl.FcmPushService;
+import com.depromeet.ahmatda.fcm.controller.FcmTokenController;
+import com.depromeet.ahmatda.fcm.service.FcmTokenService;
 import com.depromeet.ahmatda.category.CategoryController;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.recommend.RecommendController;

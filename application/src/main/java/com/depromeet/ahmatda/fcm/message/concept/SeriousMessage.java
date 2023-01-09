@@ -1,6 +1,6 @@
-package com.depromeet.ahmatda.alarm.fcm.message.concept;
+package com.depromeet.ahmatda.fcm.message.concept;
 
-import com.depromeet.ahmatda.alarm.fcm.message.MessageConst;
+import com.depromeet.ahmatda.fcm.message.MessageConst;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 
 public class SeriousMessage extends MessageConcept {

@@ -1,7 +1,6 @@
-package com.depromeet.ahmatda.alarm.fcm.service.impl;
+package com.depromeet.ahmatda.fcm.service.impl;
 
-import com.depromeet.ahmatda.alarm.fcm.message.FcmMessage;
-import com.depromeet.ahmatda.alarm.fcm.message.FcmMessage.Notification;
+import com.depromeet.ahmatda.fcm.message.FcmMessage;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.AlarmMessageHistory;
@@ -59,7 +58,7 @@ public class FcmPushService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND))
                 .getFcmToken();
 
-        final Notification notification = FcmMessage.Notification.createNotificationByAlarmEntity(alarm);
+        final FcmMessage.Notification notification = FcmMessage.Notification.createNotificationByAlarmEntity(alarm);
 
         final FcmMessage fcmMessage = FcmMessage.builder()
                 .message(FcmMessage.Message.builder()

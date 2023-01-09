@@ -1,7 +1,7 @@
-package com.depromeet.ahmatda.alarm.fcm.message;
+package com.depromeet.ahmatda.fcm.message;
 
-import com.depromeet.ahmatda.alarm.fcm.message.concept.MessageConcept;
-import com.depromeet.ahmatda.alarm.fcm.message.concept.MessageConceptFactory;
+import com.depromeet.ahmatda.fcm.message.concept.MessageConcept;
+import com.depromeet.ahmatda.fcm.message.concept.MessageConceptFactory;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import lombok.Builder;
 import lombok.Getter;

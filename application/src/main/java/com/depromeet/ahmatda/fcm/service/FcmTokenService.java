@@ -1,6 +1,6 @@
-package com.depromeet.ahmatda.alarm.fcm.service;
+package com.depromeet.ahmatda.fcm.service;
 
-import com.depromeet.ahmatda.alarm.fcm.dto.FcmTokenRequest;
+import com.depromeet.ahmatda.fcm.dto.FcmTokenRequest;
 
 public interface FcmTokenService {
 

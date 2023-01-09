@@ -1,6 +1,6 @@
 package com.depromeet.ahmatda.alarm.scheduler;
 
-import com.depromeet.ahmatda.alarm.fcm.service.impl.FcmPushService;
+import com.depromeet.ahmatda.fcm.service.impl.FcmPushService;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
 import com.depromeet.ahmatda.domain.alarm.adaptor.AlarmAdaptor;
 import lombok.RequiredArgsConstructor;

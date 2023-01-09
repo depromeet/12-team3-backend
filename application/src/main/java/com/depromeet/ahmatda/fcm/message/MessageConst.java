@@ -1,4 +1,4 @@
-package com.depromeet.ahmatda.alarm.fcm.message;
+package com.depromeet.ahmatda.fcm.message;
 
 public abstract class MessageConst {
 
