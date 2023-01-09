@@ -5,12 +5,15 @@ import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.category.Category;
+import com.depromeet.ahmatda.domain.recommend.RecommendCategory;
 import com.depromeet.ahmatda.domain.recommend.RecommendItem;
+import com.depromeet.ahmatda.domain.recommend.RecommendSection;
 import com.depromeet.ahmatda.domain.recommend.RecommendTemplate;
 import com.depromeet.ahmatda.domain.recommend.adaptor.RecommendAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
+import com.depromeet.ahmatda.recommend.dto.SectionRecommendItemData;
 import com.depromeet.ahmatda.recommend.dto.RecommendAddUserTemplateRequest;
-import com.depromeet.ahmatda.recommend.dto.RecommendItemResponse;
+import com.depromeet.ahmatda.recommend.dto.SectionRecommendItemResponse;
 import com.depromeet.ahmatda.recommend.dto.RecommendTemplateResponse;
 import com.depromeet.ahmatda.recommend.exception.RecommendException;
 import com.depromeet.ahmatda.recommend.service.RecommendService;
@@ -36,8 +39,14 @@ public class RecommendTemplateService implements RecommendService {
     private final UserService userService;
 
     @Override
-    public List<RecommendTemplateResponse> findByCategoryId(Long categoryId) {
-        List<RecommendTemplate> recommendTemplates = recommendAdaptor.findByCategoryId(categoryId);
+    public List<CategoryResponse> getRecommendCategory() {
+        List<RecommendCategory> recommendCategories = recommendAdaptor.getAllRecommendCategory();
+        return recommendCategories.stream().map(CategoryResponse::createByRecommendCategory).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RecommendTemplateResponse> findByRecommendCategoryId(Long recommendCategoryId) {
+        List<RecommendTemplate> recommendTemplates = recommendAdaptor.getRtsByRcId(recommendCategoryId);
         return recommendTemplates.stream()
                 .map(RecommendTemplate -> RecommendTemplateResponse.createByEntity(RecommendTemplate))
                 .collect(Collectors.toList());
@@ -92,24 +101,18 @@ public class RecommendTemplateService implements RecommendService {
     }
 
     @Override
-    public RecommendItemResponse findByRecommendItems(Long categoryId) {
-        CategoryResponse categoryResponse = categoryService.getCategoryById(categoryId);
-        List<RecommendItem> recommendItems = recommendAdaptor.findByItemsCategoryType(categoryResponse.getType());
-        RecommendItemResponse recommendItemResponse = RecommendItemResponse.from(recommendItems);
-        if (recommendItemResponse.getItems() != null) {
-            recommendItemResponse.getItems().stream().distinct();
-            recommendItemResponse.setItems(recommendItemsRandomShuffle(recommendItemResponse.getItems()));
-        }
-        return recommendItemResponse;
+    public SectionRecommendItemResponse getRandomSectionItems(String categoryType) {
+        RecommendSection recommendSection = recommendAdaptor.getRandomRecommendSection();
+
+        List<RecommendItem> recommendItems = recommendAdaptor.getRiByRs(recommendSection.getId());
+        Collections.shuffle(recommendItems);
+        recommendItems = recommendItems.subList(0, 5);
+
+        return new SectionRecommendItemResponse(
+          recommendSection.getSectionName(),
+          recommendItems.stream()
+              .map(recommendItem -> new SectionRecommendItemData(recommendItem.getId(), recommendItem.getItemName()))
+              .collect(Collectors.toList())
+        );
     }
-
-    private List<String> recommendItemsRandomShuffle(List<String> items) {
-        Collections.shuffle(items);
-        if (items.size() > 5) {
-            return items.subList(0, 5);
-        }
-        return items;
-    }
-
-
 }
