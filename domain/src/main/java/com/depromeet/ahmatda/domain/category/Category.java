@@ -32,9 +32,6 @@ public class Category extends BaseTimeEntity {
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     private List<Template> templates = new ArrayList<>();
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
-    private List<RecommendTemplate> recommendTemplates = new ArrayList<>();
-
     @Column
     @Enumerated(EnumType.STRING)
     private CategoryType type;

@@ -1,6 +1,5 @@
 package com.depromeet.ahmatda.domain.recommend.repository;
 
-import com.depromeet.ahmatda.domain.category.CategoryType;
 import com.depromeet.ahmatda.domain.recommend.RecommendItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface RecommendItemRepository extends JpaRepository<RecommendItem, Long> {
-
-    List<RecommendItem> findByCategoryType(CategoryType categoryType);
 
     @Query(value = "select distinct ri from RecommendItem ri" +
             " join fetch ri.recommendSection rs" +
