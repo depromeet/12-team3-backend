@@ -80,9 +80,8 @@ public class Alarm extends BaseTimeEntity {
             .isAfter(alarm.alarmDateTime);
     }
 
-    public boolean isTargetAlarm(Alarm alarm, LocalDateTime nowTime) {
-        return alarm.getTimeOption()
-            .applyAlarmOption(alarm.getAlarmDateTime()).isEqual(nowTime);
+    public boolean isTargetAlarm(LocalDateTime nowTime) {
+        return getTimeOption().applyAlarmOption(getAlarmDateTime()).isEqual(nowTime);
     }
 
     public Long getUserId() {

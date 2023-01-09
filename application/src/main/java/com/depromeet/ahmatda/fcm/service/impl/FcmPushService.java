@@ -45,8 +45,10 @@ public class FcmPushService {
         List<Alarm> unsentAlarms = alarmAdaptor.findUnsentAlarm();
         List<Alarm> targetAlarms = unsentAlarms.stream()
                 .filter(alarm -> alarm.checkMaximumAlarmOption(alarm, nowTime))
-                .filter(alarm -> alarm.isTargetAlarm(alarm, nowTime))
+                .filter(alarm -> alarm.isTargetAlarm(nowTime))
                 .collect(Collectors.toList());
+
+        log.info("targetAlarms size : {}", targetAlarms.size());
 
         sendAlarms(targetAlarms);
     }
