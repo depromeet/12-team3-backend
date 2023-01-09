@@ -72,6 +72,7 @@ public class Alarm extends BaseTimeEntity {
         this.isActivated = isActivated;
         this.alarmDateTime = alarmDateTime;
         this.timeOption = timeOption;
+        this.isSend = false;
     }
 
     public boolean checkMaximumAlarmOption(Alarm alarm, LocalDateTime nowTime) {
@@ -81,7 +82,8 @@ public class Alarm extends BaseTimeEntity {
     }
 
     public boolean isTargetAlarm(LocalDateTime nowTime) {
-        return getTimeOption().applyAlarmOption(getAlarmDateTime()).isEqual(nowTime);
+        return getTimeOption().applyAlarmOption(getAlarmDateTime()).withSecond(0).withNano(0)
+                .isEqual(nowTime.withSecond(0).withNano(0));
     }
 
     public Long getUserId() {
