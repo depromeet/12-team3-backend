@@ -1,5 +1,6 @@
 package com.depromeet.ahmatda.fcm.service.impl;
 
+import com.depromeet.ahmatda.domain.alarm.adaptor.AlarmAdaptor;
 import com.depromeet.ahmatda.fcm.message.FcmMessage;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.alarm.Alarm;
@@ -16,11 +17,14 @@ import okhttp3.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -33,6 +37,19 @@ public class FcmPushService {
     private final ObjectMapper objectMapper;
     private final FcmTokenAdaptor fcmTokenAdaptor;
     private final AlarmMessageHistoryAdaptor alarmMessageHistoryAdaptor;
+    private final AlarmAdaptor alarmAdaptor;
+
+    @Transactional
+    public void sendAlarms() throws IOException {
+        LocalDateTime nowTime = LocalDateTime.now().withSecond(0).withNano(0);
+        List<Alarm> unsentAlarms = alarmAdaptor.findUnsentAlarm();
+        List<Alarm> targetAlarms = unsentAlarms.stream()
+                .filter(alarm -> alarm.checkMaximumAlarmOption(alarm, nowTime))
+                .filter(alarm -> alarm.isTargetAlarm(alarm, nowTime))
+                .collect(Collectors.toList());
+
+        sendAlarms(targetAlarms);
+    }
 
     public void sendAlarms(List<Alarm> alarms) throws IOException {
         for (Alarm alarm : alarms) {
