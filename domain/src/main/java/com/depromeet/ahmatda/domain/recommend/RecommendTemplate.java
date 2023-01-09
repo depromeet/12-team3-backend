@@ -21,10 +21,9 @@ public class RecommendTemplate extends BaseTimeEntity {
     private String templateName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "recommend_category_id")
+    private RecommendCategory recommendCategory;
 
-    @OneToMany(mappedBy = "recommendTemplate")
+    @OneToMany(mappedBy = "recommendTemplate", cascade = CascadeType.REMOVE)
     private List<RecommendItem> recommendItems = new ArrayList<>();
-
 }

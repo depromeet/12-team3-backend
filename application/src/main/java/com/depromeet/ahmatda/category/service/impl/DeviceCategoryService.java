@@ -38,14 +38,6 @@ public class DeviceCategoryService implements CategoryService {
     }
 
     @Override
-    public List<CategoryResponse> getRecommendCategory() {
-        final List<Category> userCategories = categoryAdaptor.getCategoriesByUserToken("recommendUser");
-        return userCategories.stream()
-                .map(category -> CategoryResponse.createByEntity(category))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<CategoryResponse> getCategoriesByUser(final String userToken) {
         final List<Category> userCategories = categoryAdaptor.getCategoriesByUserToken(userToken);
         return userCategories.stream()

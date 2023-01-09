@@ -26,7 +26,7 @@ public class RecommendTemplateResponse {
         return RecommendTemplateResponse.builder()
                 .id(recommendTemplate.getId())
                 .templateName(recommendTemplate.getTemplateName())
-                .categoryId(recommendTemplate.getCategory().getId())
+                .categoryId(recommendTemplate.getRecommendCategory().getId())
                 .items(items)
                 .build();
     }
