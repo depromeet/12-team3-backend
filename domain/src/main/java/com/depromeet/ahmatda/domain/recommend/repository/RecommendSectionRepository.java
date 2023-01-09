@@ -10,6 +10,7 @@ public interface RecommendSectionRepository extends JpaRepository<RecommendSecti
 
     List<RecommendSection> findAll();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM recommend_section ORDER BY rand() LIMIT 1")
-    RecommendSection findRandom();
+    @Query(nativeQuery = true, value = "SELECT * FROM recommend_section rs JOIN recommend_category rc " +
+            "ON rs.recommend_category_id = rc.id WHERE rc.type = :categoryType ORDER BY rand() LIMIT 1;")
+    RecommendSection findRandom(String categoryType);
 }

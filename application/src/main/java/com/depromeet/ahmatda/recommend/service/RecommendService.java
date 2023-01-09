@@ -15,5 +15,5 @@ public interface RecommendService {
 
     void addUserTemplate(String userToken, RecommendAddUserTemplateRequest recommendAddUserTemplateRequest);
 
-    SectionRecommendItemResponse getRandomSectionItems(String categoryType);
+    SectionRecommendItemResponse getRandomSectionItems(Long userCategoryId);
 }

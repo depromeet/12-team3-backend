@@ -1,5 +1,6 @@
 package com.depromeet.ahmatda.domain.recommend.adaptor;
 
+import com.depromeet.ahmatda.domain.category.CategoryType;
 import com.depromeet.ahmatda.domain.recommend.RecommendCategory;
 import com.depromeet.ahmatda.domain.recommend.RecommendItem;
 import com.depromeet.ahmatda.domain.recommend.RecommendSection;
@@ -30,8 +31,8 @@ public class RecommendAdaptor {
         return recommendTemplateRepository.findByRecommendCategoryId(recommendCategoryId);
     }
 
-    public RecommendSection getRandomRecommendSection() {
-        return recommendSectionRepository.findRandom();
+    public RecommendSection getRandomRecommendSection(CategoryType categoryType) {
+        return recommendSectionRepository.findRandom(categoryType.name());
     }
 
     public List<RecommendItem> getRiByRs(Long recommendSectionId) {

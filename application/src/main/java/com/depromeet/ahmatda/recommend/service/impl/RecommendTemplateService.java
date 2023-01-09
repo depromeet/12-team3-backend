@@ -5,13 +5,13 @@ import com.depromeet.ahmatda.category.dto.CategoryResponse;
 import com.depromeet.ahmatda.category.service.CategoryService;
 import com.depromeet.ahmatda.common.response.ErrorCode;
 import com.depromeet.ahmatda.domain.category.Category;
+import com.depromeet.ahmatda.domain.category.CategoryType;
 import com.depromeet.ahmatda.domain.recommend.RecommendCategory;
 import com.depromeet.ahmatda.domain.recommend.RecommendItem;
 import com.depromeet.ahmatda.domain.recommend.RecommendSection;
 import com.depromeet.ahmatda.domain.recommend.RecommendTemplate;
 import com.depromeet.ahmatda.domain.recommend.adaptor.RecommendAdaptor;
 import com.depromeet.ahmatda.domain.user.User;
-import com.depromeet.ahmatda.recommend.dto.SectionRecommendItemData;
 import com.depromeet.ahmatda.recommend.dto.RecommendAddUserTemplateRequest;
 import com.depromeet.ahmatda.recommend.dto.SectionRecommendItemResponse;
 import com.depromeet.ahmatda.recommend.dto.RecommendTemplateResponse;
@@ -101,8 +101,9 @@ public class RecommendTemplateService implements RecommendService {
     }
 
     @Override
-    public SectionRecommendItemResponse getRandomSectionItems(String categoryType) {
-        RecommendSection recommendSection = recommendAdaptor.getRandomRecommendSection();
+    public SectionRecommendItemResponse getRandomSectionItems(Long userCategoryId) {
+        CategoryType categoryType = categoryService.getCategoryById(userCategoryId).getType();
+        RecommendSection recommendSection = recommendAdaptor.getRandomRecommendSection(categoryType);
 
         List<RecommendItem> recommendItems = recommendAdaptor.getRiByRs(recommendSection.getId());
         Collections.shuffle(recommendItems);
@@ -111,7 +112,7 @@ public class RecommendTemplateService implements RecommendService {
         return new SectionRecommendItemResponse(
           recommendSection.getSectionName(),
           recommendItems.stream()
-              .map(recommendItem -> new SectionRecommendItemData(recommendItem.getId(), recommendItem.getItemName()))
+              .map(recommendItem -> recommendItem.getItemName())
               .collect(Collectors.toList())
         );
     }

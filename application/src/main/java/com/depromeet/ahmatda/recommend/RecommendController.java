@@ -43,8 +43,8 @@ public class RecommendController {
     }
 
     @GetMapping(value = "/items")
-    public ResponseEntity<RestResponse<SectionRecommendItemResponse>> getRecommendItems(String categoryType) {
-        SectionRecommendItemResponse sectionRecommendItemResponses = recommendService.getRandomSectionItems(categoryType);
+    public ResponseEntity<RestResponse<SectionRecommendItemResponse>> getRecommendItems(@RequestParam("category") Long userCategoryId) {
+        SectionRecommendItemResponse sectionRecommendItemResponses = recommendService.getRandomSectionItems(userCategoryId);
         return ResponseEntity.ok().body(RestResponse.ok(sectionRecommendItemResponses));
     }
 }

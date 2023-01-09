@@ -10,16 +10,13 @@ import com.depromeet.ahmatda.domain.emoji.AhmatdaEmoji;
 import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.recommend.dto.*;
 import com.depromeet.ahmatda.template.dto.TemplateAddItemsRequest;
-import com.depromeet.ahmatda.template.dto.TemplateItemRequest;
-import com.depromeet.ahmatda.template.dto.TemplateItemResponse;
-import com.depromeet.ahmatda.template.dto.TemplateResponse;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentRequest;
 import static com.depromeet.ahmatda.application.apidocs.util.ApiDocsUtil.getDocumentResponse;
@@ -42,11 +39,12 @@ public class RecommendControllerTest extends ApiDocumentationTest {
     void 추천소지품_조회() throws Exception {
         Long userCategoryId = 1L;
         List<String> items = List.of("지갑", "렌즈", "핸드폰", "노트북");
-        RecommendItemResponse recommendItemResponse = RecommendItemResponse.builder()
+        SectionRecommendItemResponse sectionRecommendItemResponse = SectionRecommendItemResponse.builder()
+                .comment("아맞다! 까먹지 말고 챙기세요!")
                 .items(items)
                 .build();
 
-        given(recommendService.findByRecommendItems(userCategoryId)).willReturn(recommendItemResponse);
+        given(recommendService.getRandomSectionItems(userCategoryId)).willReturn(sectionRecommendItemResponse);
 
         mockMvc.perform(get("/api/recommend/items?category={categoryId}", userCategoryId))
                 .andExpect(status().isOk())
@@ -57,6 +55,7 @@ public class RecommendControllerTest extends ApiDocumentationTest {
                                 parameterWithName("category").description("유저 카테고리 ID")
                         ),
                         responseFields(
+                                fieldWithPath("result.comment").type(JsonFieldType.STRING).description("추천소지품 코멘트 노출"),
                                 fieldWithPath("result.items").type(JsonFieldType.ARRAY).description("추천소지품항목"),
                                 fieldWithPath("error").type(JsonFieldType.NULL).description("에러"))))
                 .andDo(print());
@@ -71,7 +70,7 @@ public class RecommendControllerTest extends ApiDocumentationTest {
                         .id(2L).emoji(AhmatdaEmoji.EMPTY_CARD)
                         .type(CategoryType.EXERCISE).name("HEALTH").build());
 
-        given(categoryService.getRecommendCategory()).willReturn(categoryResponses);
+        given(recommendService.getRecommendCategory()).willReturn(categoryResponses);
 
         mockMvc.perform(get("/api/recommend/category"))
                 .andExpect(status().isOk())
@@ -98,12 +97,12 @@ public class RecommendControllerTest extends ApiDocumentationTest {
                 RecommendTemplateItemResponse.builder()
                         .id(1L)
                         .recommendTemplateId(100L)
-                        .categoryId(categoryId).name("노트북")
+                        .name("노트북")
                         .build(),
                 RecommendTemplateItemResponse.builder()
                         .id(2L)
                         .recommendTemplateId(100L)
-                        .categoryId(categoryId).name("핸드폰")
+                        .name("핸드폰")
                         .build());
         List<RecommendTemplateResponse> recommendTemplateResponses = List.of(
                 RecommendTemplateResponse.builder()
@@ -112,7 +111,7 @@ public class RecommendControllerTest extends ApiDocumentationTest {
                         .templateName("일상에서 중요한거").items(items)
                         .build());
 
-        given(recommendService.findByCategoryId(categoryId)).willReturn(recommendTemplateResponses);
+        given(recommendService.findByRecommendCategoryId(categoryId)).willReturn(recommendTemplateResponses);
 
         mockMvc.perform(get("/api/recommend/templates?category={categoryId}", categoryId))
                 .andExpect(status().isOk())

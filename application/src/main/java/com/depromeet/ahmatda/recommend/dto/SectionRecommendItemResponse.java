@@ -12,5 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 public class SectionRecommendItemResponse {
     private String comment;
-    private List<SectionRecommendItemData> items;
+    private List<String> items;
 }
