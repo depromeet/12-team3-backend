@@ -31,8 +31,7 @@ public class TemplateResponse {
         alarmInfo = alarmInfo == null ? "" : alarmInfo;
 
         List<TemplateItemResponse> items = template.getItems().stream()
-                .sorted(Comparator.comparing(Item::isTake).reversed()
-                        .thenComparing(Item::isImportant).reversed()
+                .sorted(Comparator.comparing(Item::isImportant).reversed()
                         .thenComparing(BaseTimeEntity::getCreatedAt))
                 .map(TemplateItemResponse::from)
                 .collect(Collectors.toList());
