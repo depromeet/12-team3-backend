@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +19,8 @@ public class UserAlarmMessageHistoryService implements AlarmMessageHistoryServic
     @Override
     public List<AlarmMessageHistoryResponse> getUserAlarmHistories(String userToken) {
         List<AlarmMessageHistory> alarmMessageHistories = alarmMessageHistoryAdaptor.getUserAlarmHistories(userToken);
-        return null;
+        return alarmMessageHistories.stream()
+                .map(history -> AlarmMessageHistoryResponse.createByAlarmMessageEntity(history))
+                .collect(Collectors.toList());
     }
 }
