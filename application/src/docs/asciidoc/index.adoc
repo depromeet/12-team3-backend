@@ -288,6 +288,16 @@ include::{snippets}/get-alarm-by-template-id/request-parameters.adoc[]
 include::{snippets}/get-alarm-by-template-id/response-body.adoc[]
 include::{snippets}/get-alarm-by-template-id/response-fields-result.adoc[]
 
+=== Alarm 히스토리 조회
+==== Method : GET
+==== curl-request
+include::{snippets}/alarm-history/curl-request.adoc[]
+include::{snippets}/alarm-history/request-headers.adoc[]
+
+==== 정상 응답
+include::{snippets}/alarm-history/response-body.adoc[]
+include::{snippets}/alarm-history/response-fields-result.adoc[]
+
 === Alarm - 날짜별 알람 생성
 ==== Method : GET
 ==== curl-request

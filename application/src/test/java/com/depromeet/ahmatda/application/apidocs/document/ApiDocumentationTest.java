@@ -1,5 +1,7 @@
 package com.depromeet.ahmatda.application.apidocs.document;
 
+import com.depromeet.ahmatda.alarm.history.controller.UserAlarmHistoryController;
+import com.depromeet.ahmatda.alarm.history.service.AlarmMessageHistoryService;
 import com.depromeet.ahmatda.alarm.service.AlarmService;
 import com.depromeet.ahmatda.alarm.controller.UserAlarmController;
 import com.depromeet.ahmatda.fcm.service.impl.FcmPushService;
@@ -26,13 +28,14 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(controllers = {
-    CommonController.class,
-    UserController.class,
-    CategoryController.class,
-    TemplateController.class,
-    RecommendController.class,
-    UserAlarmController.class,
-    FcmTokenController.class
+        CommonController.class,
+        UserController.class,
+        CategoryController.class,
+        TemplateController.class,
+        RecommendController.class,
+        UserAlarmController.class,
+        FcmTokenController.class,
+        UserAlarmHistoryController.class
 })
 @AutoConfigureRestDocs
 @ActiveProfiles("test")
@@ -42,7 +45,7 @@ public abstract class ApiDocumentationTest {
     @BeforeAll
     void init() {
         objectMapper.configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true)
-            .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
+                .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true);
     }
 
     @Autowired
@@ -71,4 +74,7 @@ public abstract class ApiDocumentationTest {
 
     @MockBean
     protected FcmPushService fcmPushService;
+
+    @MockBean
+    protected AlarmMessageHistoryService alarmMessageHistoryService;
 }
