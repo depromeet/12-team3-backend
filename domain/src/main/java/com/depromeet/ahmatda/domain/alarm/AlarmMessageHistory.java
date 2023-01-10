@@ -2,6 +2,7 @@ package com.depromeet.ahmatda.domain.alarm;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class AlarmMessageHistory {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

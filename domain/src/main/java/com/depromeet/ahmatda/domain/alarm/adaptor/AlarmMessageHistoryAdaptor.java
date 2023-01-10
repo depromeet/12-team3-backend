@@ -5,6 +5,8 @@ import com.depromeet.ahmatda.domain.alarm.repository.AlarmMessageHistoryReposito
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AlarmMessageHistoryAdaptor {
@@ -13,5 +15,9 @@ public class AlarmMessageHistoryAdaptor {
 
     public void save(AlarmMessageHistory alarmMessageHistory) {
         alarmHistoryMessageRepository.save(alarmMessageHistory);
+    }
+
+    public List<AlarmMessageHistory> getUserAlarmHistories(String userToken) {
+        return alarmHistoryMessageRepository.findAllByUserToken(userToken);
     }
 }
