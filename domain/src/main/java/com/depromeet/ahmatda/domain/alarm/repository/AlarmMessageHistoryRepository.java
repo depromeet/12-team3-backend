@@ -12,6 +12,7 @@ public interface AlarmMessageHistoryRepository extends JpaRepository<AlarmMessag
     @Query("SELECT history " +
             "FROM AlarmMessageHistory history " +
             "JOIN history.alarm.template.user user " +
-            "WHERE user.userToken=:userToken")
+            "WHERE user.userToken=:userToken " +
+            "ORDER BY history.sentAt DESC")
     List<AlarmMessageHistory> findAllByUserToken(@Param("userToken") String userToken);
 }
