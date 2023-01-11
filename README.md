@@ -18,7 +18,7 @@
 ---
 |                                                  김민걸                                                   |                                                   명수찬                                                   |                         조성민                         |
 |:------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|:---------------------------------------------------:|
-|                          <img src="" alt="profile" width="180" height="180">                           | <img src="" alt="profile" width="180" height="180"> | <img src="" alt="profile" width="180" height="180"> |
+|                          <img src="" alt="profile" width="180" height="180">                           | <img src="https://suchanmyoung.github.io/images/profile.jpg" alt="profile" width="180" height="180"> | <img src="" alt="profile" width="180" height="180"> |
 |                                 [cmg1411](https://github.com/cmg1411)                                 |                                   [suchanmyoung](https://github.com/suchanmyoung)                                   |    [sungmin69355](https://github.com/sungmin69355)    |
 
 개발 스택
@@ -44,9 +44,10 @@ DB ERD 구조
 아맞다의 개발 주요 포인트
 ---
 <b>공통</b><br>
-- 지속적인 성능 개선
--  코드 리팩토링~ 등등..
-- 코드리뷰
+- 서비스 모니터링을 통한 성능 개선
+- 코드 리팩토링
+- 코드 리뷰
+- 테스트 코드 작성
 
 <b>코드 컨벤션</b><br>
 - 지속적인 성능 개선
