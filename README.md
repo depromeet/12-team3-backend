@@ -1,10 +1,12 @@
-아맞다 백엔드 공간입니다. (제목)
+아맞다 백엔드 공간입니다.
 =============
-아맞다 로고 이미지 <br>
+![logo](https://user-images.githubusercontent.com/19837507/211804134-45df63e3-1958-45bd-bb44-22ba574b5259.png)
+
 
 아맞다 서비스 개요
 ----
-아맞다 서비스 설명 이미지 <br>
+![im](https://user-images.githubusercontent.com/19837507/211804971-6899a63e-4d1f-49e9-8c01-d616b65f35a7.png)
+![im2](https://user-images.githubusercontent.com/19837507/211805179-17e91d60-457a-4490-961a-f1127bff1840.png)
 
 앱 다운로드
 ----
@@ -21,15 +23,23 @@
 
 개발 스택
 ---
-개발 스택이미지 
+- Java 17
+- Spring Boot
+- Spring Data JPA
+- Juint 5
+- Jacoco
+- Docker
+- MariaDB
+- FireBase
+- AWS (Elastic Beanstalk, EC2, RDS, Route 53)
 
-아맞다 아키텍쳐
+아맞다 인프라
 ---
-아키텍쳐 이미지
+![im3](https://user-images.githubusercontent.com/19837507/211807683-2d854477-0191-4d4e-a94d-805420dfafbc.png)
 
 DB ERD 구조
 ---
-구조 이미지
+![im4](https://user-images.githubusercontent.com/19837507/211808995-240e2f73-d28b-43df-b45f-39141eaa5d70.png)
 
 아맞다의 개발 주요 포인트
 ---
