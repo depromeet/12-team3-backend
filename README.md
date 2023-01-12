@@ -18,7 +18,7 @@
 ---
 |                                                  김민걸                                                   |                                                   명수찬                                                   |                         조성민                         |
 |:------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|:---------------------------------------------------:|
-|                          <img src="" alt="profile" width="180" height="180">                           | <img src="https://suchanmyoung.github.io/images/profile.jpg" alt="profile" width="180" height="180"> | <img src="" alt="profile" width="180" height="180"> |
+|                          <img src="https://avatars.githubusercontent.com/u/57589937?v=4" alt="profile" width="180" height="180">                           | <img src="https://suchanmyoung.github.io/images/profile.jpg" alt="profile" width="180" height="180"> | <img src="https://avatars.githubusercontent.com/u/19837507?v=4" alt="profile" width="180" height="180"> |
 |                                 [cmg1411](https://github.com/cmg1411)                                 |                                   [suchanmyoung](https://github.com/suchanmyoung)                                   |    [sungmin69355](https://github.com/sungmin69355)    |
 
 개발 스택
@@ -45,20 +45,11 @@ DB ERD 구조
 ---
 <b>공통</b><br>
 - 서비스 모니터링을 통한 성능 개선
+- 사용자 지표에 따른 서비스 개선
 - 코드 리팩토링
-- 코드 리뷰
+- 활발한 코드 리뷰
 - 테스트 코드 작성
+- Git Actions를 활용하여 CI/CD 구축 
 
 <b>코드 컨벤션</b><br>
 - 지속적인 성능 개선
-
-<b>성능 최적화</b><br>
-- 성능~
-
-CI/CD
----
-배포 파이프라인 이미지
-
-API 문서
----
-문서 링크 or 이미지
