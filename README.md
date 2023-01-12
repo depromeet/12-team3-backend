@@ -18,7 +18,7 @@
 ---
 |                                                  김민걸                                                   |                                                   명수찬                                                   |                         조성민                         |
 |:------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|:---------------------------------------------------:|
-|                          <img src="https://avatars.githubusercontent.com/u/57589937?v=4" alt="profile" width="180" height="180">                           | <img src="https://suchanmyoung.github.io/images/profile.jpg" alt="profile" width="180" height="180"> | <img src="https://avatars.githubusercontent.com/u/19837507?v=4" alt="profile" width="180" height="180"> |
+|                          <img src="https://avatars.githubusercontent.com/u/57589937?v=4" alt="profile" width="180" height="180">                           | <img src="https://avatars.githubusercontent.com/u/87016418?v=4" alt="profile" width="180" height="180"> | <img src="https://avatars.githubusercontent.com/u/19837507?v=4" alt="profile" width="180" height="180"> |
 |                                 [cmg1411](https://github.com/cmg1411)                                 |                                   [suchanmyoung](https://github.com/suchanmyoung)                                   |    [sungmin69355](https://github.com/sungmin69355)    |
 
 개발 스택
