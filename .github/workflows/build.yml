@@ -9,7 +9,7 @@ env:
   FIREBASE_ACCOUNT_PATH: ./application/src/main/resources/firebase/fcm-account.json
   TEST_RESOURCE_PATH: ./application/src/test/resources/application-production.yml
   AWS_REGION: ap-northeast-2
-  EB_ENVIRONMENT_NAME: Ahmatda-env
+  EB_ENVIRONMENT_NAME: Ahmatda-env-1
   EB_APPLICATION_NAME: "ahmatda"
   EB_DEPLOYMENT_PACKAGE: ./docker-compose.yml
 
