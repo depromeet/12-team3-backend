@@ -133,6 +133,8 @@ public class UserTemplateService implements TemplateService {
 
         authenticateTemplate(userToken, template);
 
+        //TODO: 아이템 중복 체크 필요
+
         Item item = Item.UserTemplateAddItem(templateAddItemRequest.getCategoryId(), template,
                 templateAddItemRequest.getItemName(), templateAddItemRequest.isImportant());
 
