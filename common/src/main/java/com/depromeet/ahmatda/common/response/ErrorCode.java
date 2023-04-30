@@ -17,7 +17,7 @@ public enum ErrorCode implements EnumType {
     TEMPLATE_NOT_FOUND("템플릿이 존재하지 않습니다.", 400),
     AUTHENTICATION_ERROR("유저 인증이 실패했습니다.", 401),
     ITEM_NOT_FOUND("소지품이 존재하지 않습니다.", 400),
-    ITEM_DUPLICATE("동일한 소지품이 있습니다.", 202),
+    ITEM_DUPLICATE("동일한 소지품이 있습니다.", 409),
     ALARM_EXIST("알람이 이미 존재합니다.", 400),
     NOT_IMPLEMENTED("구현되지 않은 기능입니다.", 501);
 
