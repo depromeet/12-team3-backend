@@ -33,10 +33,6 @@
 - FireBase
 - AWS (Elastic Beanstalk, EC2, RDS, Route 53)
 
-아맞다 인프라
----
-![im3](https://user-images.githubusercontent.com/19837507/211807683-2d854477-0191-4d4e-a94d-805420dfafbc.png)
-
 DB ERD 구조
 ---
 ![im4](https://user-images.githubusercontent.com/19837507/211808995-240e2f73-d28b-43df-b45f-39141eaa5d70.png)
