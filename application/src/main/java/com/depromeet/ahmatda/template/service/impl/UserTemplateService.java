@@ -212,9 +212,9 @@ public class UserTemplateService implements TemplateService {
     }
 
     private void checkDuplicateItem(String userToken, Long templateId, Long categoryId, String itemName) {
-        final boolean check = templateAdaptor.checkDuplicateItem(userToken, templateId, categoryId, itemName);
+        final Boolean isDuplicate = templateAdaptor.checkDuplicateItem(userToken, templateId, categoryId, itemName);
 
-        if (check) {
+        if (isDuplicate) {
             throw new TemplateItemException(ErrorCode.ITEM_DUPLICATE);
         }
     }

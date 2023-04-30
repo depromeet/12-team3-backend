@@ -38,7 +38,7 @@ public class TemplateAdaptor {
         return templateRepository.templatesAllOffPin(categoryId);
     }
 
-    public boolean checkDuplicateItem(String userToken, Long templateId, Long categoryId, String itemName) {
+    public Boolean checkDuplicateItem(String userToken, Long templateId, Long categoryId, String itemName) {
         return templateRepository.checkDuplicateItem(userToken, templateId, categoryId, itemName);
     }
 }

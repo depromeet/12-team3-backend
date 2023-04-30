@@ -25,6 +25,6 @@ public interface TemplateRepository extends JpaRepository<Template, Long> {
             " join t.user u " +
             " where u.userToken = :userToken and t.id = :templateId and i.categoryId =:categoryId " +
             " and REPLACE(i.name, ' ', '') = REPLACE(:itemName, ' ', '')")
-    boolean checkDuplicateItem(String userToken, Long templateId, Long categoryId, String itemName);
+    Boolean checkDuplicateItem(String userToken, Long templateId, Long categoryId, String itemName);
 
 }
