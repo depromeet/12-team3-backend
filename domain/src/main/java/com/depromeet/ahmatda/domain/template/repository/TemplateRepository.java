@@ -19,4 +19,12 @@ public interface TemplateRepository extends JpaRepository<Template, Long> {
     @Modifying
     @Query("update Template t set t.isPin = false where t.category.id = :categoryId")
     int templatesAllOffPin(Long categoryId);
+
+    @Query("select count(i) > 0 from Item i" +
+            " join i.template t " +
+            " join t.user u " +
+            " where u.userToken = :userToken and t.id = :templateId and i.categoryId =:categoryId " +
+            " and REPLACE(i.name, ' ', '') = REPLACE(:itemName, ' ', '')")
+    boolean checkDuplicateItem(String userToken, Long templateId, Long categoryId, String itemName);
+
 }

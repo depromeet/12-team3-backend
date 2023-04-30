@@ -13,6 +13,7 @@ import com.depromeet.ahmatda.domain.user.User;
 import com.depromeet.ahmatda.domain.user.adaptor.UserAdaptor;
 import com.depromeet.ahmatda.template.dto.TemplateAddItemsRequest;
 import com.depromeet.ahmatda.template.dto.*;
+import com.depromeet.ahmatda.template.exception.TemplateItemException;
 import com.depromeet.ahmatda.template.exception.TemplateNotExistException;
 import com.depromeet.ahmatda.template.exception.TemplateUserAuthenticationException;
 import com.depromeet.ahmatda.template.service.TemplateService;
@@ -134,6 +135,7 @@ public class UserTemplateService implements TemplateService {
         authenticateTemplate(userToken, template);
 
         //TODO: 아이템 중복 체크 필요
+        checkDuplicateItem(userToken, templateId, templateAddItemRequest.getCategoryId(), templateAddItemRequest.getItemName());
 
         Item item = Item.UserTemplateAddItem(templateAddItemRequest.getCategoryId(), template,
                 templateAddItemRequest.getItemName(), templateAddItemRequest.isImportant());
@@ -206,6 +208,14 @@ public class UserTemplateService implements TemplateService {
     private void templatesAllOffPin(Long categoryId, boolean isPin) {
         if (isPin == true) {
             templateAdaptor.templatesAllOffPin(categoryId);
+        }
+    }
+
+    private void checkDuplicateItem(String userToken, Long templateId, Long categoryId, String itemName) {
+        final boolean check = templateAdaptor.checkDuplicateItem(userToken, templateId, categoryId, itemName);
+
+        if (check) {
+            throw new TemplateItemException(ErrorCode.ITEM_DUPLICATE);
         }
     }
 }
