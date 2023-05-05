@@ -7,6 +7,7 @@
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_PATH}/rolling/production.%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>30</maxHistory>
+      <maxFileSize>3GB</maxFileSize>
     </rollingPolicy>
 
     <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
