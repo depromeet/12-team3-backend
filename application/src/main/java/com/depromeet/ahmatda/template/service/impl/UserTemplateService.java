@@ -189,6 +189,8 @@ public class UserTemplateService implements TemplateService {
         Item item = itemAdaptor.findByItem(itemId)
                 .orElseThrow(() -> new TemplateNotExistException(ErrorCode.ITEM_NOT_FOUND));
 
+        checkDuplicateItem(userToken, templateId, item.getCategoryId(), templateItemModfiyRequest.getModifiedItemName());
+
         if(templateItemModfiyRequest.getIsTake() != null) {
             Item.modifyItemIsTack(item, templateItemModfiyRequest.getIsTake());
         } else {
