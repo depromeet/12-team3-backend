@@ -74,4 +74,8 @@ public class TemplateController {
         templateService.templateItemModfiy(userId, templateItemModfiyRequest);
         return ResponseEntity.ok().body(RestResponse.ok());
     }
+
+    /**
+     * 해당 템플릿 아이템 전체선택, 해제 기능 추가
+     */
 }
